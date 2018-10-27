@@ -1,0 +1,4 @@
+<map id="memory::allocator_base" name="memory::allocator_base">
+<area shape="rect" id="node2" href="$classmemory_1_1block__allocator.html" title="predifined block size allocator, much faster than most allocators, but can only allocate one sized bl..." alt="" coords="5,80,188,107"/>
+<area shape="rect" id="node3" href="$classmemory_1_1default__allocator.html" title="default allocator that internally works using lists " alt="" coords="213,80,410,107"/>
+</map>

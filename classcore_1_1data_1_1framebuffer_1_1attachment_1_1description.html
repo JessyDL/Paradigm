@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>core::data::framebuffer::attachment::description class | paradigm engine custom C++17 Vulkan engine</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+doxygen.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body onload="on_document_body_loaded()">
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">paradigm engine <span class="m-thin">custom C++17 Vulkan engine</span></a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-dox-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path d="m6 0c-3.3144 0-6 2.6856-6 6 0 3.3144 2.6856 6 6 6 1.4858 0 2.8463-0.54083 3.8945-1.4355-0.0164 0.33797 0.14734 0.75854 0.5 1.1504l3.2227 3.7891c0.55185 0.6139 1.4517 0.66544 2.002 0.11524 0.55022-0.55022 0.49866-1.4501-0.11524-2.002l-3.7891-3.2246c-0.39184-0.35266-0.81242-0.51469-1.1504-0.5 0.89472-1.0482 1.4355-2.4088 1.4355-3.8945 0-3.3128-2.6856-5.998-6-5.998zm0 1.5625a4.4375 4.4375 0 0 1 4.4375 4.4375 4.4375 4.4375 0 0 1-4.4375 4.4375 4.4375 4.4375 0 0 1-4.4375-4.4375 4.4375 4.4375 0 0 1 4.4375-4.4375z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">pages</a></li>
+            <li><a href="namespaces.html">namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">classes</a></li>
+            <li><a href="files.html">files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-dox-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <path d="m6 0c-3.3144 0-6 2.6856-6 6 0 3.3144 2.6856 6 6 6 1.4858 0 2.8463-0.54083 3.8945-1.4355-0.0164 0.33797 0.14734 0.75854 0.5 1.1504l3.2227 3.7891c0.55185 0.6139 1.4517 0.66544 2.002 0.11524 0.55022-0.55022 0.49866-1.4501-0.11524-2.002l-3.7891-3.2246c-0.39184-0.35266-0.81242-0.51469-1.1504-0.5 0.89472-1.0482 1.4355-2.4088 1.4355-3.8945 0-3.3128-2.6856-5.998-6-5.998zm0 1.5625a4.4375 4.4375 0 0 1 4.4375 4.4375 4.4375 4.4375 0 0 1-4.4375 4.4375 4.4375 4.4375 0 0 1-4.4375-4.4375 4.4375 4.4375 0 0 1 4.4375-4.4375z"/>
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+
+		<div class="wrapper">
+		  <div class="toggle_radio" style="float:right;">
+			<input type="radio" checked class="toggle_option" id="first_toggle" name="toggle_option" onclick="radio_visibility_toggle(this)">
+			<input type="radio" class="toggle_option" id="second_toggle" name="toggle_option" onclick="radio_visibility_toggle(this)">
+			<input type="radio" class="toggle_option" id="third_toggle" name="toggle_option" onclick="radio_visibility_toggle(this)">
+			<div class="toggle_option_slider">
+			</div>
+			<label for="first_toggle" style="z-index:14 !important;"><p style="padding:0 !important;text-align:center;z-index:14 !important;">public</p></label>
+			<label for="second_toggle" style="z-index:14 !important;"><p style="padding:0 !important;text-align:center;z-index:14 !important;">protected</p></label>
+			<label for="third_toggle" style="z-index:14 !important;"><p style="padding:0 !important;text-align:center;z-index:14 !important;">private</p></label>			
+		  </div>
+		  </div>
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecore.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecore_1_1data.html">data</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcore_1_1data_1_1framebuffer.html">framebuffer</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcore_1_1data_1_1framebuffer_1_1attachment.html">attachment</a>::<wbr/></span>description <span class="m-thin">class</span>
+        </h1>
+		
+        
+        <section id="description">
+        <p>describes how the rendertarget should be loaded, stored, it&#x27;s sample count, and what transition layouts it should go through.</p>
+        </section>
+        <div class="m-block m-default">
+          <h3>content</h3>
+          <ul>
+            <li>
+              reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">methods</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+		<section id="class-tree" style="display:none;">
+		<h2>class tree</h2>
+			<p id="img_tag"></p>
+			<map id="map_tag"></map>
+        </section>
+        <section id="typeless-methods" class="public-visibility">
+          <h2>constructors, destructors & conversion operators</h2>
+          <dl class="m-dox">
+		  <div id="typeless-methods-id-brief">
+<div class="div-brief-main hoverable" style="padding-left:1rem;">			<div class="row" id="func-typeless-methods-id-1-brief-0" ondblclick="expandable_node(this)" >
+				<div class="block header">description</div>
+				<div class="block">defaulted constructor</div>
+				<div class="block right_align">
+ <span class="m-label m-info">defaulted</span>				</div>
+			</div>
+			<div class="expanded" id="func-typeless-methods-id-1-brief-1" ondblclick="expandable_node(this)" style="display:none;">
+				<div class="row">
+					<div class="block header" style="width: auto;max-width: unset;">description ()</div>
+					<div class="block right_align">
+ <span class="m-label m-info">defaulted</span>					</div>
+				</div>
+					
+				<div class="row">
+					<div class="block header" style="padding-left:1rem;width:6rem;color:#9b9b9b;">description</div>
+					<div class="block">defaulted constructor</div>
+				</div>
+				<div class="row" style="padding-bottom:1rem;"></div>
+			</div>		</div>
+		<div class="div-brief-alternating hoverable" style="padding-left:1rem;">			<div class="row" id="func-typeless-methods-id-2-brief-0" ondblclick="expandable_node(this)" >
+				<div class="block header">description</div>
+				<div class="block">construction based on a vk::AttachmentDescription.</div>
+				<div class="block right_align">
+				</div>
+			</div>
+			<div class="expanded" id="func-typeless-methods-id-2-brief-1" ondblclick="expandable_node(this)" style="display:none;">
+				<div class="row">
+					<div class="block header" style="width: auto;max-width: unset;">description (descr)</div>
+					<div class="block right_align">
+					</div>
+				</div>
+				<div class="row"><div class="block header" style="padding-left:1rem;width:6rem;color:#9b9b9b;">parameters</div></div>
+		
+				<div class="row">	
+					<div class="block header" style="padding-left:2rem;width:6rem;color:#7b7b7b;">descr</div>
+					<div class="block">vk::AttachmentDescription</div>
+					<div class="block right_align"></div>
+				</div>
+		
+					
+				<div class="row">
+					<div class="block header" style="padding-left:1rem;width:6rem;color:#9b9b9b;">description</div>
+					<div class="block">construction based on a vk::AttachmentDescription.</div>
+				</div>
+				<div class="row" style="padding-bottom:1rem;"></div>
+			</div>		</div>
+</div>
+
+          </dl>
+        </section>
+        <section id="pub-methods" class="public-visibility">
+          <h2>public methods</h2>
+          <dl class="m-dox">
+		  <div id="pub-methods-id-brief">
+<div class="div-brief-main hoverable" style="padding-left:1rem;">			<div class="row" id="func-pub-methods-id-1-brief-0" ondblclick="expandable_node(this)" >
+				<div class="block header"><a href="#a0ad40778305e8f32d6eec139daa00f11" class="m-dox">vkDescription</a></div>
+				<div class="block">returns a vk::AttachmentDescription based on the internal settings.</div>
+				<div class="block right_align">
+<span class="m-label m-info"> const</span>				</div>
+			</div>
+			<div class="expanded" id="func-pub-methods-id-1-brief-1" ondblclick="expandable_node(this)" style="display:none;">
+				<div class="row">
+					<div class="block header" style="width: auto;max-width: unset;"><a href="#a0ad40778305e8f32d6eec139daa00f11" class="m-dox">vkDescription</a> ()</div>
+					<div class="block right_align">
+<span class="m-label m-info"> const</span>					</div>
+				</div>
+				<div class="row">
+					<div class="block header" style="padding-left:1rem;width:6rem;color:#9b9b9b;">returns</div>
+					<div class="block">vk::AttachmentDescription</div>
+				</div>
+					
+				<div class="row">
+					<div class="block header" style="padding-left:1rem;width:6rem;color:#9b9b9b;">description</div>
+					<div class="block">returns a vk::AttachmentDescription based on the internal settings.</div>
+				</div>
+				<div class="row" style="padding-bottom:1rem;"></div>
+			</div>		</div>
+</div>
+
+          </dl>
+        </section>
+        <section>
+          <h2>methods</h2>
+          <section class="m-dox-details" id="a0ad40778305e8f32d6eec139daa00f11"><div>
+            <h3>
+			  <table>
+				<tr>
+				<td style="padding-right:1rem;width:100%;">
+					  <span class="m-dox-wrap-bumper">
+					  vk::AttachmentDescription <a href="#a0ad40778305e8f32d6eec139daa00f11" class="m-dox">vkDescription</a> (<span class="m-dox-wrap" style="padding-left:0.1rem;">)</span> </span>
+			  </td>
+			  <td><span class="m-label m-flat m-info"> const</span>			 
+			  </td>
+			  </tr>
+			  </table>
+            </h3>
+            <h4>description</h4>
+            <p>returns a vk::AttachmentDescription based on the internal settings.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">returns</th>
+                  <td>a vk::AttachmentDescription based on the internal settings.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        <section class="protected-visibility">
+		  </section>
+		  
+        <section class="private-visibility">
+		  </section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-dox-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-dox-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-dox-search-content">
+          <input type="search" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" />
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            Search for symbols, directories, files, pages or modules. You can omit any
+            prefix from the symbol or file path; adding a <code>:</code> or <code>/</code>
+            suffix lists all members of given symbol or directory. Navigate through the
+            list using <span class="m-label m-dim">&darr;</span> and
+            <span class="m-label m-dim">&uarr;</span>, press
+            <span class="m-label m-dim">Enter</span> to go.
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var visibility_level = 1;
+function radio_visibility_toggle(value) {
+  if(value.id === 'first_toggle' && value.checked)  {
+		visibility_level = 1;
+  }
+  else if(value.id === 'second_toggle' && value.checked)  {
+		visibility_level = 2;
+  }
+  else if(value.id === 'third_toggle' && value.checked)  {
+		visibility_level = 3;
+  }
+  else {
+  return;
+  }
+  
+  update_visibility();
+}
+
+function update_visibility()
+{
+	localStorage.visibility_level = visibility_level;
+  var private_elements = document.getElementsByClassName("private-visibility");
+  var protected_elements = document.getElementsByClassName("protected-visibility");
+  if (visibility_level == 1) {
+	for (i = 0; i < protected_elements.length; i++) {
+			protected_elements[i].style.display = "none";
+		}
+	for (i = 0; i < private_elements.length; i++) {
+			private_elements[i].style.display = "none";
+		}
+  } else if (visibility_level == 2) {
+	for (i = 0; i < protected_elements.length; i++) {
+			protected_elements[i].style.display = "";
+		}
+	for (i = 0; i < private_elements.length; i++) {
+			private_elements[i].style.display = "none";
+		}
+  } else if (visibility_level == 3) {
+	for (i = 0; i < protected_elements.length; i++) {
+			protected_elements[i].style.display = "";
+		}
+	for (i = 0; i < private_elements.length; i++) {
+			private_elements[i].style.display = "";
+		}
+  }
+}
+
+function load_image(target, url, map_id)
+{
+	var img = document.createElement("img");
+   var loc = url.match(/[^\/]+$/)[0];
+	img.src = loc;
+	img.alt = loc;
+	img.style = "display: block;margin-left: auto;margin-right: auto;"
+	img.useMap ="#localmap"			
+	target.appendChild(img);
+	
+	if(map_id)
+	{
+		var file = document.location.href.replace(".html", "__inherit__graph.map");	 
+		var class_tree = document.getElementById(map_id);
+	   class_tree.style = "";
+	   
+	   var request = new XMLHttpRequest();  
+		request.open('GET', file, true);
+		request.onreadystatechange = function(){
+			if (request.readyState === 4){
+				if (request.status === 200) 
+				{  
+					target.innerHTML += request.responseText;
+					target.childNodes[1].name="localmap"
+					var c = target.childNodes[1].childNodes;
+						for (i = 1; i < c.length; i+=2) {
+						c[i].href =c[i].href.replace("$", "");
+					}
+				}  			
+			}
+		};
+		request.send();	
+	}
+}
+
+function on_document_body_loaded()
+{
+	if (localStorage.getItem("visibility_level") === null) {
+		visibility_level = 1;
+	}
+	else
+	{
+   visibility_level =localStorage.visibility_level;
+   }
+	var first = document.getElementById('first_toggle');
+	if(first != null)	{
+		first.checked = visibility_level == 1;
+		var second = document.getElementById('second_toggle');
+		second.checked = visibility_level == 2;
+		var third = document.getElementById('third_toggle');
+		third.checked = visibility_level == 3;  
+		update_visibility();
+	}
+	
+	var img_tag = document.getElementById("img_tag");	
+	if(img_tag != null)
+	{
+		var img = document.createElement("img");
+		img.onload = function() 
+		{
+			img.style = "display: block;margin-left: auto;margin-right: auto;";
+			img.useMap ="#localmap";
+			img_tag.appendChild(img);
+			
+			var file = document.location.href.replace(".html", "__inherit__graph.map");	 
+			var class_tree = document.getElementById("class-tree");
+		   class_tree.style = "";
+		   
+		   var request = new XMLHttpRequest();  
+			request.open('GET', file, true);
+			request.onreadystatechange = function(){
+				if (request.readyState === 4){
+					if (request.status === 200) 
+					{  
+						img_tag.innerHTML += request.responseText;
+						img_tag.childNodes[1].name="localmap"
+						var c = img_tag.childNodes[1].childNodes;
+							for (i = 1; i < c.length; i+=2) {
+							c[i].href =c[i].href.replace("$", "");
+						}
+					}  			
+				}
+			};
+			request.send();	
+		}
+		img.onerror = function() 
+		{
+			img.parentNode.removeChild(img);
+		}
+		var url = document.location.href.replace(".html", "__inherit__graph.png");
+	   var loc = url.match(/[^\/]+$/)[0];
+		img.src = loc;
+		img.alt = loc;
+	}
+}
+
+function expandable_node(target)
+{
+	if(target.id.endsWith("1"))
+	{
+		var other = document.getElementById(target.id.substring(0, target.id.lastIndexOf("-")) + "-0");
+		if(other != null)
+		{
+			target.style = "display:none;"
+			other.style = "";
+		}
+	}
+	else
+	{
+		var other = document.getElementById(target.id.substring(0, target.id.lastIndexOf("-")) + "-1");
+		if(other != null)
+		{
+			target.style = "display:none;"
+			other.style = "";
+		}
+	}
+}
+</script>
+
+<script src="search.js"></script>
+<script src="searchdata.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>paradigm engine custom C++17 Vulkan engine.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
