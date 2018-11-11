@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['handle',['handle',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3adata_3a_3acore_3a_3agfx_3a_3abuffer_20_3e',['handle&lt; core::data::core::gfx::buffer &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3adata_3a_3acore_3a_3agfx_3a_3aframebuffer_20_3e',['handle&lt; core::data::core::gfx::framebuffer &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3adata_3a_3acore_3a_3agfx_3a_3ageometry_20_3e',['handle&lt; core::data::core::gfx::geometry &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3adata_3a_3acore_3a_3agfx_3a_3amaterial_20_3e',['handle&lt; core::data::core::gfx::material &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3adata_3a_3acore_3a_3agfx_3a_3asampler_20_3e',['handle&lt; core::data::core::gfx::sampler &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3abuffer_20_3e',['handle&lt; core::gfx::buffer &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acontext_20_3e',['handle&lt; core::gfx::context &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3abuffer_20_3e',['handle&lt; core::gfx::core::gfx::buffer &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3acontext_20_3e',['handle&lt; core::gfx::core::gfx::context &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3aframebuffer_20_3e',['handle&lt; core::gfx::core::gfx::framebuffer &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3ageometry_20_3e',['handle&lt; core::gfx::core::gfx::geometry &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3amaterial_20_3e',['handle&lt; core::gfx::core::gfx::material &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3apipeline_20_3e',['handle&lt; core::gfx::core::gfx::pipeline &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3apipeline_5fcache_20_3e',['handle&lt; core::gfx::core::gfx::pipeline_cache &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3asampler_20_3e',['handle&lt; core::gfx::core::gfx::sampler &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3ashader_20_3e',['handle&lt; core::gfx::core::gfx::shader &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3aswapchain_20_3e',['handle&lt; core::gfx::core::gfx::swapchain &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3acore_3a_3agfx_3a_3atexture_20_3e',['handle&lt; core::gfx::core::gfx::texture &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3agfx_3a_3aswapchain_20_3e',['handle&lt; core::gfx::swapchain &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20core_3a_3aos_3a_3asurface_20_3e',['handle&lt; core::os::surface &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]],
+  ['handle_3c_20data_3a_3awindow_20_3e',['handle&lt; data::window &gt;',['../classcore_1_1resource_1_1handle.html',1,'core::resource']]]
+];

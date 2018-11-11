@@ -1,0 +1,26 @@
+var classmemory_1_1region =
+[
+    [ "region", "classmemory_1_1region.html#ac3e73ac0084d309d3b155e2bef9185de", null ],
+    [ "~region", "classmemory_1_1region.html#a21c21d2652916afe4eabf33d6b0ddd5b", null ],
+    [ "region", "classmemory_1_1region.html#a0b169ab395424a97978d5ab6c568409f", null ],
+    [ "region", "classmemory_1_1region.html#a38061520021590555b7ac55fa815c2c9", null ],
+    [ "operator=", "classmemory_1_1region.html#af40d226533401158ec5ed25682d879ff", null ],
+    [ "operator=", "classmemory_1_1region.html#a86c5b092d36811440ea0fa8387a1f112", null ],
+    [ "allocate", "classmemory_1_1region.html#a90ba0332ac1296fc17d2eccf56ee8a24", null ],
+    [ "create_region", "classmemory_1_1region.html#a03bbcdef381f14b1ec6e1c5073dae80a", null ],
+    [ "allocate", "classmemory_1_1region.html#a4523d8aaf6983a05dd431f58a82e717e", null ],
+    [ "owns", "classmemory_1_1region.html#a2d3759f4252807840e4dce4d0f47b176", null ],
+    [ "create", "classmemory_1_1region.html#a6f63d99f2e7e8ddf5442785102d06260", null ],
+    [ "destroy", "classmemory_1_1region.html#ab3473e61c0917de32bd450099ba42cfa", null ],
+    [ "destroy", "classmemory_1_1region.html#a0330a7273ca083f76f1b2c5e18aa0303", null ],
+    [ "deallocate", "classmemory_1_1region.html#ae75ce3748e5ce7fb5460c69db204b164", null ],
+    [ "deallocate", "classmemory_1_1region.html#a491f445ff92b1fb43320d3ed3d7feb13", null ],
+    [ "allocator", "classmemory_1_1region.html#a18e83f9a8dca5878dd9420344db62c6d", null ],
+    [ "compact", "classmemory_1_1region.html#a64fc76caed6a6d4aae1092c31a8a8074", null ],
+    [ "decommit_unused", "classmemory_1_1region.html#a49c9a445c8ed1b94ac22834310de6c73", null ],
+    [ "data", "classmemory_1_1region.html#a26bdfe0e515f53fc313f40c09f16dcb3", null ],
+    [ "size", "classmemory_1_1region.html#a1cbd7ceb6108653d305cc279322754a0", null ],
+    [ "alignment", "classmemory_1_1region.html#a8207ef31be546591d321cce41cd4c634", null ],
+    [ "range", "classmemory_1_1region.html#abb96fd9089c22f17b160c5d754815dd2", null ],
+    [ "allocator_base", "classmemory_1_1region.html#a746725ee9976f777cd43f2e9aa4f5f0a", null ]
+];
