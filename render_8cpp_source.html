@@ -121,69 +121,70 @@ $(document).ready(function(){initNavTree('render_8cpp_source.html','');});
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using namespace </span>core::ecs::systems;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using namespace </span>core::ecs::components;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;render::render(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::context&gt;</a> context, </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::swapchain&gt;</a> swapchain, </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::os::surface&gt;</a> surface,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer) </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    : m_Pass(context, swapchain), m_Swapchain(swapchain), m_Surface(surface), m_Buffer(buffer)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> render::announce(core::ecs::state&amp; state)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, {m_RenderableEntities, m_Transforms, m_Renderers });</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, {m_CameraEntities, m_Cameras, m_CameraTransforms});</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> render::tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">if</span> (!m_Surface-&gt;open() || !m_Swapchain-&gt;is_ready())</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; m_CameraEntities.size(); ++i)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        update_buffer(i, m_CameraTransforms[i], m_Cameras[i]);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    m_Pass.clear();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    core::gfx::drawgroup dGroup{};</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">auto</span>&amp; default_layer = dGroup.layer(<span class="stringliteral">&quot;default&quot;</span>, 0);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; m_RenderableEntities.size(); ++i)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; renderable = m_Renderers[i];</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        dGroup.add(default_layer, renderable.material).add(renderable.geometry);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    m_Pass.add(dGroup);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    m_Pass.build();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    m_Pass.prepare();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    m_Pass.present();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> render::update_buffer(<span class="keywordtype">size_t</span> index, <span class="keyword">const</span> transform&amp; transform, <span class="keyword">const</span> core::ecs::components::camera&amp; camera)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">while</span>(index &gt;= fdatasegment.size())</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;render::render(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::context&gt;</a> context,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;               <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::swapchain&gt;</a> swapchain,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;               <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::os::surface&gt;</a> surface, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    : m_Pass(context, swapchain), m_Swapchain(swapchain), m_Surface(surface), m_Buffer(buffer)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{}</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> render::announce(core::ecs::state&amp; state)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, {m_RenderableEntities, m_Transforms, m_Renderers});</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, {m_CameraEntities, m_Cameras, m_CameraTransforms});</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> render::tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span>(!m_Surface-&gt;open() || !m_Swapchain-&gt;is_ready()) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; m_CameraEntities.size(); ++i)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        update_buffer(i, m_CameraTransforms[i], m_Cameras[i]);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    m_Pass.clear();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    core::gfx::drawgroup dGroup{};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">auto</span>&amp; default_layer = dGroup.layer(<span class="stringliteral">&quot;default&quot;</span>, 0);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; m_RenderableEntities.size(); ++i)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; renderable = m_Renderers[i];</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        dGroup.add(default_layer, renderable.material).add(renderable.geometry);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    m_Pass.add(dGroup);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    m_Pass.build();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    m_Pass.prepare();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    m_Pass.present();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> render::update_buffer(<span class="keywordtype">size_t</span> index, <span class="keyword">const</span> transform&amp; transform, <span class="keyword">const</span> core::ecs::components::camera&amp; camera)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">while</span>(index &gt;= fdatasegment.size())</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        fdatasegment.emplace_back(m_Buffer-&gt;reserve(<span class="keyword">sizeof</span>(framedata)).value());</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        fdatasegment.emplace_back(m_Buffer-&gt;reserve(<span class="keyword">sizeof</span>(framedata)).value());</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    glm::vec3 position = glm::vec3(transform.position[0], transform.position[1], transform.position[2]);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    glm::vec3 direction = glm::vec3(transform.direction[0], transform.direction[1], transform.direction[2]);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    glm::vec3 up = glm::vec3(transform.up[0], transform.up[1], transform.up[2]);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    fdata.ScreenParams =</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        glm::vec4((<span class="keywordtype">float</span>)m_Surface-&gt;data().width(), (float)m_Surface-&gt;data().height(), camera.near, camera.far);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    fdata.projectionMatrix = glm::perspective(</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        glm::radians(camera.fov), (<span class="keywordtype">float</span>)m_Surface-&gt;data().width() / (float)m_Surface-&gt;data().height(), camera.near, camera.far);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    fdata.clipMatrix = clip;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        psl::vec3 position  = transform.position;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        psl::vec3 direction = transform.direction;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        psl::vec3 up        = transform.up;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        fdata.ScreenParams =</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            psl::vec4((<span class="keywordtype">float</span>)m_Surface-&gt;data().width(), (float)m_Surface-&gt;data().height(), camera.near, camera.far);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        fdata.projectionMatrix = psl::math::perspective_projection(</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            psl::math::radians(camera.fov), (<span class="keywordtype">float</span>)m_Surface-&gt;data().width() / (float)m_Surface-&gt;data().height(),</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            camera.near, camera.far);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        fdata.clipMatrix = clip;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    fdata.viewMatrix = glm::lookAt(position, position + direction, up);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    fdata.modelMatrix = glm::mat4();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    fdata.viewPos    = glm::vec4(position, 1.0);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    fdata.viewDir    = glm::vec4(direction, 0.0);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        fdata.viewMatrix  = psl::math::look_at(position, position + direction, up);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        fdata.modelMatrix = psl::mat4x4(1);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        fdata.viewPos    = psl::vec4(position, 1.0);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        fdata.viewDir    = psl::vec4(direction, 0.0);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    fdata.VP  = fdata.clipMatrix * fdata.projectionMatrix * fdata.viewMatrix;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    fdata.WVP = fdata.VP * fdata.modelMatrix;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    m_Buffer-&gt;commit({{&amp;fdata, fdatasegment[index]}});</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        fdata.VP  = fdata.clipMatrix * fdata.projectionMatrix * fdata.viewMatrix;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        fdata.WVP = fdata.VP * fdata.modelMatrix;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        m_Buffer-&gt;commit({{&amp;fdata, fdatasegment[index]}});</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
 <div class="ttc" id="classcore_1_1resource_1_1handle_html"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt; core::gfx::context &gt;</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

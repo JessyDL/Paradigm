@@ -160,11 +160,21 @@ template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:a3ba39b95b08db9847b9b0a2063bd514b"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tquat<br class="typebreak"/>
 &lt; precision_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>from_euler</b> (const psl::tvec&lt; precision_t, 3 &gt; &amp;vec) noexcept</td></tr>
 <tr class="separator:a3ba39b95b08db9847b9b0a2063bd514b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab75b7c63b7039852260249d4be72111a"><td class="memTemplParams" colspan="2"><a class="anchor" id="ab75b7c63b7039852260249d4be72111a"></a>
+<tr class="memitem:aafe71adce8babdc59093baa84b24224e"><td class="memTemplParams" colspan="2"><a class="anchor" id="aafe71adce8babdc59093baa84b24224e"></a>
 template&lt;typename precision_t &gt; </td></tr>
-<tr class="memitem:ab75b7c63b7039852260249d4be72111a"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tvec<br class="typebreak"/>
+<tr class="memitem:aafe71adce8babdc59093baa84b24224e"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tvec<br class="typebreak"/>
 &lt; precision_t, 3 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>to_euler</b> (const tquat&lt; precision_t &gt; &amp;q) noexcept</td></tr>
-<tr class="separator:ab75b7c63b7039852260249d4be72111a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aafe71adce8babdc59093baa84b24224e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb2775fe0563bd108f88ab84d9f0c116"><td class="memTemplParams" colspan="2"><a class="anchor" id="acb2775fe0563bd108f88ab84d9f0c116"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:acb2775fe0563bd108f88ab84d9f0c116"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
+&lt; precision_t, 4, 4 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>perspective_projection</b> (precision_t vertical_fov, precision_t aspect_ratio, precision_t near, precision_t far) noexcept</td></tr>
+<tr class="separator:acb2775fe0563bd108f88ab84d9f0c116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b3c9cedbc508a955c0ccd745b79f3e7"><td class="memTemplParams" colspan="2"><a class="anchor" id="a7b3c9cedbc508a955c0ccd745b79f3e7"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:a7b3c9cedbc508a955c0ccd745b79f3e7"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
+&lt; precision_t, 4, 4 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>look_at</b> (const psl::tvec&lt; precision_t, 3 &gt; &amp;eye, const psl::tvec&lt; precision_t, 3 &gt; &amp;center, const psl::tvec&lt; precision_t, 3 &gt; &amp;up) noexcept</td></tr>
+<tr class="separator:a7b3c9cedbc508a955c0ccd745b79f3e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbb67b586ad4b3766f3f627586a68516"><td class="memTemplParams" colspan="2"><a class="anchor" id="afbb67b586ad4b3766f3f627586a68516"></a>
 template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:afbb67b586ad4b3766f3f627586a68516"><td class="memTemplItemLeft" align="right" valign="top">static constexpr precision_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>dot</b> (const tquat&lt; precision_t &gt; &amp;left, const tquat&lt; precision_t &gt; &amp;right) noexcept</td></tr>

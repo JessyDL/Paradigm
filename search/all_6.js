@@ -1,7 +1,7 @@
 var searchData=
 [
   ['generate',['generate',['../struct_u_i_d.html#aa9f7b5541b9aac957970f7265c657234',1,'UID']]],
-  ['generate_5ftangents',['generate_tangents',['../namespaceutility_1_1geometry.html#a92a601fe1fd69172aea5358f62b0ec8c',1,'utility::geometry::generate_tangents(const std::vector&lt; glm::vec3 &gt; &amp;positions, const std::vector&lt; glm::vec2 &gt; &amp;uvs, const std::vector&lt; uint32_t &gt; &amp;indices)'],['../namespaceutility_1_1geometry.html#a06148194ea5f3fc1f7349f29fd9f46b1',1,'utility::geometry::generate_tangents(core::resource::handle&lt; core::data::geometry &gt; geometry_data)']]],
+  ['generate_5ftangents',['generate_tangents',['../namespaceutility_1_1geometry.html#ae66e362257c10c36e17c5b7c8b257142',1,'utility::geometry::generate_tangents(const std::vector&lt; psl::vec3 &gt; &amp;positions, const std::vector&lt; psl::vec2 &gt; &amp;uvs, const std::vector&lt; uint32_t &gt; &amp;indices)'],['../namespaceutility_1_1geometry.html#a06148194ea5f3fc1f7349f29fd9f46b1',1,'utility::geometry::generate_tangents(core::resource::handle&lt; core::data::geometry &gt; geometry_data)']]],
   ['geometry',['geometry',['../classcore_1_1data_1_1geometry.html',1,'core::data']]],
   ['geometry',['geometry',['../classcore_1_1gfx_1_1geometry.html#afd55cc2b3617362ff091387b9b509be8',1,'core::gfx::geometry']]],
   ['geometry',['geometry',['../classcore_1_1gfx_1_1geometry.html',1,'core::gfx']]],

@@ -112,9 +112,9 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
 <div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="namespaceutility_1_1geometry.html">    6</a></span>&#160;<span class="keyword">namespace </span>utility::geometry</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="namespaceutility_1_1geometry.html#a92a601fe1fd69172aea5358f62b0ec8c">   14</a></span>&#160;    <span class="keyword">static</span> std::vector&lt;glm::vec3&gt; <a class="code" href="namespaceutility_1_1geometry.html#a92a601fe1fd69172aea5358f62b0ec8c">generate_tangents</a>(<span class="keyword">const</span> std::vector&lt;glm::vec3&gt;&amp; positions, <span class="keyword">const</span> std::vector&lt;glm::vec2&gt;&amp; uvs, <span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; indices)</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="namespaceutility_1_1geometry.html#ae66e362257c10c36e17c5b7c8b257142">   14</a></span>&#160;    <span class="keyword">static</span> std::vector&lt;psl::vec3&gt; <a class="code" href="namespaceutility_1_1geometry.html#ae66e362257c10c36e17c5b7c8b257142">generate_tangents</a>(<span class="keyword">const</span> std::vector&lt;psl::vec3&gt;&amp; positions, <span class="keyword">const</span> std::vector&lt;psl::vec2&gt;&amp; uvs, <span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; indices)</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        std::vector&lt;glm::vec3&gt; tangents;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        std::vector&lt;psl::vec3&gt; tangents;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        tangents.resize(positions.size());</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; indices.size(); i += 3)</div>
@@ -128,19 +128,19 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> &amp; u1 = uvs[indices[i + 1]];</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> &amp; u2 = uvs[indices[i + 2]];</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            glm::vec3 edge1 = v1 - v0;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            glm::vec3 edge2 = v2 - v0;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            glm::vec2 deltaUV1 = u1 - u0;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            glm::vec2 deltaUV2 = u2 - u0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            psl::vec3 edge1 = v1 - v0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            psl::vec3 edge2 = v2 - v0;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            psl::vec2 deltaUV1 = u1 - u0;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            psl::vec2 deltaUV2 = u2 - u0;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keywordtype">float</span> r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            glm::vec3 tangent = glm::normalize((edge1 * deltaUV2.y - edge2 * deltaUV1.y)*r);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keywordtype">float</span> r = 1.0f / (deltaUV1[0] * deltaUV2[1] - deltaUV1[1] * deltaUV2[0]);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            psl::vec3 tangent = ((edge1 * deltaUV2[1] - edge2 * deltaUV1[1])*r);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            tangent = psl::math::normalize(tangent);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            tangents[indices[i + 0]] = tangent;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            tangents[indices[i + 1]] = tangent;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            tangents[indices[i + 2]] = tangent;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="comment">/*</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">            glm::vec3 bitangent = glm::normalize((edge2 * deltaUV1.x - edge1 * deltaUV2.x)*r);</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">            psl::vec3 bitangent = psl::math::normalize((edge2 * deltaUV1[0] - edge1 * deltaUV2[0])*r);</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">            v0.m_bitangent = bitangent;</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">            v1.m_bitangent = bitangent;</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">            v2.m_bitangent = bitangent;</span></div>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">return</span> tangents;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="namespaceutility_1_1geometry.html#a06148194ea5f3fc1f7349f29fd9f46b1">   58</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceutility_1_1geometry.html#a92a601fe1fd69172aea5358f62b0ec8c">generate_tangents</a>(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::data::geometry&gt;</a> geometry_data)</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="namespaceutility_1_1geometry.html#a06148194ea5f3fc1f7349f29fd9f46b1">   58</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceutility_1_1geometry.html#ae66e362257c10c36e17c5b7c8b257142">generate_tangents</a>(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::data::geometry&gt;</a> geometry_data)</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    {</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">if</span>(geometry_data.resource_state() != core::resource::state::LOADED)</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -164,8 +164,8 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; indices = geometry_data-&gt;<a class="code" href="classcore_1_1data_1_1geometry.html#a9bd2cf2ac89ca5ed57ca3bec3c1be2bc">indices</a>();</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="classcore_1_1stream.html">core::stream</a> stream(core::stream::type::vec3);      </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        stream.<a class="code" href="classcore_1_1stream.html#a1a55f2c2124375dd471ad52283f77917">as_vec3</a>().value().get()  = {<a class="code" href="namespaceutility_1_1geometry.html#a92a601fe1fd69172aea5358f62b0ec8c">generate_tangents</a>(positions, uvs, indices)};</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span>(stream.<a class="code" href="classcore_1_1stream.html#a1a55f2c2124375dd471ad52283f77917">as_vec3</a>().value().get().size() == positions.size())</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        stream.<a class="code" href="classcore_1_1stream.html#a933b587ae1f7753675b21a32be1e15d3">as_vec3</a>().value().get()  = {<a class="code" href="namespaceutility_1_1geometry.html#ae66e362257c10c36e17c5b7c8b257142">generate_tangents</a>(positions, uvs, indices)};</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span>(stream.<a class="code" href="classcore_1_1stream.html#a933b587ae1f7753675b21a32be1e15d3">as_vec3</a>().value().get().size() == positions.size())</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            geometry_data-&gt;<a class="code" href="classcore_1_1data_1_1geometry.html#a648cc3049f93007a4df4a6f0a390b7c9">vertices</a>(<a class="code" href="structcore_1_1data_1_1geometry_1_1constants.html#a7b6029e98c18d35dd1017e3e9ffd5180">core::data::geometry::constants::TANGENT</a>, stream);</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
@@ -179,24 +179,24 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <a class="code" href="classcore_1_1stream.html">core::stream</a> normStream{core::stream::type::vec3};</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <a class="code" href="classcore_1_1stream.html">core::stream</a> uvStream{core::stream::type::vec2};</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">auto</span>&amp; vertices = vertStream.<a class="code" href="classcore_1_1stream.html#a1a55f2c2124375dd471ad52283f77917">as_vec3</a>().value().get();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">auto</span>&amp; vertices = vertStream.<a class="code" href="classcore_1_1stream.html#a933b587ae1f7753675b21a32be1e15d3">as_vec3</a>().value().get();</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keyword">auto</span>&amp; normals = normStream.as_vec3().value().get();</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keyword">auto</span>&amp; uvs = uvStream.as_vec2().value().get();</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        vertices.emplace_back(glm::vec3{right, top, 0.0f});</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        vertices.emplace_back(glm::vec3{left, top, 0.0f});</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        vertices.emplace_back(glm::vec3{left, bottom, 0.0f});</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        vertices.emplace_back(glm::vec3{right, bottom, 0.0f});</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        vertices.emplace_back(psl::vec3{right, top, 0.0f});</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        vertices.emplace_back(psl::vec3{left, top, 0.0f});</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        vertices.emplace_back(psl::vec3{left, bottom, 0.0f});</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        vertices.emplace_back(psl::vec3{right, bottom, 0.0f});</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        normals.emplace_back(glm::vec3{1.0f, 1.0f, 1.0f});</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        normals.emplace_back(glm::vec3{1.0f, 1.0f, 1.0f});</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        normals.emplace_back(glm::vec3{1.0f, 1.0f, 1.0f});</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        normals.emplace_back(glm::vec3{1.0f, 1.0f, 1.0f});</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        normals.emplace_back(psl::vec3{1.0f, 1.0f, 1.0f});</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        normals.emplace_back(psl::vec3{1.0f, 1.0f, 1.0f});</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        normals.emplace_back(psl::vec3{1.0f, 1.0f, 1.0f});</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        normals.emplace_back(psl::vec3{1.0f, 1.0f, 1.0f});</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        uvs.emplace_back(glm::vec2{1.0f, 1.0f});</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        uvs.emplace_back(glm::vec2{0.0f, 1.0f});</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        uvs.emplace_back(glm::vec2{0.0f, 0.0f});</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        uvs.emplace_back(glm::vec2{1.0f, 0.0f});</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        uvs.emplace_back(psl::vec2{1.0f, 1.0f});</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        uvs.emplace_back(psl::vec2{0.0f, 1.0f});</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        uvs.emplace_back(psl::vec2{0.0f, 0.0f});</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        uvs.emplace_back(psl::vec2{1.0f, 0.0f});</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keyword">auto</span> boxGeomData = core::resource::create&lt;core::data::geometry&gt;(cache);</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        boxGeomData.load();</div>
@@ -207,45 +207,45 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        boxGeomData-&gt;indices(std::vector&lt;uint32_t&gt;{0,1,2, 2,3,0});</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <a class="code" href="namespaceutility_1_1geometry.html#a92a601fe1fd69172aea5358f62b0ec8c">generate_tangents</a>(boxGeomData);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <a class="code" href="namespaceutility_1_1geometry.html#ae66e362257c10c36e17c5b7c8b257142">generate_tangents</a>(boxGeomData);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">return</span> boxGeomData;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    }</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
-<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="namespaceutility_1_1geometry.html#a57089a64ded159d1b1f4dd14f7c29fa4">  142</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::data::geometry&gt;</a> <a class="code" href="namespaceutility_1_1geometry.html#a57089a64ded159d1b1f4dd14f7c29fa4">create_plane</a>(<a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, glm::vec2 size = glm::vec2::One, glm::ivec2 subdivisions = glm::ivec2(1, 1), glm::vec2 uvScale = glm::vec2::One)</div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="namespaceutility_1_1geometry.html#aed0b68fe3dac0cbf0f5a7c6f76267401">  142</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::data::geometry&gt;</a> <a class="code" href="namespaceutility_1_1geometry.html#aed0b68fe3dac0cbf0f5a7c6f76267401">create_plane</a>(<a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, psl::vec2 size = psl::vec2::one, psl::ivec2 subdivisions = psl::ivec2(1, 1), psl::vec2 uvScale = psl::vec2::one)</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    {</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <a class="code" href="classcore_1_1stream.html">core::stream</a> vertStream{core::stream::type::vec3};</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <a class="code" href="classcore_1_1stream.html">core::stream</a> normStream{core::stream::type::vec3};</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <a class="code" href="classcore_1_1stream.html">core::stream</a> uvStream{core::stream::type::vec2};</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keyword">auto</span>&amp; vertices = vertStream.<a class="code" href="classcore_1_1stream.html#a1a55f2c2124375dd471ad52283f77917">as_vec3</a>().value().get();</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keyword">auto</span>&amp; vertices = vertStream.<a class="code" href="classcore_1_1stream.html#a933b587ae1f7753675b21a32be1e15d3">as_vec3</a>().value().get();</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keyword">auto</span>&amp; normals = normStream.as_vec3().value().get();</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keyword">auto</span>&amp; uvs = uvStream.as_vec2().value().get();</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        vertices.resize((subdivisions.x + 1) * (subdivisions.y + 1));</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        normals.resize((subdivisions.x + 1) * (subdivisions.y + 1));</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        uvs.resize((subdivisions.x + 1) * (subdivisions.y + 1));</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        vertices.resize((subdivisions[0] + 1) * (subdivisions[1] + 1));</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        normals.resize((subdivisions[0] + 1) * (subdivisions[1] + 1));</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        uvs.resize((subdivisions[0] + 1) * (subdivisions[1] + 1));</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        glm::vec2 offset = -(size * 0.5f);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = 0, y = 0; y &lt;= subdivisions.y; y++)</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        psl::vec2 offset = (size * -0.5f);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = 0, y = 0; y &lt;= subdivisions[1]; y++)</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <span class="keywordflow">for</span>(<span class="keyword">auto</span> x = 0; x &lt;= subdivisions.x; x++, i++)</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <span class="keywordflow">for</span>(<span class="keyword">auto</span> x = 0; x &lt;= subdivisions[0]; x++, i++)</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            {</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                vertices[i] = glm::vec3(((<span class="keywordtype">float</span>)x / ((<span class="keywordtype">float</span>)subdivisions.x))*size.x + offset.x, 0, ((<span class="keywordtype">float</span>)y / ((<span class="keywordtype">float</span>)subdivisions.y))*size.y + offset.y);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                normals[i] = glm::vec3::Up;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                uvs[i] = glm::vec2(((<span class="keywordtype">float</span>)x / ((<span class="keywordtype">float</span>)subdivisions.x))*uvScale.x, ((<span class="keywordtype">float</span>)y / ((<span class="keywordtype">float</span>)subdivisions.y))*uvScale.y);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                vertices[i] = psl::vec3(((<span class="keywordtype">float</span>)x / ((<span class="keywordtype">float</span>)subdivisions[0]))*size[0] + offset[0], 0, ((<span class="keywordtype">float</span>)y / ((<span class="keywordtype">float</span>)subdivisions[1]))*size[1] + offset[1]);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                normals[i] = psl::vec3::up;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                uvs[i] = psl::vec2(((<span class="keywordtype">float</span>)x / ((<span class="keywordtype">float</span>)subdivisions[0]))*uvScale[0], ((<span class="keywordtype">float</span>)y / ((<span class="keywordtype">float</span>)subdivisions[1]))*uvScale[1]);</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            }</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        }</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        std::vector&lt;uint32_t&gt; indexBuffer((subdivisions.x) * (subdivisions.y) * 6);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> ti = 0, vi = 0, y = 0; y &lt; subdivisions.y; y++, vi++)</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        std::vector&lt;uint32_t&gt; indexBuffer((subdivisions[0]) * (subdivisions[1]) * 6);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> ti = 0, vi = 0, y = 0; y &lt; subdivisions[1]; y++, vi++)</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <span class="keywordflow">for</span>(<span class="keyword">auto</span> x = 0; x &lt; subdivisions.x; x++, ti += 6, vi++)</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <span class="keywordflow">for</span>(<span class="keyword">auto</span> x = 0; x &lt; subdivisions[0]; x++, ti += 6, vi++)</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            {</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                indexBuffer[ti] = vi;</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                indexBuffer[ti + 3] = indexBuffer[ti + 2] = vi + 1;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                indexBuffer[ti + 4] = indexBuffer[ti + 1] = vi + subdivisions.x + 1;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                indexBuffer[ti + 5] = vi + subdivisions.x + 2;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                indexBuffer[ti + 4] = indexBuffer[ti + 1] = vi + subdivisions[0] + 1;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                indexBuffer[ti + 5] = vi + subdivisions[0] + 2;</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            }</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        }</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
@@ -259,28 +259,28 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        boxGeomData-&gt;indices(indexBuffer);</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <a class="code" href="namespaceutility_1_1geometry.html#a92a601fe1fd69172aea5358f62b0ec8c">generate_tangents</a>(boxGeomData);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <a class="code" href="namespaceutility_1_1geometry.html#ae66e362257c10c36e17c5b7c8b257142">generate_tangents</a>(boxGeomData);</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordflow">return</span> boxGeomData;</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    }</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="namespaceutility_1_1geometry.html#a8d7cb480660e0f82f406d06afbe110cf">  200</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::data::geometry&gt;</a> <a class="code" href="namespaceutility_1_1geometry.html#a8d7cb480660e0f82f406d06afbe110cf">create_box</a>(<a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, glm::vec3 scale = glm::vec3::One)</div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="namespaceutility_1_1geometry.html#a704c51bfe4662c05a94b580499203aba">  200</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::data::geometry&gt;</a> <a class="code" href="namespaceutility_1_1geometry.html#a704c51bfe4662c05a94b580499203aba">create_box</a>(<a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, psl::vec3 scale = psl::vec3::one)</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    {</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="keywordtype">float</span> length = scale.x;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordtype">float</span> width = scale.y;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordtype">float</span> height = scale.z;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="keywordtype">float</span> length = scale[0];</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordtype">float</span> width = scale[1];</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordtype">float</span> height = scale[2];</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        glm::vec3 p0 = glm::vec3(-length * .5f, -width * .5f, height * .5f);</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        glm::vec3 p1 = glm::vec3(length * .5f, -width * .5f, height * .5f);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        glm::vec3 p2 = glm::vec3(length * .5f, -width * .5f, -height * .5f);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        glm::vec3 p3 = glm::vec3(-length * .5f, -width * .5f, -height * .5f);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        psl::vec3 p0 = psl::vec3(-length * .5f, -width * .5f, height * .5f);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        psl::vec3 p1 = psl::vec3(length * .5f, -width * .5f, height * .5f);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        psl::vec3 p2 = psl::vec3(length * .5f, -width * .5f, -height * .5f);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        psl::vec3 p3 = psl::vec3(-length * .5f, -width * .5f, -height * .5f);</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        glm::vec3 p4 = glm::vec3(-length * .5f, width * .5f, height * .5f);</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        glm::vec3 p5 = glm::vec3(length * .5f, width * .5f, height * .5f);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        glm::vec3 p6 = glm::vec3(length * .5f, width * .5f, -height * .5f);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        glm::vec3 p7 = glm::vec3(-length * .5f, width * .5f, -height * .5f);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        psl::vec3 p4 = psl::vec3(-length * .5f, width * .5f, height * .5f);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        psl::vec3 p5 = psl::vec3(length * .5f, width * .5f, height * .5f);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        psl::vec3 p6 = psl::vec3(length * .5f, width * .5f, -height * .5f);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        psl::vec3 p7 = psl::vec3(-length * .5f, width * .5f, -height * .5f);</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        std::vector&lt;glm::vec3&gt; vertices</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        std::vector&lt;psl::vec3&gt; vertices</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        {</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <span class="comment">// Bottom</span></div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            p0, p1, p2, p3,</div>
@@ -301,33 +301,33 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            p7, p6, p5, p4</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        };</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        std::vector&lt;glm::vec3&gt; normals</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        std::vector&lt;psl::vec3&gt; normals</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        {</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            <span class="comment">// Bottom</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            glm::vec3::Down, glm::vec3::Down, glm::vec3::Down, glm::vec3::Down,</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            psl::vec3::down, psl::vec3::down, psl::vec3::down, psl::vec3::down,</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            <span class="comment">// Right</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            glm::vec3::Right, glm::vec3::Right, glm::vec3::Right, glm::vec3::Right,</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            psl::vec3::right, psl::vec3::right, psl::vec3::right, psl::vec3::right,</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            <span class="comment">// Front</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            glm::vec3::Forward, glm::vec3::Forward, glm::vec3::Forward, glm::vec3::Forward,</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            psl::vec3::forward, psl::vec3::forward, psl::vec3::forward, psl::vec3::forward,</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            <span class="comment">// Back</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            glm::vec3::Back, glm::vec3::Back, glm::vec3::Back, glm::vec3::Back,</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            psl::vec3::back, psl::vec3::back, psl::vec3::back, psl::vec3::back,</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            <span class="comment">// Left</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            glm::vec3::Left, glm::vec3::Left, glm::vec3::Left, glm::vec3::Left,</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            psl::vec3::left, psl::vec3::left, psl::vec3::left, psl::vec3::left,</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="comment">// Top</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            glm::vec3::Up, glm::vec3::Up, glm::vec3::Up, glm::vec3::Up</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            psl::vec3::up, psl::vec3::up, psl::vec3::up, psl::vec3::up</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        };</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        glm::vec2 _00(0.f, 0.f);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        glm::vec2 _10(1.f, 0.f);</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        glm::vec2 _01(0.f, 1.f);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        glm::vec2 _11(1.f, 1.f);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        psl::vec2 _00(0.f, 0.f);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        psl::vec2 _10(1.f, 0.f);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        psl::vec2 _01(0.f, 1.f);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        psl::vec2 _11(1.f, 1.f);</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        std::vector&lt;glm::vec2&gt; uvs</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        std::vector&lt;psl::vec2&gt; uvs</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        {</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            <span class="comment">// Bottom</span></div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            _11, _01, _00, _10,</div>
@@ -383,12 +383,12 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <a class="code" href="classcore_1_1stream.html">core::stream</a> normStream{core::stream::type::vec3};</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <a class="code" href="classcore_1_1stream.html">core::stream</a> uvStream{core::stream::type::vec2};</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        vertStream.<a class="code" href="classcore_1_1stream.html#a1a55f2c2124375dd471ad52283f77917">as_vec3</a>().value().get().resize(vertices.size());</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        memcpy(vertStream.data(), vertices.data(), <span class="keyword">sizeof</span>(glm::vec3) * vertices.size());</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        vertStream.<a class="code" href="classcore_1_1stream.html#a933b587ae1f7753675b21a32be1e15d3">as_vec3</a>().value().get().resize(vertices.size());</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        memcpy(vertStream.data(), vertices.data(), <span class="keyword">sizeof</span>(psl::vec3) * vertices.size());</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        normStream.as_vec3().value().get().resize(normals.size());</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        memcpy(normStream.data(), normals.data(), <span class="keyword">sizeof</span>(glm::vec3) * normals.size());</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        memcpy(normStream.data(), normals.data(), <span class="keyword">sizeof</span>(psl::vec3) * normals.size());</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        uvStream.as_vec2().value().get().resize(uvs.size());</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        memcpy(uvStream.data(), uvs.data(), <span class="keyword">sizeof</span>(glm::vec2) * uvs.size());</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        memcpy(uvStream.data(), uvs.data(), <span class="keyword">sizeof</span>(psl::vec2) * uvs.size());</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        boxGeomData-&gt;vertices(<a class="code" href="structcore_1_1data_1_1geometry_1_1constants.html#a18c8db6c4a238fc99a53446e89ec1c0e">core::data::geometry::constants::POSITION</a>, vertStream);</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        boxGeomData-&gt;vertices(<a class="code" href="structcore_1_1data_1_1geometry_1_1constants.html#a9763010022ed01e8ffd87ffea3442b8e">core::data::geometry::constants::NORMAL</a>, normStream);</div>
@@ -396,25 +396,25 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        boxGeomData-&gt;indices(triangles);</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <a class="code" href="namespaceutility_1_1geometry.html#a92a601fe1fd69172aea5358f62b0ec8c">generate_tangents</a>(boxGeomData);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <a class="code" href="namespaceutility_1_1geometry.html#ae66e362257c10c36e17c5b7c8b257142">generate_tangents</a>(boxGeomData);</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keywordflow">return</span> boxGeomData;</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    }</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;}</div>
-<div class="ttc" id="namespaceutility_1_1geometry_html_a8d7cb480660e0f82f406d06afbe110cf"><div class="ttname"><a href="namespaceutility_1_1geometry.html#a8d7cb480660e0f82f406d06afbe110cf">utility::geometry::create_box</a></div><div class="ttdeci">static core::resource::handle&lt; core::data::geometry &gt; create_box(core::resource::cache &amp;cache, glm::vec3 scale=glm::vec3::One)</div><div class="ttdoc">generates a box primitive with a pivot of {0,0,0}. </div><div class="ttdef"><b>Definition:</b> <a href="utility_2geometry_8h_source.html#l00200">geometry.h:200</a></div></div>
 <div class="ttc" id="structcore_1_1data_1_1geometry_1_1constants_html_a9763010022ed01e8ffd87ffea3442b8e"><div class="ttname"><a href="structcore_1_1data_1_1geometry_1_1constants.html#a9763010022ed01e8ffd87ffea3442b8e">core::data::geometry::constants::NORMAL</a></div><div class="ttdeci">static constexpr psl::string_view NORMAL</div><div class="ttdoc">vertex normal information key </div><div class="ttdef"><b>Definition:</b> <a href="data_2geometry_8h_source.html#l00048">geometry.h:48</a></div></div>
 <div class="ttc" id="classcore_1_1data_1_1geometry_html_a9bd2cf2ac89ca5ed57ca3bec3c1be2bc"><div class="ttname"><a href="classcore_1_1data_1_1geometry.html#a9bd2cf2ac89ca5ed57ca3bec3c1be2bc">core::data::geometry::indices</a></div><div class="ttdeci">const std::vector&lt; index_size_t &gt; &amp; indices() const </div><div class="ttdoc">gets all indices that are currently assigned to this model data. </div><div class="ttdef"><b>Definition:</b> <a href="data_2geometry_8cpp_source.html#l00025">geometry.cpp:25</a></div></div>
-<div class="ttc" id="namespaceutility_1_1geometry_html_a92a601fe1fd69172aea5358f62b0ec8c"><div class="ttname"><a href="namespaceutility_1_1geometry.html#a92a601fe1fd69172aea5358f62b0ec8c">utility::geometry::generate_tangents</a></div><div class="ttdeci">static std::vector&lt; glm::vec3 &gt; generate_tangents(const std::vector&lt; glm::vec3 &gt; &amp;positions, const std::vector&lt; glm::vec2 &gt; &amp;uvs, const std::vector&lt; uint32_t &gt; &amp;indices)</div><div class="ttdoc">generates tangent information for the geometry data </div><div class="ttdef"><b>Definition:</b> <a href="utility_2geometry_8h_source.html#l00014">geometry.h:14</a></div></div>
 <div class="ttc" id="classcore_1_1data_1_1geometry_html_a648cc3049f93007a4df4a6f0a390b7c9"><div class="ttname"><a href="classcore_1_1data_1_1geometry.html#a648cc3049f93007a4df4a6f0a390b7c9">core::data::geometry::vertices</a></div><div class="ttdeci">std::optional&lt; std::reference_wrapper&lt; const core::stream &gt; &gt; vertices(const psl::string_view name=constants::POSITION) const </div><div class="ttdoc">returns the stream reference (if any found) for the given key. </div><div class="ttdef"><b>Definition:</b> <a href="data_2geometry_8cpp_source.html#l00012">geometry.cpp:12</a></div></div>
-<div class="ttc" id="namespaceutility_1_1geometry_html_a57089a64ded159d1b1f4dd14f7c29fa4"><div class="ttname"><a href="namespaceutility_1_1geometry.html#a57089a64ded159d1b1f4dd14f7c29fa4">utility::geometry::create_plane</a></div><div class="ttdeci">static core::resource::handle&lt; core::data::geometry &gt; create_plane(core::resource::cache &amp;cache, glm::vec2 size=glm::vec2::One, glm::ivec2 subdivisions=glm::ivec2(1, 1), glm::vec2 uvScale=glm::vec2::One)</div><div class="ttdoc">generates a plane primitive with the bounds coordinates. </div><div class="ttdef"><b>Definition:</b> <a href="utility_2geometry_8h_source.html#l00142">geometry.h:142</a></div></div>
+<div class="ttc" id="namespaceutility_1_1geometry_html_aed0b68fe3dac0cbf0f5a7c6f76267401"><div class="ttname"><a href="namespaceutility_1_1geometry.html#aed0b68fe3dac0cbf0f5a7c6f76267401">utility::geometry::create_plane</a></div><div class="ttdeci">static core::resource::handle&lt; core::data::geometry &gt; create_plane(core::resource::cache &amp;cache, psl::vec2 size=psl::vec2::one, psl::ivec2 subdivisions=psl::ivec2(1, 1), psl::vec2 uvScale=psl::vec2::one)</div><div class="ttdoc">generates a plane primitive with the bounds coordinates. </div><div class="ttdef"><b>Definition:</b> <a href="utility_2geometry_8h_source.html#l00142">geometry.h:142</a></div></div>
 <div class="ttc" id="classcore_1_1stream_html"><div class="ttname"><a href="classcore_1_1stream.html">core::stream</a></div><div class="ttdoc">stream contains a type erased &quot;stream&quot; of memory with basic facilities to protect it from incorrect c...</div><div class="ttdef"><b>Definition:</b> <a href="stream_8h_source.html#l00010">stream.h:10</a></div></div>
 <div class="ttc" id="structcore_1_1data_1_1geometry_1_1constants_html_a57a26394290968fd0b2798fa8f455487"><div class="ttname"><a href="structcore_1_1data_1_1geometry_1_1constants.html#a57a26394290968fd0b2798fa8f455487">core::data::geometry::constants::TEX</a></div><div class="ttdeci">static constexpr psl::string_view TEX</div><div class="ttdoc">vertex uv-coordinate key </div><div class="ttdef"><b>Definition:</b> <a href="data_2geometry_8h_source.html#l00054">geometry.h:54</a></div></div>
 <div class="ttc" id="structcore_1_1data_1_1geometry_1_1constants_html_a7b6029e98c18d35dd1017e3e9ffd5180"><div class="ttname"><a href="structcore_1_1data_1_1geometry_1_1constants.html#a7b6029e98c18d35dd1017e3e9ffd5180">core::data::geometry::constants::TANGENT</a></div><div class="ttdeci">static constexpr psl::string_view TANGENT</div><div class="ttdoc">vertex tangent information key </div><div class="ttdef"><b>Definition:</b> <a href="data_2geometry_8h_source.html#l00050">geometry.h:50</a></div></div>
-<div class="ttc" id="classcore_1_1stream_html_a1a55f2c2124375dd471ad52283f77917"><div class="ttname"><a href="classcore_1_1stream.html#a1a55f2c2124375dd471ad52283f77917">core::stream::as_vec3</a></div><div class="ttdeci">std::optional&lt; std::reference_wrapper&lt; std::vector&lt; glm::vec3 &gt; &gt; &gt; as_vec3()</div><div class="ttdoc">returns the type safe variant of the stream as a reference. </div><div class="ttdef"><b>Definition:</b> <a href="stream_8h_source.html#l00073">stream.h:73</a></div></div>
+<div class="ttc" id="namespaceutility_1_1geometry_html_ae66e362257c10c36e17c5b7c8b257142"><div class="ttname"><a href="namespaceutility_1_1geometry.html#ae66e362257c10c36e17c5b7c8b257142">utility::geometry::generate_tangents</a></div><div class="ttdeci">static std::vector&lt; psl::vec3 &gt; generate_tangents(const std::vector&lt; psl::vec3 &gt; &amp;positions, const std::vector&lt; psl::vec2 &gt; &amp;uvs, const std::vector&lt; uint32_t &gt; &amp;indices)</div><div class="ttdoc">generates tangent information for the geometry data </div><div class="ttdef"><b>Definition:</b> <a href="utility_2geometry_8h_source.html#l00014">geometry.h:14</a></div></div>
 <div class="ttc" id="classcore_1_1resource_1_1cache_html"><div class="ttname"><a href="classcore_1_1resource_1_1cache.html">core::resource::cache</a></div><div class="ttdoc">represents a container of resources and their UID mappings </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00220">resource.h:220</a></div></div>
 <div class="ttc" id="structcore_1_1data_1_1geometry_1_1constants_html_a18c8db6c4a238fc99a53446e89ec1c0e"><div class="ttname"><a href="structcore_1_1data_1_1geometry_1_1constants.html#a18c8db6c4a238fc99a53446e89ec1c0e">core::data::geometry::constants::POSITION</a></div><div class="ttdeci">static constexpr psl::string_view POSITION</div><div class="ttdoc">vertex position data key </div><div class="ttdef"><b>Definition:</b> <a href="data_2geometry_8h_source.html#l00044">geometry.h:44</a></div></div>
+<div class="ttc" id="namespaceutility_1_1geometry_html_a704c51bfe4662c05a94b580499203aba"><div class="ttname"><a href="namespaceutility_1_1geometry.html#a704c51bfe4662c05a94b580499203aba">utility::geometry::create_box</a></div><div class="ttdeci">static core::resource::handle&lt; core::data::geometry &gt; create_box(core::resource::cache &amp;cache, psl::vec3 scale=psl::vec3::one)</div><div class="ttdoc">generates a box primitive with a pivot of {0,0,0}. </div><div class="ttdef"><b>Definition:</b> <a href="utility_2geometry_8h_source.html#l00200">geometry.h:200</a></div></div>
 <div class="ttc" id="namespaceutility_1_1geometry_html_ad86946d2d0b2983fcd0589ea85cc0822"><div class="ttname"><a href="namespaceutility_1_1geometry.html#ad86946d2d0b2983fcd0589ea85cc0822">utility::geometry::create_quad</a></div><div class="ttdeci">static core::resource::handle&lt; core::data::geometry &gt; create_quad(core::resource::cache &amp;cache, float top, float bottom, float left, float right)</div><div class="ttdoc">generates a quad primitive with the bounds coordinates. </div><div class="ttdef"><b>Definition:</b> <a href="utility_2geometry_8h_source.html#l00092">geometry.h:92</a></div></div>
 <div class="ttc" id="classcore_1_1resource_1_1handle_html"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html">core::resource::handle</a></div><div class="ttdoc">wraps around a resource for sharing and management purposes. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00033">resource.h:33</a></div></div>
+<div class="ttc" id="classcore_1_1stream_html_a933b587ae1f7753675b21a32be1e15d3"><div class="ttname"><a href="classcore_1_1stream.html#a933b587ae1f7753675b21a32be1e15d3">core::stream::as_vec3</a></div><div class="ttdeci">std::optional&lt; std::reference_wrapper&lt; std::vector&lt; psl::vec3 &gt; &gt; &gt; as_vec3()</div><div class="ttdoc">returns the type safe variant of the stream as a reference. </div><div class="ttdef"><b>Definition:</b> <a href="stream_8h_source.html#l00073">stream.h:73</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
