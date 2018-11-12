@@ -140,7 +140,7 @@ $(document).ready(function(){initNavTree('state_8h_source.html','');});
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                  generator(region.size() / size){};</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            component_info(std::vector&lt;entity&gt;&amp;&amp; entities, component_key_t <span class="keywordtype">id</span>)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                : region(128), entities(std::move(entities)), id(id), size(size), generator(1)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                : region(128), entities(std::move(entities)), id(id), size(1), generator(1)</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            {};</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            memory::raw_region region;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            std::vector&lt;entity&gt; entities;</div>
