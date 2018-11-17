@@ -263,9 +263,9 @@ $(document).ready(function(){initNavTree('state_8h_source.html','');});
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keyword">auto</span>&amp; pair{it-&gt;second};</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keywordflow">if</span> constexpr(std::is_empty&lt;T&gt;::value)</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = std::begin(ent_cpy); it != end; ++it)</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span> ent_it = std::begin(ent_cpy); ent_it != end; ++ent_it)</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                    <span class="keyword">const</span> entity&amp; e{*it};</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                    <span class="keyword">const</span> entity&amp; e{*ent_it};</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                    m_EntityMap[e].emplace_back(int_id, 0);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                    pair.entities.emplace(std::upper_bound(std::begin(pair.entities), std::end(pair.entities), e), e);</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                }</div>
@@ -279,9 +279,9 @@ $(document).ready(function(){initNavTree('state_8h_source.html','');});
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                std::vector&lt;uint64_t&gt; indices;</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                indices.reserve(std::distance(std::begin(ent_cpy), end));</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = std::begin(ent_cpy); it != end; ++it)</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span> ent_it = std::begin(ent_cpy); ent_it != end; ++ent_it)</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                {</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                    <span class="keyword">const</span> entity&amp; e{*it};</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                    <span class="keyword">const</span> entity&amp; e{*ent_it};</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                    <span class="keyword">auto</span> index = pair.generator.CreateID().second;</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                    indices.emplace_back(index);</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                    m_EntityMap[e].emplace_back(int_id, index);</div>

@@ -1316,7 +1316,7 @@ $(document).ready(function(){initNavTree('format_8cpp_source.html','');});
 <div class="line"><a name="l01208"></a><span class="lineno"> 1208</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> index = rfind_first_of(name, name.size(), constants::NAMESPACE_DIVIDER); index != psl::string8_t::npos)</div>
 <div class="line"><a name="l01209"></a><span class="lineno"> 1209</span>&#160;    {</div>
 <div class="line"><a name="l01210"></a><span class="lineno"> 1210</span>&#160;        psl::string8_t parent_name = fullname(parent) + psl::string8_t{ name.substr(0, index - constants::NAMESPACE_DIVIDER.size()) };</div>
-<div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160;        <span class="keyword">auto</span> parent_index = index_of(parent_name);</div>
+<div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160;        parent_index = index_of(parent_name);</div>
 <div class="line"><a name="l01212"></a><span class="lineno"> 1212</span>&#160;        name = name.substr(index);</div>
 <div class="line"><a name="l01213"></a><span class="lineno"> 1213</span>&#160;</div>
 <div class="line"><a name="l01214"></a><span class="lineno"> 1214</span>&#160;    }</div>

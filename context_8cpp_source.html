@@ -897,74 +897,73 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;    }</div>
 <div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;</div>
 <div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;could not find memory type&quot;</span>);</div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;}</div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;</div>
-<div class="line"><a name="l00795"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#af078770ab9f0bbde2ec186fe4dc3e7f8">  795</a></span>&#160;<span class="keywordtype">void</span> context::flush(vk::CommandBuffer commandBuffer, <span class="keywordtype">bool</span> free)</div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;{</div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;    <span class="keywordflow">if</span>(!commandBuffer)</div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;    {</div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    }</div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;</div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;    utility::vulkan::check(commandBuffer.end());</div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;</div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;    vk::SubmitInfo submitInfo;</div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;    submitInfo.commandBufferCount = 1;</div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;    submitInfo.pCommandBuffers  = &amp;commandBuffer;</div>
-<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;</div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;    vk::FenceCreateInfo fenceCreateInfo = {};</div>
-<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;    fenceCreateInfo.flags               = vk::FenceCreateFlagBits(0u);</div>
-<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;    <span class="comment">// fenceCreateInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;</span></div>
-<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;    <span class="comment">// fenceCreateInfo.flags = 0u;</span></div>
-<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;    <span class="keyword">auto</span> [result, fence] = m_Device.createFence(fenceCreateInfo, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;    utility::vulkan::check(result);</div>
-<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;</div>
-<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;    utility::vulkan::check(m_Queue.submit(1, &amp;submitInfo, fence));</div>
-<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;    utility::vulkan::check(m_Device.waitForFences(1, &amp;fence, VK_TRUE, 100000000000 <span class="comment">/*nanoseconds*/</span>));</div>
-<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;    m_Device.destroyFence(fence);</div>
-<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;</div>
-<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;    <span class="keywordflow">if</span>(free)</div>
-<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;    {</div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;        m_Device.freeCommandBuffers(m_CommandPool, 1, &amp;commandBuffer);</div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;    }</div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;}</div>
-<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;</div>
-<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="keywordtype">void</span> context::select_physical_device(<span class="keyword">const</span> std::vector&lt;vk::PhysicalDevice&gt;&amp; allDevices)</div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;{</div>
-<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;    m_PhysicalDevice = allDevices[m_DeviceIndex];</div>
-<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;}</div>
-<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;</div>
-<div class="line"><a name="l00830"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a7833eeee7c4d1c62684286f97452e990">  830</a></span>&#160;<span class="keyword">const</span> vk::Instance&amp; context::instance() const noexcept { <span class="keywordflow">return</span> m_Instance; }</div>
-<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;</div>
-<div class="line"><a name="l00832"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#abec09333ef3bd9573c43e050085452be">  832</a></span>&#160;<span class="keyword">const</span> vk::Device&amp; context::device() const noexcept { <span class="keywordflow">return</span> m_Device; }</div>
-<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;</div>
-<div class="line"><a name="l00834"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a5771ae336d86f87c4e76f67cc4c3cbfb">  834</a></span>&#160;<span class="keyword">const</span> vk::PhysicalDevice&amp; context::physical_device() const noexcept { <span class="keywordflow">return</span> m_PhysicalDevice; }</div>
-<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;</div>
-<div class="line"><a name="l00836"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#ab35e395ebb72abd85e03420836ac6068">  836</a></span>&#160;<span class="keyword">const</span> vk::PhysicalDeviceProperties&amp; context::properties() const noexcept { <span class="keywordflow">return</span> m_PhysicalDeviceProperties; }</div>
-<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;</div>
-<div class="line"><a name="l00838"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#afb68579b54e70612a1efaa7ba3209e73">  838</a></span>&#160;<span class="keyword">const</span> vk::PhysicalDeviceFeatures&amp; context::features() const noexcept { <span class="keywordflow">return</span> m_PhysicalDeviceFeatures; }</div>
-<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160;</div>
-<div class="line"><a name="l00840"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a2ee91cf9aa96cad4297a3f21dd704e7e">  840</a></span>&#160;<span class="keyword">const</span> vk::PhysicalDeviceMemoryProperties&amp; context::memory_properties() const noexcept</div>
-<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;{</div>
-<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;    <span class="keywordflow">return</span> m_PhysicalDeviceMemoryProperties;</div>
-<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160;}</div>
-<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;</div>
-<div class="line"><a name="l00845"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#ab76c30b774f07eb2661f9c1b00f72837">  845</a></span>&#160;<span class="keyword">const</span> vk::CommandPool&amp; context::command_pool() const noexcept { <span class="keywordflow">return</span> m_CommandPool; }</div>
-<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;</div>
-<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;<span class="keyword">const</span> vk::CommandPool&amp; context::transfer_command_pool() const noexcept { <span class="keywordflow">return</span> m_TransferCommandPool; }</div>
-<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;</div>
-<div class="line"><a name="l00849"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a3246465b2821ca362a8468cbcb0d0a3d">  849</a></span>&#160;<span class="keyword">const</span> vk::DescriptorPool&amp; context::descriptor_pool() const noexcept { <span class="keywordflow">return</span> m_DescriptorPool; }</div>
-<div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;</div>
-<div class="line"><a name="l00851"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#acea5a860f5bb2cd72f6f493417afa74c">  851</a></span>&#160;<span class="keyword">const</span> vk::Queue&amp; context::queue() const noexcept { <span class="keywordflow">return</span> m_Queue; }</div>
-<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;</div>
-<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;<span class="keyword">const</span> vk::Queue&amp; context::transfer_queue() const noexcept { <span class="keywordflow">return</span> m_TransferQueue; }</div>
-<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;</div>
-<div class="line"><a name="l00855"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a09e6fed6df145580c75e475f56894c67">  855</a></span>&#160;uint32_t context::graphics_queue_index() const noexcept { <span class="keywordflow">return</span> m_GraphicsQueueIndex; }</div>
-<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;</div>
-<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;uint32_t context::transfer_que_index() const noexcept { <span class="keywordflow">return</span> m_TransferQueueIndex; }</div>
-<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;</div>
-<div class="line"><a name="l00859"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#aae9a6ec400c391a1a4a776885bd8d38a">  859</a></span>&#160;<span class="keywordtype">bool</span> context::acquireNextImage2KHR(optional_ref&lt;uint64_t&gt; out_version) <span class="keyword">const</span> noexcept { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;}</div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;</div>
+<div class="line"><a name="l00794"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#af078770ab9f0bbde2ec186fe4dc3e7f8">  794</a></span>&#160;<span class="keywordtype">void</span> context::flush(vk::CommandBuffer commandBuffer, <span class="keywordtype">bool</span> free)</div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;{</div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;    <span class="keywordflow">if</span>(!commandBuffer)</div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;    {</div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;    }</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;</div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;    utility::vulkan::check(commandBuffer.end());</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;    vk::SubmitInfo submitInfo;</div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;    submitInfo.commandBufferCount = 1;</div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;    submitInfo.pCommandBuffers  = &amp;commandBuffer;</div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;    vk::FenceCreateInfo fenceCreateInfo = {};</div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;    fenceCreateInfo.flags               = vk::FenceCreateFlagBits(0u);</div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;    <span class="comment">// fenceCreateInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;</span></div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;    <span class="comment">// fenceCreateInfo.flags = 0u;</span></div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;    <span class="keyword">auto</span> [result, fence] = m_Device.createFence(fenceCreateInfo, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;    utility::vulkan::check(result);</div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;</div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;    utility::vulkan::check(m_Queue.submit(1, &amp;submitInfo, fence));</div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;    utility::vulkan::check(m_Device.waitForFences(1, &amp;fence, VK_TRUE, 100000000000 <span class="comment">/*nanoseconds*/</span>));</div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;    m_Device.destroyFence(fence);</div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;</div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;    <span class="keywordflow">if</span>(free)</div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;    {</div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;        m_Device.freeCommandBuffers(m_CommandPool, 1, &amp;commandBuffer);</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;    }</div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;}</div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;</div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="keywordtype">void</span> context::select_physical_device(<span class="keyword">const</span> std::vector&lt;vk::PhysicalDevice&gt;&amp; allDevices)</div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;{</div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;    m_PhysicalDevice = allDevices[m_DeviceIndex];</div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;}</div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;</div>
+<div class="line"><a name="l00829"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a7833eeee7c4d1c62684286f97452e990">  829</a></span>&#160;<span class="keyword">const</span> vk::Instance&amp; context::instance() const noexcept { <span class="keywordflow">return</span> m_Instance; }</div>
+<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;</div>
+<div class="line"><a name="l00831"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#abec09333ef3bd9573c43e050085452be">  831</a></span>&#160;<span class="keyword">const</span> vk::Device&amp; context::device() const noexcept { <span class="keywordflow">return</span> m_Device; }</div>
+<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;</div>
+<div class="line"><a name="l00833"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a5771ae336d86f87c4e76f67cc4c3cbfb">  833</a></span>&#160;<span class="keyword">const</span> vk::PhysicalDevice&amp; context::physical_device() const noexcept { <span class="keywordflow">return</span> m_PhysicalDevice; }</div>
+<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;</div>
+<div class="line"><a name="l00835"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#ab35e395ebb72abd85e03420836ac6068">  835</a></span>&#160;<span class="keyword">const</span> vk::PhysicalDeviceProperties&amp; context::properties() const noexcept { <span class="keywordflow">return</span> m_PhysicalDeviceProperties; }</div>
+<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;</div>
+<div class="line"><a name="l00837"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#afb68579b54e70612a1efaa7ba3209e73">  837</a></span>&#160;<span class="keyword">const</span> vk::PhysicalDeviceFeatures&amp; context::features() const noexcept { <span class="keywordflow">return</span> m_PhysicalDeviceFeatures; }</div>
+<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;</div>
+<div class="line"><a name="l00839"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a2ee91cf9aa96cad4297a3f21dd704e7e">  839</a></span>&#160;<span class="keyword">const</span> vk::PhysicalDeviceMemoryProperties&amp; context::memory_properties() const noexcept</div>
+<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;{</div>
+<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;    <span class="keywordflow">return</span> m_PhysicalDeviceMemoryProperties;</div>
+<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;}</div>
+<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160;</div>
+<div class="line"><a name="l00844"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#ab76c30b774f07eb2661f9c1b00f72837">  844</a></span>&#160;<span class="keyword">const</span> vk::CommandPool&amp; context::command_pool() const noexcept { <span class="keywordflow">return</span> m_CommandPool; }</div>
+<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;</div>
+<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;<span class="keyword">const</span> vk::CommandPool&amp; context::transfer_command_pool() const noexcept { <span class="keywordflow">return</span> m_TransferCommandPool; }</div>
+<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;</div>
+<div class="line"><a name="l00848"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a3246465b2821ca362a8468cbcb0d0a3d">  848</a></span>&#160;<span class="keyword">const</span> vk::DescriptorPool&amp; context::descriptor_pool() const noexcept { <span class="keywordflow">return</span> m_DescriptorPool; }</div>
+<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160;</div>
+<div class="line"><a name="l00850"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#acea5a860f5bb2cd72f6f493417afa74c">  850</a></span>&#160;<span class="keyword">const</span> vk::Queue&amp; context::queue() const noexcept { <span class="keywordflow">return</span> m_Queue; }</div>
+<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;</div>
+<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;<span class="keyword">const</span> vk::Queue&amp; context::transfer_queue() const noexcept { <span class="keywordflow">return</span> m_TransferQueue; }</div>
+<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;</div>
+<div class="line"><a name="l00854"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#a09e6fed6df145580c75e475f56894c67">  854</a></span>&#160;uint32_t context::graphics_queue_index() const noexcept { <span class="keywordflow">return</span> m_GraphicsQueueIndex; }</div>
+<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;</div>
+<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;uint32_t context::transfer_que_index() const noexcept { <span class="keywordflow">return</span> m_TransferQueueIndex; }</div>
+<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;</div>
+<div class="line"><a name="l00858"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1context.html#aae9a6ec400c391a1a4a776885bd8d38a">  858</a></span>&#160;<span class="keywordtype">bool</span> context::acquireNextImage2KHR(optional_ref&lt;uint64_t&gt; out_version) <span class="keyword">const</span> noexcept { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
 <div class="ttc" id="struct_u_i_d_html"><div class="ttname"><a href="struct_u_i_d.html">UID</a></div><div class="ttdoc">is an object holding a Unique IDentifier (UID) </div><div class="ttdef"><b>Definition:</b> <a href="meta_8h_source.html#l00018">meta.h:18</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1buffer_html"><div class="ttname"><a href="classcore_1_1gfx_1_1buffer.html">core::gfx::buffer</a></div><div class="ttdoc">maps a memory region and interfaces with the driver for read/writes </div><div class="ttdef"><b>Definition:</b> <a href="core_2inc_2vk_2buffer_8h_source.html#l00019">buffer.h:19</a></div></div>
 <div class="ttc" id="namespacecore_1_1ivk_html_a06a4970c50f3f8eb80887fd2a6db6395"><div class="ttname"><a href="namespacecore_1_1ivk.html#a06a4970c50f3f8eb80887fd2a6db6395">core::ivk::extensions</a></div><div class="ttdeci">extensions</div><div class="ttdoc">all known extensions for Vulkan. </div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00008">context.h:8</a></div></div>

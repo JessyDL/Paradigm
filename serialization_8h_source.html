@@ -2019,9 +2019,9 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01941"></a><span class="lineno"> 1941</span>&#160;                    {</div>
 <div class="line"><a name="l01942"></a><span class="lineno"> 1942</span>&#160;                        target = (T*)((*it-&gt;second)());</div>
 <div class="line"><a name="l01943"></a><span class="lineno"> 1943</span>&#160;                    }</div>
-<div class="line"><a name="l01944"></a><span class="lineno"> 1944</span>&#160;                    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = accessor::polymorphic_data().find(<span class="keywordtype">id</span>); it != accessor::polymorphic_data().end())</div>
+<div class="line"><a name="l01944"></a><span class="lineno"> 1944</span>&#160;                    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<span class="keyword">auto</span> poly_it = accessor::polymorphic_data().find(<span class="keywordtype">id</span>); poly_it != accessor::polymorphic_data().end())</div>
 <div class="line"><a name="l01945"></a><span class="lineno"> 1945</span>&#160;                    {</div>
-<div class="line"><a name="l01946"></a><span class="lineno"> 1946</span>&#160;                        target = (T*)((*it-&gt;second-&gt;factory)());</div>
+<div class="line"><a name="l01946"></a><span class="lineno"> 1946</span>&#160;                        target = (T*)((*poly_it-&gt;second-&gt;factory)());</div>
 <div class="line"><a name="l01947"></a><span class="lineno"> 1947</span>&#160;                    }</div>
 <div class="line"><a name="l01948"></a><span class="lineno"> 1948</span>&#160;                    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l01949"></a><span class="lineno"> 1949</span>&#160;                    {</div>
