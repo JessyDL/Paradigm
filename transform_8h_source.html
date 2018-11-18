@@ -115,13 +115,14 @@ $(document).ready(function(){initNavTree('transform_8h_source.html','');});
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    {</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        transform() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        transform(<span class="keyword">const</span> psl::vec3&amp; position) : position(position) {};</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        psl::quat rotation{1,0,0,0};</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        psl::vec3 position{ psl::vec3::zero };</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        psl::vec3 scale{ psl::vec3::one };</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        psl::vec3 up{ psl::vec3::up };</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        psl::vec3 direction{ psl::vec3::forward };</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    };</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        transform(<span class="keyword">const</span> psl::vec3&amp; position, <span class="keyword">const</span> psl::vec3&amp; scale) : position(position), scale(scale) {};</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        psl::quat rotation{1,0,0,0};</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        psl::vec3 position{ psl::vec3::zero };</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        psl::vec3 scale{ psl::vec3::one };</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        psl::vec3 up{ psl::vec3::up };</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        psl::vec3 direction{ psl::vec3::forward };</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    };</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -793,83 +793,84 @@ $(document).ready(function(){initNavTree('core_8cpp_source.html','');});
 <div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;    core::ecs::state ECSState{};</div>
 <div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;    <span class="keyword">auto</span> eCam = ECSState.create&lt;core::ecs::components::transform, core::ecs::components::camera, core::ecs::components::input_tag&gt;(std::nullopt, std::nullopt, std::nullopt);</div>
 <div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;</div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 32; ++x)</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> x = 0; x &lt; 1024; ++x)</div>
 <div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    {</div>
 <div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;        <span class="keyword">auto</span> eGeom = ECSState.create&lt;core::ecs::components::renderable, core::ecs::components::transform&gt;</div>
 <div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;            (core::ecs::components::renderable{ material, <a class="code" href="classcore_1_1gfx_1_1geometry.html">geometry</a>, 0u }, </div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;             core::ecs::components::transform{psl::vec3(std::rand() % 6 - 3,std::rand() % 6 - 3,std::rand() % 6 - 3)});</div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;    }</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;    core::ecs::systems::fly fly_system{ surface_handle-&gt;input() };</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    ECSState.register_system(fly_system);</div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;</div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;    core::ecs::systems::render render_system{ context_handle, swapchain_handle, surface_handle, frameBuffer };</div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;    ECSState.register_system(render_system);</div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;    core::ecs::systems::geometry_instance geometry_instance{};</div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    ECSState.register_system(geometry_instance);</div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;    uint64_t frameCount                                      = 0u;</div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    std::chrono::high_resolution_clock::time_point last_tick = std::chrono::high_resolution_clock::now();</div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;    <span class="keywordflow">while</span>(surface_handle-&gt;tick())</div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    {</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;        <span class="keyword">auto</span> current_time = std::chrono::high_resolution_clock::now();</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;        std::chrono::duration&lt;float&gt; elapsed =</div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;            std::chrono::duration_cast&lt;std::chrono::duration&lt;float&gt;&gt;(current_time - last_tick);</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;        last_tick = current_time;</div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;        ECSState.tick(elapsed);</div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;        ++frameCount;</div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;    }</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;}</div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;</div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="keyword">static</span> <span class="keywordtype">bool</span> initialized = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="preprocessor">#if defined(PLATFORM_ANDROID)</span></div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="comment">// todo deal with this extern</span></div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;android_app* platform::specifics::android_application;</div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;</div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="keywordtype">void</span> handleAppCommand(android_app* app, int32_t cmd)</div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;{</div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;    <span class="keywordflow">switch</span>(cmd)</div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;    {</div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;    <span class="keywordflow">case</span> APP_CMD_INIT_WINDOW: initialized = <span class="keyword">true</span>; <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;    }</div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;}</div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;int32_t handleAppInput(<span class="keyword">struct</span> android_app* app, AInputEvent* event) {}</div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;</div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="keywordtype">void</span> android_main(android_app* application)</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;{</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    application-&gt;onAppCmd = handleAppCommand;</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    <span class="comment">// Screen density</span></div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    AConfiguration* config = AConfiguration_new();</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;    AConfiguration_fromAssetManager(config, application-&gt;activity-&gt;assetManager);</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;    <span class="comment">// vks::android::screenDensity = AConfiguration_getDensity(config);</span></div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    AConfiguration_delete(config);</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    <span class="keywordflow">while</span>(!initialized)</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;    {</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;        <span class="keywordtype">int</span> ident;</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;        <span class="keywordtype">int</span> events;</div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;        <span class="keyword">struct </span>android_poll_source* source;</div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;        <span class="keywordtype">bool</span> destroy = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;        <span class="keywordflow">while</span>((ident = ALooper_pollAll(0, NULL, &amp;events, (<span class="keywordtype">void</span>**)&amp;source)) &gt;= 0)</div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;        {</div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;            <span class="keywordflow">if</span>(source != NULL)</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;            {</div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;                source-&gt;process(application, source);</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;            }</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;        }</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    }</div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;    platform::specifics::android_application = application;</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    android_entry();</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;}</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="preprocessor">#elif defined(PLATFORM_WINDOWS) || defined(PLATFORM_LINUX)</span></div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="preprocessor"></span><span class="keywordtype">int</span> main() { <span class="keywordflow">return</span> entry(); }</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;             core::ecs::components::transform{psl::vec3(std::rand() % 6 - 3,std::rand() % 6 - 3,std::rand() % 6 - 3), </div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;             psl::vec3(std::rand() % 10 / 10.0f, std::rand() % 10 / 10.0f, std::rand() % 10 / 10.0f)});</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;    }</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    core::ecs::systems::fly fly_system{ surface_handle-&gt;input() };</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;    ECSState.register_system(fly_system);</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;    core::ecs::systems::render render_system{ context_handle, swapchain_handle, surface_handle, frameBuffer };</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;    ECSState.register_system(render_system);</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    core::ecs::systems::geometry_instance geometry_instance{};</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;    ECSState.register_system(geometry_instance);</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    uint64_t frameCount                                      = 0u;</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;    std::chrono::high_resolution_clock::time_point last_tick = std::chrono::high_resolution_clock::now();</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    <span class="keywordflow">while</span>(surface_handle-&gt;tick())</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    {</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;        <span class="keyword">auto</span> current_time = std::chrono::high_resolution_clock::now();</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;        std::chrono::duration&lt;float&gt; elapsed =</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;            std::chrono::duration_cast&lt;std::chrono::duration&lt;float&gt;&gt;(current_time - last_tick);</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;        last_tick = current_time;</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;        ECSState.tick(elapsed);</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;        ++frameCount;</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    }</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;}</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="keyword">static</span> <span class="keywordtype">bool</span> initialized = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="preprocessor">#if defined(PLATFORM_ANDROID)</span></div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="comment">// todo deal with this extern</span></div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;android_app* platform::specifics::android_application;</div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="keywordtype">void</span> handleAppCommand(android_app* app, int32_t cmd)</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;{</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;    <span class="keywordflow">switch</span>(cmd)</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;    {</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;    <span class="keywordflow">case</span> APP_CMD_INIT_WINDOW: initialized = <span class="keyword">true</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;    }</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;}</div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;int32_t handleAppInput(<span class="keyword">struct</span> android_app* app, AInputEvent* event) {}</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="keywordtype">void</span> android_main(android_app* application)</div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;{</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    application-&gt;onAppCmd = handleAppCommand;</div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    <span class="comment">// Screen density</span></div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;    AConfiguration* config = AConfiguration_new();</div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;    AConfiguration_fromAssetManager(config, application-&gt;activity-&gt;assetManager);</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    <span class="comment">// vks::android::screenDensity = AConfiguration_getDensity(config);</span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;    AConfiguration_delete(config);</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;    <span class="keywordflow">while</span>(!initialized)</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;    {</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;        <span class="keywordtype">int</span> ident;</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;        <span class="keywordtype">int</span> events;</div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;        <span class="keyword">struct </span>android_poll_source* source;</div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;        <span class="keywordtype">bool</span> destroy = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;</div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;        <span class="keywordflow">while</span>((ident = ALooper_pollAll(0, NULL, &amp;events, (<span class="keywordtype">void</span>**)&amp;source)) &gt;= 0)</div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;        {</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;            <span class="keywordflow">if</span>(source != NULL)</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;            {</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;                source-&gt;process(application, source);</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;            }</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;        }</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    }</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    platform::specifics::android_application = application;</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;    android_entry();</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;}</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="preprocessor">#elif defined(PLATFORM_WINDOWS) || defined(PLATFORM_LINUX)</span></div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="preprocessor"></span><span class="keywordtype">int</span> main() { <span class="keywordflow">return</span> entry(); }</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="structcore_1_1data_1_1geometry_1_1constants_html_ad7b522dc309f2a6f4b90b17af761c5c7"><div class="ttname"><a href="structcore_1_1data_1_1geometry_1_1constants.html#ad7b522dc309f2a6f4b90b17af761c5c7">core::data::geometry::constants::COLOR</a></div><div class="ttdeci">static constexpr psl::string_view COLOR</div><div class="ttdoc">vertex color data key </div><div class="ttdef"><b>Definition:</b> <a href="data_2geometry_8h_source.html#l00046">geometry.h:46</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1geometry_html"><div class="ttname"><a href="classcore_1_1gfx_1_1geometry.html">core::gfx::geometry</a></div><div class="ttdoc">describes the driver visible concept of geometry. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2geometry_8h_source.html#l00016">geometry.h:16</a></div></div>
 <div class="ttc" id="classcore_1_1data_1_1material_html"><div class="ttname"><a href="classcore_1_1data_1_1material.html">core::data::material</a></div><div class="ttdoc">Describes a collection of resources that can be used to initialize a core::gfx::material. </div><div class="ttdef"><b>Definition:</b> <a href="data_2material_8h_source.html#l00014">material.h:14</a></div></div>
