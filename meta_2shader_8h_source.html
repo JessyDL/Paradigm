@@ -341,25 +341,26 @@ $(document).ready(function(){initNavTree('meta_2shader_8h_source.html','');});
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcore_1_1meta_1_1shader.html#a556ac26c230ebe6311a688b03e82fa0d">erase</a>(descriptor value);</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcore_1_1meta_1_1shader.html#a556ac26c230ebe6311a688b03e82fa0d">erase</a>(vertex::binding element);</div>
 <div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;      private:</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;        template &lt;typename S&gt;</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;        <span class="keywordtype">void</span> serialize(S&amp; s)</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;        {</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            ::meta::file::serialize(s);</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;            s &lt;&lt; m_Stage &lt;&lt; m_VertexBindings &lt;&lt; m_Descriptors;</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        }</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        <a class="code" href="structserialization_1_1property.html">serialization::property</a>&lt;vk::ShaderStageFlags, const_str(<span class="stringliteral">&quot;STAGE&quot;</span>, 5)&gt; m_Stage;</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        <a class="code" href="structserialization_1_1property.html">serialization::property&lt;std::vector&lt;vertex::binding&gt;</a>, const_str(<span class="stringliteral">&quot;VERTEX_BINDINGS&quot;</span>, 15)&gt; m_VertexBindings;</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        <a class="code" href="structserialization_1_1property.html">serialization::property&lt;std::vector&lt;descriptor&gt;</a>, const_str(<span class="stringliteral">&quot;DESCRIPTORS&quot;</span>, 11)&gt; m_Descriptors;</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        <span class="keyword">static</span> constexpr <span class="keyword">const</span> <span class="keywordtype">char</span> polymorphic_name[12]{<span class="stringliteral">&quot;SHADER_META&quot;</span>};</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> uint64_t polymorphic_id()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> polymorphic_identity; }</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> uint64_t polymorphic_identity;</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    };</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;} <span class="comment">// namespace core::meta</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        std::vector&lt;vertex::binding&gt; instance_bindings() const noexcept;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        std::optional&lt;descriptor&gt; material_data() const noexcept;</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;      private:</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;        template &lt;typename S&gt;</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;        <span class="keywordtype">void</span> serialize(S&amp; s)</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        {</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;            ::meta::file::serialize(s);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;            s &lt;&lt; m_Stage &lt;&lt; m_VertexBindings &lt;&lt; m_Descriptors;</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        }</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        <a class="code" href="structserialization_1_1property.html">serialization::property</a>&lt;vk::ShaderStageFlags, const_str(<span class="stringliteral">&quot;STAGE&quot;</span>, 5)&gt; m_Stage;</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        <a class="code" href="structserialization_1_1property.html">serialization::property&lt;std::vector&lt;vertex::binding&gt;</a>, const_str(<span class="stringliteral">&quot;VERTEX_BINDINGS&quot;</span>, 15)&gt; m_VertexBindings;</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        <a class="code" href="structserialization_1_1property.html">serialization::property&lt;std::vector&lt;descriptor&gt;</a>, const_str(<span class="stringliteral">&quot;DESCRIPTORS&quot;</span>, 11)&gt; m_Descriptors;</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;        <span class="keyword">static</span> constexpr <span class="keyword">const</span> <span class="keywordtype">char</span> polymorphic_name[12]{<span class="stringliteral">&quot;SHADER_META&quot;</span>};</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> uint64_t polymorphic_id()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> polymorphic_identity; }</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> uint64_t polymorphic_identity;</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    };</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;} <span class="comment">// namespace core::meta</span></div>
 <div class="ttc" id="classcore_1_1meta_1_1shader_html_a4a236a5b60c82df96e38973413b16b26"><div class="ttname"><a href="classcore_1_1meta_1_1shader.html#a4a236a5b60c82df96e38973413b16b26">core::meta::shader::stage</a></div><div class="ttdeci">vk::ShaderStageFlags stage() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="meta_2shader_8cpp_source.html#l00203">shader.cpp:203</a></div></div>
 <div class="ttc" id="classcore_1_1meta_1_1shader_1_1vertex_1_1attribute_html_a457805ff7527cfa02914a2260e518f3d"><div class="ttname"><a href="classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html#a457805ff7527cfa02914a2260e518f3d">core::meta::shader::vertex::attribute::format</a></div><div class="ttdeci">vk::Format format() const noexcept</div><div class="ttdoc">returns the format that this binding location should be using. </div><div class="ttdef"><b>Definition:</b> <a href="meta_2shader_8cpp_source.html#l00013">shader.cpp:13</a></div></div>
 <div class="ttc" id="classmeta_1_1file_html_a28cabf4c1e5a1d9100ab1c966e937bd2"><div class="ttname"><a href="classmeta_1_1file.html#a28cabf4c1e5a1d9100ab1c966e937bd2">meta::file::name</a></div><div class="ttdeci">psl::string8::view name() const </div><div class="ttdef"><b>Definition:</b> <a href="library_8h_source.html#l00059">library.h:59</a></div></div>

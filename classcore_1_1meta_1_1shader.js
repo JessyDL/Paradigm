@@ -15,6 +15,8 @@ var classcore_1_1meta_1_1shader =
     [ "set", "classcore_1_1meta_1_1shader.html#a5cc644bfd8dc6a2ed6043b7838e90ead", null ],
     [ "erase", "classcore_1_1meta_1_1shader.html#a556ac26c230ebe6311a688b03e82fa0d", null ],
     [ "erase", "classcore_1_1meta_1_1shader.html#ad0fc30ff4564d8c8c20f776ec895a6db", null ],
+    [ "instance_bindings", "classcore_1_1meta_1_1shader.html#aba040e0fdb4d347856209a2bd8ca0666", null ],
+    [ "material_data", "classcore_1_1meta_1_1shader.html#a06eb3ad4dac65a8a5acd078e0cfbc55f", null ],
     [ "serialization::accessor", "classcore_1_1meta_1_1shader.html#a36016c25465818cb92fa0c5faf0c519c", null ],
     [ "library", "classcore_1_1meta_1_1shader.html#aee46278171d51c5f2ef7b6cf086cf424", null ]
 ];

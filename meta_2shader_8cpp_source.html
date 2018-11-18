@@ -365,6 +365,28 @@ $(document).ready(function(){initNavTree('meta_2shader_8cpp_source.html','');});
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    m_Descriptors.value.erase(it);</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;}</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;std::vector&lt;shader::vertex::binding&gt; shader::instance_bindings() const noexcept</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;{</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    std::vector&lt;shader::vertex::binding&gt; res;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; binding : m_VertexBindings.value)</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    {</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordflow">if</span>(psl::string8::view(binding.buffer()).substr(0, 9) != <span class="stringliteral">&quot;INSTANCE_&quot;</span>)</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        res.emplace_back(binding);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    }</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordflow">return</span> res;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;}</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;std::optional&lt;shader::descriptor&gt; shader::material_data() const noexcept</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;{</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; descriptor : m_Descriptors.value)</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    {</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">if</span>(descriptor.name() == <span class="stringliteral">&quot;MATERIAL_DATA&quot;</span>)</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <span class="keywordflow">return</span> descriptor;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;}</div>
 <div class="ttc" id="classcore_1_1meta_1_1shader_html_a4a236a5b60c82df96e38973413b16b26"><div class="ttname"><a href="classcore_1_1meta_1_1shader.html#a4a236a5b60c82df96e38973413b16b26">core::meta::shader::stage</a></div><div class="ttdeci">vk::ShaderStageFlags stage() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="meta_2shader_8cpp_source.html#l00203">shader.cpp:203</a></div></div>
 <div class="ttc" id="classcore_1_1meta_1_1shader_1_1vertex_1_1attribute_html_a457805ff7527cfa02914a2260e518f3d"><div class="ttname"><a href="classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html#a457805ff7527cfa02914a2260e518f3d">core::meta::shader::vertex::attribute::format</a></div><div class="ttdeci">vk::Format format() const noexcept</div><div class="ttdoc">returns the format that this binding location should be using. </div><div class="ttdef"><b>Definition:</b> <a href="meta_2shader_8cpp_source.html#l00013">shader.cpp:13</a></div></div>
 <div class="ttc" id="classcore_1_1meta_1_1shader_html_a72fa695d88278e087ebb6663bd69083d"><div class="ttname"><a href="classcore_1_1meta_1_1shader.html#a72fa695d88278e087ebb6663bd69083d">core::meta::shader::set</a></div><div class="ttdeci">void set(descriptor value)</div><div class="ttdoc">tries to emplace, or overwrite (if sharing a binding location) a descriptor at the given binding slot...</div><div class="ttdef"><b>Definition:</b> <a href="meta_2shader_8cpp_source.html#l00211">shader.cpp:211</a></div></div>

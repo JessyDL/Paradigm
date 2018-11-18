@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>paradigm engine: core/inc/ecs/components/transform.h Source File</title>
+<title>paradigm engine: core/inc/ecs/systems/geometry_instance.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('transform_8h_source.html','');});
+$(document).ready(function(){initNavTree('geometry__instance_8h_source.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -103,31 +103,40 @@ $(document).ready(function(){initNavTree('transform_8h_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">transform.h</div>  </div>
+<div class="title">geometry_instance.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;math/math.hpp&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span>core::ecs::components</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keyword">struct </span>transform</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        transform() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        transform(<span class="keyword">const</span> psl::vec3&amp; position) : position(position) {};</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        psl::quat rotation{1,0,0,0};</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        psl::vec3 position{ psl::vec3::zero };</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        psl::vec3 scale{ psl::vec3::one };</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        psl::vec3 up{ psl::vec3::up };</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        psl::vec3 direction{ psl::vec3::forward };</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    };</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;ecs/ecs.hpp&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;gfx/pass.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;systems/resource.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>core::ecs::components</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">struct </span>transform;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">struct </span>renderable;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;} <span class="comment">// namespace core::ecs::components</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>core::ecs::systems</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">class </span>geometry_instance</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        core::ecs::vector&lt;core::ecs::components::transform, core::ecs::READ_ONLY&gt; m_Transforms;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        core::ecs::vector&lt;core::ecs::components::renderable, core::ecs::READ_ONLY&gt; m_Renderers;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        core::ecs::vector&lt;core::ecs::entity&gt; m_Entities;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">void</span> announce(core::ecs::state&amp; state);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">void</span> tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_071e1b64239a6677b6e70b7a2c735c10.html">core</a></li><li class="navelem"><a class="el" href="dir_9160a88f735f7466501c9ec570fde59d.html">inc</a></li><li class="navelem"><a class="el" href="dir_99a647bb52586874a9dac57de85d2e88.html">ecs</a></li><li class="navelem"><a class="el" href="dir_c4efa2e1605f83ee5ea0c57140f8c54c.html">components</a></li><li class="navelem"><b>transform.h</b></li>
+    <li class="navelem"><a class="el" href="dir_071e1b64239a6677b6e70b7a2c735c10.html">core</a></li><li class="navelem"><a class="el" href="dir_9160a88f735f7466501c9ec570fde59d.html">inc</a></li><li class="navelem"><a class="el" href="dir_99a647bb52586874a9dac57de85d2e88.html">ecs</a></li><li class="navelem"><a class="el" href="dir_9035074a81e71a97fd1f7a287f25b83e.html">systems</a></li><li class="navelem"><b>geometry_instance.h</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

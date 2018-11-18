@@ -10,6 +10,7 @@ var classcore_1_1resource_1_1handle =
     [ "operator=", "classcore_1_1resource_1_1handle.html#aec14e2ad6eec08b8c5849ced5ff63c19", null ],
     [ "operator=", "classcore_1_1resource_1_1handle.html#a22a80dc01f0ce83e7e16b1bb5ef45556", null ],
     [ "operator const T &", "classcore_1_1resource_1_1handle.html#ac23b661ab36b0b9382f0bc04615cbf15", null ],
+    [ "operator tag< T >", "classcore_1_1resource_1_1handle.html#a2b3be435d2f2dfd2fdc8eb6946f704ce", null ],
     [ "operator bool", "classcore_1_1resource_1_1handle.html#a1484725bb7f3031d016198bf09c0a262", null ],
     [ "resource_state", "classcore_1_1resource_1_1handle.html#a963f95ec3aeb7567ff4bc6617254a788", null ],
     [ "load", "classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51", null ],

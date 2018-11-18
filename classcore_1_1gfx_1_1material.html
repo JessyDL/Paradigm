@@ -184,11 +184,28 @@ const std::vector&lt; std::pair<br class="typebreak"/>
 <tr class="memitem:a42cb55db628806b2795247b145c3bbbf"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1gfx_1_1material.html#a42cb55db628806b2795247b145c3bbbf">instances</a> (const <a class="el" href="classcore_1_1resource_1_1handle.html">core::resource::handle</a>&lt; <a class="el" href="classcore_1_1gfx_1_1geometry.html">core::gfx::geometry</a> &gt; <a class="el" href="classcore_1_1gfx_1_1geometry.html">geometry</a>) const </td></tr>
 <tr class="memdesc:a42cb55db628806b2795247b145c3bbbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the instance count currently used for the given piece of geometry.  <a href="#a42cb55db628806b2795247b145c3bbbf">More...</a><br/></td></tr>
 <tr class="separator:a42cb55db628806b2795247b145c3bbbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaeb9dc78f19d633484b3ae9bd9318ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adaeb9dc78f19d633484b3ae9bd9318ce"></a>
+std::optional&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>instantiate</b> (const core::resource::tag&lt; <a class="el" href="classcore_1_1gfx_1_1geometry.html">core::gfx::geometry</a> &gt; &amp;<a class="el" href="classcore_1_1gfx_1_1geometry.html">geometry</a>)</td></tr>
+<tr class="separator:adaeb9dc78f19d633484b3ae9bd9318ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea134b4f87e19846b63d211b03357b70"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea134b4f87e19846b63d211b03357b70"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>release</b> (const core::resource::tag&lt; <a class="el" href="classcore_1_1gfx_1_1geometry.html">core::gfx::geometry</a> &gt; &amp;<a class="el" href="classcore_1_1gfx_1_1geometry.html">geometry</a>, uint32_t id)</td></tr>
+<tr class="separator:aea134b4f87e19846b63d211b03357b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40eaa45db352712b92d909fb3c17996b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40eaa45db352712b92d909fb3c17996b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>release_all</b> ()</td></tr>
+<tr class="separator:a40eaa45db352712b92d909fb3c17996b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f4f1f3f254ac5609d0ac64f9e916b22"><td class="memTemplParams" colspan="2"><a class="anchor" id="a9f4f1f3f254ac5609d0ac64f9e916b22"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9f4f1f3f254ac5609d0ac64f9e916b22"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>set</b> (const core::resource::tag&lt; <a class="el" href="classcore_1_1gfx_1_1geometry.html">core::gfx::geometry</a> &gt; &amp;<a class="el" href="classcore_1_1gfx_1_1geometry.html">geometry</a>, uint32_t id, psl::string_view name, const T &amp;value)</td></tr>
+<tr class="separator:a9f4f1f3f254ac5609d0ac64f9e916b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a026971b8cce163be1ad3f42569961591"><td class="memTemplParams" colspan="2"><a class="anchor" id="a026971b8cce163be1ad3f42569961591"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a026971b8cce163be1ad3f42569961591"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>set</b> (const core::resource::tag&lt; <a class="el" href="classcore_1_1gfx_1_1geometry.html">core::gfx::geometry</a> &gt; &amp;<a class="el" href="classcore_1_1gfx_1_1geometry.html">geometry</a>, uint32_t id, uint32_t binding, const T &amp;value)</td></tr>
+<tr class="separator:a026971b8cce163be1ad3f42569961591"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The material class is a container of various resources that can, together, describe what should happen to a surface in the render pipeline on the GPU, and what is all needed. The material class also can contain instance data and will manage this for you. Together with a <a class="el" href="classcore_1_1gfx_1_1geometry.html" title="describes the driver visible concept of geometry. ">core::gfx::geometry</a>, this describes all the resources you need to render something on screen. </p>
 
-<p>Definition at line <a class="el" href="gfx_2material_8h_source.html#l00027">27</a> of file <a class="el" href="gfx_2material_8h_source.html">material.h</a>.</p>
+<p>Definition at line <a class="el" href="gfx_2material_8h_source.html#l00028">28</a> of file <a class="el" href="gfx_2material_8h_source.html">material.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aba2d1b161c61e39999285b177d2e3fee"></a>
 <div class="memitem">
@@ -249,7 +266,7 @@ const std::vector&lt; std::pair<br class="typebreak"/>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00019">19</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
+<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00020">20</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
 
 </div>
 </div>
@@ -268,7 +285,7 @@ const std::vector&lt; std::pair<br class="typebreak"/>
 </div><div class="memdoc">
 <dl class="section note"><dt>Note</dt><dd>when editing the material or the data after construction, this value will be out of sync with the runtime <a class="el" href="classcore_1_1gfx_1_1material.html" title="class that creates a bindable collection of resources that can be used in conjuction with a surface t...">gfx::material</a>. </dd></dl>
 
-<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00122">122</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
+<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00127">127</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +303,7 @@ const std::vector&lt; std::pair<br class="typebreak"/>
 </div><div class="memdoc">
 <dl class="section note"><dt>Note</dt><dd>the buffers could be anything, they could be uniform buffer objects, or maybe shader storage buffer objects. </dd></dl>
 
-<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00132">132</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
+<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00137">137</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
 
 </div>
 </div>
@@ -330,7 +347,7 @@ const std::vector&lt; std::pair<br class="typebreak"/>
 </dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>drawindex is a temporary hack to support instancing. a generic solution should be sought after. </dd></dl>
 
-<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00164">164</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
+<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00169">169</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
 
 </div>
 </div>
@@ -373,7 +390,7 @@ const std::vector&lt; std::pair<br class="typebreak"/>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00184">184</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
+<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00189">189</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
 
 </div>
 </div>
@@ -410,7 +427,7 @@ const std::vector&lt; std::pair<br class="typebreak"/>
 </dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>write instance buffer support. </dd></dl>
 
-<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00204">204</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
+<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00211">211</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
 
 </div>
 </div>
@@ -434,7 +451,7 @@ const std::vector&lt; std::pair<br class="typebreak"/>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00211">211</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
+<p>Definition at line <a class="el" href="gfx_2material_8cpp_source.html#l00228">228</a> of file <a class="el" href="gfx_2material_8cpp_source.html">material.cpp</a>.</p>
 
 </div>
 </div>

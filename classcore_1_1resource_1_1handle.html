@@ -147,6 +147,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac23b661ab36b0b9382f0bc04615cbf15"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac23b661ab36b0b9382f0bc04615cbf15"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator const T &amp;</b> () const </td></tr>
 <tr class="separator:ac23b661ab36b0b9382f0bc04615cbf15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3be435d2f2dfd2fdc8eb6946f704ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b3be435d2f2dfd2fdc8eb6946f704ce"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator tag&lt; T &gt;</b> () const </td></tr>
+<tr class="separator:a2b3be435d2f2dfd2fdc8eb6946f704ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1484725bb7f3031d016198bf09c0a262"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1resource_1_1handle.html#a1484725bb7f3031d016198bf09c0a262">operator bool</a> () const </td></tr>
 <tr class="separator:a1484725bb7f3031d016198bf09c0a262"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a963f95ec3aeb7567ff4bc6617254a788"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a963f95ec3aeb7567ff4bc6617254a788"></a>
@@ -232,7 +235,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <dl class="section note"><dt>Note</dt><dd>only used in the scenario of "create_shared" </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00549">549</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00567">567</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -279,7 +282,7 @@ template&lt;typename... Args, typename  = typename std::enable_if&lt;										s
 </div><div class="memdoc">
 <p>special form of the constructor that will create a detached clone of the handle you use as the source. this will create a new resource, that branches off from the current state the other resource is in. it invokes the copy constructor of the contained type, and so if it is not present, this will not compile. </p>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00570">570</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00588">588</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -308,7 +311,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>true of the handle has a valid, loaded object. </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00601">601</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00623">623</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -340,7 +343,7 @@ template&lt;typename... Args&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>true if the resource is loaded</dd></dl>
 <p>loads the resource with the given arguments. In case the resource already exists, the arguments are ignored and the already loaded resource is returned instead. </p>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00612">612</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00634">634</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -377,7 +380,7 @@ template&lt;typename T&gt; </div>
 <p>&gt;ill try to unload the resource. In case that this is the last handle to the resource, it will clean itself up and return success, otherwise it will fail and return false. It will also fail when the resource is not yet loaded, and it will <em>not</em> unload when it finally is loaded, you'll have to call this again. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Regardless of success, the handle will become invalid. </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00743">743</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00765">765</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -405,7 +408,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the <a class="el" href="struct_u_i_d.html" title="is an object holding a Unique IDentifier (UID) ">UID</a> assigned to the handle </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00750">750</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00772">772</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -436,7 +439,7 @@ template&lt;typename T&gt; </div>
 <dd>
 the <a class="el" href="classcore_1_1resource_1_1handle.html#a7bba3da66dde1005a90e70f5e43f4dae">ID()</a> and <a class="el" href="classcore_1_1resource_1_1handle.html#ad08217225221fe8f63ae88cc462e8eec">RUID()</a> are the same for generated resources, as then the "Resource UID" is considered the memory location of the handle. </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00759">759</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00781">781</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
