@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"classmemory_1_1range.html#ae446d032e99cad79a31319d15533159b":[3,0,1,3,11],
 "classmemory_1_1range.html#ae44e89d58242fe69b623144cb9b82b96":[3,0,1,3,5],
 "classmemory_1_1range.html#ae878862fd450f6174df6204628cfe567":[3,0,1,3,1],
 "classmemory_1_1region.html":[3,0,1,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "math_8hpp_source.html":[4,0,3,0,0,0],
 "matrix_8h_source.html":[4,0,3,0,0,1],
 "meta_2shader_8cpp_source.html":[4,0,0,1,3,0],
-"meta_2shader_8h_source.html":[4,0,0,0,3,0],
-"meta_2texture_8cpp_source.html":[4,0,0,1,3,1]
+"meta_2shader_8h_source.html":[4,0,0,0,3,0]
 };

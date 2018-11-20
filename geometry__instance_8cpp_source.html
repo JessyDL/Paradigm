@@ -109,48 +109,94 @@ $(document).ready(function(){initNavTree('geometry__instance_8cpp_source.html','
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;stdafx.h&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;ecs/systems/geometry_instance.h&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;gfx/material.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;ecs/components/renderable.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ecs/components/transform.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using namespace </span>core::resource;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">using namespace </span>core::gfx;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using namespace </span>core::os;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using namespace </span>core;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using namespace </span>core::ecs::systems;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">using namespace </span>core::ecs::components;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using namespace </span>psl::math;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> geometry_instance::announce(core::ecs::state&amp; <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>)</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, {m_Entities, m_Transforms, m_Renderers});</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> geometry_instance::tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; renderer : m_Renderers)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        renderer.material.handle()-&gt;release_all();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; m_Entities.size(); ++i)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">if</span>(<span class="keyword">auto</span> index = m_Renderers[i].<a class="code" href="classcore_1_1gfx_1_1material.html">material</a>.handle()-&gt;instantiate(m_Renderers[i].<a class="code" href="classcore_1_1gfx_1_1geometry.html">geometry</a>); index)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            psl::mat4x4 modelMatrix;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keyword">const</span> psl::mat4x4 translationMat = translate(psl::mat4x4(1.0f), m_Transforms[i].position);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keyword">const</span> psl::mat4x4 rotationMat = to_matrix(m_Transforms[i].rotation);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keyword">const</span> psl::mat4x4 scaleMat = scale(psl::mat4x4(1.0f), m_Transforms[i].scale);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            modelMatrix = translationMat * scaleMat * rotationMat;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            m_Renderers[i].material.handle()-&gt;set(m_Renderers[i].geometry, index.value(), <span class="stringliteral">&quot;INSTANCE_TRANSFORM&quot;</span>, modelMatrix);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;vk/geometry.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ecs/components/renderable.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ecs/components/transform.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ecs/components/input_tag.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;conversion_utils.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using namespace </span>core::resource;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using namespace </span>core::gfx;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">using namespace </span>core::os;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using namespace </span>core;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using namespace </span>core::ecs::systems;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using namespace </span>core::ecs::components;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using namespace </span>psl::math;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> geometry_instance::announce(core::ecs::state&amp; <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, {m_Entities, m_Transforms, m_Renderers});</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, {m_CamEntities, m_CamTransform, core::ecs::filter&lt;core::ecs::components::input_tag&gt;{}});</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;std::vector&lt;psl::mat4x4&gt; modelMats;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">float</span> accTime {0.0f};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> geometry_instance::tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    accTime += dTime.count();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; renderer : m_Renderers)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        renderer.material.handle()-&gt;release_all();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; m_Entities.size(); ++i)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        m_Transforms[i].position += (normalize(m_Transforms[i].position) * dTime.count() * 3.0f * sin(accTime*0.1f));</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        m_Transforms[i].rotation = normalize(psl::math::look_at_q(m_Transforms[i].position, m_CamTransform[0].position, psl::vec3::up));</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">//m_Transforms[i].rotation = normalize(m_CamTransform[0].rotation);</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    modelMats.clear();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;material&gt;</a> cachedMat;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;geometry&gt;</a> cachedGeom;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    uint32_t startIndex = 0u;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    uint32_t indexCount = 0u;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">bool</span> setStart = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; m_Entities.size(); ++i)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">if</span>(<span class="keyword">auto</span> index = m_Renderers[i].<a class="code" href="classcore_1_1gfx_1_1material.html">material</a>.handle()-&gt;instantiate(m_Renderers[i].<a class="code" href="classcore_1_1gfx_1_1geometry.html">geometry</a>); index)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">if</span>(i &gt; 0 &amp;&amp; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                (m_Renderers[i].<a class="code" href="classcore_1_1gfx_1_1material.html">material</a>.handle() != cachedMat ||</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                 m_Renderers[i].geometry.handle() != cachedGeom || </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                 index.value() - indexCount != startIndex))</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                cachedMat-&gt;set(cachedGeom, startIndex, <span class="stringliteral">&quot;INSTANCE_TRANSFORM&quot;</span>, modelMats);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                modelMats.clear();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                cachedMat = m_Renderers[i].material.handle();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                cachedGeom = m_Renderers[i].geometry.handle();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                startIndex = index.value();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                indexCount = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">if</span>(setStart)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                startIndex = index.value();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                cachedMat = m_Renderers[i].material.handle();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                cachedGeom = m_Renderers[i].geometry.handle();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            ++indexCount;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            setStart = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            psl::mat4x4 translationMat = translate(m_Transforms[i].position);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            psl::mat4x4 rotationMat = to_matrix(m_Transforms[i].rotation);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            psl::mat4x4 scaleMat = scale(m_Transforms[i].scale);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            modelMats.emplace_back(translationMat * rotationMat * scaleMat);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="comment">//m_Renderers[i].material.handle()-&gt;set(m_Renderers[i].geometry, index.value(), &quot;INSTANCE_TRANSFORM&quot;, modelMatrix);</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span>(modelMats.size() &gt; 0)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        cachedMat-&gt;set(cachedGeom, startIndex, <span class="stringliteral">&quot;INSTANCE_TRANSFORM&quot;</span>, modelMats);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    modelMats.clear();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
 <div class="ttc" id="classcore_1_1gfx_1_1geometry_html"><div class="ttname"><a href="classcore_1_1gfx_1_1geometry.html">core::gfx::geometry</a></div><div class="ttdoc">describes the driver visible concept of geometry. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2geometry_8h_source.html#l00016">geometry.h:16</a></div></div>
 <div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442e"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">core::resource::state</a></div><div class="ttdeci">state</div><div class="ttdoc">represents the various states a resource can be in. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00017">resource.h:17</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1material_html"><div class="ttname"><a href="classcore_1_1gfx_1_1material.html">core::gfx::material</a></div><div class="ttdoc">class that creates a bindable collection of resources that can be used in conjuction with a surface t...</div><div class="ttdef"><b>Definition:</b> <a href="gfx_2material_8h_source.html#l00028">material.h:28</a></div></div>
+<div class="ttc" id="classcore_1_1resource_1_1handle_html"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html">core::resource::handle</a></div><div class="ttdoc">wraps around a resource for sharing and management purposes. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00033">resource.h:33</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('gfx_2material_8cpp_source.html','');})
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                iData.size_of_element = vBinding.size();</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                iData.name = vBinding.buffer();</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            m_InstanceData = instance_data(std::move(elements), 10240);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            m_InstanceData = instance_data(std::move(elements), 1024*1024);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">// now we validate the shader, and store all the bound resource handles</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; binding : stage.bindings())</div>
@@ -361,129 +361,150 @@ $(document).ready(function(){initNavTree('gfx_2material_8cpp_source.html','');})
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;std::optional&lt;uint32_t&gt; material::instantiate(<span class="keyword">const</span> core::resource::tag&lt;core::gfx::geometry&gt;&amp; geometry)</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;{</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordflow">return</span> m_InstanceData.add(m_InstanceBuffer, geometry);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;}</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="keywordtype">bool</span> material::release(<span class="keyword">const</span> core::resource::tag&lt;core::gfx::geometry&gt;&amp; geometry, uint32_t <span class="keywordtype">id</span>)</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;{</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordflow">return</span> m_InstanceData.remove(m_InstanceBuffer, geometry, <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;}</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="keywordtype">bool</span> material::release_all()</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;{</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordflow">return</span> m_InstanceData.remove_all(m_InstanceBuffer);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;}</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;std::optional&lt;uint32_t&gt; material::instance_data::add(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> <a class="code" href="classcore_1_1gfx_1_1buffer.html">buffer</a>, <span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid)</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;{</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordflow">if</span>(!has_data()) <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keyword">auto</span> it = m_Instance.find(uid);</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordflow">if</span>(it == std::end(m_Instance))</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    {</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        it = m_Instance.emplace(uid, instance_object{m_Capacity, elements.size()}).first;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> elementIt : elements)</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        {</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="keyword">auto</span>&amp; data = it-&gt;second.segments.emplace_back();</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            data.slot = elementIt.slot;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            data.size_of_element = elementIt.size_of_element;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            data.segment = buffer-&gt;<a class="code" href="classcore_1_1gfx_1_1buffer.html#ae499bbfdb86f7fb33aedfb669fad683a">reserve</a>(elementIt.size_of_element * m_Capacity).value();</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        }</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    }</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">if</span>(it-&gt;second.size == m_Capacity) <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> <span class="keywordtype">id</span> = it-&gt;second.id_generator.CreateID(); <span class="keywordtype">id</span>.first)</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    {</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        ++it-&gt;second.size;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <span class="keywordflow">return</span> <span class="keywordtype">id</span>.second;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    }</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;}</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="keywordtype">bool</span> material::instance_data::remove(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer, <span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid, uint32_t <span class="keywordtype">id</span>)</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;{</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_Instance.find(uid); it != std::end(m_Instance) &amp;&amp; it-&gt;second.id_generator.DestroyID(<span class="keywordtype">id</span>))</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    {</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        --it-&gt;second.size;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keywordflow">if</span>(it-&gt;second.size == 0)</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        {</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; segment : it-&gt;second.segments)</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                buffer-&gt;<a class="code" href="classcore_1_1gfx_1_1buffer.html#af24be29ede5663407ce919525a5f64b9">deallocate</a>(segment.segment);</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            }</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            m_Instance.erase(it);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    }</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;material::optional_ref&lt;const material::instance_element&gt; material::instance_data::has_element(psl::string_view name) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;{</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = std::find_if(std::begin(elements), std::end(elements),</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                              [&amp;name](<span class="keyword">const</span> instance_element&amp; element) { <span class="keywordflow">return</span> element.name == name; });</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;       it != std::end(elements))</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="keywordtype">bool</span> material::set(<span class="keyword">const</span> core::resource::tag&lt;core::gfx::geometry&gt;&amp; geometry, uint32_t id_first, uint32_t binding, <span class="keyword">const</span> <span class="keywordtype">void</span>* data,</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;         <span class="keywordtype">size_t</span> size, <span class="keywordtype">size_t</span> count)</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;{</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keyword">auto</span> opt = m_InstanceData.instance(geometry);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordflow">if</span>(!opt)</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keyword">auto</span>&amp; instance_obj = opt.value().get();</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; element : instance_obj.segments)</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    {</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordflow">if</span>(element.slot == binding)</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            m_InstanceBuffer-&gt;commit({<a class="code" href="structcore_1_1gfx_1_1buffer_1_1commit__instruction.html">core::gfx::buffer::commit_instruction</a>{(<span class="keywordtype">void</span>*)data, size * count, element.<a class="code" href="structcore_1_1gfx_1_1buffer_1_1commit__instruction.html#aa88807a9d0174be3d817ca57ffe4b861">segment</a>, <a class="code" href="classmemory_1_1range.html">memory::range</a>{element.size_of_element * id_first, element.size_of_element * (id_first + count) }}});</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        }</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;}</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;std::optional&lt;uint32_t&gt; material::instantiate(<span class="keyword">const</span> core::resource::tag&lt;core::gfx::geometry&gt;&amp; geometry)</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;{</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordflow">return</span> m_InstanceData.add(m_InstanceBuffer, geometry);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;}</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="keywordtype">bool</span> material::release(<span class="keyword">const</span> core::resource::tag&lt;core::gfx::geometry&gt;&amp; geometry, uint32_t <span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;{</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">return</span> m_InstanceData.remove(m_InstanceBuffer, geometry, <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;}</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="keywordtype">bool</span> material::release_all()</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;{</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">return</span> m_InstanceData.remove_all(m_InstanceBuffer);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;}</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;std::optional&lt;uint32_t&gt; material::instance_data::add(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> <a class="code" href="classcore_1_1gfx_1_1buffer.html">buffer</a>, <span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid)</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;{</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keywordflow">if</span>(!has_data()) <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keyword">auto</span> it = m_Instance.find(uid);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keywordflow">if</span>(it == std::end(m_Instance))</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        it = m_Instance.emplace(uid, instance_object{m_Capacity, elements.size()}).first;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> elementIt : elements)</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            <span class="keyword">auto</span>&amp; data = it-&gt;second.segments.emplace_back();</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            data.slot = elementIt.slot;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            data.size_of_element = elementIt.size_of_element;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            data.segment = buffer-&gt;<a class="code" href="classcore_1_1gfx_1_1buffer.html#ae499bbfdb86f7fb33aedfb669fad683a">reserve</a>(elementIt.size_of_element * m_Capacity).value();</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    }</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keywordflow">if</span>(it-&gt;second.size == m_Capacity) <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> <span class="keywordtype">id</span> = it-&gt;second.id_generator.CreateID(); <span class="keywordtype">id</span>.first)</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        ++it-&gt;second.size;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keywordflow">return</span> <span class="keywordtype">id</span>.second;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;}</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="keywordtype">bool</span> material::instance_data::remove(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer, <span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid, uint32_t <span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;{</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_Instance.find(uid); it != std::end(m_Instance) &amp;&amp; it-&gt;second.id_generator.DestroyID(<span class="keywordtype">id</span>))</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    {</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordflow">return</span> *it;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    }</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;}</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;material::optional_ref&lt;const material::instance_element&gt; material::instance_data::has_element(uint32_t slot) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;{</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = std::find_if(std::begin(elements), std::end(elements),</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                              [&amp;slot](<span class="keyword">const</span> instance_element&amp; element) { <span class="keywordflow">return</span> element.slot == slot; });</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;       it != std::end(elements))</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    {</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keywordflow">return</span> *it;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        --it-&gt;second.size;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keywordflow">if</span>(it-&gt;second.size == 0)</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; segment : it-&gt;second.segments)</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            {</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                buffer-&gt;<a class="code" href="classcore_1_1gfx_1_1buffer.html#af24be29ede5663407ce919525a5f64b9">deallocate</a>(segment.segment);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            }</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            m_Instance.erase(it);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        }</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    }</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;}</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;material::optional_ref&lt;material::instance_object&gt; material::instance_data::instance(<span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid) noexcept</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;material::optional_ref&lt;const material::instance_element&gt; material::instance_data::has_element(psl::string_view name) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;{</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keyword">auto</span> it = m_Instance.find(uid);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keywordflow">if</span>(it != std::end(m_Instance))</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        <span class="keywordflow">return</span> it-&gt;second;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;}</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;uint32_t material::instance_data::size(<span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;{</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_Instance.find(uid); it != std::end(m_Instance))</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keywordflow">return</span> it-&gt;second.size;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    }</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;}</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="keywordtype">bool</span> material::instance_data::remove_all(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer)</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;{</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; instance : m_Instance)</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    {</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; segment : instance.second.segments)</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        {</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            buffer-&gt;<a class="code" href="classcore_1_1gfx_1_1buffer.html#af24be29ede5663407ce919525a5f64b9">deallocate</a>(segment.segment);</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        }</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    }</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    m_Instance.clear();</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;}</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="keywordtype">bool</span> material::instance_data::remove_all(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer, <span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid)</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;{</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_Instance.find(uid); it != std::end(m_Instance))</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    {</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; segment : it-&gt;second.segments)</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        {</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            buffer-&gt;<a class="code" href="classcore_1_1gfx_1_1buffer.html#af24be29ede5663407ce919525a5f64b9">deallocate</a>(segment.segment);</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        }</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        m_Instance.erase(it);</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    }</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;}</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = std::find_if(std::begin(elements), std::end(elements),</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                              [&amp;name](<span class="keyword">const</span> instance_element&amp; element) { <span class="keywordflow">return</span> element.name == name; });</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;       it != std::end(elements))</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <span class="keywordflow">return</span> *it;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    }</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;}</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;material::optional_ref&lt;const material::instance_element&gt; material::instance_data::has_element(uint32_t slot) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;{</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = std::find_if(std::begin(elements), std::end(elements),</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                              [&amp;slot](<span class="keyword">const</span> instance_element&amp; element) { <span class="keywordflow">return</span> element.slot == slot; });</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;       it != std::end(elements))</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        <span class="keywordflow">return</span> *it;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    }</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;}</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;material::optional_ref&lt;material::instance_object&gt; material::instance_data::instance(<span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid) noexcept</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;{</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <span class="keyword">auto</span> it = m_Instance.find(uid);</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <span class="keywordflow">if</span>(it != std::end(m_Instance))</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keywordflow">return</span> it-&gt;second;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;}</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;uint32_t material::instance_data::size(<span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;{</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_Instance.find(uid); it != std::end(m_Instance))</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    {</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keywordflow">return</span> it-&gt;second.size;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    }</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;}</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="keywordtype">bool</span> material::instance_data::remove_all(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer)</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;{</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; instance : m_Instance)</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    {</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; segment : instance.second.segments)</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        {</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            buffer-&gt;<a class="code" href="classcore_1_1gfx_1_1buffer.html#af24be29ede5663407ce919525a5f64b9">deallocate</a>(segment.segment);</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        }</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    }</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    m_Instance.clear();</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;}</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="keywordtype">bool</span> material::instance_data::remove_all(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer, <span class="keyword">const</span> <a class="code" href="struct_u_i_d.html">UID</a>&amp; uid)</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;{</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_Instance.find(uid); it != std::end(m_Instance))</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    {</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; segment : it-&gt;second.segments)</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        {</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;            buffer-&gt;<a class="code" href="classcore_1_1gfx_1_1buffer.html#af24be29ede5663407ce919525a5f64b9">deallocate</a>(segment.segment);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        }</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        m_Instance.erase(it);</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    }</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;}</div>
 <div class="ttc" id="classcore_1_1gfx_1_1material_html_a648e311eaacbba88eb6138ed3bbc2615"><div class="ttname"><a href="classcore_1_1gfx_1_1material.html#a648e311eaacbba88eb6138ed3bbc2615">core::gfx::material::buffers</a></div><div class="ttdeci">const std::vector&lt; std::pair&lt; uint32_t, core::resource::handle&lt; core::gfx::buffer &gt; &gt; &gt; &amp; buffers() const </div><div class="ttdoc">returns all currently used buffers and their binding slots. </div><div class="ttdef"><b>Definition:</b> <a href="gfx_2material_8cpp_source.html#l00137">material.cpp:137</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1geometry_html"><div class="ttname"><a href="classcore_1_1gfx_1_1geometry.html">core::gfx::geometry</a></div><div class="ttdoc">describes the driver visible concept of geometry. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2geometry_8h_source.html#l00016">geometry.h:16</a></div></div>
 <div class="ttc" id="structcore_1_1gfx_1_1buffer_1_1commit__instruction_html_aa88807a9d0174be3d817ca57ffe4b861"><div class="ttname"><a href="structcore_1_1gfx_1_1buffer_1_1commit__instruction.html#aa88807a9d0174be3d817ca57ffe4b861">core::gfx::buffer::commit_instruction::segment</a></div><div class="ttdeci">memory::segment segment</div><div class="ttdoc">target segment in the buffer </div><div class="ttdef"><b>Definition:</b> <a href="core_2inc_2vk_2buffer_8h_source.html#l00080">buffer.h:80</a></div></div>
@@ -491,13 +512,13 @@ $(document).ready(function(){initNavTree('gfx_2material_8cpp_source.html','');})
 <div class="ttc" id="struct_u_i_d_html"><div class="ttname"><a href="struct_u_i_d.html">UID</a></div><div class="ttdoc">is an object holding a Unique IDentifier (UID) </div><div class="ttdef"><b>Definition:</b> <a href="meta_8h_source.html#l00018">meta.h:18</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1buffer_html"><div class="ttname"><a href="classcore_1_1gfx_1_1buffer.html">core::gfx::buffer</a></div><div class="ttdoc">maps a memory region and interfaces with the driver for read/writes </div><div class="ttdef"><b>Definition:</b> <a href="core_2inc_2vk_2buffer_8h_source.html#l00019">buffer.h:19</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1material_html_a42cb55db628806b2795247b145c3bbbf"><div class="ttname"><a href="classcore_1_1gfx_1_1material.html#a42cb55db628806b2795247b145c3bbbf">core::gfx::material::instances</a></div><div class="ttdeci">uint32_t instances(const core::resource::handle&lt; core::gfx::geometry &gt; geometry) const </div><div class="ttdoc">returns the instance count currently used for the given piece of geometry. </div><div class="ttdef"><b>Definition:</b> <a href="gfx_2material_8cpp_source.html#l00228">material.cpp:228</a></div></div>
-<div class="ttc" id="classcore_1_1gfx_1_1buffer_html_af24be29ede5663407ce919525a5f64b9"><div class="ttname"><a href="classcore_1_1gfx_1_1buffer.html#af24be29ede5663407ce919525a5f64b9">core::gfx::buffer::deallocate</a></div><div class="ttdeci">bool deallocate(memory::segment &amp;segment)</div><div class="ttdoc">marks the specific region of memory available again. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2buffer_8cpp_source.html#l00262">buffer.cpp:262</a></div></div>
+<div class="ttc" id="classcore_1_1gfx_1_1buffer_html_af24be29ede5663407ce919525a5f64b9"><div class="ttname"><a href="classcore_1_1gfx_1_1buffer.html#af24be29ede5663407ce919525a5f64b9">core::gfx::buffer::deallocate</a></div><div class="ttdeci">bool deallocate(memory::segment &amp;segment)</div><div class="ttdoc">marks the specific region of memory available again. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2buffer_8cpp_source.html#l00268">buffer.cpp:268</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1sampler_html"><div class="ttname"><a href="classcore_1_1gfx_1_1sampler.html">core::gfx::sampler</a></div><div class="ttdoc">sampler object for texture filtering and lookups </div><div class="ttdef"><b>Definition:</b> <a href="vk_2sampler_8h_source.html#l00018">sampler.h:18</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1buffer_html_ae499bbfdb86f7fb33aedfb669fad683a"><div class="ttname"><a href="classcore_1_1gfx_1_1buffer.html#ae499bbfdb86f7fb33aedfb669fad683a">core::gfx::buffer::reserve</a></div><div class="ttdeci">std::optional&lt; memory::segment &gt; reserve(vk::DeviceSize size)</div><div class="ttdoc">tries to reserve a region of memory of at least the given size in thye buffer. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2buffer_8cpp_source.html#l00104">buffer.cpp:104</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1material_html_a66497854e2116503460f7058480fbcf0"><div class="ttname"><a href="classcore_1_1gfx_1_1material.html#a66497854e2116503460f7058480fbcf0">core::gfx::material::bind_geometry</a></div><div class="ttdeci">bool bind_geometry(vk::CommandBuffer cmdBuffer, const core::resource::handle&lt; core::gfx::geometry &gt; geometry)</div><div class="ttdoc">prepares the material for rendering by binding the geometry&#39;s instance data. </div><div class="ttdef"><b>Definition:</b> <a href="gfx_2material_8cpp_source.html#l00211">material.cpp:211</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1material_html_a1e4c4f26943c74c56f9232eb76dd6cb2"><div class="ttname"><a href="classcore_1_1gfx_1_1material.html#a1e4c4f26943c74c56f9232eb76dd6cb2">core::gfx::material::shaders</a></div><div class="ttdeci">const std::vector&lt; core::resource::handle&lt; core::gfx::shader &gt; &gt; &amp; shaders() const </div><div class="ttdoc">returns all the shaders that are being used right now by this material. </div><div class="ttdef"><b>Definition:</b> <a href="gfx_2material_8cpp_source.html#l00128">material.cpp:128</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1swapchain_html"><div class="ttname"><a href="classcore_1_1gfx_1_1swapchain.html">core::gfx::swapchain</a></div><div class="ttdoc">describes a framebuffer that is specially handled and created by the driver </div><div class="ttdef"><b>Definition:</b> <a href="swapchain_8h_source.html#l00028">swapchain.h:28</a></div></div>
-<div class="ttc" id="classcore_1_1gfx_1_1buffer_html_ac7b2b906cbeaaa3321f4e9ac19d42ad5"><div class="ttname"><a href="classcore_1_1gfx_1_1buffer.html#ac7b2b906cbeaaa3321f4e9ac19d42ad5">core::gfx::buffer::gpu_buffer</a></div><div class="ttdeci">const vk::Buffer &amp; gpu_buffer() const </div><div class="ttdef"><b>Definition:</b> <a href="vk_2buffer_8cpp_source.html#l00487">buffer.cpp:487</a></div></div>
+<div class="ttc" id="classcore_1_1gfx_1_1buffer_html_ac7b2b906cbeaaa3321f4e9ac19d42ad5"><div class="ttname"><a href="classcore_1_1gfx_1_1buffer.html#ac7b2b906cbeaaa3321f4e9ac19d42ad5">core::gfx::buffer::gpu_buffer</a></div><div class="ttdeci">const vk::Buffer &amp; gpu_buffer() const </div><div class="ttdef"><b>Definition:</b> <a href="vk_2buffer_8cpp_source.html#l00493">buffer.cpp:493</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1pipeline__cache_html"><div class="ttname"><a href="classcore_1_1gfx_1_1pipeline__cache.html">core::gfx::pipeline_cache</a></div><div class="ttdoc">the pipeline cache allows sharing of pipelines between various materials. </div><div class="ttdef"><b>Definition:</b> <a href="pipeline__cache_8h_source.html#l00082">pipeline_cache.h:82</a></div></div>
 <div class="ttc" id="classcore_1_1resource_1_1handle_html_a7bba3da66dde1005a90e70f5e43f4dae"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#a7bba3da66dde1005a90e70f5e43f4dae">core::resource::handle::ID</a></div><div class="ttdeci">const UID &amp; ID() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00772">resource.h:772</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1buffer_html_a1fa9fe61eab8f498a9224d885ec84cf7"><div class="ttname"><a href="classcore_1_1gfx_1_1buffer.html#a1fa9fe61eab8f498a9224d885ec84cf7">core::gfx::buffer::commit</a></div><div class="ttdeci">bool commit(std::vector&lt; commit_instruction &gt; instructions)</div><div class="ttdoc">tries to find the appropriate method to update the buffer with the commit instructions. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2buffer_8cpp_source.html#l00159">buffer.cpp:159</a></div></div>

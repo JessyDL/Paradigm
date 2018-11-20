@@ -104,8 +104,7 @@ $(document).ready(function(){initNavTree('namespacepsl_1_1math.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">psl::math Namespace Reference</div>  </div>
 </div><!--header-->
@@ -150,6 +149,14 @@ template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:aa214fe3d2db68c5cbc4af28863c5b330"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tvec<br class="typebreak"/>
 &lt; precision_t, 3 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>rotate</b> (const psl::tquat&lt; precision_t &gt; &amp;quat, const psl::tvec&lt; precision_t, 3 &gt; &amp;vec) noexcept</td></tr>
 <tr class="separator:aa214fe3d2db68c5cbc4af28863c5b330"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a201f222542d64be7ea0bfbd260b7b771"><td class="memTemplParams" colspan="2"><a class="anchor" id="a201f222542d64be7ea0bfbd260b7b771"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:a201f222542d64be7ea0bfbd260b7b771"><td class="memTemplItemLeft" align="right" valign="top">static constexpr precision_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>saturate</b> (precision_t value) noexcept</td></tr>
+<tr class="separator:a201f222542d64be7ea0bfbd260b7b771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1eb3722be08c3d9af8450374060a860"><td class="memTemplParams" colspan="2"><a class="anchor" id="ae1eb3722be08c3d9af8450374060a860"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:ae1eb3722be08c3d9af8450374060a860"><td class="memTemplItemLeft" align="right" valign="top">static constexpr precision_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>clamp</b> (precision_t value, precision_t min=0, precision_t max=1) noexcept</td></tr>
+<tr class="separator:ae1eb3722be08c3d9af8450374060a860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4541745eefb9a98437888bbf2ea2efe5"><td class="memTemplParams" colspan="2"><a class="anchor" id="a4541745eefb9a98437888bbf2ea2efe5"></a>
 template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:a4541745eefb9a98437888bbf2ea2efe5"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tquat<br class="typebreak"/>
@@ -175,16 +182,26 @@ template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:a7b3c9cedbc508a955c0ccd745b79f3e7"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
 &lt; precision_t, 4, 4 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>look_at</b> (const psl::tvec&lt; precision_t, 3 &gt; &amp;eye, const psl::tvec&lt; precision_t, 3 &gt; &amp;center, const psl::tvec&lt; precision_t, 3 &gt; &amp;up) noexcept</td></tr>
 <tr class="separator:a7b3c9cedbc508a955c0ccd745b79f3e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5d0ea47426cb0440bca6ba1afbb1711"><td class="memTemplParams" colspan="2"><a class="anchor" id="ab5d0ea47426cb0440bca6ba1afbb1711"></a>
+<tr class="memitem:abf006b760b496639bb0d471bd366d5a5"><td class="memTemplParams" colspan="2"><a class="anchor" id="abf006b760b496639bb0d471bd366d5a5"></a>
 template&lt;typename precision_t &gt; </td></tr>
-<tr class="memitem:ab5d0ea47426cb0440bca6ba1afbb1711"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
-&lt; precision_t, 4, 4 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>scale</b> (const psl::tmat&lt; precision_t, 4, 4 &gt; &amp;tmat, const psl::tvec&lt; precision_t, 3 &gt; &amp;tvec) noexcept</td></tr>
-<tr class="separator:ab5d0ea47426cb0440bca6ba1afbb1711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ec0f3ad9c5d49136827ebf3508b4348"><td class="memTemplParams" colspan="2"><a class="anchor" id="a3ec0f3ad9c5d49136827ebf3508b4348"></a>
+<tr class="memitem:abf006b760b496639bb0d471bd366d5a5"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
+&lt; precision_t, 4, 4 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>scale</b> (const psl::tmat&lt; precision_t, 4, 4 &gt; &amp;mat, const psl::tvec&lt; precision_t, 3 &gt; &amp;vec) noexcept</td></tr>
+<tr class="separator:abf006b760b496639bb0d471bd366d5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29b22886acc481d9704ef5fcc2649a78"><td class="memTemplParams" colspan="2"><a class="anchor" id="a29b22886acc481d9704ef5fcc2649a78"></a>
 template&lt;typename precision_t &gt; </td></tr>
-<tr class="memitem:a3ec0f3ad9c5d49136827ebf3508b4348"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
-&lt; precision_t, 4, 4 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>translate</b> (const psl::tmat&lt; precision_t, 4, 4 &gt; &amp;tmat, const psl::tvec&lt; precision_t, 3 &gt; &amp;tvec) noexcept</td></tr>
-<tr class="separator:a3ec0f3ad9c5d49136827ebf3508b4348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29b22886acc481d9704ef5fcc2649a78"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
+&lt; precision_t, 4, 4 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>scale</b> (const psl::tvec&lt; precision_t, 3 &gt; &amp;vec) noexcept</td></tr>
+<tr class="separator:a29b22886acc481d9704ef5fcc2649a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af736db21b8239668e7a2174d7f9290f8"><td class="memTemplParams" colspan="2"><a class="anchor" id="af736db21b8239668e7a2174d7f9290f8"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:af736db21b8239668e7a2174d7f9290f8"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
+&lt; precision_t, 4, 4 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>translate</b> (const psl::tmat&lt; precision_t, 4, 4 &gt; &amp;mat, const psl::tvec&lt; precision_t, 3 &gt; &amp;vec) noexcept</td></tr>
+<tr class="separator:af736db21b8239668e7a2174d7f9290f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2223113efb477f5bd8698c4ecefa77b3"><td class="memTemplParams" colspan="2"><a class="anchor" id="a2223113efb477f5bd8698c4ecefa77b3"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:a2223113efb477f5bd8698c4ecefa77b3"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
+&lt; precision_t, 4, 4 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>translate</b> (const psl::tvec&lt; precision_t, 3 &gt; &amp;vec) noexcept</td></tr>
+<tr class="separator:a2223113efb477f5bd8698c4ecefa77b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a813f57fd957606dc062c328ca1a1cfb9"><td class="memTemplParams" colspan="2"><a class="anchor" id="a813f57fd957606dc062c328ca1a1cfb9"></a>
 template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:a813f57fd957606dc062c328ca1a1cfb9"><td class="memTemplItemLeft" align="right" valign="top">static constexpr psl::tmat<br class="typebreak"/>
@@ -195,6 +212,25 @@ template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:a6625f7db8853b35d78e2c97dd7357d7d"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tmat<br class="typebreak"/>
 &lt; precision_t, 3, 3 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>to_matrix</b> (const psl::tquat&lt; precision_t &gt; &amp;value) noexcept</td></tr>
 <tr class="separator:a6625f7db8853b35d78e2c97dd7357d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92d0f35216efcb338b65d7312d8025d3"><td class="memTemplParams" colspan="2"><a class="anchor" id="a92d0f35216efcb338b65d7312d8025d3"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:a92d0f35216efcb338b65d7312d8025d3"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tquat<br class="typebreak"/>
+&lt; precision_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>to_quat</b> (tmat&lt; precision_t, 3, 3 &gt; const &amp;mat) noexcept</td></tr>
+<tr class="separator:a92d0f35216efcb338b65d7312d8025d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5298d8866bc91a75e24c7aa1fd6768be"><td class="memTemplParams" colspan="2"><a class="anchor" id="a5298d8866bc91a75e24c7aa1fd6768be"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:a5298d8866bc91a75e24c7aa1fd6768be"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tquat<br class="typebreak"/>
+&lt; precision_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>look_at_q</b> (const tvec&lt; precision_t, 3 &gt; &amp;direction, const tvec&lt; precision_t, 3 &gt; &amp;up) noexcept</td></tr>
+<tr class="separator:a5298d8866bc91a75e24c7aa1fd6768be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5d19ad7884ecac3818561d929a98f8f"><td class="memTemplParams" colspan="2"><a class="anchor" id="ae5d19ad7884ecac3818561d929a98f8f"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:ae5d19ad7884ecac3818561d929a98f8f"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tquat<br class="typebreak"/>
+&lt; precision_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>look_at_q</b> (const tvec&lt; precision_t, 3 &gt; &amp;origin, const tvec&lt; precision_t, 3 &gt; &amp;target, const tvec&lt; precision_t, 3 &gt; &amp;up) noexcept</td></tr>
+<tr class="separator:ae5d19ad7884ecac3818561d929a98f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8240ccaa91be519379865a0801490068"><td class="memTemplParams" colspan="2"><a class="anchor" id="a8240ccaa91be519379865a0801490068"></a>
+template&lt;typename precision_t &gt; </td></tr>
+<tr class="memitem:a8240ccaa91be519379865a0801490068"><td class="memTemplItemLeft" align="right" valign="top">static constexpr precision_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>mix</b> (const precision_t &amp;x, const precision_t &amp;y, precision_t a) noexcept</td></tr>
+<tr class="separator:a8240ccaa91be519379865a0801490068"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbb67b586ad4b3766f3f627586a68516"><td class="memTemplParams" colspan="2"><a class="anchor" id="afbb67b586ad4b3766f3f627586a68516"></a>
 template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:afbb67b586ad4b3766f3f627586a68516"><td class="memTemplItemLeft" align="right" valign="top">static constexpr precision_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>dot</b> (const tquat&lt; precision_t &gt; &amp;left, const tquat&lt; precision_t &gt; &amp;right) noexcept</td></tr>
@@ -284,44 +320,7 @@ template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:ac48fb882a8ba3d75a172c552087676f8"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tvec<br class="typebreak"/>
 &lt; precision_t, 3 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cross</b> (const tvec&lt; precision_t, 3 &gt; &amp;left, const tvec&lt; precision_t, 3 &gt; &amp;right) noexcept</td></tr>
 <tr class="separator:ac48fb882a8ba3d75a172c552087676f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a1d1fadbcf0de241f4e5296c76b38d0a3"><td class="memItemLeft" align="right" valign="top">static constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>PI</b></td></tr>
-<tr class="separator:a1d1fadbcf0de241f4e5296c76b38d0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a596a4238683dbd584cb0d233a346afdc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a596a4238683dbd584cb0d233a346afdc"></a>
-static constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>DEG</b> { 180.0 / PI }</td></tr>
-<tr class="separator:a596a4238683dbd584cb0d233a346afdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71c8d8b24fdc1d7c2e7bd65cb3be6be5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a71c8d8b24fdc1d7c2e7bd65cb3be6be5"></a>
-static constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>RAD</b> { PI / 180.0 }</td></tr>
-<tr class="separator:a71c8d8b24fdc1d7c2e7bd65cb3be6be5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="a1d1fadbcf0de241f4e5296c76b38d0a3"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr double psl::math::PI</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{</div>
-<div class="line">        3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270</div>
-<div class="line">    }</div>
-</div><!-- fragment -->
-<p>Definition at line <a class="el" href="utility_8h_source.html#l00007">7</a> of file <a class="el" href="utility_8h_source.html">utility.h</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

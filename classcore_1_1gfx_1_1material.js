@@ -21,5 +21,6 @@ var classcore_1_1gfx_1_1material =
     [ "release", "classcore_1_1gfx_1_1material.html#aea134b4f87e19846b63d211b03357b70", null ],
     [ "release_all", "classcore_1_1gfx_1_1material.html#a40eaa45db352712b92d909fb3c17996b", null ],
     [ "set", "classcore_1_1gfx_1_1material.html#a9f4f1f3f254ac5609d0ac64f9e916b22", null ],
+    [ "set", "classcore_1_1gfx_1_1material.html#a4f134c497d3bdd9dedada44fe13c7a9c", null ],
     [ "set", "classcore_1_1gfx_1_1material.html#a026971b8cce163be1ad3f42569961591", null ]
 ];
