@@ -1,6 +1,6 @@
 var classcore_1_1gfx_1_1swapchain =
 [
-    [ "swapchain", "classcore_1_1gfx_1_1swapchain.html#aa86adc80f6d2b5c379e0a7603bdd946d", null ],
+    [ "swapchain", "classcore_1_1gfx_1_1swapchain.html#a04aa0c03eb8390e60a78ab6fee5f0d47", null ],
     [ "~swapchain", "classcore_1_1gfx_1_1swapchain.html#a724e4e5ac6e91441a2202541b8d8e913", null ],
     [ "next", "classcore_1_1gfx_1_1swapchain.html#ade61b6d3ba58649d4483e6adbe6d4172", null ],
     [ "present", "classcore_1_1gfx_1_1swapchain.html#adeeb2e4c049c1d899522d35acf5f0e39", null ],

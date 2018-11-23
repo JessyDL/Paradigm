@@ -1,7 +1,7 @@
 var classcore_1_1meta_1_1texture =
 [
     [ "texture", "classcore_1_1meta_1_1texture.html#a4de0298be2311d7aa172bc3bf23aefd9", null ],
-    [ "texture", "classcore_1_1meta_1_1texture.html#a2cdf0a720594d5117d9565a88d7410ac", null ],
+    [ "texture", "classcore_1_1meta_1_1texture.html#a04cace8537f6a26f9324842bea0afc80", null ],
     [ "~texture", "classcore_1_1meta_1_1texture.html#ada7f67abeb394511092e0d220b2a177a", null ],
     [ "width", "classcore_1_1meta_1_1texture.html#ab208d152595029215ae2ee10d11a277d", null ],
     [ "width", "classcore_1_1meta_1_1texture.html#a3fb27114998e1c5e21430bee6a419c41", null ],
@@ -21,6 +21,6 @@ var classcore_1_1meta_1_1texture =
     [ "usage", "classcore_1_1meta_1_1texture.html#abf0e624649c346224cd907ffbe8fa747", null ],
     [ "aspect_mask", "classcore_1_1meta_1_1texture.html#a6225f8852c46b38fa851e19bb268d479", null ],
     [ "aspect_mask", "classcore_1_1meta_1_1texture.html#a9737c1d00dc6029c712fa206848d83a7", null ],
-    [ "serialization::accessor", "classcore_1_1meta_1_1texture.html#a36016c25465818cb92fa0c5faf0c519c", null ],
+    [ "psl::serialization::accessor", "classcore_1_1meta_1_1texture.html#ae6e4002148765f114da9fe1b5c64547d", null ],
     [ "library", "classcore_1_1meta_1_1texture.html#aee46278171d51c5f2ef7b6cf086cf424", null ]
 ];

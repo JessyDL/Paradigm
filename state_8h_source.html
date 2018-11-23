@@ -427,7 +427,7 @@ $(document).ready(function(){initNavTree('state_8h_source.html','');});
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                {</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                    m_Components.emplace(</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                        int_id,</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                        details::component_info{memory::raw_region{1024 * 1024 * 128}, {}, int_id, (size_t)<span class="keyword">sizeof</span>(T)});</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                        details::component_info{memory::raw_region{1024 * 1024 * 128}, {}, int_id, (size_t)<span class="keyword">sizeof</span>(component_type)});</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                }</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                it = m_Components.find(int_id);</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                core::profiler.scope_end();</div>
@@ -994,44 +994,45 @@ $(document).ready(function(){initNavTree('state_8h_source.html','');});
 <div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160;            size_t i = 0;</div>
 <div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;</div>
 <div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;            const auto&amp; mem_pair = m_Components.find(int_id);</div>
-<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;</div>
-<div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160;            for(const auto&amp; e : entities)</div>
-<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;            {</div>
-<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;                <span class="keyword">auto</span> eMapIt  = m_EntityMap.find(e);</div>
-<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;                <span class="keyword">auto</span> foundIt = std::find_if(eMapIt-&gt;second.begin(), eMapIt-&gt;second.end(),</div>
-<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;                                            [&amp;int_id](<span class="keyword">const</span> std::pair&lt;details::component_key_t, size_t&gt;&amp; pair) {</div>
-<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;                                                <span class="keywordflow">return</span> pair.first == int_id;</div>
-<div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160;                                            });</div>
-<div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160;</div>
-<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;                <span class="keyword">auto</span> index = foundIt-&gt;second;</div>
-<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;                <span class="keywordtype">void</span>* loc  = (<span class="keywordtype">void</span>*)((std::uintptr_t)mem_pair-&gt;second.region.data() + mem_pair-&gt;second.size * index);</div>
-<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160;                std::memcpy((<span class="keywordtype">void</span>*)((std::uintptr_t)out + (i * mem_pair-&gt;second.size)), loc, mem_pair-&gt;second.size);</div>
-<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;                ++i;</div>
-<div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;            }</div>
-<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;        }</div>
-<div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;</div>
-<div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;        <span class="keywordtype">void</span> fill_in(<span class="keyword">const</span> std::vector&lt;entity&gt;&amp; entities, std::vector&lt;T&gt;&amp; out) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;        {</div>
-<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;            PROFILE_SCOPE(core::profiler)</div>
-<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;            out.resize(entities.size());</div>
-<div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;            return fill_in(entities, details::component_key&lt;T&gt;, out.data());</div>
-<div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;        }</div>
-<div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;</div>
-<div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;        uint64_t mID{0u};</div>
-<div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160;        ska::bytell_hash_map&lt;entity, std::vector&lt;std::pair&lt;details::component_key_t, size_t&gt;&gt;&gt; m_EntityMap;</div>
-<div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160;</div>
-<div class="line"><a name="l00931"></a><span class="lineno">  931</span>&#160;        ska::bytell_hash_map&lt;details::component_key_t, details::component_info&gt; m_Components;</div>
-<div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;</div>
-<div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;        std::unordered_map&lt;void*, std::tuple&lt;std::function&lt;void(core::ecs::state&amp;, std::chrono::duration&lt;float&gt;)&gt;,</div>
-<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;                                             std::vector&lt;dependency_pack&gt;&gt;&gt;</div>
-<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;            m_Systems;</div>
-<div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;        memory::raw_region m_Cache{1024 * 1024 * 32};</div>
-<div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160;</div>
+<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;            const auto size = mem_pair-&gt;second.size;</div>
+<div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160;            const std::uintptr_t data = (std::uintptr_t)mem_pair-&gt;second.region.data();</div>
+<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;            for(const auto&amp; e : entities)</div>
+<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;            {</div>
+<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;                <span class="keyword">auto</span> eMapIt  = m_EntityMap.find(e);</div>
+<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;                <span class="keyword">auto</span> foundIt = std::find_if(eMapIt-&gt;second.begin(), eMapIt-&gt;second.end(),</div>
+<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;                                            [&amp;int_id](<span class="keyword">const</span> std::pair&lt;details::component_key_t, size_t&gt;&amp; pair) {</div>
+<div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160;                                                <span class="keywordflow">return</span> pair.first == int_id;</div>
+<div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160;                                            });</div>
+<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;</div>
+<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;                <span class="keyword">auto</span> index = foundIt-&gt;second;</div>
+<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160;                <span class="keywordtype">void</span>* loc  = (<span class="keywordtype">void</span>*)(data + size * index);</div>
+<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;                std::memcpy((<span class="keywordtype">void</span>*)((std::uintptr_t)out + (i * size)), loc, size);</div>
+<div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;                ++i;</div>
+<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;            }</div>
+<div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;        }</div>
+<div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160;</div>
+<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;        <span class="keywordtype">void</span> fill_in(<span class="keyword">const</span> std::vector&lt;entity&gt;&amp; entities, std::vector&lt;T&gt;&amp; out) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;        {</div>
+<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;            PROFILE_SCOPE(core::profiler)</div>
+<div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;            out.resize(entities.size());</div>
+<div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;            return fill_in(entities, details::component_key&lt;T&gt;, out.data());</div>
+<div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;        }</div>
+<div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;</div>
+<div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;        uint64_t mID{0u};</div>
+<div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160;        ska::bytell_hash_map&lt;entity, std::vector&lt;std::pair&lt;details::component_key_t, size_t&gt;&gt;&gt; m_EntityMap;</div>
+<div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;</div>
+<div class="line"><a name="l00932"></a><span class="lineno">  932</span>&#160;        ska::bytell_hash_map&lt;details::component_key_t, details::component_info&gt; m_Components;</div>
+<div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;</div>
+<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;        std::unordered_map&lt;void*, std::tuple&lt;std::function&lt;void(core::ecs::state&amp;, std::chrono::duration&lt;float&gt;)&gt;,</div>
+<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;                                             std::vector&lt;dependency_pack&gt;&gt;&gt;</div>
+<div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;            m_Systems;</div>
+<div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160;        memory::raw_region m_Cache{1024 * 1024 * 32};</div>
 <div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;</div>
-<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;        <span class="comment">// std::unordered_map&lt;details::component_key_t,</span></div>
-<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;    };</div>
-<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;} <span class="comment">// namespace core::ecs</span></div>
+<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;</div>
+<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;        <span class="comment">// std::unordered_map&lt;details::component_key_t,</span></div>
+<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;    };</div>
+<div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160;} <span class="comment">// namespace core::ecs</span></div>
 <div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442e"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">core::resource::state</a></div><div class="ttdeci">state</div><div class="ttdoc">represents the various states a resource can be in. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00017">resource.h:17</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1state_1_1dependency__pack_html_a4b742eb208f9e2ac63af9f40196f16f2"><div class="ttname"><a href="classcore_1_1ecs_1_1state_1_1dependency__pack.html#a4b742eb208f9e2ac63af9f40196f16f2">core::ecs::state::dependency_pack::dependency_pack</a></div><div class="ttdeci">dependency_pack(core::ecs::vector&lt; entity &gt; &amp;entities)</div><div class="ttdoc">constructs a unique set of dependencies </div><div class="ttdef"><b>Definition:</b> <a href="state_8h_source.html#l00194">state.h:194</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1state_1_1dependency__pack_html"><div class="ttname"><a href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a></div><div class="ttdoc">describes a set of dependencies for a given system </div><div class="ttdef"><b>Definition:</b> <a href="state_8h_source.html#l00188">state.h:188</a></div></div>

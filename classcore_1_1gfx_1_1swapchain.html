@@ -121,9 +121,9 @@ $(document).ready(function(){initNavTree('classcore_1_1gfx_1_1swapchain.html',''
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa86adc80f6d2b5c379e0a7603bdd946d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa86adc80f6d2b5c379e0a7603bdd946d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>swapchain</b> (const <a class="el" href="struct_u_i_d.html">UID</a> &amp;uid, <a class="el" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a> &amp;<a class="el" href="classcore_1_1resource_1_1cache.html">cache</a>, <a class="el" href="classcore_1_1resource_1_1handle.html">core::resource::handle</a>&lt; <a class="el" href="classcore_1_1os_1_1surface.html">core::os::surface</a> &gt; <a class="el" href="classcore_1_1os_1_1surface.html">surface</a>, <a class="el" href="classcore_1_1resource_1_1handle.html">core::resource::handle</a>&lt; <a class="el" href="classcore_1_1gfx_1_1context.html">core::gfx::context</a> &gt; <a class="el" href="classcore_1_1gfx_1_1context.html">context</a>, bool use_depth=true)</td></tr>
-<tr class="separator:aa86adc80f6d2b5c379e0a7603bdd946d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04aa0c03eb8390e60a78ab6fee5f0d47"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04aa0c03eb8390e60a78ab6fee5f0d47"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>swapchain</b> (const <a class="el" href="structpsl_1_1_u_i_d.html">psl::UID</a> &amp;uid, <a class="el" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a> &amp;<a class="el" href="classcore_1_1resource_1_1cache.html">cache</a>, <a class="el" href="classcore_1_1resource_1_1handle.html">core::resource::handle</a>&lt; <a class="el" href="classcore_1_1os_1_1surface.html">core::os::surface</a> &gt; <a class="el" href="classcore_1_1os_1_1surface.html">surface</a>, <a class="el" href="classcore_1_1resource_1_1handle.html">core::resource::handle</a>&lt; <a class="el" href="classcore_1_1gfx_1_1context.html">core::gfx::context</a> &gt; <a class="el" href="classcore_1_1gfx_1_1context.html">context</a>, bool use_depth=true)</td></tr>
+<tr class="separator:a04aa0c03eb8390e60a78ab6fee5f0d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade61b6d3ba58649d4483e6adbe6d4172"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1gfx_1_1swapchain.html#ade61b6d3ba58649d4483e6adbe6d4172">next</a> (vk::Semaphore presentComplete, uint32_t &amp;out_image_index)</td></tr>
 <tr class="separator:ade61b6d3ba58649d4483e6adbe6d4172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adeeb2e4c049c1d899522d35acf5f0e39"><td class="memItemLeft" align="right" valign="top">vk::Result&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1gfx_1_1swapchain.html#adeeb2e4c049c1d899522d35acf5f0e39">present</a> (vk::Semaphore wait)</td></tr>
@@ -202,7 +202,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </dl>
 <p>when invoking this method it will request the next image in the swapchain, and return. the semaphore will be flaged once the resource is ready on the GPU. (and so should be used as a sync point before using the image in the swapchain. </p>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00504">504</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00505">505</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -227,7 +227,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00535">535</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00536">536</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -253,7 +253,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the renderpass associated with the swapchain. </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00599">599</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00600">600</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -279,7 +279,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the width of the swapchain image </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00601">601</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00602">602</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -305,7 +305,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the height of the swapchainimage. </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00602">602</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00603">603</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -331,7 +331,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the vulkan framebuffers for the swapchain (one for each buffer). </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00604">604</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00605">605</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -357,7 +357,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the images for the swapchain (one for each buffer). </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00605">605</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00606">606</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -383,7 +383,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the image views for the swapchain (one for each buffer). </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00606">606</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00607">607</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -409,7 +409,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the clear color value assigned to the swapchain. </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00607">607</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00608">608</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -436,7 +436,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 <dl class="section return"><dt>Returns</dt><dd>the clear depth color of the swapchain </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>will return default value in case there is no depth texture. </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00608">608</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00609">609</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -462,7 +462,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>if the swapchain uses a depth texture or not. </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00609">609</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00610">610</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -494,7 +494,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00611">611</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00612">612</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>
@@ -521,7 +521,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 <dl class="section return"><dt>Returns</dt><dd>false in case the window might be resizing. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>calls to getting the next swapchain image and presenting will fail in that scenario. </dd></dl>
 
-<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00595">595</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
+<p>Definition at line <a class="el" href="swapchain_8cpp_source.html#l00596">596</a> of file <a class="el" href="swapchain_8cpp_source.html">swapchain.cpp</a>.</p>
 
 </div>
 </div>

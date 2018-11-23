@@ -25,5 +25,5 @@ var classcore_1_1data_1_1material_1_1blendstate =
     [ "alpha_blend_dst", "classcore_1_1data_1_1material_1_1blendstate.html#af664e1b983788138bc38c61d46dca5e0", null ],
     [ "alpha_blend_op", "classcore_1_1data_1_1material_1_1blendstate.html#a1cc4b5134115e6b2fa151749ca41b23e", null ],
     [ "color_components", "classcore_1_1data_1_1material_1_1blendstate.html#a57b10a18ad42ef361edf85d6e0fa90f7", null ],
-    [ "serialization::accessor", "classcore_1_1data_1_1material_1_1blendstate.html#a36016c25465818cb92fa0c5faf0c519c", null ]
+    [ "psl::serialization::accessor", "classcore_1_1data_1_1material_1_1blendstate.html#ae6e4002148765f114da9fe1b5c64547d", null ]
 ];

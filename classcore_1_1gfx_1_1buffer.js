@@ -1,7 +1,7 @@
 var classcore_1_1gfx_1_1buffer =
 [
     [ "commit_instruction", "structcore_1_1gfx_1_1buffer_1_1commit__instruction.html", "structcore_1_1gfx_1_1buffer_1_1commit__instruction" ],
-    [ "buffer", "classcore_1_1gfx_1_1buffer.html#a180a6ef07535a02b9ad139c3e4886edf", null ],
+    [ "buffer", "classcore_1_1gfx_1_1buffer.html#a9a61406bf30ce727be42dd613b6675be", null ],
     [ "~buffer", "classcore_1_1gfx_1_1buffer.html#a2676a1a64b89fd492537129a618b88cf", null ],
     [ "buffer", "classcore_1_1gfx_1_1buffer.html#a0213f926a8bfd4bc15b6f2f8ffa6b1d3", null ],
     [ "buffer", "classcore_1_1gfx_1_1buffer.html#a0c2ba58f37dc317a412f16e5a8ae64dd", null ],

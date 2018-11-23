@@ -28,5 +28,5 @@ var classcore_1_1stream =
     [ "as_mat4", "classcore_1_1stream.html#a63adba74476a40dcfe1cdb1722589b15", null ],
     [ "size", "classcore_1_1stream.html#a8c33e159bef9586a7b106444b5b3c858", null ],
     [ "bytesize", "classcore_1_1stream.html#a2d439e6d8ea3e94dec97f93d138263da", null ],
-    [ "serialization::accessor", "classcore_1_1stream.html#a36016c25465818cb92fa0c5faf0c519c", null ]
+    [ "psl::serialization::accessor", "classcore_1_1stream.html#ae6e4002148765f114da9fe1b5c64547d", null ]
 ];

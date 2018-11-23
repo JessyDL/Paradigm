@@ -2,7 +2,7 @@ var classcore_1_1gfx_1_1framebuffer =
 [
     [ "attachment", "structcore_1_1gfx_1_1framebuffer_1_1attachment.html", "structcore_1_1gfx_1_1framebuffer_1_1attachment" ],
     [ "binding", "structcore_1_1gfx_1_1framebuffer_1_1binding.html", "structcore_1_1gfx_1_1framebuffer_1_1binding" ],
-    [ "framebuffer", "classcore_1_1gfx_1_1framebuffer.html#a95527b80de377092ad4f1d5c36488b96", null ],
+    [ "framebuffer", "classcore_1_1gfx_1_1framebuffer.html#a7b041691382cc32fb97296bebbfda383", null ],
     [ "framebuffer", "classcore_1_1gfx_1_1framebuffer.html#a0bd4a253b029c9c3773dbe6ab5992dd8", null ],
     [ "framebuffer", "classcore_1_1gfx_1_1framebuffer.html#af931ef33cb64379cb72aa843da3f28b9", null ],
     [ "~framebuffer", "classcore_1_1gfx_1_1framebuffer.html#a2024adae5e43d9c21ccbd110b2099f73", null ],

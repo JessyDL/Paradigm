@@ -1,7 +1,7 @@
 var classcore_1_1data_1_1material =
 [
     [ "blendstate", "classcore_1_1data_1_1material_1_1blendstate.html", "classcore_1_1data_1_1material_1_1blendstate" ],
-    [ "material", "classcore_1_1data_1_1material.html#a7cf2af1c0d350b814d738727677a9d4d", null ],
+    [ "material", "classcore_1_1data_1_1material.html#a8411ad0e4a0bf5172cee7d7b70d06db8", null ],
     [ "~material", "classcore_1_1data_1_1material.html#a81832a5543032ea194fbdbdba352efa7", null ],
     [ "material", "classcore_1_1data_1_1material.html#ae0535fa9f0e6e7c242db40acf970fa7e", null ],
     [ "material", "classcore_1_1data_1_1material.html#a8b2427bcf7f9aabb67e28361ad4a024e", null ],
@@ -31,6 +31,6 @@ var classcore_1_1data_1_1material =
     [ "erase", "classcore_1_1data_1_1material.html#a4384af2f2af9f41eed950e7b8d2eb533", null ],
     [ "erase", "classcore_1_1data_1_1material.html#ab58cc3a68aa975d2d87cc68f97e770fb", null ],
     [ "undefine", "classcore_1_1data_1_1material.html#a638facaead088ccff6638b9eaee7b058", null ],
-    [ "from_shaders", "classcore_1_1data_1_1material.html#ac998c6b8209811f984aa38d64c091d6d", null ],
-    [ "serialization::accessor", "classcore_1_1data_1_1material.html#a36016c25465818cb92fa0c5faf0c519c", null ]
+    [ "from_shaders", "classcore_1_1data_1_1material.html#a0e1cbf2be91353dd4b6b83f00ab57a52", null ],
+    [ "psl::serialization::accessor", "classcore_1_1data_1_1material.html#ae6e4002148765f114da9fe1b5c64547d", null ]
 ];

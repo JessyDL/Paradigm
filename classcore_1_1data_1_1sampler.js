@@ -1,6 +1,6 @@
 var classcore_1_1data_1_1sampler =
 [
-    [ "sampler", "classcore_1_1data_1_1sampler.html#a06e54357b6a43dc56946239b8699a1a4", null ],
+    [ "sampler", "classcore_1_1data_1_1sampler.html#a6a1ea774d076fa613bd4da61d71727f4", null ],
     [ "~sampler", "classcore_1_1data_1_1sampler.html#a1b0e2e04dbc063661f50df66a0d34ca2", null ],
     [ "sampler", "classcore_1_1data_1_1sampler.html#a08434e3190bf01e1f581a004660343e6", null ],
     [ "sampler", "classcore_1_1data_1_1sampler.html#af623af1deabf725540f140c0b24b85c2", null ],
@@ -38,5 +38,5 @@ var classcore_1_1data_1_1sampler =
     [ "filter_max", "classcore_1_1data_1_1sampler.html#aef6b066b35bb9118f18ff7fff77e1cb7", null ],
     [ "normalized_coordinates", "classcore_1_1data_1_1sampler.html#ac175fcf0515bc102a87c855126dfb4ba", null ],
     [ "normalized_coordinates", "classcore_1_1data_1_1sampler.html#a73a36b14ccfdb4e0f732486698fc1a85", null ],
-    [ "serialization::accessor", "classcore_1_1data_1_1sampler.html#a36016c25465818cb92fa0c5faf0c519c", null ]
+    [ "psl::serialization::accessor", "classcore_1_1data_1_1sampler.html#ae6e4002148765f114da9fe1b5c64547d", null ]
 ];

@@ -1,7 +1,7 @@
 var classcore_1_1gfx_1_1context =
 [
     [ "optional_ref", "classcore_1_1gfx_1_1context.html#a3c1d8a60e8a5ceb159bc55311aefbb1f", null ],
-    [ "context", "classcore_1_1gfx_1_1context.html#ae0b1ae702294305623aad5009347f812", null ],
+    [ "context", "classcore_1_1gfx_1_1context.html#a6c4a6a5898e6e75818c4d81a3add7ef6", null ],
     [ "~context", "classcore_1_1gfx_1_1context.html#a7c0a2e60f8fe692925a98ae1fa925ede", null ],
     [ "context", "classcore_1_1gfx_1_1context.html#a3f77f8c22ce5cdab0f151332f5cc03c4", null ],
     [ "context", "classcore_1_1gfx_1_1context.html#ab5afae1afb9a1242f7161291a6f06bd0", null ],

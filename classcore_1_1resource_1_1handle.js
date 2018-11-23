@@ -2,8 +2,8 @@ var classcore_1_1resource_1_1handle =
 [
     [ "handle", "classcore_1_1resource_1_1handle.html#aa8b9e6d603d5f9a0f1ecd85b13fc7528", null ],
     [ "handle", "classcore_1_1resource_1_1handle.html#ac620b7d8325650eee430ec1772cba5d1", null ],
-    [ "handle", "classcore_1_1resource_1_1handle.html#af097e9803470f29ea134f77127c86905", null ],
-    [ "handle", "classcore_1_1resource_1_1handle.html#aa6e1d7d3391d89e4c70a6d97eb911db3", null ],
+    [ "handle", "classcore_1_1resource_1_1handle.html#acd7e6d66599daaf6d94e1cec5934403e", null ],
+    [ "handle", "classcore_1_1resource_1_1handle.html#a35c6351ef91aa987fde7c8108210d48a", null ],
     [ "handle", "classcore_1_1resource_1_1handle.html#a544e73cdc5dc43092b3a15d6c3b88314", null ],
     [ "handle", "classcore_1_1resource_1_1handle.html#ad9350b54ff9c70a829857cb0b1ba9a9e", null ],
     [ "handle", "classcore_1_1resource_1_1handle.html#a805f256e1e28510ccf5c90077c3d5629", null ],
@@ -18,9 +18,9 @@ var classcore_1_1resource_1_1handle =
     [ "operator->", "classcore_1_1resource_1_1handle.html#a8fec57133615042a407cad4f589789f0", null ],
     [ "cvalue", "classcore_1_1resource_1_1handle.html#add1be8462743c0696dfb6ff1ebaed3ff", null ],
     [ "unload", "classcore_1_1resource_1_1handle.html#a4a7b7fdd7e0bd7916434084ad8048a6d", null ],
-    [ "ID", "classcore_1_1resource_1_1handle.html#a7bba3da66dde1005a90e70f5e43f4dae", null ],
-    [ "RUID", "classcore_1_1resource_1_1handle.html#ad08217225221fe8f63ae88cc462e8eec", null ],
-    [ "copy", "classcore_1_1resource_1_1handle.html#a51f13e09dc8342dfdb9eba3fe7077ab1", null ],
+    [ "ID", "classcore_1_1resource_1_1handle.html#aa8046384a86c913041c0910a5f1f02f3", null ],
+    [ "RUID", "classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d", null ],
+    [ "copy", "classcore_1_1resource_1_1handle.html#a3b1a006399afa1c1ad4e1463d5d0d0a3", null ],
     [ "cache", "classcore_1_1resource_1_1handle.html#a3a4fd88a2b390b6ad8d9d833a87c877d", null ],
     [ "indirect_handle< T >", "classcore_1_1resource_1_1handle.html#a63c380af70249f4254f4bedfafac526b", null ]
 ];

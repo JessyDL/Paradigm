@@ -1,6 +1,6 @@
 var classcore_1_1gfx_1_1material =
 [
-    [ "resource_dependency", "classcore_1_1gfx_1_1material.html#ac9e7bb364bafb6c23a32d66f8f7826e6", null ],
+    [ "resource_dependency", "classcore_1_1gfx_1_1material.html#a7b5f99c00bc6ac09b521f658af5c9faa", null ],
     [ "material", "classcore_1_1gfx_1_1material.html#aba2d1b161c61e39999285b177d2e3fee", null ],
     [ "material", "classcore_1_1gfx_1_1material.html#ad3031c2031835f51b3f12fc4e36d0b11", null ],
     [ "~material", "classcore_1_1gfx_1_1material.html#a81832a5543032ea194fbdbdba352efa7", null ],

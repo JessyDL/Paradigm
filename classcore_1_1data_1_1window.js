@@ -1,7 +1,7 @@
 var classcore_1_1data_1_1window =
 [
-    [ "window", "classcore_1_1data_1_1window.html#a45477b7ba80f6b78b0ce781bb631c672", null ],
-    [ "window", "classcore_1_1data_1_1window.html#a527114bf5b1800d0153457dafd423a06", null ],
+    [ "window", "classcore_1_1data_1_1window.html#ad14f06f39e12c3cde86e93919e9d366a", null ],
+    [ "window", "classcore_1_1data_1_1window.html#aa3cc0b37e7e92e45b4946ec4cefe1382", null ],
     [ "~window", "classcore_1_1data_1_1window.html#a5227ae0c01e47610d5924d3a6aa2ecff", null ],
     [ "window", "classcore_1_1data_1_1window.html#a6a6ab88218f494982852021861b41d79", null ],
     [ "window", "classcore_1_1data_1_1window.html#a95f0bd203de737df5960f2cc34a50b74", null ],
@@ -18,5 +18,5 @@ var classcore_1_1data_1_1window =
     [ "mode", "classcore_1_1data_1_1window.html#a9c5349e200167bac27398864f09069c8", null ],
     [ "buffering", "classcore_1_1data_1_1window.html#a49b49ee1c55952a9c548e1f419ce2aa0", null ],
     [ "buffering", "classcore_1_1data_1_1window.html#a31f80f496d7e46cf9cae86d7cf2da770", null ],
-    [ "serialization::accessor", "classcore_1_1data_1_1window.html#a36016c25465818cb92fa0c5faf0c519c", null ]
+    [ "psl::serialization::accessor", "classcore_1_1data_1_1window.html#ae6e4002148765f114da9fe1b5c64547d", null ]
 ];

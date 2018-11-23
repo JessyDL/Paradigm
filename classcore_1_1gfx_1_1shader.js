@@ -1,8 +1,8 @@
 var classcore_1_1gfx_1_1shader =
 [
     [ "specialization", "structcore_1_1gfx_1_1shader_1_1specialization.html", "structcore_1_1gfx_1_1shader_1_1specialization" ],
-    [ "shader", "classcore_1_1gfx_1_1shader.html#a0a49829ee3364cbfde15f0ac29875416", null ],
-    [ "shader", "classcore_1_1gfx_1_1shader.html#ad0702170be85e30df79a73a2059729fc", null ],
+    [ "shader", "classcore_1_1gfx_1_1shader.html#a267ea28221ae67cbdebdc5f20f2d8bd5", null ],
+    [ "shader", "classcore_1_1gfx_1_1shader.html#a278ee738170f780ecd18b149641f2c3c", null ],
     [ "~shader", "classcore_1_1gfx_1_1shader.html#a54ae84e4ea7db18c45fca4026b3d35dd", null ],
     [ "shader", "classcore_1_1gfx_1_1shader.html#a5dc878d34e9c197426acbb93d8861cd5", null ],
     [ "shader", "classcore_1_1gfx_1_1shader.html#a92234740664673c4b475a21ff8170e19", null ],

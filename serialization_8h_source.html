@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>paradigm engine: /home/travis/build/JessyDL/paradigm/format/inc/serialization.h Source File</title>
+<title>paradigm engine: /home/travis/build/JessyDL/paradigm/psl/inc/serialization.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define SUPPORT_POLYMORPH</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// we give a start offset because of the first character is used as a check</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define get_char(name, ii) ::serialization::details::get_nth_character&lt;ii + 1&gt;(name)</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define get_char(name, ii) ::psl::serialization::details::get_nth_character&lt;ii + 1&gt;(name)</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define get_char_2(str, size) get_char(str, size - 2)</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define get_char_3(str, size) get_char(str, size - 3), get_char_2(str, size)</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define get_char_4(str, size) get_char(str, size - 4), get_char_3(str, size)</span></div>
@@ -251,9 +251,9 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define get_char_127(str, size) get_char(str, size - 127), get_char_126(str, size)</span></div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define get_char_128(str, size) get_char(str, size - 128), get_char_127(str, size)</span></div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#define const_str(str, size) ::serialization::details::check_str&lt;size&gt;(str), get_char_##size(str, size)</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#define const_str(str, size) ::psl::serialization::details::check_str&lt;size&gt;(str), get_char_##size(str, size)</span></div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="namespacepsl.html">  148</a></span>&#160;<span class="keyword">namespace </span>psl</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keyword">namespace </span>psl</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;{</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">template</span> &lt;<span class="keywordtype">char</span>... C&gt;</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">class </span>template_string final</div>
@@ -274,7 +274,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;} <span class="comment">// namespace psl</span></div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keyword">namespace </span>serialization</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keyword">namespace </span>psl::serialization</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;{</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keyword">namespace </span>details</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    {</div>
@@ -282,13 +282,13 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    }</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="comment">// forward declarations</span></div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">char</span>... Char&gt;</div>
-<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="structserialization_1_1property.html">  182</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structserialization_1_1property.html">property</a>;</div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="structpsl_1_1serialization_1_1property.html">  182</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structpsl_1_1serialization_1_1property.html">property</a>;</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keyword">struct </span>ptr;</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="classserialization_1_1polymorphic.html">  188</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classserialization_1_1polymorphic.html">polymorphic</a>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="classpsl_1_1serialization_1_1polymorphic.html">  188</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classpsl_1_1serialization_1_1polymorphic.html">polymorphic</a>;</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keyword">class </span>serializer;</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
@@ -361,7 +361,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">auto</span> serialize_fn(S&amp; s, T&amp; obj);</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">auto</span> to_string(T&amp; t, format::container&amp; container, format::data&amp; parent)</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">auto</span> to_string(T&amp; t, psl::format::container&amp; container, psl::format::data&amp; parent)</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            -&gt; decltype(t.to_string(container, parent))</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        {</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            t.to_string(container, parent);</div>
@@ -423,7 +423,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                          <span class="stringliteral">&quot;\n\tPlease make sure your class fullfills any of the following requirements:\n&quot;</span></div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                          <span class="stringliteral">&quot;\t\t - has a public variable \&quot;static constexpr const char* serialization_name\&quot;\n&quot;</span></div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                          <span class="stringliteral">&quot;\t\t - or a private variable \&quot;static constexpr const char* serialization_name\&quot; and added &quot;</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                          <span class="stringliteral">&quot;\&quot;friend class serialization::accessor\&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                          <span class="stringliteral">&quot;\&quot;friend class psl::serialization::accessor\&quot;\n&quot;</span>);</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            <span class="keywordflow">return</span> T::serialization_name;</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        }</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;</div>
@@ -434,7 +434,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                          <span class="stringliteral">&quot;\n\tPlease make sure your class fullfills any of the following requirements:\n&quot;</span></div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                          <span class="stringliteral">&quot;\t\t - has a public variable \&quot;static constexpr const char* polymorphic_name\&quot;\n&quot;</span></div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                          <span class="stringliteral">&quot;\t\t - or a private variable \&quot;static constexpr const char* polymorphic_name\&quot; and added &quot;</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                          <span class="stringliteral">&quot;\&quot;friend class serialization::accessor\&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                          <span class="stringliteral">&quot;\&quot;friend class psl::serialization::accessor\&quot;\n&quot;</span>);</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="namespaceutility.html#a857e522bee9af5904b82b11b5ccc8947">utility::crc64</a>(T::polymorphic_name);</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        }</div>
@@ -444,9 +444,9 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        {</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            static_assert(is_polymorphic&lt;T&gt;::value,</div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                          <span class="stringliteral">&quot;\nYou are missing, or have incorrectly defined the following requirements:&quot;</span></div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                          <span class="stringliteral">&quot;\n\t- virtual const serialization::polymorphic_base&amp; polymorphic_id() { return &quot;</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                          <span class="stringliteral">&quot;\n\t- virtual const psl::serialization::polymorphic_base&amp; polymorphic_id() { return &quot;</span></div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                          <span class="stringliteral">&quot;polymorphic_container; }&quot;</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                          <span class="stringliteral">&quot;\n\t- static const serialization::polymorphic&lt;YOUR TYPE HERE&gt; polymorphic_container;&quot;</span>);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                          <span class="stringliteral">&quot;\n\t- static const psl::serialization::polymorphic&lt;YOUR TYPE HERE&gt; polymorphic_container;&quot;</span>);</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            <span class="keywordflow">return</span> obj.polymorphic_id();</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        }</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;</div>
@@ -455,9 +455,9 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        {</div>
 <div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            static_assert(is_polymorphic&lt;T&gt;::value,</div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                          <span class="stringliteral">&quot;\nYou are missing, or have incorrectly defined the following requirements:&quot;</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                          <span class="stringliteral">&quot;\n\t- virtual const serialization::polymorphic_base&amp; polymorphic_id() { return &quot;</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                          <span class="stringliteral">&quot;\n\t- virtual const psl::serialization::polymorphic_base&amp; polymorphic_id() { return &quot;</span></div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                          <span class="stringliteral">&quot;polymorphic_container; }&quot;</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                          <span class="stringliteral">&quot;\n\t- static const serialization::polymorphic&lt;YOUR TYPE HERE&gt; polymorphic_container;&quot;</span>);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                          <span class="stringliteral">&quot;\n\t- static const psl::serialization::polymorphic&lt;YOUR TYPE HERE&gt; polymorphic_container;&quot;</span>);</div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            <span class="keywordflow">return</span> obj-&gt;polymorphic_id();</div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        }</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;</div>
@@ -547,7 +547,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;</div>
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> S, <span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        <span class="keyword">struct </span>member_function_serialize&lt;</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;            S, T, std::void_t&lt;decltype(::serialization::accessor::serialize(std::declval&lt;S&amp;&gt;(), std::declval&lt;T&amp;&gt;()))&gt;&gt;</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;            S, T, std::void_t&lt;decltype(::psl::serialization::accessor::serialize(std::declval&lt;S&amp;&gt;(), std::declval&lt;T&amp;&gt;()))&gt;&gt;</div>
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;            : std::true_type</div>
 <div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        {};</div>
 <div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;</div>
@@ -559,7 +559,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;</div>
 <div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> S, <span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;        <span class="keyword">struct </span>function_serialize&lt;</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;            S, T, std::void_t&lt;decltype(serialization::serialize(std::declval&lt;S&amp;&gt;(), std::declval&lt;T&amp;&gt;()))&gt;&gt;</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;            S, T, std::void_t&lt;decltype(psl::serialization::serialize(std::declval&lt;S&amp;&gt;(), std::declval&lt;T&amp;&gt;()))&gt;&gt;</div>
 <div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;            : std::true_type</div>
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        {};</div>
 <div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;</div>
@@ -568,7 +568,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        <span class="keyword">struct </span>is_property : std::false_type</div>
 <div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        {};</div>
 <div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> A, <span class="keywordtype">char</span>... C&gt;</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        <span class="keyword">struct </span>is_property&lt;serialization::property&lt;A, C...&gt;&gt; : std::true_type</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        <span class="keyword">struct </span>is_property&lt;psl::serialization::property&lt;A, C...&gt;&gt; : std::true_type</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;        {};</div>
 <div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;</div>
 <div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Encoder = encode_to_format&gt;</div>
@@ -605,7 +605,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;        <span class="keyword">struct </span>is_pointer : std::false_type</div>
 <div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;        {};</div>
 <div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">char</span>... Char&gt;</div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        <span class="keyword">struct </span>is_pointer&lt;serialization::property&lt;ptr&lt;T&gt;, Char...&gt;&gt; : std::true_type</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        <span class="keyword">struct </span>is_pointer&lt;psl::serialization::property&lt;ptr&lt;T&gt;, Char...&gt;&gt; : std::true_type</div>
 <div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;        {};</div>
 <div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;</div>
 <div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
@@ -998,8 +998,8 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;            <span class="keyword">auto</span> lambda{[]() { <span class="keywordflow">return</span> <span class="keyword">new</span> T(); }};</div>
 <div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;            data.factory = <span class="keyword">new</span> invocable_wrapper&lt;decltype(lambda)&gt;(std::forward&lt;decltype(lambda)&gt;(lambda));</div>
 <div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;</div>
-<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;            data.encoder                     = &amp;vtable_for&lt;T, serialization::encode_to_format&gt;;</div>
-<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;            data.decoder                     = &amp;vtable_for&lt;T, serialization::decode_from_format&gt;;</div>
+<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;            data.encoder                     = &amp;vtable_for&lt;T, psl::serialization::encode_to_format&gt;;</div>
+<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;            data.decoder                     = &amp;vtable_for&lt;T, psl::serialization::decode_from_format&gt;;</div>
 <div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160;            accessor::polymorphic_data()[ID] = &amp;data;</div>
 <div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160;        }</div>
 <div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;</div>
@@ -1021,7 +1021,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Base&gt;</div>
 <div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> uint64_t register_polymorphic()</div>
 <div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160;    {</div>
-<div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;        <span class="keyword">static</span> <a class="code" href="classserialization_1_1polymorphic.html">serialization::polymorphic&lt;T&gt;</a> polymorphic_container;</div>
+<div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;        <span class="keyword">static</span> <a class="code" href="classpsl_1_1serialization_1_1polymorphic.html">psl::serialization::polymorphic&lt;T&gt;</a> polymorphic_container;</div>
 <div class="line"><a name="l00931"></a><span class="lineno">  931</span>&#160;        <span class="keywordflow">if</span> constexpr(<span class="keyword">sizeof</span>...(Base) &gt; 0)</div>
 <div class="line"><a name="l00932"></a><span class="lineno">  932</span>&#160;        {</div>
 <div class="line"><a name="l00933"></a><span class="lineno">  933</span>&#160;            notify_base&lt;Base...&gt;(accessor::name&lt;T&gt;(), accessor::id&lt;T&gt;());</div>
@@ -1223,12 +1223,12 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01141"></a><span class="lineno"> 1141</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l01142"></a><span class="lineno"> 1142</span>&#160;<span class="preprocessor"></span>        <span class="keyword">operator</span> T&amp;() { <span class="keywordflow">return</span> this-&gt;value; }</div>
 <div class="line"><a name="l01144"></a><span class="lineno"> 1144</span>&#160;</div>
-<div class="line"><a name="l01146"></a><span class="lineno"><a class="line" href="structserialization_1_1property.html#a4da2405ec59ecd5db86ac15abaf81e6c"> 1146</a></span>&#160;        T* <a class="code" href="structserialization_1_1property.html#a4da2405ec59ecd5db86ac15abaf81e6c">operator-&gt;</a>() { <span class="keywordflow">return</span> &amp;this-&gt;value; }</div>
+<div class="line"><a name="l01146"></a><span class="lineno"><a class="line" href="structpsl_1_1serialization_1_1property.html#a896c77a46a3a1ba78707a02fa45ed02b"> 1146</a></span>&#160;        T* <a class="code" href="structpsl_1_1serialization_1_1property.html#a896c77a46a3a1ba78707a02fa45ed02b">operator-&gt;</a>() { <span class="keywordflow">return</span> &amp;this-&gt;value; }</div>
 <div class="line"><a name="l01147"></a><span class="lineno"> 1147</span>&#160;</div>
-<div class="line"><a name="l01149"></a><span class="lineno"><a class="line" href="structserialization_1_1property.html#afaf62ba4eef630b9f0cd8983fcb69b97"> 1149</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> psl::string8::view <a class="code" href="structserialization_1_1property.html#afaf62ba4eef630b9f0cd8983fcb69b97">name</a>() { <span class="keywordflow">return</span> m_Name.data(); }</div>
+<div class="line"><a name="l01149"></a><span class="lineno"><a class="line" href="structpsl_1_1serialization_1_1property.html#a493d5e8d9b72421f7de3068a6020cb14"> 1149</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> psl::string8::view <a class="code" href="structpsl_1_1serialization_1_1property.html#a493d5e8d9b72421f7de3068a6020cb14">name</a>() { <span class="keywordflow">return</span> m_Name.data(); }</div>
 <div class="line"><a name="l01150"></a><span class="lineno"> 1150</span>&#160;</div>
 <div class="line"><a name="l01151"></a><span class="lineno"> 1151</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> psl::template_string&lt;Char...&gt; m_Name;</div>
-<div class="line"><a name="l01153"></a><span class="lineno"><a class="line" href="structserialization_1_1property.html#a52ed0605774271264667b3d54c8ee8e2"> 1153</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> uint64_t ID{<a class="code" href="namespaceutility.html#a857e522bee9af5904b82b11b5ccc8947">utility::crc64</a>&lt;<span class="keyword">sizeof</span>...(Char)&gt;(m_Name.data())};</div>
+<div class="line"><a name="l01153"></a><span class="lineno"><a class="line" href="structpsl_1_1serialization_1_1property.html#a2116c70113631d96190fe8c4d9bbb477"> 1153</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> uint64_t ID{<a class="code" href="namespaceutility.html#a857e522bee9af5904b82b11b5ccc8947">utility::crc64</a>&lt;<span class="keyword">sizeof</span>...(Char)&gt;(m_Name.data())};</div>
 <div class="line"><a name="l01154"></a><span class="lineno"> 1154</span>&#160;    };</div>
 <div class="line"><a name="l01155"></a><span class="lineno"> 1155</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">char</span>... Char&gt;</div>
 <div class="line"><a name="l01156"></a><span class="lineno"> 1156</span>&#160;    <span class="keyword">const</span> psl::template_string&lt;Char...&gt; <span class="keyword">property</span>&lt;T, Char...&gt;::m_Name{};</div>
@@ -1379,10 +1379,10 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01301"></a><span class="lineno"> 1301</span>&#160;    <span class="keyword">class </span>decode_from_format : decoder</div>
 <div class="line"><a name="l01302"></a><span class="lineno"> 1302</span>&#160;    {</div>
 <div class="line"><a name="l01303"></a><span class="lineno"> 1303</span>&#160;        <span class="keyword">using</span> codec_t    = decode_from_format;</div>
-<div class="line"><a name="l01304"></a><span class="lineno"> 1304</span>&#160;        <span class="keyword">using</span> container_t = format::container;</div>
+<div class="line"><a name="l01304"></a><span class="lineno"> 1304</span>&#160;        <span class="keyword">using</span> container_t = psl::format::container;</div>
 <div class="line"><a name="l01305"></a><span class="lineno"> 1305</span>&#160;</div>
 <div class="line"><a name="l01306"></a><span class="lineno"> 1306</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l01307"></a><span class="lineno"> 1307</span>&#160;        decode_from_format(format::container&amp; container, format::handle* root,</div>
+<div class="line"><a name="l01307"></a><span class="lineno"> 1307</span>&#160;        decode_from_format(psl::format::container&amp; container, psl::format::handle* root,</div>
 <div class="line"><a name="l01308"></a><span class="lineno"> 1308</span>&#160;                           std::unordered_map&lt;uint64_t, invocable_wrapper_base*&gt; factory = {})</div>
 <div class="line"><a name="l01309"></a><span class="lineno"> 1309</span>&#160;            : m_Container(container), m_CollectionStack{{root}}, m_Factory(factory){};</div>
 <div class="line"><a name="l01310"></a><span class="lineno"> 1310</span>&#160;</div>
@@ -1484,9 +1484,9 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01406"></a><span class="lineno"> 1406</span>&#160;        }</div>
 <div class="line"><a name="l01407"></a><span class="lineno"> 1407</span>&#160;</div>
 <div class="line"><a name="l01408"></a><span class="lineno"> 1408</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01409"></a><span class="lineno"> 1409</span>&#160;        <span class="keywordtype">void</span> parse_collection(T&amp; property, format::nodes_t index)</div>
+<div class="line"><a name="l01409"></a><span class="lineno"> 1409</span>&#160;        <span class="keywordtype">void</span> parse_collection(T&amp; property, psl::format::nodes_t index)</div>
 <div class="line"><a name="l01410"></a><span class="lineno"> 1410</span>&#160;        {</div>
-<div class="line"><a name="l01411"></a><span class="lineno"> 1411</span>&#160;            <span class="keywordflow">if</span>(index == std::numeric_limits&lt;format::nodes_t&gt;::max()) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l01411"></a><span class="lineno"> 1411</span>&#160;            <span class="keywordflow">if</span>(index == std::numeric_limits&lt;psl::format::nodes_t&gt;::max()) <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l01412"></a><span class="lineno"> 1412</span>&#160;</div>
 <div class="line"><a name="l01413"></a><span class="lineno"> 1413</span>&#160;            <span class="keyword">auto</span>&amp; collection = m_Container[index];</div>
 <div class="line"><a name="l01414"></a><span class="lineno"> 1414</span>&#160;            m_CollectionStack.push(&amp;collection);</div>
@@ -1511,7 +1511,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01433"></a><span class="lineno"> 1433</span>&#160;                              <span class="stringliteral">&quot;\t\t- a function in the namespace &#39;serialization&#39; of the signature: template&lt;typename &quot;</span></div>
 <div class="line"><a name="l01434"></a><span class="lineno"> 1434</span>&#160;                              <span class="stringliteral">&quot;S&gt; void serialize(S&amp; s, T&amp; target) {};\n&quot;</span></div>
 <div class="line"><a name="l01435"></a><span class="lineno"> 1435</span>&#160;                              <span class="stringliteral">&quot;\t\t- if you did declare a member function, but wanted the serialize to be private, &quot;</span></div>
-<div class="line"><a name="l01436"></a><span class="lineno"> 1436</span>&#160;                              <span class="stringliteral">&quot;please add &#39;friend class serialization::serializer&#39; to your class&quot;</span>);</div>
+<div class="line"><a name="l01436"></a><span class="lineno"> 1436</span>&#160;                              <span class="stringliteral">&quot;please add &#39;friend class psl::serialization::serializer&#39; to your class&quot;</span>);</div>
 <div class="line"><a name="l01437"></a><span class="lineno"> 1437</span>&#160;            }</div>
 <div class="line"><a name="l01438"></a><span class="lineno"> 1438</span>&#160;            m_CollectionStack.pop();</div>
 <div class="line"><a name="l01439"></a><span class="lineno"> 1439</span>&#160;        }</div>
@@ -1600,7 +1600,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01522"></a><span class="lineno"> 1522</span>&#160;                <span class="keywordtype">size_t</span> actual_index = 0;</div>
 <div class="line"><a name="l01523"></a><span class="lineno"> 1523</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = begin; i &lt; end; ++i)</div>
 <div class="line"><a name="l01524"></a><span class="lineno"> 1524</span>&#160;                {</div>
-<div class="line"><a name="l01525"></a><span class="lineno"> 1525</span>&#160;                    <span class="keywordflow">if</span>((<span class="keywordtype">size_t</span>)(m_Container[format::nodes_t(i)].get().depth()) - 1u ==</div>
+<div class="line"><a name="l01525"></a><span class="lineno"> 1525</span>&#160;                    <span class="keywordflow">if</span>((<span class="keywordtype">size_t</span>)(m_Container[psl::format::nodes_t(i)].get().depth()) - 1u ==</div>
 <div class="line"><a name="l01526"></a><span class="lineno"> 1526</span>&#160;                       (<span class="keywordtype">size_t</span>)(m_CollectionStack.top()-&gt;get().depth()))</div>
 <div class="line"><a name="l01527"></a><span class="lineno"> 1527</span>&#160;                    {</div>
 <div class="line"><a name="l01528"></a><span class="lineno"> 1528</span>&#160;                        <span class="keywordflow">if</span> constexpr(std::is_pointer&lt;contained_t&gt;::value)</div>
@@ -1608,12 +1608,12 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01530"></a><span class="lineno"> 1530</span>&#160;                            <span class="keyword">using</span> deref_t = <span class="keyword">typename</span> std::remove_pointer&lt;contained_t&gt;::type;</div>
 <div class="line"><a name="l01531"></a><span class="lineno"> 1531</span>&#160;                            value.emplace_back(</div>
 <div class="line"><a name="l01532"></a><span class="lineno"> 1532</span>&#160;                                create_polymorphic_collection&lt;deref_t&gt;(utility::to_string(actual_index)));</div>
-<div class="line"><a name="l01533"></a><span class="lineno"> 1533</span>&#160;                            parse_collection(*value[actual_index], (format::nodes_t)(i));</div>
+<div class="line"><a name="l01533"></a><span class="lineno"> 1533</span>&#160;                            parse_collection(*value[actual_index], (psl::format::nodes_t)(i));</div>
 <div class="line"><a name="l01534"></a><span class="lineno"> 1534</span>&#160;                        }</div>
 <div class="line"><a name="l01535"></a><span class="lineno"> 1535</span>&#160;                        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l01536"></a><span class="lineno"> 1536</span>&#160;                        {</div>
 <div class="line"><a name="l01537"></a><span class="lineno"> 1537</span>&#160;                            value.emplace_back();</div>
-<div class="line"><a name="l01538"></a><span class="lineno"> 1538</span>&#160;                            parse_collection(value[actual_index], (format::nodes_t)(i));</div>
+<div class="line"><a name="l01538"></a><span class="lineno"> 1538</span>&#160;                            parse_collection(value[actual_index], (psl::format::nodes_t)(i));</div>
 <div class="line"><a name="l01539"></a><span class="lineno"> 1539</span>&#160;                        }</div>
 <div class="line"><a name="l01540"></a><span class="lineno"> 1540</span>&#160;                        ++actual_index;</div>
 <div class="line"><a name="l01541"></a><span class="lineno"> 1541</span>&#160;                    }</div>
@@ -1648,13 +1648,13 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01570"></a><span class="lineno"> 1570</span>&#160;</div>
 <div class="line"><a name="l01571"></a><span class="lineno"> 1571</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = begin; i &lt; end; ++i)</div>
 <div class="line"><a name="l01572"></a><span class="lineno"> 1572</span>&#160;                {</div>
-<div class="line"><a name="l01573"></a><span class="lineno"> 1573</span>&#160;                    <span class="keywordflow">if</span>((<span class="keywordtype">size_t</span>)(m_Container[format::nodes_t(i)].<span class="keyword">get</span>().depth()) - 1u ==</div>
+<div class="line"><a name="l01573"></a><span class="lineno"> 1573</span>&#160;                    <span class="keywordflow">if</span>((<span class="keywordtype">size_t</span>)(m_Container[psl::format::nodes_t(i)].<span class="keyword">get</span>().depth()) - 1u ==</div>
 <div class="line"><a name="l01574"></a><span class="lineno"> 1574</span>&#160;                       (<span class="keywordtype">size_t</span>)(m_CollectionStack.top()-&gt;get().depth()))</div>
 <div class="line"><a name="l01575"></a><span class="lineno"> 1575</span>&#160;                    {</div>
 <div class="line"><a name="l01576"></a><span class="lineno"> 1576</span>&#160;                        <span class="comment">// auto&amp; pair = value.emplace(, typename T::value_type{});</span></div>
 <div class="line"><a name="l01577"></a><span class="lineno"> 1577</span>&#160;                        <span class="keyword">auto</span>&amp; sub_val = value[utility::from_string&lt;typename utility::templates::get_key_type&lt;T&gt;::type&gt;(</div>
-<div class="line"><a name="l01578"></a><span class="lineno"> 1578</span>&#160;                            m_Container[format::nodes_t(i)].get().name())];</div>
-<div class="line"><a name="l01579"></a><span class="lineno"> 1579</span>&#160;                        parse_collection(sub_val, (format::nodes_t)(i));</div>
+<div class="line"><a name="l01578"></a><span class="lineno"> 1578</span>&#160;                            m_Container[psl::format::nodes_t(i)].get().name())];</div>
+<div class="line"><a name="l01579"></a><span class="lineno"> 1579</span>&#160;                        parse_collection(sub_val, (psl::format::nodes_t)(i));</div>
 <div class="line"><a name="l01580"></a><span class="lineno"> 1580</span>&#160;                    }</div>
 <div class="line"><a name="l01581"></a><span class="lineno"> 1581</span>&#160;                }</div>
 <div class="line"><a name="l01582"></a><span class="lineno"> 1582</span>&#160;                m_CollectionStack.pop();</div>
@@ -1706,13 +1706,13 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01628"></a><span class="lineno"> 1628</span>&#160;            }</div>
 <div class="line"><a name="l01629"></a><span class="lineno"> 1629</span>&#160;        }</div>
 <div class="line"><a name="l01630"></a><span class="lineno"> 1630</span>&#160;</div>
-<div class="line"><a name="l01631"></a><span class="lineno"> 1631</span>&#160;        format::container&amp; m_Container;</div>
-<div class="line"><a name="l01632"></a><span class="lineno"> 1632</span>&#160;        std::stack&lt;format::handle*&gt; m_CollectionStack;</div>
+<div class="line"><a name="l01631"></a><span class="lineno"> 1631</span>&#160;        psl::format::container&amp; m_Container;</div>
+<div class="line"><a name="l01632"></a><span class="lineno"> 1632</span>&#160;        std::stack&lt;psl::format::handle*&gt; m_CollectionStack;</div>
 <div class="line"><a name="l01633"></a><span class="lineno"> 1633</span>&#160;</div>
 <div class="line"><a name="l01634"></a><span class="lineno"> 1634</span>&#160;        <span class="comment">// reference resolving</span></div>
-<div class="line"><a name="l01635"></a><span class="lineno"> 1635</span>&#160;        std::unordered_map&lt;std::uintptr_t, format::handle*&gt; m_ReferenceNodes;</div>
-<div class="line"><a name="l01636"></a><span class="lineno"> 1636</span>&#160;        std::unordered_map&lt;std::uintptr_t, format::handle*&gt; m_PointerNodes;</div>
-<div class="line"><a name="l01637"></a><span class="lineno"> 1637</span>&#160;        std::unordered_map&lt;format::handle*, std::uintptr_t&gt; m_ReferenceMap;</div>
+<div class="line"><a name="l01635"></a><span class="lineno"> 1635</span>&#160;        std::unordered_map&lt;std::uintptr_t, psl::format::handle*&gt; m_ReferenceNodes;</div>
+<div class="line"><a name="l01636"></a><span class="lineno"> 1636</span>&#160;        std::unordered_map&lt;std::uintptr_t, psl::format::handle*&gt; m_PointerNodes;</div>
+<div class="line"><a name="l01637"></a><span class="lineno"> 1637</span>&#160;        std::unordered_map&lt;psl::format::handle*, std::uintptr_t&gt; m_ReferenceMap;</div>
 <div class="line"><a name="l01638"></a><span class="lineno"> 1638</span>&#160;</div>
 <div class="line"><a name="l01639"></a><span class="lineno"> 1639</span>&#160;        <span class="comment">// polymorphic override</span></div>
 <div class="line"><a name="l01640"></a><span class="lineno"> 1640</span>&#160;        std::unordered_map&lt;uint64_t, invocable_wrapper_base*&gt; m_Factory;</div>
@@ -1721,10 +1721,10 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01643"></a><span class="lineno"> 1643</span>&#160;    <span class="keyword">class </span>encode_to_format : encoder</div>
 <div class="line"><a name="l01644"></a><span class="lineno"> 1644</span>&#160;    {</div>
 <div class="line"><a name="l01645"></a><span class="lineno"> 1645</span>&#160;        <span class="keyword">using</span> codec_t    = encode_to_format;</div>
-<div class="line"><a name="l01646"></a><span class="lineno"> 1646</span>&#160;        <span class="keyword">using</span> container_t = format::container;</div>
+<div class="line"><a name="l01646"></a><span class="lineno"> 1646</span>&#160;        <span class="keyword">using</span> container_t = psl::format::container;</div>
 <div class="line"><a name="l01647"></a><span class="lineno"> 1647</span>&#160;</div>
 <div class="line"><a name="l01648"></a><span class="lineno"> 1648</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l01649"></a><span class="lineno"> 1649</span>&#160;        encode_to_format(format::container&amp; container, format::handle* root)</div>
+<div class="line"><a name="l01649"></a><span class="lineno"> 1649</span>&#160;        encode_to_format(psl::format::container&amp; container, psl::format::handle* root)</div>
 <div class="line"><a name="l01650"></a><span class="lineno"> 1650</span>&#160;            : m_Container(container), m_CollectionStack{{root}} {};</div>
 <div class="line"><a name="l01651"></a><span class="lineno"> 1651</span>&#160;</div>
 <div class="line"><a name="l01652"></a><span class="lineno"> 1652</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">char</span>... Char&gt;</div>
@@ -1765,9 +1765,9 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01687"></a><span class="lineno"> 1687</span>&#160;</div>
 <div class="line"><a name="l01688"></a><span class="lineno"> 1688</span>&#160;                m_Container.add_reference(m_CollectionStack.top()-&gt;get(), <span class="keyword">property</span>.name(), m_Container[0].get());</div>
 <div class="line"><a name="l01689"></a><span class="lineno"> 1689</span>&#160;                m_ReferenceMap[(std::uintptr_t)&amp;property.value] =</div>
-<div class="line"><a name="l01690"></a><span class="lineno"> 1690</span>&#160;                    &amp;m_Container[(format::nodes_t)(m_Container.size() - 1u)];</div>
+<div class="line"><a name="l01690"></a><span class="lineno"> 1690</span>&#160;                    &amp;m_Container[(psl::format::nodes_t)(m_Container.size() - 1u)];</div>
 <div class="line"><a name="l01691"></a><span class="lineno"> 1691</span>&#160;                m_ToBeResolvedReferenceMap[(std::uintptr_t)(property.value)] =</div>
-<div class="line"><a name="l01692"></a><span class="lineno"> 1692</span>&#160;                    &amp;m_Container[(format::nodes_t)(m_Container.size() - 1u)];</div>
+<div class="line"><a name="l01692"></a><span class="lineno"> 1692</span>&#160;                    &amp;m_Container[(psl::format::nodes_t)(m_Container.size() - 1u)];</div>
 <div class="line"><a name="l01693"></a><span class="lineno"> 1693</span>&#160;            }</div>
 <div class="line"><a name="l01694"></a><span class="lineno"> 1694</span>&#160;        }</div>
 <div class="line"><a name="l01695"></a><span class="lineno"> 1695</span>&#160;</div>
@@ -1806,7 +1806,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01728"></a><span class="lineno"> 1728</span>&#160;                              <span class="stringliteral">&quot;\t\t- a function in the namespace &#39;serialization&#39; of the signature: template&lt;typename &quot;</span></div>
 <div class="line"><a name="l01729"></a><span class="lineno"> 1729</span>&#160;                              <span class="stringliteral">&quot;S&gt; void serialize(S&amp; s, T&amp; target) {};\n&quot;</span></div>
 <div class="line"><a name="l01730"></a><span class="lineno"> 1730</span>&#160;                              <span class="stringliteral">&quot;\t\t- if you did declare a member function, but wanted the serialize to be private, &quot;</span></div>
-<div class="line"><a name="l01731"></a><span class="lineno"> 1731</span>&#160;                              <span class="stringliteral">&quot;please add &#39;friend class serialization::serializer&#39; to your class&quot;</span>);</div>
+<div class="line"><a name="l01731"></a><span class="lineno"> 1731</span>&#160;                              <span class="stringliteral">&quot;please add &#39;friend class psl::serialization::serializer&#39; to your class&quot;</span>);</div>
 <div class="line"><a name="l01732"></a><span class="lineno"> 1732</span>&#160;            }</div>
 <div class="line"><a name="l01733"></a><span class="lineno"> 1733</span>&#160;            m_CollectionStack.pop();</div>
 <div class="line"><a name="l01734"></a><span class="lineno"> 1734</span>&#160;        }</div>
@@ -1892,26 +1892,26 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01814"></a><span class="lineno"> 1814</span>&#160;                    previous = loc;</div>
 <div class="line"><a name="l01815"></a><span class="lineno"> 1815</span>&#160;                }</div>
 <div class="line"><a name="l01816"></a><span class="lineno"> 1816</span>&#160;                m_Container.add_value_range(m_CollectionStack.top()-&gt;get(), name, res);</div>
-<div class="line"><a name="l01817"></a><span class="lineno"> 1817</span>&#160;                m_ReferenceMap[(std::uintptr_t)&amp;value] = &amp;m_Container[(format::nodes_t)(m_Container.size() - 1u)];</div>
+<div class="line"><a name="l01817"></a><span class="lineno"> 1817</span>&#160;                m_ReferenceMap[(std::uintptr_t)&amp;value] = &amp;m_Container[(psl::format::nodes_t)(m_Container.size() - 1u)];</div>
 <div class="line"><a name="l01818"></a><span class="lineno"> 1818</span>&#160;            }</div>
 <div class="line"><a name="l01819"></a><span class="lineno"> 1819</span>&#160;            <span class="keywordflow">else</span></div>
 <div class="line"><a name="l01820"></a><span class="lineno"> 1820</span>&#160;            {</div>
 <div class="line"><a name="l01821"></a><span class="lineno"> 1821</span>&#160;                m_Container.add_value(m_CollectionStack.top()-&gt;get(), name, utility::to_string&lt;contained_t&gt;(value));</div>
-<div class="line"><a name="l01822"></a><span class="lineno"> 1822</span>&#160;                m_ReferenceMap[(std::uintptr_t)&amp;value] = &amp;m_Container[(format::nodes_t)(m_Container.size() - 1u)];</div>
+<div class="line"><a name="l01822"></a><span class="lineno"> 1822</span>&#160;                m_ReferenceMap[(std::uintptr_t)&amp;value] = &amp;m_Container[(psl::format::nodes_t)(m_Container.size() - 1u)];</div>
 <div class="line"><a name="l01823"></a><span class="lineno"> 1823</span>&#160;            }</div>
 <div class="line"><a name="l01824"></a><span class="lineno"> 1824</span>&#160;        }</div>
 <div class="line"><a name="l01825"></a><span class="lineno"> 1825</span>&#160;</div>
 <div class="line"><a name="l01826"></a><span class="lineno"> 1826</span>&#160;</div>
-<div class="line"><a name="l01827"></a><span class="lineno"> 1827</span>&#160;        format::container&amp; m_Container;</div>
-<div class="line"><a name="l01828"></a><span class="lineno"> 1828</span>&#160;        std::stack&lt;format::handle*&gt; m_CollectionStack;</div>
+<div class="line"><a name="l01827"></a><span class="lineno"> 1827</span>&#160;        psl::format::container&amp; m_Container;</div>
+<div class="line"><a name="l01828"></a><span class="lineno"> 1828</span>&#160;        std::stack&lt;psl::format::handle*&gt; m_CollectionStack;</div>
 <div class="line"><a name="l01829"></a><span class="lineno"> 1829</span>&#160;</div>
-<div class="line"><a name="l01830"></a><span class="lineno"> 1830</span>&#160;        std::unordered_map&lt;std::uintptr_t, format::handle*&gt; m_ReferenceMap;</div>
-<div class="line"><a name="l01831"></a><span class="lineno"> 1831</span>&#160;        std::unordered_map&lt;std::uintptr_t, format::handle*&gt; m_ToBeResolvedReferenceMap;</div>
+<div class="line"><a name="l01830"></a><span class="lineno"> 1830</span>&#160;        std::unordered_map&lt;std::uintptr_t, psl::format::handle*&gt; m_ReferenceMap;</div>
+<div class="line"><a name="l01831"></a><span class="lineno"> 1831</span>&#160;        std::unordered_map&lt;std::uintptr_t, psl::format::handle*&gt; m_ToBeResolvedReferenceMap;</div>
 <div class="line"><a name="l01832"></a><span class="lineno"> 1832</span>&#160;    };</div>
 <div class="line"><a name="l01833"></a><span class="lineno"> 1833</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l01834"></a><span class="lineno"> 1834</span>&#160;    vtable&lt;encode_to_format&gt; <span class="keyword">const</span> vtable_for&lt;T, encode_to_format&gt; = {[](<span class="keywordtype">void</span>* this_, encode_to_format&amp; s) {</div>
 <div class="line"><a name="l01835"></a><span class="lineno"> 1835</span>&#160;        T* t = <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(this_);</div>
-<div class="line"><a name="l01836"></a><span class="lineno"> 1836</span>&#160;        <a class="code" href="structserialization_1_1property.html">serialization::property</a>&lt;psl::string8_t, const_str(<span class="stringliteral">&quot;POLYMORPHIC_ID&quot;</span>, 14)&gt; p{</div>
+<div class="line"><a name="l01836"></a><span class="lineno"> 1836</span>&#160;        <a class="code" href="structpsl_1_1serialization_1_1property.html">psl::serialization::property</a>&lt;psl::string8_t, const_str(<span class="stringliteral">&quot;POLYMORPHIC_ID&quot;</span>, 14)&gt; p{</div>
 <div class="line"><a name="l01837"></a><span class="lineno"> 1837</span>&#160;            utility::to_string(accessor::polymorphic_id(t))};</div>
 <div class="line"><a name="l01838"></a><span class="lineno"> 1838</span>&#160;        s.parse(p);</div>
 <div class="line"><a name="l01839"></a><span class="lineno"> 1839</span>&#160;        accessor::serialize_directly&lt;encode_to_format, T&gt;(s, *t);</div>
@@ -1926,14 +1926,14 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01848"></a><span class="lineno"> 1848</span>&#160;                          <span class="stringliteral">&quot;\n\tPlease make sure your class fullfills any of the following requirements:\n&quot;</span></div>
 <div class="line"><a name="l01849"></a><span class="lineno"> 1849</span>&#160;                          <span class="stringliteral">&quot;\t\t - has a public variable \&quot;static constexpr const char* serialization_name\&quot;\n&quot;</span></div>
 <div class="line"><a name="l01850"></a><span class="lineno"> 1850</span>&#160;                          <span class="stringliteral">&quot;\t\t - or a private variable \&quot;static constexpr const char* serialization_name\&quot; and added &quot;</span></div>
-<div class="line"><a name="l01851"></a><span class="lineno"> 1851</span>&#160;                          <span class="stringliteral">&quot;\&quot;friend class serialization::accessor\&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l01851"></a><span class="lineno"> 1851</span>&#160;                          <span class="stringliteral">&quot;\&quot;friend class psl::serialization::accessor\&quot;\n&quot;</span>);</div>
 <div class="line"><a name="l01852"></a><span class="lineno"> 1852</span>&#160;            static_assert(is_member_fn&lt;T, Encoder&gt;() || is_fn&lt;T, Encoder&gt;(),</div>
 <div class="line"><a name="l01853"></a><span class="lineno"> 1853</span>&#160;                          <span class="stringliteral">&quot;\n\tPlease define one of the following for the serializer:\n&quot;</span></div>
 <div class="line"><a name="l01854"></a><span class="lineno"> 1854</span>&#160;                          <span class="stringliteral">&quot;\t\t- a member function of the type template&lt;typename S&gt; void serialize(S&amp; s) {};\n&quot;</span></div>
 <div class="line"><a name="l01855"></a><span class="lineno"> 1855</span>&#160;                          <span class="stringliteral">&quot;\t\t- a function in the namespace &#39;serialization&#39; of the signature: template&lt;typename S&gt; &quot;</span></div>
 <div class="line"><a name="l01856"></a><span class="lineno"> 1856</span>&#160;                          <span class="stringliteral">&quot;void serialize(S&amp; s, T&amp; target) {};\n&quot;</span></div>
 <div class="line"><a name="l01857"></a><span class="lineno"> 1857</span>&#160;                          <span class="stringliteral">&quot;\t\t- if you did declare a member function, but wanted the serialize to be private, please &quot;</span></div>
-<div class="line"><a name="l01858"></a><span class="lineno"> 1858</span>&#160;                          <span class="stringliteral">&quot;add &#39;friend class serialization::serializer&#39; to your class&quot;</span>);</div>
+<div class="line"><a name="l01858"></a><span class="lineno"> 1858</span>&#160;                          <span class="stringliteral">&quot;add &#39;friend class psl::serialization::serializer&#39; to your class&quot;</span>);</div>
 <div class="line"><a name="l01859"></a><span class="lineno"> 1859</span>&#160;        }</div>
 <div class="line"><a name="l01860"></a><span class="lineno"> 1860</span>&#160;</div>
 <div class="line"><a name="l01861"></a><span class="lineno"> 1861</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Encoder&gt;</div>
@@ -1960,7 +1960,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01882"></a><span class="lineno"> 1882</span>&#160;        }</div>
 <div class="line"><a name="l01883"></a><span class="lineno"> 1883</span>&#160;</div>
 <div class="line"><a name="l01884"></a><span class="lineno"> 1884</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Encoder, <span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01885"></a><span class="lineno"> 1885</span>&#160;        <span class="keywordtype">void</span> serialize(T* target, format::container&amp; out, std::optional&lt;psl::string8::view&gt; name = {})</div>
+<div class="line"><a name="l01885"></a><span class="lineno"> 1885</span>&#160;        <span class="keywordtype">void</span> serialize(T* target, psl::format::container&amp; out, std::optional&lt;psl::string8::view&gt; name = {})</div>
 <div class="line"><a name="l01886"></a><span class="lineno"> 1886</span>&#160;        {</div>
 <div class="line"><a name="l01887"></a><span class="lineno"> 1887</span>&#160;            <span class="keywordflow">if</span>(target == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l01888"></a><span class="lineno"> 1888</span>&#160;            serialize&lt;Encoder, T&gt;(*target, out, name);</div>
@@ -1969,7 +1969,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01891"></a><span class="lineno"> 1891</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Encoder, <span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l01892"></a><span class="lineno"> 1892</span>&#160;        <span class="keywordtype">void</span> serialize(T&amp; target, psl::string8::view filename, std::optional&lt;psl::string8::view&gt; name = {})</div>
 <div class="line"><a name="l01893"></a><span class="lineno"> 1893</span>&#160;        {</div>
-<div class="line"><a name="l01894"></a><span class="lineno"> 1894</span>&#160;            format::container out;</div>
+<div class="line"><a name="l01894"></a><span class="lineno"> 1894</span>&#160;            psl::format::container out;</div>
 <div class="line"><a name="l01895"></a><span class="lineno"> 1895</span>&#160;            serialize&lt;Encoder, T&gt;(target, out, name);</div>
 <div class="line"><a name="l01896"></a><span class="lineno"> 1896</span>&#160;            <a class="code" href="namespaceutility_1_1platform_1_1file.html#aef3e5b6b184ef28209180771bc5d5830">utility::platform::file::write</a>(<a class="code" href="namespacepsl.html#a43142232ba12e429c77903e90869468c">psl::from_string8_t</a>(filename), <a class="code" href="namespacepsl.html#a43142232ba12e429c77903e90869468c">psl::from_string8_t</a>(out.to_string()));</div>
 <div class="line"><a name="l01897"></a><span class="lineno"> 1897</span>&#160;        };</div>
@@ -1978,13 +1978,13 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01900"></a><span class="lineno"> 1900</span>&#160;        <span class="keywordtype">void</span> serialize(T* target, psl::string8::view filename, std::optional&lt;psl::string8::view&gt; name = {})</div>
 <div class="line"><a name="l01901"></a><span class="lineno"> 1901</span>&#160;        {</div>
 <div class="line"><a name="l01902"></a><span class="lineno"> 1902</span>&#160;            <span class="keywordflow">if</span>(target == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l01903"></a><span class="lineno"> 1903</span>&#160;            format::container out;</div>
+<div class="line"><a name="l01903"></a><span class="lineno"> 1903</span>&#160;            psl::format::container out;</div>
 <div class="line"><a name="l01904"></a><span class="lineno"> 1904</span>&#160;            serialize&lt;Encoder, T&gt;(*target, out, name);</div>
 <div class="line"><a name="l01905"></a><span class="lineno"> 1905</span>&#160;            <a class="code" href="namespaceutility_1_1platform_1_1file.html#aef3e5b6b184ef28209180771bc5d5830">utility::platform::file::write</a>(<a class="code" href="namespacepsl.html#a43142232ba12e429c77903e90869468c">psl::from_string8_t</a>(filename), <a class="code" href="namespacepsl.html#a43142232ba12e429c77903e90869468c">psl::from_string8_t</a>(out.to_string()));</div>
 <div class="line"><a name="l01906"></a><span class="lineno"> 1906</span>&#160;        };</div>
 <div class="line"><a name="l01907"></a><span class="lineno"> 1907</span>&#160;</div>
 <div class="line"><a name="l01908"></a><span class="lineno"> 1908</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Encoder, <span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01909"></a><span class="lineno"> 1909</span>&#160;        <span class="keywordtype">void</span> serialize(T&amp; target, format::container&amp; out, std::optional&lt;psl::string8::view&gt; name = {})</div>
+<div class="line"><a name="l01909"></a><span class="lineno"> 1909</span>&#160;        <span class="keywordtype">void</span> serialize(T&amp; target, psl::format::container&amp; out, std::optional&lt;psl::string8::view&gt; name = {})</div>
 <div class="line"><a name="l01910"></a><span class="lineno"> 1910</span>&#160;        {</div>
 <div class="line"><a name="l01911"></a><span class="lineno"> 1911</span>&#160;            check&lt;T, Encoder&gt;();</div>
 <div class="line"><a name="l01912"></a><span class="lineno"> 1912</span>&#160;            <span class="keyword">auto</span>&amp; collection = out.add_collection((name) ? name.value() : accessor::name&lt;T&gt;());</div>
@@ -2003,7 +2003,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01925"></a><span class="lineno"> 1925</span>&#160;        };</div>
 <div class="line"><a name="l01926"></a><span class="lineno"> 1926</span>&#160;</div>
 <div class="line"><a name="l01927"></a><span class="lineno"> 1927</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Encoder, <span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01928"></a><span class="lineno"> 1928</span>&#160;        <span class="keywordtype">bool</span> deserialize(T*&amp; target, format::container&amp; out, std::optional&lt;psl::string8::view&gt; name = {})</div>
+<div class="line"><a name="l01928"></a><span class="lineno"> 1928</span>&#160;        <span class="keywordtype">bool</span> deserialize(T*&amp; target, psl::format::container&amp; out, std::optional&lt;psl::string8::view&gt; name = {})</div>
 <div class="line"><a name="l01929"></a><span class="lineno"> 1929</span>&#160;        {</div>
 <div class="line"><a name="l01930"></a><span class="lineno"> 1930</span>&#160;            <span class="keywordflow">if</span>(target == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l01931"></a><span class="lineno"> 1931</span>&#160;            {</div>
@@ -2041,7 +2041,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01963"></a><span class="lineno"> 1963</span>&#160;        {</div>
 <div class="line"><a name="l01964"></a><span class="lineno"> 1964</span>&#160;            <span class="keyword">auto</span> res = <a class="code" href="namespaceutility_1_1platform_1_1file.html#aed91134be6eac51636b5cde73af16b5c">utility::platform::file::read</a>(<a class="code" href="namespacepsl.html#a43142232ba12e429c77903e90869468c">psl::from_string8_t</a>(filename));</div>
 <div class="line"><a name="l01965"></a><span class="lineno"> 1965</span>&#160;            <span class="keywordflow">if</span>(!res) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l01966"></a><span class="lineno"> 1966</span>&#160;            format::container cont{<a class="code" href="namespacepsl.html#a4aefbed6301998f899153b7a4f4140db">psl::to_string8_t</a>(res.value())};</div>
+<div class="line"><a name="l01966"></a><span class="lineno"> 1966</span>&#160;            psl::format::container cont{<a class="code" href="namespacepsl.html#a4aefbed6301998f899153b7a4f4140db">psl::to_string8_t</a>(res.value())};</div>
 <div class="line"><a name="l01967"></a><span class="lineno"> 1967</span>&#160;            <span class="keywordflow">return</span> deserialize&lt;Encoder, T&gt;(target, cont, name);</div>
 <div class="line"><a name="l01968"></a><span class="lineno"> 1968</span>&#160;        }</div>
 <div class="line"><a name="l01969"></a><span class="lineno"> 1969</span>&#160;</div>
@@ -2050,12 +2050,12 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l01972"></a><span class="lineno"> 1972</span>&#160;        {</div>
 <div class="line"><a name="l01973"></a><span class="lineno"> 1973</span>&#160;            <span class="keyword">auto</span> res = <a class="code" href="namespaceutility_1_1platform_1_1file.html#aed91134be6eac51636b5cde73af16b5c">utility::platform::file::read</a>(<a class="code" href="namespacepsl.html#a43142232ba12e429c77903e90869468c">psl::from_string8_t</a>(filename));</div>
 <div class="line"><a name="l01974"></a><span class="lineno"> 1974</span>&#160;            <span class="keywordflow">if</span>(!res) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l01975"></a><span class="lineno"> 1975</span>&#160;            format::container cont{<a class="code" href="namespacepsl.html#a4aefbed6301998f899153b7a4f4140db">psl::to_string8_t</a>(res.value())};</div>
+<div class="line"><a name="l01975"></a><span class="lineno"> 1975</span>&#160;            psl::format::container cont{<a class="code" href="namespacepsl.html#a4aefbed6301998f899153b7a4f4140db">psl::to_string8_t</a>(res.value())};</div>
 <div class="line"><a name="l01976"></a><span class="lineno"> 1976</span>&#160;            <span class="keywordflow">return</span> deserialize&lt;Encoder, T&gt;(target, cont, name);</div>
 <div class="line"><a name="l01977"></a><span class="lineno"> 1977</span>&#160;        }</div>
 <div class="line"><a name="l01978"></a><span class="lineno"> 1978</span>&#160;</div>
 <div class="line"><a name="l01979"></a><span class="lineno"> 1979</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Encoder, <span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01980"></a><span class="lineno"> 1980</span>&#160;        <span class="keywordtype">bool</span> deserialize(T&amp; target, format::container&amp; out, std::optional&lt;psl::string8::view&gt; name = {})</div>
+<div class="line"><a name="l01980"></a><span class="lineno"> 1980</span>&#160;        <span class="keywordtype">bool</span> deserialize(T&amp; target, psl::format::container&amp; out, std::optional&lt;psl::string8::view&gt; name = {})</div>
 <div class="line"><a name="l01981"></a><span class="lineno"> 1981</span>&#160;        {</div>
 <div class="line"><a name="l01982"></a><span class="lineno"> 1982</span>&#160;            check&lt;T, Encoder&gt;();</div>
 <div class="line"><a name="l01983"></a><span class="lineno"> 1983</span>&#160;</div>
@@ -2095,7 +2095,7 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l02017"></a><span class="lineno"> 2017</span>&#160;        }</div>
 <div class="line"><a name="l02018"></a><span class="lineno"> 2018</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l02019"></a><span class="lineno"> 2019</span>&#160;        {</div>
-<div class="line"><a name="l02020"></a><span class="lineno"> 2020</span>&#160;            serialization::serialize(s, obj);</div>
+<div class="line"><a name="l02020"></a><span class="lineno"> 2020</span>&#160;            psl::serialization::serialize(s, obj);</div>
 <div class="line"><a name="l02021"></a><span class="lineno"> 2021</span>&#160;        }</div>
 <div class="line"><a name="l02022"></a><span class="lineno"> 2022</span>&#160;    }</div>
 <div class="line"><a name="l02023"></a><span class="lineno"> 2023</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> S, <span class="keyword">typename</span> T&gt;</div>
@@ -2119,21 +2119,21 @@ $(document).ready(function(){initNavTree('serialization_8h_source.html','');});
 <div class="line"><a name="l02041"></a><span class="lineno"> 2041</span>&#160;        }</div>
 <div class="line"><a name="l02042"></a><span class="lineno"> 2042</span>&#160;    }</div>
 <div class="line"><a name="l02043"></a><span class="lineno"> 2043</span>&#160;} <span class="comment">// namespace serialization</span></div>
-<div class="ttc" id="structserialization_1_1property_html"><div class="ttname"><a href="structserialization_1_1property.html">serialization::property</a></div><div class="ttdoc">wrapper class to signify a data member can be serialized and deserialized. </div><div class="ttdef"><b>Definition:</b> <a href="serialization_8h_source.html#l00182">serialization.h:182</a></div></div>
-<div class="ttc" id="classserialization_1_1polymorphic_html"><div class="ttname"><a href="classserialization_1_1polymorphic.html">serialization::polymorphic</a></div><div class="ttdoc">contains the polymorphic lambda constructor for your polymorphic type </div><div class="ttdef"><b>Definition:</b> <a href="serialization_8h_source.html#l00188">serialization.h:188</a></div></div>
+<div class="ttc" id="classpsl_1_1serialization_1_1polymorphic_html"><div class="ttname"><a href="classpsl_1_1serialization_1_1polymorphic.html">psl::serialization::polymorphic</a></div><div class="ttdoc">contains the polymorphic lambda constructor for your polymorphic type </div><div class="ttdef"><b>Definition:</b> <a href="serialization_8h_source.html#l00188">serialization.h:188</a></div></div>
+<div class="ttc" id="structpsl_1_1serialization_1_1property_html_a493d5e8d9b72421f7de3068a6020cb14"><div class="ttname"><a href="structpsl_1_1serialization_1_1property.html#a493d5e8d9b72421f7de3068a6020cb14">psl::serialization::property::name</a></div><div class="ttdeci">static const psl::string8::view name()</div><div class="ttdef"><b>Definition:</b> <a href="serialization_8h_source.html#l01149">serialization.h:1149</a></div></div>
+<div class="ttc" id="structpsl_1_1serialization_1_1property_html"><div class="ttname"><a href="structpsl_1_1serialization_1_1property.html">psl::serialization::property</a></div><div class="ttdoc">wrapper class to signify a data member can be serialized and deserialized. </div><div class="ttdef"><b>Definition:</b> <a href="serialization_8h_source.html#l00182">serialization.h:182</a></div></div>
 <div class="ttc" id="namespacepsl_html_a43142232ba12e429c77903e90869468c"><div class="ttname"><a href="namespacepsl.html#a43142232ba12e429c77903e90869468c">psl::from_string8_t</a></div><div class="ttdeci">static psl::string from_string8_t(const psl::string8_t &amp;s)</div><div class="ttdoc">converts a UTF-8 string into a psl::string </div><div class="ttdef"><b>Definition:</b> <a href="ustring_8h_source.html#l00255">ustring.h:255</a></div></div>
 <div class="ttc" id="namespaceutility_1_1platform_1_1file_html_aef3e5b6b184ef28209180771bc5d5830"><div class="ttname"><a href="namespaceutility_1_1platform_1_1file.html#aef3e5b6b184ef28209180771bc5d5830">utility::platform::file::write</a></div><div class="ttdeci">static bool write(psl::string_view filename, psl::string_view content)</div><div class="ttdoc">write the contents to the given location on the filesystem. </div><div class="ttdef"><b>Definition:</b> <a href="platform__utils_8h_source.html#l00442">platform_utils.h:442</a></div></div>
+<div class="ttc" id="structpsl_1_1serialization_1_1property_html_a896c77a46a3a1ba78707a02fa45ed02b"><div class="ttname"><a href="structpsl_1_1serialization_1_1property.html#a896c77a46a3a1ba78707a02fa45ed02b">psl::serialization::property::operator-&gt;</a></div><div class="ttdeci">T * operator-&gt;()</div><div class="ttdef"><b>Definition:</b> <a href="serialization_8h_source.html#l01146">serialization.h:1146</a></div></div>
 <div class="ttc" id="namespaceutility_html_a857e522bee9af5904b82b11b5ccc8947"><div class="ttname"><a href="namespaceutility.html#a857e522bee9af5904b82b11b5ccc8947">utility::crc64</a></div><div class="ttdeci">static constexpr uint64_t crc64(char const (&amp;str)[length])</div><div class="ttdoc">compile-time crc64 checksum calculator for the input characters. </div><div class="ttdef"><b>Definition:</b> <a href="crc32_8h_source.html#l00189">crc32.h:189</a></div></div>
-<div class="ttc" id="structserialization_1_1property_html_a4da2405ec59ecd5db86ac15abaf81e6c"><div class="ttname"><a href="structserialization_1_1property.html#a4da2405ec59ecd5db86ac15abaf81e6c">serialization::property::operator-&gt;</a></div><div class="ttdeci">T * operator-&gt;()</div><div class="ttdef"><b>Definition:</b> <a href="serialization_8h_source.html#l01146">serialization.h:1146</a></div></div>
 <div class="ttc" id="namespaceutility_1_1platform_1_1file_html_aed91134be6eac51636b5cde73af16b5c"><div class="ttname"><a href="namespaceutility_1_1platform_1_1file.html#aed91134be6eac51636b5cde73af16b5c">utility::platform::file::read</a></div><div class="ttdeci">static bool read(psl::string_view filename, std::vector&lt; psl::char_t &gt; &amp;out)</div><div class="ttdoc">reads the given filepath&#39;s contents into a psl::char_t container. </div><div class="ttdef"><b>Definition:</b> <a href="platform__utils_8h_source.html#l00383">platform_utils.h:383</a></div></div>
 <div class="ttc" id="namespacepsl_html_a4aefbed6301998f899153b7a4f4140db"><div class="ttname"><a href="namespacepsl.html#a4aefbed6301998f899153b7a4f4140db">psl::to_string8_t</a></div><div class="ttdeci">static psl::string8_t to_string8_t(const psl::string &amp;s)</div><div class="ttdoc">converts a psl::string into a UTF-8 string. </div><div class="ttdef"><b>Definition:</b> <a href="ustring_8h_source.html#l00244">ustring.h:244</a></div></div>
-<div class="ttc" id="structserialization_1_1property_html_afaf62ba4eef630b9f0cd8983fcb69b97"><div class="ttname"><a href="structserialization_1_1property.html#afaf62ba4eef630b9f0cd8983fcb69b97">serialization::property::name</a></div><div class="ttdeci">static const psl::string8::view name()</div><div class="ttdef"><b>Definition:</b> <a href="serialization_8h_source.html#l01149">serialization.h:1149</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_5dbdea161462ad0913adb5ecf5fbf62a.html">format</a></li><li class="navelem"><a class="el" href="dir_0b7c1c7f38ec991eb4c3c4a2e91be58c.html">inc</a></li><li class="navelem"><b>serialization.h</b></li>
+    <li class="navelem"><a class="el" href="dir_857595d91812b02e8c2d8722bada823e.html">psl</a></li><li class="navelem"><a class="el" href="dir_1c2fcdabcbe783d36ef9dfcea9a7a7d4.html">inc</a></li><li class="navelem"><b>serialization.h</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

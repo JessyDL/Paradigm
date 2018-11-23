@@ -1,7 +1,7 @@
 var classcore_1_1os_1_1surface =
 [
-    [ "surface", "classcore_1_1os_1_1surface.html#ac9104052b722bc388f968185f8ea9bd9", null ],
-    [ "surface", "classcore_1_1os_1_1surface.html#acbabaf78d5ef1be7d43b3c38a6227e8b", null ],
+    [ "surface", "classcore_1_1os_1_1surface.html#a3397ffd671f000d7f8d381823a77311f", null ],
+    [ "surface", "classcore_1_1os_1_1surface.html#a554abbd80f680fc689a93fb2b96a6e7e", null ],
     [ "~surface", "classcore_1_1os_1_1surface.html#a0d468eb3f6583074c61925c838ab7e42", null ],
     [ "surface", "classcore_1_1os_1_1surface.html#a45226bec2e8774f3c321b21a018940af", null ],
     [ "surface", "classcore_1_1os_1_1surface.html#aff3508041f03ed60c80d42e2fb7f4a8c", null ],

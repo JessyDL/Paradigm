@@ -153,7 +153,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa89dd026ff2dc177e42af9feacc597c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the expected input rate of the binding (i.e. should we offset per-vertex, or per-instance in the data)  <a href="#aa89dd026ff2dc177e42af9feacc597c0">More...</a><br/></td></tr>
 <tr class="separator:aa89dd026ff2dc177e42af9feacc597c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad21b6eedf356bea41591acf4b2618da3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1meta_1_1shader_1_1vertex_1_1binding.html#ad21b6eedf356bea41591acf4b2618da3">buffer</a> (psl::string8_t value)</td></tr>
-<tr class="memdesc:ad21b6eedf356bea41591acf4b2618da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the <a class="el" href="struct_u_i_d.html" title="is an object holding a Unique IDentifier (UID) ">UID</a>, or TAG that will suggest where to find the data to bind.  <a href="#ad21b6eedf356bea41591acf4b2618da3">More...</a><br/></td></tr>
+<tr class="memdesc:ad21b6eedf356bea41591acf4b2618da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the <a class="el" href="structpsl_1_1_u_i_d.html" title="is an object holding a Unique IDentifier (UID) ">psl::UID</a>, or TAG that will suggest where to find the data to bind.  <a href="#ad21b6eedf356bea41591acf4b2618da3">More...</a><br/></td></tr>
 <tr class="separator:ad21b6eedf356bea41591acf4b2618da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cf5e0fbd653dfb00faa880ad9bacd83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1meta_1_1shader_1_1vertex_1_1binding.html#a9cf5e0fbd653dfb00faa880ad9bacd83">attributes</a> (const std::vector&lt; <a class="el" href="classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html">attribute</a> &gt; &amp;value)</td></tr>
 <tr class="memdesc:a9cf5e0fbd653dfb00faa880ad9bacd83"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the collection of attributes that make up this binding.  <a href="#a9cf5e0fbd653dfb00faa880ad9bacd83">More...</a><br/></td></tr>
@@ -167,12 +167,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a36016c25465818cb92fa0c5faf0c519c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36016c25465818cb92fa0c5faf0c519c"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>serialization::accessor</b></td></tr>
-<tr class="separator:a36016c25465818cb92fa0c5faf0c519c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6e4002148765f114da9fe1b5c64547d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae6e4002148765f114da9fe1b5c64547d"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>psl::serialization::accessor</b></td></tr>
+<tr class="separator:ae6e4002148765f114da9fe1b5c64547d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>shaders can have various bindings such as textures, UBO's, SSBO's, Dynamic UBO's, etc... this class describes the type and either the <a class="el" href="struct_u_i_d.html" title="is an object holding a Unique IDentifier (UID) ">UID</a>, or the tag that points to a resource in the runtime. </p>
+<div class="textblock"><p>shaders can have various bindings such as textures, UBO's, SSBO's, Dynamic UBO's, etc... this class describes the type and either the <a class="el" href="structpsl_1_1_u_i_d.html" title="is an object holding a Unique IDentifier (UID) ">psl::UID</a>, or the tag that points to a resource in the runtime. </p>
 
 <p>Definition at line <a class="el" href="meta_2shader_8h_source.html#l00083">83</a> of file <a class="el" href="meta_2shader_8h_source.html">shader.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -275,7 +275,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>serialization::acces
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the buffer this binding is bound to. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>this can either be a <a class="el" href="struct_u_i_d.html" title="is an object holding a Unique IDentifier (UID) ">UID</a>, or a TAG </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>this can either be a <a class="el" href="structpsl_1_1_u_i_d.html" title="is an object holding a Unique IDentifier (UID) ">psl::UID</a>, or a TAG </dd></dl>
 
 <p>Definition at line <a class="el" href="meta_2shader_8cpp_source.html#l00026">26</a> of file <a class="el" href="meta_2shader_8cpp_source.html">shader.cpp</a>.</p>
 
@@ -396,7 +396,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>serialization::acces
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classcore_1_1data_1_1geometry.html" title="describes a stream of data that will be uploaded to the GPU as geometry data. ">core::data::geometry</a> <a class="el" href="classcore_1_1gfx_1_1geometry.html" title="describes the driver visible concept of geometry. ">core::gfx::geometry</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>the new <a class="el" href="struct_u_i_d.html" title="is an object holding a Unique IDentifier (UID) ">UID</a> or TAG </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>the new <a class="el" href="structpsl_1_1_u_i_d.html" title="is an object holding a Unique IDentifier (UID) ">psl::UID</a> or TAG </td></tr>
   </table>
   </dd>
 </dl>

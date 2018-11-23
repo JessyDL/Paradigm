@@ -1,6 +1,6 @@
 var classcore_1_1data_1_1buffer =
 [
-    [ "buffer", "classcore_1_1data_1_1buffer.html#acb60729d5954c3614fd2801c50542d17", null ],
+    [ "buffer", "classcore_1_1data_1_1buffer.html#a243eba96e835642628d28146bbbeb1fb", null ],
     [ "~buffer", "classcore_1_1data_1_1buffer.html#a2676a1a64b89fd492537129a618b88cf", null ],
     [ "buffer", "classcore_1_1data_1_1buffer.html#a3e98dcb180acc93fca12bfb8930fb724", null ],
     [ "buffer", "classcore_1_1data_1_1buffer.html#a052f05fb29f583d6217000eb40851ecb", null ],
@@ -13,5 +13,5 @@ var classcore_1_1data_1_1buffer =
     [ "segments", "classcore_1_1data_1_1buffer.html#a1c49238f1289ab91ce13f466e4aa241a", null ],
     [ "allocate", "classcore_1_1data_1_1buffer.html#a4d7f1433fffa4be889ca58413a4d7177", null ],
     [ "deallocate", "classcore_1_1data_1_1buffer.html#af24be29ede5663407ce919525a5f64b9", null ],
-    [ "serialization::accessor", "classcore_1_1data_1_1buffer.html#a36016c25465818cb92fa0c5faf0c519c", null ]
+    [ "psl::serialization::accessor", "classcore_1_1data_1_1buffer.html#ae6e4002148765f114da9fe1b5c64547d", null ]
 ];
