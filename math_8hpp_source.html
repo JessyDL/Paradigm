@@ -315,7 +315,7 @@ $(document).ready(function(){initNavTree('math_8hpp_source.html','');});
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> precision_t&gt;</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    constexpr <span class="keyword">static</span> psl::tmat&lt;precision_t, 4, 4&gt; scale(<span class="keyword">const</span> psl::tvec&lt;precision_t, 3&gt;&amp; vec) noexcept</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    {</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        constexpr psl::tmat&lt;precision_t, 4, 4&gt; mat{1};</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keyword">const</span> psl::tmat&lt;precision_t, 4, 4&gt; mat{1};</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        psl::tmat&lt;precision_t, 4, 4&gt; res{};</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        res.row(0, mat.row(0) * vec[0]);</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        res.row(1, mat.row(1) * vec[1]);</div>
@@ -335,7 +335,7 @@ $(document).ready(function(){initNavTree('math_8hpp_source.html','');});
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> precision_t&gt;</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    constexpr <span class="keyword">static</span> psl::tmat&lt;precision_t, 4, 4&gt; translate(<span class="keyword">const</span> psl::tvec&lt;precision_t, 3&gt;&amp; vec) noexcept</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    {</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        constexpr psl::tmat&lt;precision_t, 4, 4&gt; mat{1};</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keyword">const</span> psl::tmat&lt;precision_t, 4, 4&gt; mat{1};</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        psl::tmat&lt;precision_t, 4, 4&gt; res{mat};</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        res.row(3, mat.row(0)* vec[0] + mat.row(1) * vec[1] + mat.row(2) * vec[2] + mat.row(3));</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keywordflow">return</span> res;</div>

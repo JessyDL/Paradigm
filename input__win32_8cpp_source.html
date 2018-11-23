@@ -294,19 +294,20 @@ $(document).ready(function(){initNavTree('input__win32_8cpp_source.html','');});
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="keywordtype">void</span> input::tick()</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;{</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    MSG msg;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    ZeroMemory(&amp;msg, <span class="keyword">sizeof</span>(MSG));</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">while</span>(PeekMessage(&amp;msg, NULL, 0, 0, PM_REMOVE) &gt; 0)</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        TranslateMessage(&amp;msg);</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        DispatchMessage(&amp;msg);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; key : m_HeldKeys)</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        m_OnKeyHeld.Execute(key);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; key : m_HeldMouseButtons)</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        m_OnMouseHeld.Execute(key);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    PROFILE_SCOPE(core::profiler)</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    MSG msg;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    ZeroMemory(&amp;msg, sizeof(MSG));</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    while(PeekMessage(&amp;msg, NULL, 0, 0, PM_REMOVE) &gt; 0)</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        TranslateMessage(&amp;msg);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        DispatchMessage(&amp;msg);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; key : m_HeldKeys)</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        m_OnKeyHeld.Execute(key);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; key : m_HeldMouseButtons)</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        m_OnMouseHeld.Execute(key);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;}</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classcore_1_1os_1_1surface_html_a247b92e546cb8ddbe22fb62ac90d36f2"><div class="ttname"><a href="classcore_1_1os_1_1surface.html#a247b92e546cb8ddbe22fb62ac90d36f2">core::os::surface::resize</a></div><div class="ttdeci">bool resize(uint32_t width, uint32_t height)</div><div class="ttdoc">suggests a new size for the surface. </div><div class="ttdef"><b>Definition:</b> <a href="surface_8cpp_source.html#l00039">surface.cpp:39</a></div></div>
 <div class="ttc" id="classcore_1_1data_1_1window_html_ad7fc58ceef75511a755a1c3dc057b6f9"><div class="ttname"><a href="classcore_1_1data_1_1window.html#ad7fc58ceef75511a755a1c3dc057b6f9">core::data::window::height</a></div><div class="ttdeci">uint32_t height() const </div><div class="ttdoc">returns the height in pixels. </div><div class="ttdef"><b>Definition:</b> <a href="window_8cpp_source.html#l00038">window.cpp:38</a></div></div>
 <div class="ttc" id="classcore_1_1data_1_1window_html_a4b6c996d7cc15be5fa27a815070f01c4"><div class="ttname"><a href="classcore_1_1data_1_1window.html#a4b6c996d7cc15be5fa27a815070f01c4">core::data::window::width</a></div><div class="ttdeci">uint32_t width() const </div><div class="ttdoc">returns the width in pixels. </div><div class="ttdef"><b>Definition:</b> <a href="window_8cpp_source.html#l00030">window.cpp:30</a></div></div>

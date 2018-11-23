@@ -130,6 +130,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a15af6ddd321dddec9a125cab7a0f01fa"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="structutility_1_1debug_1_1trace__info.html">trace_info</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutility_1_1debug.html#a15af6ddd321dddec9a125cab7a0f01fa">trace</a> (size_t offset=0u, size_t depth=255u)</td></tr>
 <tr class="memdesc:a15af6ddd321dddec9a125cab7a0f01fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">method to get trace information of the current callstack.  <a href="#a15af6ddd321dddec9a125cab7a0f01fa">More...</a><br/></td></tr>
 <tr class="separator:a15af6ddd321dddec9a125cab7a0f01fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa100d76b555c7af54c99052e22158500"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; void * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutility_1_1debug.html#aa100d76b555c7af54c99052e22158500">raw_trace</a> (size_t offset=0u, size_t depth=255u)</td></tr>
+<tr class="memdesc:aa100d76b555c7af54c99052e22158500"><td class="mdescLeft">&#160;</td><td class="mdescRight">method to get raw trace information of the current callstack.  <a href="#aa100d76b555c7af54c99052e22158500">More...</a><br/></td></tr>
+<tr class="separator:aa100d76b555c7af54c99052e22158500"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa72d2fd2798790c6025d0d13bc1c77c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa72d2fd2798790c6025d0d13bc1c77c0"></a>
+static <a class="el" href="structutility_1_1debug_1_1trace__info.html">utility::debug::trace_info</a>&#160;</td><td class="memItemRight" valign="bottom"><b>demangle</b> (void *target)</td></tr>
+<tr class="separator:aa72d2fd2798790c6025d0d13bc1c77c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0d6d960216bf55aa17585db20a951cb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutility_1_1debug.html#ad0d6d960216bf55aa17585db20a951cb">register_thread</a> (const std::thread::id &amp;id, const psl::string8_t &amp;name)</td></tr>
 <tr class="memdesc:ad0d6d960216bf55aa17585db20a951cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper method to give a name to a specific thread.  <a href="#ad0d6d960216bf55aa17585db20a951cb">More...</a><br/></td></tr>
 <tr class="separator:ad0d6d960216bf55aa17585db20a951cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,6 +203,50 @@ static const psl::string8_t&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
+<a class="anchor" id="aa100d76b555c7af54c99052e22158500"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; void * &gt; utility::debug::raw_trace </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>offset</em> = <code>0u</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>depth</em> = <code>255u</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">offset</td><td>what height of the callstack to start from (0 being the bottom, not root of the callstack). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">depth</td><td>how far up should we get information from (i.e. a depth of 1 would only get the current information, while 255 would likely get you to the root). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an std::vector containing void pointers pointing to the address of the current callstack (excluding this method). </dd></dl>
+
+<p>Definition at line <a class="el" href="platform__utils_8cpp_source.html#l00225">225</a> of file <a class="el" href="platform__utils_8cpp_source.html">platform_utils.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ad0d6d960216bf55aa17585db20a951cb"></a>
 <div class="memitem">
 <div class="memproto">
@@ -236,7 +286,7 @@ static const psl::string8_t&#160;</td><td class="memItemRight" valign="bottom"><
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00051">51</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
+<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00059">59</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
 
 </div>
 </div>
@@ -268,7 +318,7 @@ static const psl::string8_t&#160;</td><td class="memItemRight" valign="bottom"><
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00058">58</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
+<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00066">66</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
 
 </div>
 </div>
@@ -301,7 +351,7 @@ static const psl::string8_t&#160;</td><td class="memItemRight" valign="bottom"><
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the name (if any) that is assigned to the given thread::id. </dd></dl>
 
-<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00066">66</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
+<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00074">74</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
 
 </div>
 </div>
@@ -327,7 +377,7 @@ static const psl::string8_t&#160;</td><td class="memItemRight" valign="bottom"><
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the name (if any) that is assigned to the current thread. </dd></dl>
 
-<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00073">73</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
+<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00081">81</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
 
 </div>
 </div>
@@ -360,7 +410,7 @@ static const psl::string8_t&#160;</td><td class="memItemRight" valign="bottom"><
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the class name. </dd></dl>
 
-<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00081">81</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
+<p>Definition at line <a class="el" href="platform__utils_8h_source.html#l00089">89</a> of file <a class="el" href="platform__utils_8h_source.html">platform_utils.h</a>.</p>
 
 </div>
 </div>

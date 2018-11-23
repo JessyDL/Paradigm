@@ -141,14 +141,14 @@ template&lt;typename... Ts&gt; </td></tr>
 <tr class="memitem:aeba89f284f4276249da093b6ad537423"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeba89f284f4276249da093b6ad537423"></a>
 <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;&amp;)=default</td></tr>
 <tr class="separator:aeba89f284f4276249da093b6ad537423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab08db2728e19beb31a63186b689264d4"><td class="memTemplParams" colspan="2"><a class="anchor" id="ab08db2728e19beb31a63186b689264d4"></a>
+<tr class="memitem:a19e12ce373b2522798123bc9568c6899"><td class="memTemplParams" colspan="2"><a class="anchor" id="a19e12ce373b2522798123bc9568c6899"></a>
 template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ab08db2728e19beb31a63186b689264d4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add</b> (core::ecs::vector&lt; T, access::READ_WRITE &gt; &amp;vec) noexcept</td></tr>
-<tr class="separator:ab08db2728e19beb31a63186b689264d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64d4b431fc0345e12e243a461ef3bf0c"><td class="memTemplParams" colspan="2"><a class="anchor" id="a64d4b431fc0345e12e243a461ef3bf0c"></a>
+<tr class="memitem:a19e12ce373b2522798123bc9568c6899"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add</b> (core::ecs::vector&lt; T &gt; &amp;vec) noexcept</td></tr>
+<tr class="separator:a19e12ce373b2522798123bc9568c6899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a219091b0e06156f72e5141706855faed"><td class="memTemplParams" colspan="2"><a class="anchor" id="a219091b0e06156f72e5141706855faed"></a>
 template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a64d4b431fc0345e12e243a461ef3bf0c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add</b> (core::ecs::vector&lt; T, access::READ_ONLY &gt; &amp;vec) noexcept</td></tr>
-<tr class="separator:a64d4b431fc0345e12e243a461ef3bf0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a219091b0e06156f72e5141706855faed"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add</b> (core::ecs::vector&lt; const T &gt; &amp;vec) noexcept</td></tr>
+<tr class="separator:a219091b0e06156f72e5141706855faed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb6ae8e7a8b81b315691cb5ce1ac8f48"><td class="memTemplParams" colspan="2"><a class="anchor" id="abb6ae8e7a8b81b315691cb5ce1ac8f48"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:abb6ae8e7a8b81b315691cb5ce1ac8f48"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add</b> (core::ecs::filter&lt; T &gt; &amp;filter) noexcept</td></tr>
@@ -167,7 +167,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::ecs::state</b>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>systems can have various dependencies, for example a movement system could have dependencies on both a core::ecs::components::transform component and a core::ecs::components::renderable component. This dependency will output a set of <a class="el" href="structcore_1_1ecs_1_1entity.html" title="entity points to a collection of components ">core::ecs::entity</a>'s that have all required core::ecs::components present. Certain systems could have sets of dependencies, for example the render system requires knowing about both all <code>core::ecs::components::renderable</code> that have a <code>core::ecs::components::transform</code>, but also needs to know all <code>core::ecs::components::camera's</code>. So that system would require several <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html" title="describes a set of dependencies for a given system ">dependency_pack</a>'s. </p>
 
-<p>Definition at line <a class="el" href="state_8h_source.html#l00080">80</a> of file <a class="el" href="state_8h_source.html">state.h</a>.</p>
+<p>Definition at line <a class="el" href="state_8h_source.html#l00188">188</a> of file <a class="el" href="state_8h_source.html">state.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/travis/build/JessyDL/paradigm/core/inc/ecs/<a class="el" href="state_8h_source.html">state.h</a></li>
 </ul>
