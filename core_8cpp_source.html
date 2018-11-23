@@ -699,236 +699,241 @@ $(document).ready(function(){initNavTree('core_8cpp_source.html','');});
 <div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;</div>
 <div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;    <span class="comment">// load the example model</span></div>
 <div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;    <span class="comment">// auto geomData = create&lt;data::geometry&gt;(cache, UID::convert(&quot;bf36d6f1-af53-41b9-b7ae-0f0cb16d8734&quot;));</span></div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;    <span class="keyword">auto</span> geomData = <a class="code" href="namespaceutility_1_1geometry.html#a704c51bfe4662c05a94b580499203aba">utility::geometry::create_box</a>(cache, psl::vec3::one);</div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;    geomData.load();</div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;    <span class="keyword">auto</span>&amp; positionstream =</div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;        geomData-&gt;vertices(<a class="code" href="structcore_1_1data_1_1geometry_1_1constants.html#a18c8db6c4a238fc99a53446e89ec1c0e">core::data::geometry::constants::POSITION</a>).value().get().as_vec3().value().get();</div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;    <a class="code" href="classcore_1_1stream.html">core::stream</a> colorstream{core::stream::type::vec3};</div>
-<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;    <span class="keyword">auto</span>&amp; colors              = colorstream.<a class="code" href="classcore_1_1stream.html#a933b587ae1f7753675b21a32be1e15d3">as_vec3</a>().value().get();</div>
-<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> range         = 1.0f;</div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span> inverse_colors = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = 0; i &lt; positionstream.size(); ++i)</div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;    {</div>
-<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;        <span class="keywordflow">if</span>(inverse_colors)</div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;        {</div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;            <span class="keywordtype">float</span> red   = std::max(-range, std::min(range, positionstream[i][0])) / range;</div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;            <span class="keywordtype">float</span> green = std::max(-range, std::min(range, positionstream[i][1])) / range;</div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;            <span class="keywordtype">float</span> blue  = std::max(-range, std::min(range, positionstream[i][2])) / range;</div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;            colors.emplace_back(psl::vec3(red, green, blue));</div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;        }</div>
-<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;        {</div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;            <span class="keywordtype">float</span> red   = (std::max(-range, std::min(range, positionstream[i][0])) + range) / (range * 2);</div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;            <span class="keywordtype">float</span> green = (std::max(-range, std::min(range, positionstream[i][1])) + range) / (range * 2);</div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;            <span class="keywordtype">float</span> blue  = (std::max(-range, std::min(range, positionstream[i][2])) + range) / (range * 2);</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;            colors.emplace_back(psl::vec3(red, green, blue));</div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;        }</div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;    }</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    geomData-&gt;vertices(<a class="code" href="structcore_1_1data_1_1geometry_1_1constants.html#ad7b522dc309f2a6f4b90b17af761c5c7">core::data::geometry::constants::COLOR</a>, colorstream);</div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    <span class="keyword">auto</span> <a class="code" href="classcore_1_1gfx_1_1geometry.html">geometry</a> = create&lt;gfx::geometry&gt;(cache);</div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;    <a class="code" href="classcore_1_1gfx_1_1geometry.html">geometry</a>.load(context_handle, geomData, geomBuffer, geomBuffer);</div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;</div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;    <span class="comment">// get a vertex and fragment shader that can be combined, we only need the meta</span></div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;    <span class="keywordflow">if</span>(!cache.library().contains(<a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;3982b466-58fe-4918-8735-fc6cc45378b0&quot;</span>)) ||</div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;       !cache.library().contains(<a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;4429d63a-9867-468f-a03f-cf56fee3c82e&quot;</span>)))</div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;    {</div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;        core::log-&gt;critical(</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;            <span class="stringliteral">&quot;Could not find the required shader resources in the meta library. Did you forget to copy the files over?&quot;</span>);</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;        <span class="keywordflow">if</span>(surface_handle) surface_handle-&gt;terminate();</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;    }</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;    <span class="keyword">auto</span> vertShaderMeta =</div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;        cache.library().get&lt;<a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>&gt;(<a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;3982b466-58fe-4918-8735-fc6cc45378b0&quot;</span>)).value();</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;    <span class="keyword">auto</span> fragShaderMeta =</div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;        cache.library().get&lt;<a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>&gt;(<a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;4429d63a-9867-468f-a03f-cf56fee3c82e&quot;</span>)).value();</div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;    <span class="comment">// create the material buffer and instance buffer</span></div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;    <span class="keyword">auto</span> matBufferData = create&lt;data::buffer&gt;(cache);</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;    matBufferData.load(vk::BufferUsageFlagBits::eStorageBuffer | vk::BufferUsageFlagBits::eTransferDst,</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;                       vk::MemoryPropertyFlagBits::eDeviceLocal,</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;                       <a class="code" href="classmemory_1_1region.html">memory::region</a>{1024 * 1024 * 128,</div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;                                      context_handle-&gt;properties().limits.minStorageBufferOffsetAlignment,</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;                                      <span class="keyword">new</span> <a class="code" href="classmemory_1_1default__allocator.html">memory::default_allocator</a>(<span class="keyword">false</span>)});</div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;    <span class="keyword">auto</span> matBuffer = create&lt;gfx::buffer&gt;(cache);</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;    matBuffer.load(context_handle, matBufferData, stagingBuffer);</div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;</div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;    <span class="comment">// create the texture</span></div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;    <span class="keyword">auto</span> textureHandle = create&lt;gfx::texture&gt;(cache, <a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;3c4af7eb-289e-440d-99d9-20b5738f0200&quot;</span>));</div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;    textureHandle.load(context_handle);</div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;    <span class="comment">// create the sampler</span></div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;    <span class="keyword">auto</span> samplerData = create&lt;data::sampler&gt;(cache);</div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;    samplerData.load();</div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;    <span class="keyword">auto</span> samplerHandle = create&lt;gfx::sampler&gt;(cache);</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;    samplerHandle.load(context_handle, samplerData);</div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;    <span class="comment">// create a pipeline cache</span></div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;    <span class="keyword">auto</span> <a class="code" href="classcore_1_1gfx_1_1pipeline__cache.html">pipeline_cache</a> = create&lt;core::gfx::pipeline_cache&gt;(cache);</div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;    <a class="code" href="classcore_1_1gfx_1_1pipeline__cache.html">pipeline_cache</a>.load(context_handle);</div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;</div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;    <span class="comment">// load the example material</span></div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;    <span class="keyword">auto</span> matData = create&lt;data::material&gt;(cache);</div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    matData.load();</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;    matData-&gt;from_shaders(cache.library(), {vertShaderMeta, fragShaderMeta});</div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;    <span class="keyword">auto</span> stages = matData-&gt;stages();</div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; stage : stages)</div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;    {</div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;        <span class="keywordflow">if</span>(stage.shader_stage() != vk::ShaderStageFlagBits::eFragment) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;        <span class="keyword">auto</span> bindings = stage.bindings();</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;        bindings[0].texture(textureHandle.RUID());</div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;        bindings[0].sampler(samplerHandle.RUID());</div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;        stage.bindings(bindings);</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;        <span class="comment">// binding.texture()</span></div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;    }</div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;    matData-&gt;stages(stages);</div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;    psl::serialization::serializer s;</div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;    s.serialize&lt;psl::serialization::encode_to_format&gt;(*(<a class="code" href="classcore_1_1data_1_1material.html">data::material</a>*)matData.cvalue(),</div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;                                                 <a class="code" href="namespaceutility_1_1application_1_1path.html#a3934b91176cbab02adcfb3186aa5ea5d">utility::application::path::get_path</a>() + <span class="stringliteral">&quot;material_example.mat&quot;</span>);</div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;</div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    <span class="keyword">auto</span> <a class="code" href="classcore_1_1gfx_1_1material.html">material</a> = create&lt;gfx::material&gt;(cache);</div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;    material.load(context_handle, matData, <a class="code" href="classcore_1_1gfx_1_1pipeline__cache.html">pipeline_cache</a>, matBuffer, matBuffer);</div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;</div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;    <span class="comment">// create the ecs</span></div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;    core::ecs::state ECSState{};</div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;    <span class="keyword">auto</span> eCam = ECSState.create_one(core::ecs::tag&lt;core::ecs::components::transform&gt;{},</div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;                                    core::ecs::tag&lt;core::ecs::components::camera&gt;{},</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;                                    core::ecs::tag&lt;core::ecs::components::input_tag&gt;{});</div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;</div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> area             = 128;</div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> area_granularity = 128;</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> size_steps       = 24;</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    </div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;</div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;    core::ecs::systems::fly fly_system{surface_handle-&gt;input()};</div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;    ECSState.register_system(fly_system);</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;    <span class="comment">//auto geomData = utility::geometry::create_box(cache, psl::vec3::one);</span></div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;    <span class="keyword">auto</span> geomData = utility::geometry::create_icosphere(cache, psl::vec3::one);</div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;    geomData.load();</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;    <span class="keyword">auto</span>&amp; positionstream =</div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;        geomData-&gt;vertices(<a class="code" href="structcore_1_1data_1_1geometry_1_1constants.html#a18c8db6c4a238fc99a53446e89ec1c0e">core::data::geometry::constants::POSITION</a>).value().get().as_vec3().value().get();</div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;    <a class="code" href="classcore_1_1stream.html">core::stream</a> colorstream{core::stream::type::vec3};</div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;    <span class="keyword">auto</span>&amp; colors              = colorstream.<a class="code" href="classcore_1_1stream.html#a933b587ae1f7753675b21a32be1e15d3">as_vec3</a>().value().get();</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> range         = 1.0f;</div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span> inverse_colors = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = 0; i &lt; positionstream.size(); ++i)</div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;    {</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;        <span class="keywordflow">if</span>(inverse_colors)</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;        {</div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;            <span class="keywordtype">float</span> red   = std::max(-range, std::min(range, positionstream[i][0])) / range;</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;            <span class="keywordtype">float</span> green = std::max(-range, std::min(range, positionstream[i][1])) / range;</div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;            <span class="keywordtype">float</span> blue  = std::max(-range, std::min(range, positionstream[i][2])) / range;</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;            colors.emplace_back(psl::vec3(red, green, blue));</div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;        }</div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;        {</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;            <span class="keywordtype">float</span> red   = (std::max(-range, std::min(range, positionstream[i][0])) + range) / (range * 2);</div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;            <span class="keywordtype">float</span> green = (std::max(-range, std::min(range, positionstream[i][1])) + range) / (range * 2);</div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;            <span class="keywordtype">float</span> blue  = (std::max(-range, std::min(range, positionstream[i][2])) + range) / (range * 2);</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;            colors.emplace_back(psl::vec3(red, green, blue));</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;        }</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;    }</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    geomData-&gt;vertices(<a class="code" href="structcore_1_1data_1_1geometry_1_1constants.html#ad7b522dc309f2a6f4b90b17af761c5c7">core::data::geometry::constants::COLOR</a>, colorstream);</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;    <span class="keyword">auto</span> <a class="code" href="classcore_1_1gfx_1_1geometry.html">geometry</a> = create&lt;gfx::geometry&gt;(cache);</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;    <a class="code" href="classcore_1_1gfx_1_1geometry.html">geometry</a>.load(context_handle, geomData, geomBuffer, geomBuffer);</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;    <span class="comment">// get a vertex and fragment shader that can be combined, we only need the meta</span></div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;    <span class="keywordflow">if</span>(!cache.library().contains(<a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;3982b466-58fe-4918-8735-fc6cc45378b0&quot;</span>)) ||</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;       !cache.library().contains(<a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;4429d63a-9867-468f-a03f-cf56fee3c82e&quot;</span>)))</div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;    {</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;        core::log-&gt;critical(</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;            <span class="stringliteral">&quot;Could not find the required shader resources in the meta library. Did you forget to copy the files over?&quot;</span>);</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;        <span class="keywordflow">if</span>(surface_handle) surface_handle-&gt;terminate();</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;    }</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;    <span class="keyword">auto</span> vertShaderMeta =</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;        cache.library().get&lt;<a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>&gt;(<a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;3982b466-58fe-4918-8735-fc6cc45378b0&quot;</span>)).value();</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;    <span class="keyword">auto</span> fragShaderMeta =</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;        cache.library().get&lt;<a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>&gt;(<a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;4429d63a-9867-468f-a03f-cf56fee3c82e&quot;</span>)).value();</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;    <span class="comment">// create the material buffer and instance buffer</span></div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;    <span class="keyword">auto</span> matBufferData = create&lt;data::buffer&gt;(cache);</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;    matBufferData.load(vk::BufferUsageFlagBits::eStorageBuffer | vk::BufferUsageFlagBits::eTransferDst,</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;                       vk::MemoryPropertyFlagBits::eDeviceLocal,</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;                       <a class="code" href="classmemory_1_1region.html">memory::region</a>{1024 * 1024 * 128,</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;                                      context_handle-&gt;properties().limits.minStorageBufferOffsetAlignment,</div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;                                      <span class="keyword">new</span> <a class="code" href="classmemory_1_1default__allocator.html">memory::default_allocator</a>(<span class="keyword">false</span>)});</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;    <span class="keyword">auto</span> matBuffer = create&lt;gfx::buffer&gt;(cache);</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;    matBuffer.load(context_handle, matBufferData, stagingBuffer);</div>
+<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;</div>
+<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;    <span class="comment">// create the texture</span></div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;    <span class="keyword">auto</span> textureHandle = create&lt;gfx::texture&gt;(cache, <a class="code" href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a>(<span class="stringliteral">&quot;3c4af7eb-289e-440d-99d9-20b5738f0200&quot;</span>));</div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;    textureHandle.load(context_handle);</div>
+<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;    <span class="comment">// create the sampler</span></div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;    <span class="keyword">auto</span> samplerData = create&lt;data::sampler&gt;(cache);</div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;    samplerData.load();</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;    <span class="keyword">auto</span> samplerHandle = create&lt;gfx::sampler&gt;(cache);</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;    samplerHandle.load(context_handle, samplerData);</div>
+<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;</div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;    <span class="comment">// create a pipeline cache</span></div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;    <span class="keyword">auto</span> <a class="code" href="classcore_1_1gfx_1_1pipeline__cache.html">pipeline_cache</a> = create&lt;core::gfx::pipeline_cache&gt;(cache);</div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;    <a class="code" href="classcore_1_1gfx_1_1pipeline__cache.html">pipeline_cache</a>.load(context_handle);</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;    <span class="comment">// load the example material</span></div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    <span class="keyword">auto</span> matData = create&lt;data::material&gt;(cache);</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;    matData.load();</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;    matData-&gt;from_shaders(cache.library(), {vertShaderMeta, fragShaderMeta});</div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;    <span class="keyword">auto</span> stages = matData-&gt;stages();</div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; stage : stages)</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;    {</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;        <span class="keywordflow">if</span>(stage.shader_stage() != vk::ShaderStageFlagBits::eFragment) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;        <span class="keyword">auto</span> bindings = stage.bindings();</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;        bindings[0].texture(textureHandle.RUID());</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;        bindings[0].sampler(samplerHandle.RUID());</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;        stage.bindings(bindings);</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;        <span class="comment">// binding.texture()</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;    }</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;    matData-&gt;stages(stages);</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;    psl::serialization::serializer s;</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;    s.serialize&lt;psl::serialization::encode_to_format&gt;(*(<a class="code" href="classcore_1_1data_1_1material.html">data::material</a>*)matData.cvalue(),</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;                                                 <a class="code" href="namespaceutility_1_1application_1_1path.html#a3934b91176cbab02adcfb3186aa5ea5d">utility::application::path::get_path</a>() + <span class="stringliteral">&quot;material_example.mat&quot;</span>);</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;    <span class="keyword">auto</span> <a class="code" href="classcore_1_1gfx_1_1material.html">material</a> = create&lt;gfx::material&gt;(cache);</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;    material.load(context_handle, matData, <a class="code" href="classcore_1_1gfx_1_1pipeline__cache.html">pipeline_cache</a>, matBuffer, matBuffer);</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;    <span class="comment">// create the ecs</span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;    core::ecs::state ECSState{};</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    core::ecs::components::transform camTrans{psl::vec3{40, 15, 150}};</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    camTrans.rotation = psl::math::look_at_q(-camTrans.position, psl::vec3::zero, psl::vec3::up);</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;    <span class="keyword">auto</span> eCam = ECSState.create_one(std::move(camTrans),</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;                                    core::ecs::tag&lt;core::ecs::components::camera&gt;{},</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;                                    core::ecs::tag&lt;core::ecs::components::input_tag&gt;{});</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> area             = 128;</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> area_granularity = 128;</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> size_steps       = 24;</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;    </div>
 <div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;</div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    core::ecs::systems::render render_system{context_handle, swapchain_handle, surface_handle, frameBuffer};</div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;    ECSState.register_system(render_system);</div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    core::ecs::systems::geometry_instance geometry_instance{};</div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;    ECSState.register_system(geometry_instance);</div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    core::ecs::systems::attractor attractor{};</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    ECSState.register_system(attractor);</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    std::chrono::high_resolution_clock::time_point last_tick = std::chrono::high_resolution_clock::now();</div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;    <span class="keywordflow">while</span>(surface_handle-&gt;tick())</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;    {</div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;        core::profiler.next_frame();</div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;        <span class="keyword">auto</span> current_time = std::chrono::high_resolution_clock::now();</div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;        std::chrono::duration&lt;float&gt; elapsed =</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;            std::chrono::duration_cast&lt;std::chrono::duration&lt;float&gt;&gt;(current_time - last_tick);</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;        last_tick = current_time;</div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;        ECSState.tick(elapsed);</div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;        ECSState.destroy(ECSState.filter&lt;core::ecs::components::dead_tag&gt;());</div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;        core::log-&gt;info(<span class="stringliteral">&quot;ECS has {} renderables alive right now&quot;</span>, ECSState.filter&lt;core::ecs::components::renderable&gt;().size());</div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;        <span class="comment">/*auto all_geom = ECSState.filter&lt;core::ecs::components::renderable, core::ecs::components::transform&gt;();</span></div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="comment">        core::log-&gt;info(&quot;ECS has {} renderables alive right now&quot;, all_geom.size());</span></div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="comment">        std::vector&lt;core::ecs::entity&gt; to_delete;</span></div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="comment">        for(size_t x = 0; x &lt; std::min(size_t{1200}, all_geom.size()); ++x)</span></div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="comment">        {</span></div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="comment">            to_delete.emplace_back(all_geom[std::rand() % all_geom.size()]);</span></div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="comment">        all_geom = std::move(to_delete);</span></div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="comment">        ECSState.destroy(all_geom);</span></div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="comment">        */</span></div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;        ECSState.create(</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;            120, core::ecs::components::renderable{material, <a class="code" href="classcore_1_1gfx_1_1geometry.html">geometry</a>, 0u},</div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;            [&amp;size_steps](<span class="keywordtype">size_t</span> index) {</div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;                <span class="keywordflow">return</span> core::ecs::components::transform{</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;                    psl::vec3(0, 0, 0),</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;                    psl::vec3((<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps,</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;                              (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps,</div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;                              (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps)};</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;            },</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;            [](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::lifetime{5.0f + ((std::rand() % 50) / 50.0f) * 5.0f}; },</div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;            [&amp;size_steps](<span class="keywordtype">size_t</span> index) {</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;                <span class="keywordflow">return</span> core::ecs::components::velocity{</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;                    psl::math::normalize(psl::vec3((<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 2.0f - 1.0f,</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;                                                   (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 2.0f - 1.0f,</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;                                                   (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 2.0f - 1.0f)),</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;                    ((std::rand() % 5000) / 500.0f) * 3.0f, 1.0f};</div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;            });</div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;        <span class="keywordflow">if</span>(ECSState.filter&lt;core::ecs::components::attractor&gt;().size() &lt; 5)</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;        {</div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;        ECSState.create(</div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;            5,</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;            [](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::lifetime{5.0f + ((std::rand() % 50) / 50.0f) * 5.0f}; },</div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;            [&amp;size_steps](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::attractor{(float)(std::rand() % size_steps) / size_steps * 3 + 0.5f, (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 80}; },</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;            [&amp;area_granularity, &amp;area, &amp;size_steps](<span class="keywordtype">size_t</span> index)</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;            {</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;                <span class="keywordflow">return</span> core::ecs::components::transform{</div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;                    psl::vec3((<span class="keywordtype">float</span>)((<span class="keywordtype">float</span>)(std::rand() % (area * area_granularity)) / (<span class="keywordtype">float</span>)area_granularity) -</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;                                  (area / 2.0f),</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;                              (<span class="keywordtype">float</span>)((<span class="keywordtype">float</span>)(std::rand() % (area * area_granularity)) / (<span class="keywordtype">float</span>)area_granularity) -</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;                                  (area / 2.0f),</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;                              (<span class="keywordtype">float</span>)((<span class="keywordtype">float</span>)(std::rand() % (area * area_granularity)) / (<span class="keywordtype">float</span>)area_granularity) -</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;                                  (area / 2.0f)),</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;</div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;                    psl::vec3((<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps,</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;                              (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps,</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;                              (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps)};</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;            });</div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;        }</div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;    }</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;    <a class="code" href="namespaceutility_1_1platform_1_1file.html#aef3e5b6b184ef28209180771bc5d5830">utility::platform::file::write</a>(<a class="code" href="namespaceutility_1_1application_1_1path.html#a3934b91176cbab02adcfb3186aa5ea5d">utility::application::path::get_path</a>() + <span class="stringliteral">&quot;frame_data.txt&quot;</span>,</div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;                                   core::profiler.to_string());</div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;}</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    core::ecs::systems::fly fly_system{surface_handle-&gt;input()};</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;    ECSState.register_system(fly_system);</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;    core::ecs::systems::render render_system{context_handle, swapchain_handle, surface_handle, frameBuffer};</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    ECSState.register_system(render_system);</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    core::ecs::systems::geometry_instance geometry_instance{};</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    ECSState.register_system(geometry_instance);</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;    core::ecs::systems::attractor attractor{};</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;    ECSState.register_system(attractor);</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    std::chrono::high_resolution_clock::time_point last_tick = std::chrono::high_resolution_clock::now();</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;    <span class="keywordflow">while</span>(surface_handle-&gt;tick())</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;    {</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;        core::profiler.next_frame();</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;        <span class="keyword">auto</span> current_time = std::chrono::high_resolution_clock::now();</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;        std::chrono::duration&lt;float&gt; elapsed =</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;            std::chrono::duration_cast&lt;std::chrono::duration&lt;float&gt;&gt;(current_time - last_tick);</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;        last_tick = current_time;</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;        ECSState.tick(elapsed);</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;        ECSState.destroy(ECSState.filter&lt;core::ecs::components::dead_tag&gt;());</div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;        core::log-&gt;info(<span class="stringliteral">&quot;ECS has {} renderables alive right now&quot;</span>, ECSState.filter&lt;core::ecs::components::renderable&gt;().size());</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;</div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;        <span class="comment">/*auto all_geom = ECSState.filter&lt;core::ecs::components::renderable, core::ecs::components::transform&gt;();</span></div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="comment">        core::log-&gt;info(&quot;ECS has {} renderables alive right now&quot;, all_geom.size());</span></div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="comment">        std::vector&lt;core::ecs::entity&gt; to_delete;</span></div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="comment">        for(size_t x = 0; x &lt; std::min(size_t{1200}, all_geom.size()); ++x)</span></div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="comment">        {</span></div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="comment">            to_delete.emplace_back(all_geom[std::rand() % all_geom.size()]);</span></div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="comment">        }</span></div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="comment">        all_geom = std::move(to_delete);</span></div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="comment">        ECSState.destroy(all_geom);</span></div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="comment">        */</span></div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;        ECSState.create(</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;            120, </div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;            core::ecs::components::renderable{material, <a class="code" href="classcore_1_1gfx_1_1geometry.html">geometry</a>, 0u},</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;            core::ecs::tag&lt;core::ecs::components::transform&gt;{}<span class="comment">/*</span></div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;<span class="comment">            [&amp;size_steps](size_t index) {</span></div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="comment">                return core::ecs::components::transform{</span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="comment">                    psl::vec3(0, 0, 0),</span></div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="comment">                    psl::vec3((float)(std::rand() % size_steps) / size_steps,</span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="comment">                              (float)(std::rand() % size_steps) / size_steps,</span></div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="comment">                              (float)(std::rand() % size_steps) / size_steps)};</span></div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="comment">            }*/</span>,</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;            [](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::lifetime{5.0f + ((std::rand() % 50) / 50.0f) * 5.0f}; },</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;            [&amp;size_steps](<span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;                <span class="keywordflow">return</span> core::ecs::components::velocity{</div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;                    psl::math::normalize(psl::vec3((<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 2.0f - 1.0f,</div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;                                                   (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 2.0f - 1.0f,</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;                                                   (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 2.0f - 1.0f)),</div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;                    ((std::rand() % 5000) / 500.0f) * 8.0f, 1.0f};</div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;            });</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;        <span class="keywordflow">if</span>(ECSState.filter&lt;core::ecs::components::attractor&gt;().size() &lt; 5)</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;        {</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;        ECSState.create(</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;            5,</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;            [](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::lifetime{5.0f + ((std::rand() % 50) / 50.0f) * 5.0f}; },</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;            [&amp;size_steps](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::attractor{(float)(std::rand() % size_steps) / size_steps * 3 + 0.5f, (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 80}; },</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;            [&amp;area_granularity, &amp;area, &amp;size_steps](<span class="keywordtype">size_t</span> index)</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;            {</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;                <span class="keywordflow">return</span> core::ecs::components::transform{</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;                    psl::vec3((<span class="keywordtype">float</span>)((<span class="keywordtype">float</span>)(std::rand() % (area * area_granularity)) / (<span class="keywordtype">float</span>)area_granularity) -</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;                                  (area / 2.0f),</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;                              (<span class="keywordtype">float</span>)((<span class="keywordtype">float</span>)(std::rand() % (area * area_granularity)) / (<span class="keywordtype">float</span>)area_granularity) -</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;                                  (area / 2.0f),</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;                              (<span class="keywordtype">float</span>)((<span class="keywordtype">float</span>)(std::rand() % (area * area_granularity)) / (<span class="keywordtype">float</span>)area_granularity) -</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;                                  (area / 2.0f)),</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;</div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;                    psl::vec3((<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps,</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;                              (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps,</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;                              (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps)};</div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;            });</div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;        }</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;    }</div>
 <div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;</div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="keyword">static</span> <span class="keywordtype">bool</span> initialized = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="preprocessor">#if defined(PLATFORM_ANDROID)</span></div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="comment">// todo deal with this extern</span></div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;android_app* platform::specifics::android_application;</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;</div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="keywordtype">void</span> handleAppCommand(android_app* app, int32_t cmd)</div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;{</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;    <span class="keywordflow">switch</span>(cmd)</div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;    {</div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;    <span class="keywordflow">case</span> APP_CMD_INIT_WINDOW: initialized = <span class="keyword">true</span>; <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;    }</div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;}</div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;</div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;int32_t handleAppInput(<span class="keyword">struct</span> android_app* app, AInputEvent* event) {}</div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;</div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="keywordtype">void</span> android_main(android_app* application)</div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;{</div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;    application-&gt;onAppCmd = handleAppCommand;</div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;    <span class="comment">// Screen density</span></div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;    AConfiguration* config = AConfiguration_new();</div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;    AConfiguration_fromAssetManager(config, application-&gt;activity-&gt;assetManager);</div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;    <span class="comment">// vks::android::screenDensity = AConfiguration_getDensity(config);</span></div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;    AConfiguration_delete(config);</div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;</div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;    <span class="keywordflow">while</span>(!initialized)</div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    {</div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;        <span class="keywordtype">int</span> ident;</div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;        <span class="keywordtype">int</span> events;</div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;        <span class="keyword">struct </span>android_poll_source* source;</div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;        <span class="keywordtype">bool</span> destroy = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;</div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;        <span class="keywordflow">while</span>((ident = ALooper_pollAll(0, NULL, &amp;events, (<span class="keywordtype">void</span>**)&amp;source)) &gt;= 0)</div>
-<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;        {</div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;            <span class="keywordflow">if</span>(source != NULL)</div>
-<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;            {</div>
-<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;                source-&gt;process(application, source);</div>
-<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;            }</div>
-<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;        }</div>
-<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;    }</div>
-<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;</div>
-<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;    platform::specifics::android_application = application;</div>
-<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;    android_entry();</div>
-<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;}</div>
-<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="preprocessor">#elif defined(PLATFORM_WINDOWS) || defined(PLATFORM_LINUX)</span></div>
-<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;<span class="preprocessor"></span><span class="keywordtype">int</span> main() { <span class="keywordflow">return</span> entry(); }</div>
-<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    <a class="code" href="namespaceutility_1_1platform_1_1file.html#aef3e5b6b184ef28209180771bc5d5830">utility::platform::file::write</a>(<a class="code" href="namespaceutility_1_1application_1_1path.html#a3934b91176cbab02adcfb3186aa5ea5d">utility::application::path::get_path</a>() + <span class="stringliteral">&quot;frame_data.txt&quot;</span>,</div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;                                   core::profiler.to_string());</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;}</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;</div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="keyword">static</span> <span class="keywordtype">bool</span> initialized = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="preprocessor">#if defined(PLATFORM_ANDROID)</span></div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="comment">// todo deal with this extern</span></div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;android_app* platform::specifics::android_application;</div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;</div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="keywordtype">void</span> handleAppCommand(android_app* app, int32_t cmd)</div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;{</div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;    <span class="keywordflow">switch</span>(cmd)</div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;    {</div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;    <span class="keywordflow">case</span> APP_CMD_INIT_WINDOW: initialized = <span class="keyword">true</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;    }</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;}</div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;</div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;int32_t handleAppInput(<span class="keyword">struct</span> android_app* app, AInputEvent* event) {}</div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;</div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="keywordtype">void</span> android_main(android_app* application)</div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;{</div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;    application-&gt;onAppCmd = handleAppCommand;</div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;    <span class="comment">// Screen density</span></div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;    AConfiguration* config = AConfiguration_new();</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    AConfiguration_fromAssetManager(config, application-&gt;activity-&gt;assetManager);</div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;    <span class="comment">// vks::android::screenDensity = AConfiguration_getDensity(config);</span></div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;    AConfiguration_delete(config);</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;</div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;    <span class="keywordflow">while</span>(!initialized)</div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;    {</div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;        <span class="keywordtype">int</span> ident;</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;        <span class="keywordtype">int</span> events;</div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;        <span class="keyword">struct </span>android_poll_source* source;</div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;        <span class="keywordtype">bool</span> destroy = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;</div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;        <span class="keywordflow">while</span>((ident = ALooper_pollAll(0, NULL, &amp;events, (<span class="keywordtype">void</span>**)&amp;source)) &gt;= 0)</div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;        {</div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;            <span class="keywordflow">if</span>(source != NULL)</div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;            {</div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;                source-&gt;process(application, source);</div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;            }</div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;        }</div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;    }</div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;</div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;    platform::specifics::android_application = application;</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;    android_entry();</div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;}</div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;<span class="preprocessor">#elif defined(PLATFORM_WINDOWS) || defined(PLATFORM_LINUX)</span></div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="preprocessor"></span><span class="keywordtype">int</span> main() { <span class="keywordflow">return</span> entry(); }</div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="structcore_1_1data_1_1geometry_1_1constants_html_ad7b522dc309f2a6f4b90b17af761c5c7"><div class="ttname"><a href="structcore_1_1data_1_1geometry_1_1constants.html#ad7b522dc309f2a6f4b90b17af761c5c7">core::data::geometry::constants::COLOR</a></div><div class="ttdeci">static constexpr psl::string_view COLOR</div><div class="ttdoc">vertex color data key </div><div class="ttdef"><b>Definition:</b> <a href="data_2geometry_8h_source.html#l00046">geometry.h:46</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1geometry_html"><div class="ttname"><a href="classcore_1_1gfx_1_1geometry.html">core::gfx::geometry</a></div><div class="ttdoc">describes the driver visible concept of geometry. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2geometry_8h_source.html#l00016">geometry.h:16</a></div></div>
 <div class="ttc" id="structpsl_1_1_u_i_d_html_a2c692f1537e0626d3bfe4ed49a0e3eab"><div class="ttname"><a href="structpsl_1_1_u_i_d.html#a2c692f1537e0626d3bfe4ed49a0e3eab">psl::UID::convert</a></div><div class="ttdeci">static UID convert(const psl::string8_t &amp;key)</div><div class="ttdoc">tries to convert from the given string based representation to a valid UID. </div><div class="ttdef"><b>Definition:</b> <a href="meta_8cpp_source.html#l00095">meta.cpp:95</a></div></div>
@@ -956,7 +961,6 @@ $(document).ready(function(){initNavTree('core_8cpp_source.html','');});
 <div class="ttc" id="classcore_1_1resource_1_1handle_html_a951620c17cee25dc03800e628670bd51"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51">core::resource::handle::load</a></div><div class="ttdeci">bool load(Args &amp;&amp;...args)</div><div class="ttdoc">loads the resource with the given arguments. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00645">resource.h:645</a></div></div>
 <div class="ttc" id="namespacepsl_html_a4aefbed6301998f899153b7a4f4140db"><div class="ttname"><a href="namespacepsl.html#a4aefbed6301998f899153b7a4f4140db">psl::to_string8_t</a></div><div class="ttdeci">static psl::string8_t to_string8_t(const psl::string &amp;s)</div><div class="ttdoc">converts a psl::string into a UTF-8 string. </div><div class="ttdef"><b>Definition:</b> <a href="ustring_8h_source.html#l00244">ustring.h:244</a></div></div>
 <div class="ttc" id="classmemory_1_1default__allocator_html"><div class="ttname"><a href="classmemory_1_1default__allocator.html">memory::default_allocator</a></div><div class="ttdoc">default allocator that internally works using lists </div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00058">allocator.h:58</a></div></div>
-<div class="ttc" id="namespaceutility_1_1geometry_html_a704c51bfe4662c05a94b580499203aba"><div class="ttname"><a href="namespaceutility_1_1geometry.html#a704c51bfe4662c05a94b580499203aba">utility::geometry::create_box</a></div><div class="ttdeci">static core::resource::handle&lt; core::data::geometry &gt; create_box(core::resource::cache &amp;cache, psl::vec3 scale=psl::vec3::one)</div><div class="ttdoc">generates a box primitive with a pivot of {0,0,0}. </div><div class="ttdef"><b>Definition:</b> <a href="utility_2geometry_8h_source.html#l00200">geometry.h:200</a></div></div>
 <div class="ttc" id="classcore_1_1resource_1_1handle_html"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html">core::resource::handle</a></div><div class="ttdoc">wraps around a resource for sharing and management purposes. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00033">resource.h:33</a></div></div>
 <div class="ttc" id="classcore_1_1stream_html_a933b587ae1f7753675b21a32be1e15d3"><div class="ttname"><a href="classcore_1_1stream.html#a933b587ae1f7753675b21a32be1e15d3">core::stream::as_vec3</a></div><div class="ttdeci">std::optional&lt; std::reference_wrapper&lt; std::vector&lt; psl::vec3 &gt; &gt; &gt; as_vec3()</div><div class="ttdoc">returns the type safe variant of the stream as a reference. </div><div class="ttdef"><b>Definition:</b> <a href="stream_8h_source.html#l00073">stream.h:73</a></div></div>
 <div class="ttc" id="classcore_1_1meta_1_1shader_html"><div class="ttname"><a href="classcore_1_1meta_1_1shader.html">core::meta::shader</a></div><div class="ttdoc">contains extensions for meta data when loading shader files. </div><div class="ttdef"><b>Definition:</b> <a href="meta_2shader_8h_source.html#l00011">shader.h:11</a></div></div>

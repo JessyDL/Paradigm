@@ -133,6 +133,22 @@ Functions</h2></td></tr>
 &lt; <a class="el" href="classcore_1_1data_1_1geometry.html">core::data::geometry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutility_1_1geometry.html#a704c51bfe4662c05a94b580499203aba">create_box</a> (<a class="el" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a> &amp;cache, psl::vec3 scale=psl::vec3::one)</td></tr>
 <tr class="memdesc:a704c51bfe4662c05a94b580499203aba"><td class="mdescLeft">&#160;</td><td class="mdescRight">generates a box primitive with a pivot of {0,0,0}.  <a href="#a704c51bfe4662c05a94b580499203aba">More...</a><br/></td></tr>
 <tr class="separator:a704c51bfe4662c05a94b580499203aba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64bdd9e9408de4ff52e51986ec694110"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64bdd9e9408de4ff52e51986ec694110"></a>
+static <a class="el" href="classcore_1_1resource_1_1handle.html">core::resource::handle</a><br class="typebreak"/>
+&lt; <a class="el" href="classcore_1_1data_1_1geometry.html">core::data::geometry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>create_spherified_cube</b> (<a class="el" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a> &amp;cache, psl::vec3 scale=psl::vec3::one, uint32_t divisions=4)</td></tr>
+<tr class="separator:a64bdd9e9408de4ff52e51986ec694110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2075614151b67f8c1bb65fdff2155b89"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2075614151b67f8c1bb65fdff2155b89"></a>
+static <a class="el" href="classcore_1_1resource_1_1handle.html">core::resource::handle</a><br class="typebreak"/>
+&lt; <a class="el" href="classcore_1_1data_1_1geometry.html">core::data::geometry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>create_cone</b> (<a class="el" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a> &amp;cache, float height=1.0f, float topRadius=1.0f, float bottomRadius=1.0f, uint32_t sides=18)</td></tr>
+<tr class="separator:a2075614151b67f8c1bb65fdff2155b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf2111799e87485550d3dded95be7746"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf2111799e87485550d3dded95be7746"></a>
+static <a class="el" href="classcore_1_1resource_1_1handle.html">core::resource::handle</a><br class="typebreak"/>
+&lt; <a class="el" href="classcore_1_1data_1_1geometry.html">core::data::geometry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>create_sphere</b> (<a class="el" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a> &amp;cache, psl::vec3 scale=psl::vec3::one, uint16_t longitude=24, uint16_t latitude=16)</td></tr>
+<tr class="separator:abf2111799e87485550d3dded95be7746"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a567c68b5699305df47cbfab8bfce24"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6a567c68b5699305df47cbfab8bfce24"></a>
+static <a class="el" href="classcore_1_1resource_1_1handle.html">core::resource::handle</a><br class="typebreak"/>
+&lt; <a class="el" href="classcore_1_1data_1_1geometry.html">core::data::geometry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>create_icosphere</b> (<a class="el" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a> &amp;cache, psl::vec3 scale=psl::vec3::one, size_t subdivisions=2)</td></tr>
+<tr class="separator:a6a567c68b5699305df47cbfab8bfce24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ae66e362257c10c36e17c5b7c8b257142"></a>
@@ -218,7 +234,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>it is expected this is valid geometry data, only minimal to no data validation is done. </dd></dl>
 
-<p>Definition at line <a class="el" href="utility_2geometry_8h_source.html#l00058">58</a> of file <a class="el" href="utility_2geometry_8h_source.html">geometry.h</a>.</p>
+<p>Definition at line <a class="el" href="utility_2geometry_8h_source.html#l00060">60</a> of file <a class="el" href="utility_2geometry_8h_source.html">geometry.h</a>.</p>
 
 </div>
 </div>
@@ -344,7 +360,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>the handle to the generated geometry data. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>the final size of the object is always 2x the extents. This means that a size {2, 1} results into a min-coordinate {-2, -1} and max-coordinate {2, 1}. </dd></dl>
 
-<p>Definition at line <a class="el" href="utility_2geometry_8h_source.html#l00142">142</a> of file <a class="el" href="utility_2geometry_8h_source.html">geometry.h</a>.</p>
+<p>Definition at line <a class="el" href="utility_2geometry_8h_source.html#l00144">144</a> of file <a class="el" href="utility_2geometry_8h_source.html">geometry.h</a>.</p>
 
 </div>
 </div>
@@ -389,7 +405,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>the handle to the generated geometry data. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>unlike extent, scale implies that the final size is equal to the scale (i.e. an object of 1 unit at a scale of 1 is equal to 1unit). </dd></dl>
 
-<p>Definition at line <a class="el" href="utility_2geometry_8h_source.html#l00200">200</a> of file <a class="el" href="utility_2geometry_8h_source.html">geometry.h</a>.</p>
+<p>Definition at line <a class="el" href="utility_2geometry_8h_source.html#l00208">208</a> of file <a class="el" href="utility_2geometry_8h_source.html">geometry.h</a>.</p>
 
 </div>
 </div>
