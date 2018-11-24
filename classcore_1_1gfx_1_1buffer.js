@@ -8,6 +8,7 @@ var classcore_1_1gfx_1_1buffer =
     [ "operator=", "classcore_1_1gfx_1_1buffer.html#a44a7ca6b70e8900970716b86b914cef2", null ],
     [ "operator=", "classcore_1_1gfx_1_1buffer.html#a0faf9846a1c8e1714bce11e99aff44d8", null ],
     [ "reserve", "classcore_1_1gfx_1_1buffer.html#ae499bbfdb86f7fb33aedfb669fad683a", null ],
+    [ "free_size", "classcore_1_1gfx_1_1buffer.html#a597b700baf57e053c270921cedd6657d", null ],
     [ "reserve", "classcore_1_1gfx_1_1buffer.html#aa2e17dad2ce8a0b562f7ecba2178aef6", null ],
     [ "commit", "classcore_1_1gfx_1_1buffer.html#a1fa9fe61eab8f498a9224d885ec84cf7", null ],
     [ "deallocate", "classcore_1_1gfx_1_1buffer.html#af24be29ede5663407ce919525a5f64b9", null ],

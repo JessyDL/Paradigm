@@ -13,6 +13,8 @@ var classcore_1_1resource_1_1handle =
     [ "operator tag< T >", "classcore_1_1resource_1_1handle.html#a2b3be435d2f2dfd2fdc8eb6946f704ce", null ],
     [ "operator bool", "classcore_1_1resource_1_1handle.html#a1484725bb7f3031d016198bf09c0a262", null ],
     [ "resource_state", "classcore_1_1resource_1_1handle.html#a963f95ec3aeb7567ff4bc6617254a788", null ],
+    [ "operator==", "classcore_1_1resource_1_1handle.html#aa4ed4f952e5f28893a68f282c2be391f", null ],
+    [ "operator!=", "classcore_1_1resource_1_1handle.html#aa9758d90f3c13906dca10f569fc2f348", null ],
     [ "load", "classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51", null ],
     [ "operator->", "classcore_1_1resource_1_1handle.html#a5e7dcd131c19ed72db5c9d30006db050", null ],
     [ "operator->", "classcore_1_1resource_1_1handle.html#a8fec57133615042a407cad4f589789f0", null ],

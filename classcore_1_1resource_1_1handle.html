@@ -155,6 +155,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a963f95ec3aeb7567ff4bc6617254a788"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a963f95ec3aeb7567ff4bc6617254a788"></a>
 <a class="el" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>&#160;</td><td class="memItemRight" valign="bottom"><b>resource_state</b> () const noexcept</td></tr>
 <tr class="separator:a963f95ec3aeb7567ff4bc6617254a788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ed4f952e5f28893a68f282c2be391f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa4ed4f952e5f28893a68f282c2be391f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="classcore_1_1resource_1_1handle.html">handle</a> &amp;other)</td></tr>
+<tr class="separator:aa4ed4f952e5f28893a68f282c2be391f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9758d90f3c13906dca10f569fc2f348"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9758d90f3c13906dca10f569fc2f348"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (const <a class="el" href="classcore_1_1resource_1_1handle.html">handle</a> &amp;other)</td></tr>
+<tr class="separator:aa9758d90f3c13906dca10f569fc2f348"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a951620c17cee25dc03800e628670bd51"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a951620c17cee25dc03800e628670bd51"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51">load</a> (Args &amp;&amp;...args)</td></tr>
 <tr class="memdesc:a951620c17cee25dc03800e628670bd51"><td class="mdescLeft">&#160;</td><td class="mdescRight">loads the resource with the given arguments.  <a href="#a951620c17cee25dc03800e628670bd51">More...</a><br/></td></tr>
@@ -343,7 +349,7 @@ template&lt;typename... Args&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>true if the resource is loaded</dd></dl>
 <p>loads the resource with the given arguments. In case the resource already exists, the arguments are ignored and the already loaded resource is returned instead. </p>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00645">645</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00652">652</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -380,7 +386,7 @@ template&lt;typename T&gt; </div>
 <p>&gt;ill try to unload the resource. In case that this is the last handle to the resource, it will clean itself up and return success, otherwise it will fail and return false. It will also fail when the resource is not yet loaded, and it will <em>not</em> unload when it finally is loaded, you'll have to call this again. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Regardless of success, the handle will become invalid. </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00777">777</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00784">784</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -408,7 +414,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the UID assigned to the handle </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00785">785</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00792">792</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -439,7 +445,7 @@ template&lt;typename T&gt; </div>
 <dd>
 the <a class="el" href="classcore_1_1resource_1_1handle.html#aa8046384a86c913041c0910a5f1f02f3">ID()</a> and <a class="el" href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">RUID()</a> are the same for generated resources, as then the "Resource UID" is considered the memory location of the handle. </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00794">794</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00801">801</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>

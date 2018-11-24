@@ -723,265 +723,283 @@ $(document).ready(function(){initNavTree('resource_8h_source.html','');});
 <div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;</div>
 <div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;        <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a> resource_state() const noexcept { <span class="keywordflow">return</span> (!m_Container) ? <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442eaccc0377a8afbf50e7094f5c23a8af223">state::INVALID</a> : m_Container-&gt;m_State; }</div>
 <div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00645"></a><span class="lineno"><a class="line" href="classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51">  645</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51">load</a>(Args&amp;&amp;... args)</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;        {</div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;            PROFILE_SCOPE(core::profiler)</div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;            <span class="keywordflow">if</span> constexpr(details::has_resource_dependency&lt;T&gt;::value)</div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;            {</div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;                <span class="keywordflow">if</span> constexpr(!std::is_constructible&lt;T, typename T::resource_dependency, Args...&gt;::value)</div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;                {</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;                    static_assert(</div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;                        utility::templates::always_false_v&lt;T&gt;,</div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;                        <span class="stringliteral">&quot;there was no suitable constructor for the given type that would accept these arguments.&quot;</span>);</div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;                }</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;                <span class="keyword">typename</span> T::resource_dependency pac;</div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;                <span class="keywordflow">if</span> constexpr(details::has_packet&lt;psl::UID, typename T::resource_dependency&gt;::value)</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;        <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> handle&amp; other)</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;        {</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;            <span class="keywordflow">return</span> other.uid == uid;</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;        }</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;        <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> handle&amp; other)</div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;        {</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;            <span class="keywordflow">return</span> other.uid != uid;</div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;        }</div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00652"></a><span class="lineno"><a class="line" href="classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51">  652</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51">load</a>(Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;        {</div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;            PROFILE_SCOPE(core::profiler)</div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;            <span class="keywordflow">if</span> constexpr(details::has_resource_dependency&lt;T&gt;::value)</div>
+<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;            {</div>
+<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;                <span class="keywordflow">if</span> constexpr(!std::is_constructible&lt;T, typename T::resource_dependency, Args...&gt;::value)</div>
 <div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;                {</div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;                    std::get&lt;details::packet&lt;psl::UID&gt;&gt;(pac.data) = details::packet&lt;psl::UID&gt;(uid);</div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;                }</div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;                <span class="keywordflow">if</span> constexpr(details::has_packet&lt;core::resource::cache, typename T::resource_dependency&gt;::value)</div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;                {</div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;                    std::get&lt;details::packet&lt;core::resource::cache&gt;&gt;(pac.data) =</div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;                        details::packet&lt;core::resource::cache&gt;(*m_Cache);</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;                }</div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;</div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;                <span class="keywordflow">if</span>(!uid) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;</div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;                <span class="keywordflow">if</span>(m_Container-&gt;m_State == state::NOT_LOADED || m_Container-&gt;m_State == state::UNLOADED)</div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;                {</div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;                    m_Container-&gt;m_State = state::LOADING;</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;                    <span class="keywordflow">if</span>(m_Container-&gt;set(*m_Cache, pac, std::forward&lt;Args&gt;(args)...))</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;                    {</div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;                        <span class="keywordflow">if</span> constexpr(psl::serialization::details::is_collection&lt;T&gt;::value)</div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;                        {</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;                            <span class="keywordflow">if</span>(<span class="keyword">auto</span> result = m_Cache-&gt;library().<a class="code" href="classpsl_1_1meta_1_1library.html#a667f5b9b1544433ad7a8a94403d6afa3">load</a>(resource_uid); result)</div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;                            {</div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;                                psl::serialization::serializer s;</div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;                                psl::format::container cont{result.value()};</div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;                                s.deserialize&lt;psl::serialization::decode_from_format, T&gt;(*(m_Container-&gt;resource()), cont);</div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;                            }</div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;                        }</div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;                        m_Container-&gt;m_State = state::LOADED;</div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;                    }</div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;                    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;                    {</div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;                        m_Container-&gt;m_State = <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442eaccc0377a8afbf50e7094f5c23a8af223">state::INVALID</a>;</div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;                    }</div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;                }</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;</div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;                <span class="keywordflow">return</span> m_Container-&gt;m_State == state::LOADED;</div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;            }</div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr(std::is_constructible&lt;T, const psl::UID&amp;, cache&amp;, Args...&gt;::value)</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;            {</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;                <span class="keywordflow">if</span>(!uid) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;</div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;                <span class="keywordflow">if</span>(m_Container-&gt;m_State == state::NOT_LOADED || m_Container-&gt;m_State == state::UNLOADED)</div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;                {</div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;                    m_Container-&gt;m_State = state::LOADING;</div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;                    <span class="keywordflow">if</span>(m_Container-&gt;set(uid, *m_Cache, std::forward&lt;Args&gt;(args)...))</div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;                    {</div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;                        <span class="keywordflow">if</span> constexpr(psl::serialization::details::is_collection&lt;T&gt;::value)</div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;                        {</div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;                            <span class="keywordflow">if</span>(<span class="keyword">auto</span> result = m_Cache-&gt;library().<a class="code" href="classpsl_1_1meta_1_1library.html#a667f5b9b1544433ad7a8a94403d6afa3">load</a>(resource_uid); result)</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;                            {</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;                                psl::serialization::serializer s;</div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;                                psl::format::container cont{result.value()};</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;                                s.deserialize&lt;psl::serialization::decode_from_format, T&gt;(*(m_Container-&gt;resource()), cont);</div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;                            }</div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;                        }</div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;                        m_Container-&gt;m_State = state::LOADED;</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;                    }</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;                    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;                    {</div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;                        m_Container-&gt;m_State = <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442eaccc0377a8afbf50e7094f5c23a8af223">state::INVALID</a>;</div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;                    }</div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;                }</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;</div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;                <span class="keywordflow">return</span> m_Container-&gt;m_State == state::LOADED;</div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;            }</div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr(std::is_constructible&lt;T, const psl::UID&amp;, cache&amp;, psl::meta::file*, Args...&gt;::value)</div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;            {</div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;                <span class="keywordflow">if</span>(!uid) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;</div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;                <span class="keywordflow">if</span>(m_Container-&gt;m_State == state::NOT_LOADED || m_Container-&gt;m_State == state::UNLOADED)</div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;                {</div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;                    m_Container-&gt;m_State = state::LOADING;</div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;                    <span class="keyword">auto</span> metaPtr         = m_Cache-&gt;library().<a class="code" href="classpsl_1_1meta_1_1library.html#aef9fbac098dbaec1a9a6ff6dcba8b652">get</a>(resource_uid);</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;                    <span class="keywordflow">if</span>(metaPtr &amp;&amp; m_Container-&gt;set(uid, *m_Cache, metaPtr.value(), std::forward&lt;Args&gt;(args)...))</div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;                    {</div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;                        <span class="keywordflow">if</span> constexpr(psl::serialization::details::is_collection&lt;T&gt;::value)</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;                        {</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;                            <span class="keywordflow">if</span>(<span class="keyword">auto</span> result = m_Cache-&gt;library().<a class="code" href="classpsl_1_1meta_1_1library.html#a667f5b9b1544433ad7a8a94403d6afa3">load</a>(resource_uid); result)</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;                            {</div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;                                psl::serialization::serializer s;</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;                                psl::format::container cont{result.value()};</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;                                s.deserialize&lt;psl::serialization::decode_from_format, T&gt;(*(m_Container-&gt;resource()), cont);</div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;                            }</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;                        }</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;                        m_Container-&gt;m_State = state::LOADED;</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;                    }</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;                    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;                    {</div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;                        m_Container-&gt;m_State = <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442eaccc0377a8afbf50e7094f5c23a8af223">state::INVALID</a>;</div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;                    }</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;                }</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;</div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;                <span class="keywordflow">return</span> m_Container-&gt;m_State == state::LOADED;</div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;            }</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;            {</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;                static_assert(</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;                    utility::templates::always_false_v&lt;T&gt;,</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;                    <span class="stringliteral">&quot;there was no suitable constructor for the given type that would accept these arguments.&quot;</span>);</div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;            }</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;        }</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;        T* operator-&gt;() { <span class="keywordflow">return</span> (m_Container &amp;&amp; m_Container-&gt;has_value()) ? m_Container-&gt;resource() : <span class="keyword">nullptr</span>; }</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;        <span class="keyword">const</span> T* operator-&gt;()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;            <span class="keywordflow">return</span> (m_Container &amp;&amp; m_Container-&gt;has_value()) ? m_Container-&gt;resource() : <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;        }</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;</div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;        <span class="keyword">const</span> T* cvalue()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;            <span class="keywordflow">return</span> (m_Container &amp;&amp; m_Container-&gt;has_value()) ? m_Container-&gt;resource() : <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;        }</div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;</div>
-<div class="line"><a name="l00777"></a><span class="lineno"><a class="line" href="classcore_1_1resource_1_1handle.html#a4a7b7fdd7e0bd7916434084ad8048a6d">  777</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcore_1_1resource_1_1handle.html#a4a7b7fdd7e0bd7916434084ad8048a6d">unload</a>(<span class="keywordtype">bool</span> force = <span class="keyword">false</span>)</div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;        {</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;            PROFILE_SCOPE(core::profiler)</div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;            m_Container.reset();</div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;reset&lt;T&gt;(resource_uid, force);</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;        }</div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;</div>
-<div class="line"><a name="l00785"></a><span class="lineno"><a class="line" href="classcore_1_1resource_1_1handle.html#aa8046384a86c913041c0910a5f1f02f3">  785</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp; <a class="code" href="classcore_1_1resource_1_1handle.html#aa8046384a86c913041c0910a5f1f02f3">ID</a>() const noexcept { <span class="keywordflow">return</span> uid; }</div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;</div>
-<div class="line"><a name="l00794"></a><span class="lineno"><a class="line" href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">  794</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp; <a class="code" href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">RUID</a>() const noexcept { <span class="keywordflow">return</span> resource_uid; }</div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;</div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;        <span class="keyword">typename</span> std::enable_if&lt;std::is_constructible&lt;T, <span class="keyword">const</span> T&amp;, <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp;, cache&amp;, Args...&gt;::value, <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;T&gt;</a>&gt;::type</div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;        copy(cache&amp; cache, Args&amp;&amp;... args)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;            PROFILE_SCOPE(core::profiler)</div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;            auto res =</div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;                (m_Cache-&gt;library().is_physical_file(resource_uid) ? <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt;(cache, psl::UID::generate(), resource_uid)</div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;                                                                   : <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt;(cache));</div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;</div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;            if(m_Container &amp;&amp; m_Container-&gt;has_value())</div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;            {</div>
-<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;                res.m_Container-&gt;copy_set(*m_Container-&gt;resource(), res.uid, cache, std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;                res.m_Container-&gt;m_State = m_Container-&gt;m_State;</div>
-<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;            }</div>
-<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;</div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;                    static_assert(</div>
+<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;                        utility::templates::always_false_v&lt;T&gt;,</div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;                        <span class="stringliteral">&quot;there was no suitable constructor for the given type that would accept these arguments.&quot;</span>);</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;                }</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;                <span class="keyword">typename</span> T::resource_dependency pac;</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;                <span class="keywordflow">if</span> constexpr(details::has_packet&lt;psl::UID, typename T::resource_dependency&gt;::value)</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;                {</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;                    std::get&lt;details::packet&lt;psl::UID&gt;&gt;(pac.data) = details::packet&lt;psl::UID&gt;(uid);</div>
+<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;                }</div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;                <span class="keywordflow">if</span> constexpr(details::has_packet&lt;core::resource::cache, typename T::resource_dependency&gt;::value)</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;                {</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;                    std::get&lt;details::packet&lt;core::resource::cache&gt;&gt;(pac.data) =</div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;                        details::packet&lt;core::resource::cache&gt;(*m_Cache);</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;                }</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;                <span class="keywordflow">if</span>(!uid) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;                <span class="keywordflow">if</span>(m_Container-&gt;m_State == state::NOT_LOADED || m_Container-&gt;m_State == state::UNLOADED)</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;                {</div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;                    m_Container-&gt;m_State = state::LOADING;</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;                    <span class="keywordflow">if</span>(m_Container-&gt;set(*m_Cache, pac, std::forward&lt;Args&gt;(args)...))</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;                    {</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;                        <span class="keywordflow">if</span> constexpr(psl::serialization::details::is_collection&lt;T&gt;::value)</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;                        {</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;                            <span class="keywordflow">if</span>(<span class="keyword">auto</span> result = m_Cache-&gt;library().<a class="code" href="classpsl_1_1meta_1_1library.html#a667f5b9b1544433ad7a8a94403d6afa3">load</a>(resource_uid); result)</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;                            {</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;                                psl::serialization::serializer s;</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;                                psl::format::container cont{result.value()};</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;                                s.deserialize&lt;psl::serialization::decode_from_format, T&gt;(*(m_Container-&gt;resource()), cont);</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;                            }</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;                        }</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;                        m_Container-&gt;m_State = state::LOADED;</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;                    }</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;                    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;                    {</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;                        m_Container-&gt;m_State = <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442eaccc0377a8afbf50e7094f5c23a8af223">state::INVALID</a>;</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;                    }</div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;                }</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;                <span class="keywordflow">return</span> m_Container-&gt;m_State == state::LOADED;</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;            }</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr(std::is_constructible&lt;T, const psl::UID&amp;, cache&amp;, Args...&gt;::value)</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;            {</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;                <span class="keywordflow">if</span>(!uid) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;                <span class="keywordflow">if</span>(m_Container-&gt;m_State == state::NOT_LOADED || m_Container-&gt;m_State == state::UNLOADED)</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;                {</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;                    m_Container-&gt;m_State = state::LOADING;</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;                    <span class="keywordflow">if</span>(m_Container-&gt;set(uid, *m_Cache, std::forward&lt;Args&gt;(args)...))</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;                    {</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;                        <span class="keywordflow">if</span> constexpr(psl::serialization::details::is_collection&lt;T&gt;::value)</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;                        {</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;                            <span class="keywordflow">if</span>(<span class="keyword">auto</span> result = m_Cache-&gt;library().<a class="code" href="classpsl_1_1meta_1_1library.html#a667f5b9b1544433ad7a8a94403d6afa3">load</a>(resource_uid); result)</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;                            {</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;                                psl::serialization::serializer s;</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;                                psl::format::container cont{result.value()};</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;                                s.deserialize&lt;psl::serialization::decode_from_format, T&gt;(*(m_Container-&gt;resource()), cont);</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;                            }</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;                        }</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;                        m_Container-&gt;m_State = state::LOADED;</div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;                    }</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;                    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;                    {</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;                        m_Container-&gt;m_State = <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442eaccc0377a8afbf50e7094f5c23a8af223">state::INVALID</a>;</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;                    }</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;                }</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;                <span class="keywordflow">return</span> m_Container-&gt;m_State == state::LOADED;</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;            }</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> constexpr(std::is_constructible&lt;T, const psl::UID&amp;, cache&amp;, psl::meta::file*, Args...&gt;::value)</div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;            {</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;                <span class="keywordflow">if</span>(!uid) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;                <span class="keywordflow">if</span>(m_Container-&gt;m_State == state::NOT_LOADED || m_Container-&gt;m_State == state::UNLOADED)</div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;                {</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;                    m_Container-&gt;m_State = state::LOADING;</div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;                    <span class="keyword">auto</span> metaPtr         = m_Cache-&gt;library().<a class="code" href="classpsl_1_1meta_1_1library.html#aef9fbac098dbaec1a9a6ff6dcba8b652">get</a>(resource_uid);</div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;                    <span class="keywordflow">if</span>(metaPtr &amp;&amp; m_Container-&gt;set(uid, *m_Cache, metaPtr.value(), std::forward&lt;Args&gt;(args)...))</div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;                    {</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;                        <span class="keywordflow">if</span> constexpr(psl::serialization::details::is_collection&lt;T&gt;::value)</div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;                        {</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;                            <span class="keywordflow">if</span>(<span class="keyword">auto</span> result = m_Cache-&gt;library().<a class="code" href="classpsl_1_1meta_1_1library.html#a667f5b9b1544433ad7a8a94403d6afa3">load</a>(resource_uid); result)</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;                            {</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;                                psl::serialization::serializer s;</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;                                psl::format::container cont{result.value()};</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;                                s.deserialize&lt;psl::serialization::decode_from_format, T&gt;(*(m_Container-&gt;resource()), cont);</div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;                            }</div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;                        }</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;                        m_Container-&gt;m_State = state::LOADED;</div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;                    }</div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;                    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;                    {</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;                        m_Container-&gt;m_State = <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442eaccc0377a8afbf50e7094f5c23a8af223">state::INVALID</a>;</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;                    }</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;                }</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;                <span class="keywordflow">return</span> m_Container-&gt;m_State == state::LOADED;</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;            }</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;            {</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;                static_assert(</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;                    utility::templates::always_false_v&lt;T&gt;,</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;                    <span class="stringliteral">&quot;there was no suitable constructor for the given type that would accept these arguments.&quot;</span>);</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;            }</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;        }</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;        T* operator-&gt;() { <span class="keywordflow">return</span> (m_Container &amp;&amp; m_Container-&gt;has_value()) ? m_Container-&gt;resource() : <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;</div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;        <span class="keyword">const</span> T* operator-&gt;()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;            <span class="keywordflow">return</span> (m_Container &amp;&amp; m_Container-&gt;has_value()) ? m_Container-&gt;resource() : <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;        }</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;</div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;        <span class="keyword">const</span> T* cvalue()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;            <span class="keywordflow">return</span> (m_Container &amp;&amp; m_Container-&gt;has_value()) ? m_Container-&gt;resource() : <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;        }</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;</div>
+<div class="line"><a name="l00784"></a><span class="lineno"><a class="line" href="classcore_1_1resource_1_1handle.html#a4a7b7fdd7e0bd7916434084ad8048a6d">  784</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcore_1_1resource_1_1handle.html#a4a7b7fdd7e0bd7916434084ad8048a6d">unload</a>(<span class="keywordtype">bool</span> force = <span class="keyword">false</span>)</div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;        {</div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;            PROFILE_SCOPE(core::profiler)</div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;            m_Container.reset();</div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;reset&lt;T&gt;(resource_uid, force);</div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;        }</div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;</div>
+<div class="line"><a name="l00792"></a><span class="lineno"><a class="line" href="classcore_1_1resource_1_1handle.html#aa8046384a86c913041c0910a5f1f02f3">  792</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp; <a class="code" href="classcore_1_1resource_1_1handle.html#aa8046384a86c913041c0910a5f1f02f3">ID</a>() const noexcept { <span class="keywordflow">return</span> uid; }</div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;</div>
+<div class="line"><a name="l00801"></a><span class="lineno"><a class="line" href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">  801</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp; <a class="code" href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">RUID</a>() const noexcept { <span class="keywordflow">return</span> resource_uid; }</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;        <span class="keyword">typename</span> std::enable_if&lt;std::is_constructible&lt;T, <span class="keyword">const</span> T&amp;, <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp;, cache&amp;, Args...&gt;::value, <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;T&gt;</a>&gt;::type</div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;        copy(cache&amp; cache, Args&amp;&amp;... args)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;            PROFILE_SCOPE(core::profiler)</div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;            auto res =</div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;                (m_Cache-&gt;library().is_physical_file(resource_uid) ? <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt;(cache, psl::UID::generate(), resource_uid)</div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;                                                                   : <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt;(cache));</div>
 <div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;</div>
-<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;            <span class="keywordflow">return</span> res;</div>
-<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;        }</div>
-<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;</div>
-<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;</div>
-<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;        cache* m_Cache;</div>
-<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;        psl::UID uid;         <span class="comment">// my actual UID</span></div>
-<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;        psl::UID resource_uid; <span class="comment">// the disk based resource I&#39;m based on, this can be the same like my actual uid if I&#39;m a</span></div>
-<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;                          <span class="comment">// shared resource, or it can be the same if I&#39;m not a physical file.</span></div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;        std::shared_ptr&lt;details::container&lt;T&gt;&gt; m_Container;</div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;    };</div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;</div>
-<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;    <span class="keyword">static</span> handle&lt;T&gt; create(cache&amp; cache)</div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;    {</div>
-<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
-<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;        return handle&lt;T&gt;(cache);</div>
-<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;    }</div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;            if(m_Container &amp;&amp; m_Container-&gt;has_value())</div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;            {</div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;                res.m_Container-&gt;copy_set(*m_Container-&gt;resource(), res.uid, cache, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;                res.m_Container-&gt;m_State = m_Container-&gt;m_State;</div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;            }</div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;</div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;</div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;            <span class="keywordflow">return</span> res;</div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;        }</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;</div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;</div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;        cache* m_Cache;</div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;        psl::UID uid;         <span class="comment">// my actual UID</span></div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;        psl::UID resource_uid; <span class="comment">// the disk based resource I&#39;m based on, this can be the same like my actual uid if I&#39;m a</span></div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;                          <span class="comment">// shared resource, or it can be the same if I&#39;m not a physical file.</span></div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;        std::shared_ptr&lt;details::container&lt;T&gt;&gt; m_Container;</div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;    };</div>
 <div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;</div>
-<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;    template &lt;typename T&gt;</div>
-<div class="line"><a name="l00836"></a><span class="lineno"><a class="line" href="namespacecore_1_1resource.html#a56c46970d9958cb28371675cecaa3ef3">  836</a></span>&#160;    static <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt; create(cache&amp; cache, const psl::UID&amp; uid)</div>
-<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;    {</div>
-<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
-<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;T&gt;</a>{cache, <a class="code" href="structpsl_1_1_u_i_d.html#aa9f7b5541b9aac957970f7265c657234">psl::UID::generate</a>(), uid};</div>
-<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;    }</div>
-<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;</div>
-<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00848"></a><span class="lineno"><a class="line" href="namespacecore_1_1resource.html#ad538f6b2a7504da18d1efdf5054f49fc">  848</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;T&gt;</a> <a class="code" href="namespacecore_1_1resource.html#ad538f6b2a7504da18d1efdf5054f49fc">create_shared</a>(cache&amp; cache, <span class="keyword">const</span> psl::UID&amp; uid)</div>
-<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160;    {</div>
-<div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
-<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;        <span class="keyword">auto</span> res = cache.find&lt;T&gt;(uid);</div>
-<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;        <span class="keywordflow">if</span>(res) <span class="keywordflow">return</span> res;</div>
-<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;T&gt;</a>(cache, uid);</div>
-<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;    }</div>
-<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;</div>
-<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Y&gt;</div>
-<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;    <span class="keyword">static</span> handle&lt;T&gt; <a class="code" href="namespacecore_1_1resource.html#ad538f6b2a7504da18d1efdf5054f49fc">create_shared</a>(cache&amp; cache, <span class="keyword">const</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;Y&gt;</a>&amp; base)</div>
-<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;    {</div>
-<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
-<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;        auto res = cache.find&lt;T&gt;(base.<a class="code" href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">RUID</a>());</div>
-<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;        if(res) return res;</div>
-<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;        return handle&lt;T&gt;(cache, base.RUID());</div>
-<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;    }</div>
-<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;</div>
-<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;    template &lt;typename T, typename... Args&gt;</div>
-<div class="line"><a name="l00869"></a><span class="lineno"><a class="line" href="namespacecore_1_1resource.html#aff038c7144a720146e78fb448b33d469">  869</a></span>&#160;    static <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt; copy(cache&amp; cache, const <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt;&amp; source, Args&amp;&amp;... args)</div>
-<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;    {</div>
-<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
-<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;        static_assert(std::is_constructible&lt;T, const T&amp;, const psl::UID&amp;, resource::cache&amp;, Args...&gt;::value,</div>
-<div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160;                      <span class="stringliteral">&quot;lacking a &#39;copy&#39; constructor on T, cannot create a new handle with the given source.&quot;</span>);</div>
-<div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160;        <span class="keywordflow">return</span> source.copy(cache, std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;    }</div>
-<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;</div>
-<div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;    <span class="keyword">class </span>indirect_handle</div>
-<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160;    {</div>
-<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;        indirect_handle() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;        indirect_handle(<span class="keyword">const</span> psl::UID&amp; uid, cache* cache)  : m_Cache(cache), m_UID(uid) {};</div>
-<div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160;        indirect_handle(<span class="keyword">const</span> handle&lt;T&gt;&amp; handle) : m_Cache(handle.m_Cache), m_UID(handle.uid) {};</div>
-<div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160;</div>
-<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;        <span class="keyword">operator</span> <span class="keyword">const</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;T&gt;</a>() <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160;        {</div>
-<div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
-<div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160;        }</div>
-<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;        <span class="keyword">operator</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;T&gt;</a>() noexcept</div>
-<div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160;        {</div>
-<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
-<div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;        }</div>
-<div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160;        <span class="keyword">operator</span> <span class="keyword">const</span> T&amp;() <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;        {</div>
-<div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
-<div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;        }</div>
-<div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;        <span class="keyword">operator</span> T&amp;() noexcept</div>
-<div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160;        {</div>
-<div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
-<div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;        }</div>
-<div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;</div>
-<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;        <span class="keyword">operator</span> tag&lt;T&gt;() <span class="keyword">const</span></div>
-<div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160;        {</div>
-<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;            <span class="keywordflow">return</span> tag&lt;T&gt;(m_UID);</div>
-<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;        }</div>
-<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;</div>
-<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;T&gt;</a> handle() const noexcept</div>
-<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;        {</div>
-<div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
-<div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160;        }</div>
-<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;</div>
-<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;        <span class="keyword">const</span> T&amp; operator-&gt;() const noexcept</div>
-<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160;        {</div>
-<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
-<div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;        }</div>
-<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;</div>
-<div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;        T&amp; operator-&gt;() noexcept</div>
-<div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160;        {</div>
-<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
-<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;        }</div>
-<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;        cache* m_Cache{<span class="keyword">nullptr</span>};</div>
-<div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;        psl::UID m_UID{};</div>
-<div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;    };</div>
-<div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;</div>
-<div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;</div>
-<div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;} <span class="comment">// namespace core::resource</span></div>
+<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;    <span class="keyword">static</span> handle&lt;T&gt; create(cache&amp; cache)</div>
+<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;    {</div>
+<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
+<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;        return handle&lt;T&gt;(cache);</div>
+<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;    }</div>
+<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;</div>
+<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;    template &lt;typename T&gt;</div>
+<div class="line"><a name="l00843"></a><span class="lineno"><a class="line" href="namespacecore_1_1resource.html#a56c46970d9958cb28371675cecaa3ef3">  843</a></span>&#160;    static <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt; create(cache&amp; cache, const psl::UID&amp; uid)</div>
+<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;    {</div>
+<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
+<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;T&gt;</a>{cache, <a class="code" href="structpsl_1_1_u_i_d.html#aa9f7b5541b9aac957970f7265c657234">psl::UID::generate</a>(), uid};</div>
+<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;    }</div>
+<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;</div>
+<div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00855"></a><span class="lineno"><a class="line" href="namespacecore_1_1resource.html#ad538f6b2a7504da18d1efdf5054f49fc">  855</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;T&gt;</a> <a class="code" href="namespacecore_1_1resource.html#ad538f6b2a7504da18d1efdf5054f49fc">create_shared</a>(cache&amp; cache, <span class="keyword">const</span> psl::UID&amp; uid)</div>
+<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;    {</div>
+<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
+<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;        <span class="keyword">auto</span> res = cache.find&lt;T&gt;(uid);</div>
+<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;        <span class="keywordflow">if</span>(res) <span class="keywordflow">return</span> res;</div>
+<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classcore_1_1resource_1_1handle.html">handle&lt;T&gt;</a>(cache, uid);</div>
+<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;    }</div>
+<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;</div>
+<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Y&gt;</div>
+<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;    <span class="keyword">static</span> handle&lt;T&gt; <a class="code" href="namespacecore_1_1resource.html#ad538f6b2a7504da18d1efdf5054f49fc">create_shared</a>(cache&amp; cache, <span class="keyword">const</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;Y&gt;</a>&amp; base)</div>
+<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;    {</div>
+<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
+<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;        auto res = cache.find&lt;T&gt;(base.<a class="code" href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">RUID</a>());</div>
+<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;        if(res) return res;</div>
+<div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;        return handle&lt;T&gt;(cache, base.RUID());</div>
+<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;    }</div>
+<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;</div>
+<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;    template &lt;typename T, typename... Args&gt;</div>
+<div class="line"><a name="l00876"></a><span class="lineno"><a class="line" href="namespacecore_1_1resource.html#aff038c7144a720146e78fb448b33d469">  876</a></span>&#160;    static <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt; copy(cache&amp; cache, const <a class="code" href="classcore_1_1resource_1_1handle.html">handle</a>&lt;T&gt;&amp; source, Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;    {</div>
+<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;        PROFILE_SCOPE_STATIC(core::profiler)</div>
+<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160;        static_assert(std::is_constructible&lt;T, const T&amp;, const psl::UID&amp;, resource::cache&amp;, Args...&gt;::value,</div>
+<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160;                      <span class="stringliteral">&quot;lacking a &#39;copy&#39; constructor on T, cannot create a new handle with the given source.&quot;</span>);</div>
+<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;        <span class="keywordflow">return</span> source.copy(cache, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;    }</div>
+<div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160;</div>
+<div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;    <span class="keyword">class </span>indirect_handle</div>
+<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160;    {</div>
+<div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160;        indirect_handle() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;        indirect_handle(<span class="keyword">const</span> psl::UID&amp; uid, cache* cache)  : m_Cache(cache), m_UID(uid) {};</div>
+<div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160;        indirect_handle(<span class="keyword">const</span> handle&lt;T&gt;&amp; handle) : m_Cache(handle.m_Cache), m_UID(handle.uid) {};</div>
+<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160;</div>
+<div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;        <span class="keyword">operator</span> <span class="keyword">const</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;T&gt;</a>() <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160;        {</div>
+<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
+<div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;        }</div>
+<div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;        <span class="keyword">operator</span> <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;T&gt;</a>() noexcept</div>
+<div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;        {</div>
+<div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
+<div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160;        }</div>
+<div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;        <span class="keyword">operator</span> <span class="keyword">const</span> T&amp;() <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;        {</div>
+<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
+<div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160;        }</div>
+<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;        <span class="keyword">operator</span> T&amp;() noexcept</div>
+<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;        {</div>
+<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
+<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;        }</div>
+<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;</div>
+<div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160;        <span class="keyword">operator</span> <span class="keyword">const</span> psl::UID&amp;() <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160;        {</div>
+<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;            <span class="keywordflow">return</span> m_UID;</div>
+<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;        }</div>
+<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160;</div>
+<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;        <span class="keyword">operator</span> psl::UID() noexcept</div>
+<div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;        {</div>
+<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;            <span class="keywordflow">return</span> m_UID;</div>
+<div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;        }</div>
+<div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160;        <span class="keyword">operator</span> tag&lt;T&gt;() <span class="keyword">const</span></div>
+<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;        {</div>
+<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;            <span class="keywordflow">return</span> tag&lt;T&gt;(m_UID);</div>
+<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;        }</div>
+<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;</div>
+<div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;T&gt;</a> handle() const noexcept</div>
+<div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;        {</div>
+<div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
+<div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;        }</div>
+<div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;</div>
+<div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160;        <span class="keyword">const</span> T&amp; operator-&gt;() const noexcept</div>
+<div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160;        {</div>
+<div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
+<div class="line"><a name="l00931"></a><span class="lineno">  931</span>&#160;        }</div>
+<div class="line"><a name="l00932"></a><span class="lineno">  932</span>&#160;</div>
+<div class="line"><a name="l00933"></a><span class="lineno">  933</span>&#160;        T&amp; operator-&gt;() noexcept</div>
+<div class="line"><a name="l00934"></a><span class="lineno">  934</span>&#160;        {</div>
+<div class="line"><a name="l00935"></a><span class="lineno">  935</span>&#160;            <span class="keywordflow">return</span> m_Cache-&gt;find&lt;T&gt;(m_UID);</div>
+<div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;        }</div>
+<div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;</div>
+<div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;</div>
+<div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;        cache* m_Cache{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;        psl::UID m_UID{};</div>
+<div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;    };</div>
+<div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;</div>
+<div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;</div>
+<div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;} <span class="comment">// namespace core::resource</span></div>
 <div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442eaccc0377a8afbf50e7094f5c23a8af223"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442eaccc0377a8afbf50e7094f5c23a8af223">core::resource::state::INVALID</a></div><div class="ttdoc">special sentinel state in case something disastrous has happened, like OOM </div></div>
 <div class="ttc" id="classmemory_1_1allocator__base_html"><div class="ttname"><a href="classmemory_1_1allocator__base.html">memory::allocator_base</a></div><div class="ttdoc">base class that defines the interface for an allocator. </div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00014">allocator.h:14</a></div></div>
 <div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442e"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">core::resource::state</a></div><div class="ttdeci">state</div><div class="ttdoc">represents the various states a resource can be in. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00017">resource.h:17</a></div></div>
@@ -990,14 +1008,14 @@ $(document).ready(function(){initNavTree('resource_8h_source.html','');});
 <div class="ttc" id="classpsl_1_1meta_1_1library_html_a667f5b9b1544433ad7a8a94403d6afa3"><div class="ttname"><a href="classpsl_1_1meta_1_1library.html#a667f5b9b1544433ad7a8a94403d6afa3">psl::meta::library::load</a></div><div class="ttdeci">std::optional&lt; psl::string8::view &gt; load(const psl::UID &amp;uid)</div><div class="ttdoc">loads the specific psl::UID&#39;s content. </div><div class="ttdef"><b>Definition:</b> <a href="library_8cpp_source.html#l00195">library.cpp:195</a></div></div>
 <div class="ttc" id="structpsl_1_1_u_i_d_html"><div class="ttname"><a href="structpsl_1_1_u_i_d.html">psl::UID</a></div><div class="ttdoc">is an object holding a Unique IDentifier (UID) </div><div class="ttdef"><b>Definition:</b> <a href="meta_8h_source.html#l00020">meta.h:20</a></div></div>
 <div class="ttc" id="classpsl_1_1meta_1_1library_html_aef9fbac098dbaec1a9a6ff6dcba8b652"><div class="ttname"><a href="classpsl_1_1meta_1_1library.html#aef9fbac098dbaec1a9a6ff6dcba8b652">psl::meta::library::get</a></div><div class="ttdeci">std::optional&lt; T * &gt; get(const psl::UID &amp;uid) const </div><div class="ttdoc">get the psl::UID&#39;s associated meta::file from the meta::library and tries to cast to the templated ty...</div><div class="ttdef"><b>Definition:</b> <a href="library_8h_source.html#l00291">library.h:291</a></div></div>
-<div class="ttc" id="classcore_1_1resource_1_1handle_html_ac428d465a3e75aea31f2104f47cab47d"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">core::resource::handle::RUID</a></div><div class="ttdeci">const psl::UID &amp; RUID() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00794">resource.h:794</a></div></div>
+<div class="ttc" id="classcore_1_1resource_1_1handle_html_ac428d465a3e75aea31f2104f47cab47d"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">core::resource::handle::RUID</a></div><div class="ttdeci">const psl::UID &amp; RUID() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00801">resource.h:801</a></div></div>
 <div class="ttc" id="classcore_1_1resource_1_1cache_html"><div class="ttname"><a href="classcore_1_1resource_1_1cache.html">core::resource::cache</a></div><div class="ttdoc">represents a container of resources and their UID mappings </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00238">resource.h:238</a></div></div>
 <div class="ttc" id="structpsl_1_1_u_i_d_html_aa9f7b5541b9aac957970f7265c657234"><div class="ttname"><a href="structpsl_1_1_u_i_d.html#aa9f7b5541b9aac957970f7265c657234">psl::UID::generate</a></div><div class="ttdeci">static UID generate()</div><div class="ttdoc">generates a UID, it is equivalent to calling the default UID::UID() constructor. </div><div class="ttdef"><b>Definition:</b> <a href="meta_8cpp_source.html#l00055">meta.cpp:55</a></div></div>
-<div class="ttc" id="classcore_1_1resource_1_1handle_html_a951620c17cee25dc03800e628670bd51"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51">core::resource::handle::load</a></div><div class="ttdeci">bool load(Args &amp;&amp;...args)</div><div class="ttdoc">loads the resource with the given arguments. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00645">resource.h:645</a></div></div>
-<div class="ttc" id="classcore_1_1resource_1_1handle_html_a4a7b7fdd7e0bd7916434084ad8048a6d"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#a4a7b7fdd7e0bd7916434084ad8048a6d">core::resource::handle::unload</a></div><div class="ttdeci">bool unload(bool force=false)</div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00777">resource.h:777</a></div></div>
-<div class="ttc" id="namespacecore_1_1resource_html_ad538f6b2a7504da18d1efdf5054f49fc"><div class="ttname"><a href="namespacecore_1_1resource.html#ad538f6b2a7504da18d1efdf5054f49fc">core::resource::create_shared</a></div><div class="ttdeci">static handle&lt; T &gt; create_shared(cache &amp;cache, const psl::UID &amp;uid)</div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00848">resource.h:848</a></div></div>
+<div class="ttc" id="classcore_1_1resource_1_1handle_html_a951620c17cee25dc03800e628670bd51"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#a951620c17cee25dc03800e628670bd51">core::resource::handle::load</a></div><div class="ttdeci">bool load(Args &amp;&amp;...args)</div><div class="ttdoc">loads the resource with the given arguments. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00652">resource.h:652</a></div></div>
+<div class="ttc" id="classcore_1_1resource_1_1handle_html_a4a7b7fdd7e0bd7916434084ad8048a6d"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#a4a7b7fdd7e0bd7916434084ad8048a6d">core::resource::handle::unload</a></div><div class="ttdeci">bool unload(bool force=false)</div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00784">resource.h:784</a></div></div>
+<div class="ttc" id="namespacecore_1_1resource_html_ad538f6b2a7504da18d1efdf5054f49fc"><div class="ttname"><a href="namespacecore_1_1resource.html#ad538f6b2a7504da18d1efdf5054f49fc">core::resource::create_shared</a></div><div class="ttdeci">static handle&lt; T &gt; create_shared(cache &amp;cache, const psl::UID &amp;uid)</div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00855">resource.h:855</a></div></div>
 <div class="ttc" id="classcore_1_1resource_1_1handle_html"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html">core::resource::handle</a></div><div class="ttdoc">wraps around a resource for sharing and management purposes. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00033">resource.h:33</a></div></div>
-<div class="ttc" id="classcore_1_1resource_1_1handle_html_aa8046384a86c913041c0910a5f1f02f3"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#aa8046384a86c913041c0910a5f1f02f3">core::resource::handle::ID</a></div><div class="ttdeci">const psl::UID &amp; ID() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00785">resource.h:785</a></div></div>
+<div class="ttc" id="classcore_1_1resource_1_1handle_html_aa8046384a86c913041c0910a5f1f02f3"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html#aa8046384a86c913041c0910a5f1f02f3">core::resource::handle::ID</a></div><div class="ttdeci">const psl::UID &amp; ID() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00792">resource.h:792</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

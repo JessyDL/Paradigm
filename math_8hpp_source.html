@@ -465,7 +465,7 @@ $(document).ready(function(){initNavTree('math_8hpp_source.html','');});
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> precision_t&gt;</div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    constexpr <span class="keyword">static</span> tquat&lt;precision_t&gt; look_at_q(<span class="keyword">const</span> tvec&lt;precision_t, 3&gt;&amp; origin, <span class="keyword">const</span> tvec&lt;precision_t, 3&gt;&amp; target, <span class="keyword">const</span> tvec&lt;precision_t, 3&gt;&amp; up) noexcept</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    {</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keywordflow">return</span> look_at_q(normalize(target - origin), up);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keywordflow">return</span> look_at_q(normalize(origin - target), up);</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    }</div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;</div>

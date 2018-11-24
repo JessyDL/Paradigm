@@ -6,6 +6,6 @@ var classcore_1_1gfx_1_1pipeline__cache =
     [ "pipeline_cache", "classcore_1_1gfx_1_1pipeline__cache.html#a8a067056b592b31bfacae19d6726e9d6", null ],
     [ "operator=", "classcore_1_1gfx_1_1pipeline__cache.html#a67d4206dc2180aa83b9a1ba915f04d65", null ],
     [ "operator=", "classcore_1_1gfx_1_1pipeline__cache.html#a01289916b433a981e1f1419c319356b2", null ],
-    [ "get", "classcore_1_1gfx_1_1pipeline__cache.html#a450983a3b109287f9fee4fcdacce9bdb", null ],
-    [ "get", "classcore_1_1gfx_1_1pipeline__cache.html#a7d22ccdd08834e158281a3e047c95fde", null ]
+    [ "get", "classcore_1_1gfx_1_1pipeline__cache.html#a8a5005b49e66d99db1572c32447e3ee1", null ],
+    [ "get", "classcore_1_1gfx_1_1pipeline__cache.html#a2941cbaa294e90537fb261b3d101db62", null ]
 ];

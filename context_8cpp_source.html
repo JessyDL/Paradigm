@@ -859,7 +859,7 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    <span class="comment">// All descriptors used in this example are allocated from this pool</span></div>
 <div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;    vk::DescriptorPoolCreateInfo descriptorPoolInfo =</div>
 <div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;        utility::vulkan::defaults::descriptor_pool_ci((uint32_t)typeCounts.size(), typeCounts.data(), 32);</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    descriptorPoolInfo.flags = vk::DescriptorPoolCreateFlagBits::eFreeDescriptorSet;</div>
 <div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    utility::vulkan::check(m_Device.createDescriptorPool(&amp;descriptorPoolInfo, <span class="keyword">nullptr</span>, &amp;m_DescriptorPool));</div>
 <div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;}</div>
 <div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;</div>

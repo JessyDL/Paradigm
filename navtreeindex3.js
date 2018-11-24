@@ -1,5 +1,9 @@
 var NAVTREEINDEX3 =
 {
+"classmemory_1_1range.html#a99133b0dc1d57a04d3c0c2020140ff66":[3,0,1,3,9],
+"classmemory_1_1range.html#a9dd84a08ca8f9d5558e5504179b6369a":[3,0,1,3,2],
+"classmemory_1_1range.html#aa5cd695c0ac00bf6fe10c383c6a09214":[3,0,1,3,16],
+"classmemory_1_1range.html#ab803f6d4d406ce16ebe4f0dfa81fd611":[3,0,1,3,18],
 "classmemory_1_1range.html#ac0a0c4d64179714e3465973412312e65":[3,0,1,3,4],
 "classmemory_1_1range.html#ac5a9091baa8e7fb3d7bdd704c9cd31eb":[3,0,1,3,3],
 "classmemory_1_1range.html#ad93c10368b49d6fc8d850a1a7e1e9313":[3,0,1,3,10],
@@ -192,8 +196,8 @@ var NAVTREEINDEX3 =
 "functions_e.html":[3,3,0,4],
 "functions_enum.html":[3,3,3],
 "functions_f.html":[3,3,0,5],
-"functions_func.html":[3,3,1,0],
 "functions_func.html":[3,3,1],
+"functions_func.html":[3,3,1,0],
 "functions_func_b.html":[3,3,1,1],
 "functions_func_c.html":[3,3,1,2],
 "functions_func_d.html":[3,3,1,3],
@@ -245,9 +249,5 @@ var NAVTREEINDEX3 =
 "input__win32_8cpp_source.html":[4,0,0,1,5,1],
 "input__xcb_8cpp_source.html":[4,0,0,1,5,2],
 "library_8cpp_source.html":[4,0,1,1,5],
-"library_8h_source.html":[4,0,1,0,18],
-"logging_8cpp_source.html":[4,0,0,1,8],
-"logging_8h_source.html":[4,0,0,0,10],
-"math_8hpp_source.html":[4,0,1,0,0,0],
-"matrix_8h_source.html":[4,0,1,0,0,1]
+"library_8h_source.html":[4,0,1,0,18]
 };

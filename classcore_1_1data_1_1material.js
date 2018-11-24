@@ -2,6 +2,7 @@ var classcore_1_1data_1_1material =
 [
     [ "blendstate", "classcore_1_1data_1_1material_1_1blendstate.html", "classcore_1_1data_1_1material_1_1blendstate" ],
     [ "material", "classcore_1_1data_1_1material.html#a8411ad0e4a0bf5172cee7d7b70d06db8", null ],
+    [ "material", "classcore_1_1data_1_1material.html#ab1fef41330cdce3f50ff371d512ceffe", null ],
     [ "~material", "classcore_1_1data_1_1material.html#a81832a5543032ea194fbdbdba352efa7", null ],
     [ "material", "classcore_1_1data_1_1material.html#ae0535fa9f0e6e7c242db40acf970fa7e", null ],
     [ "material", "classcore_1_1data_1_1material.html#a8b2427bcf7f9aabb67e28361ad4a024e", null ],

@@ -234,7 +234,7 @@ template&lt;typename T &gt; </div>
 <p>will either find the resource with the given UID, and return that, or create a new one using that UID. this function should be used for resources that might be shared (like <a class="el" href="classcore_1_1gfx_1_1material.html" title="class that creates a bindable collection of resources that can be used in conjuction with a surface t...">gfx::material</a>), co-owned in disconnected systems, or read-only.</p>
 <p>The resulting resource keeps the UID you create it with, meaning it can be found again using this function. </p>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00848">848</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00855">855</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -273,7 +273,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <p>if this resource is disk-based it might speed up loading due to using the already cached value (todo) The resulting resource has a new UID. </p>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00836">836</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00843">843</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -318,7 +318,7 @@ template&lt;typename T , typename... Args&gt; </div>
 </div><div class="memdoc">
 <p>this will create a disconnected copy based on the source handle. This means that, for example, when the source gets destroyed, this copy will keep existing, and when changes happen to either the source or copy, the changes will not be applied to the other. </p>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00869">869</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00876">876</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>

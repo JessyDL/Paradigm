@@ -145,6 +145,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae499bbfdb86f7fb33aedfb669fad683a"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classmemory_1_1segment.html">memory::segment</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1gfx_1_1buffer.html#ae499bbfdb86f7fb33aedfb669fad683a">reserve</a> (vk::DeviceSize size)</td></tr>
 <tr class="memdesc:ae499bbfdb86f7fb33aedfb669fad683a"><td class="mdescLeft">&#160;</td><td class="mdescRight">tries to reserve a region of memory of <em>at least</em> the given size in thye buffer.  <a href="#ae499bbfdb86f7fb33aedfb669fad683a">More...</a><br/></td></tr>
 <tr class="separator:ae499bbfdb86f7fb33aedfb669fad683a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a597b700baf57e053c270921cedd6657d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a597b700baf57e053c270921cedd6657d"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>free_size</b> () const noexcept</td></tr>
+<tr class="separator:a597b700baf57e053c270921cedd6657d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2e17dad2ce8a0b562f7ecba2178aef6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair<br class="typebreak"/>
 &lt; <a class="el" href="classmemory_1_1segment.html">memory::segment</a>, <br class="typebreak"/>
 <a class="el" href="classmemory_1_1range.html">memory::range</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1gfx_1_1buffer.html#aa2e17dad2ce8a0b562f7ecba2178aef6">reserve</a> (std::vector&lt; vk::DeviceSize &gt; sizes, bool optimize=false)</td></tr>
@@ -264,7 +267,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classmemory_1_1segment.html" title="a segment defines a addressable and mapped region of memory. ">memory::segment</a> on success. </dd></dl>
 
-<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00107">107</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00113">113</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -301,7 +304,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00109">109</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00115">115</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -329,7 +332,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="section return"><dt>Returns</dt><dd>success if the instruction has been sent. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>this method will try to figure out the best way to send this set of instructions to the GPU, possibly merging instructions together. </dd></dl>
 
-<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00163">163</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00169">169</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -355,7 +358,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="section return"><dt>Returns</dt><dd>success in case the region was freed. note that in case the buffer was not the owner of the <a class="el" href="classmemory_1_1segment.html" title="a segment defines a addressable and mapped region of memory. ">memory::segment</a>, false will be returned. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>no actual memory will be freed. driver resources are created at the start (constructor) and can only be freed completely (destructor). there is no intermediate unless you copy over the resources to a new, smaller buffer. Check <a class="el" href="classcore_1_1gfx_1_1buffer.html#ae3aaca937d0128110066efa50c33d318" title="allows you to copy from one buffer into another. ">copy_from()</a> for that. </dd></dl>
 
-<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00273">273</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00279">279</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +394,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true in case the instructions were successfully uploaded to the GPU. </dd></dl>
 
-<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00343">343</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00349">349</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -410,7 +413,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="section return"><dt>Returns</dt><dd>in case the GPU/driver is busy. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>could be true for various situations, in case it is busy uploading, or hasn't finalized everything yet amongst other. </dd></dl>
 
-<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00491">491</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00497">497</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -474,7 +477,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the vk::Buffer handle. </dd></dl>
 
-<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00501">501</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00507">507</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -492,7 +495,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the internal buffer data. </dd></dl>
 
-<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00502">502</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00508">508</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -510,7 +513,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the vulkan descriptor buffer info. </dd></dl>
 
-<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00503">503</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p>Definition at line <a class="el" href="vk_2buffer_8cpp_source.html#l00509">509</a> of file <a class="el" href="vk_2buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>

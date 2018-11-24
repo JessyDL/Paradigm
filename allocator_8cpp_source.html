@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('allocator_8cpp_source.html','');});
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">if</span>(is_physically_backed())  <span class="comment">// zero-reset</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        std::memset((<span class="keywordtype">void</span>*)local.begin, 0, local.size());</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">static</span> <a class="code" href="classmemory_1_1range.html">range</a> r{0u, 0u};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">static</span> <a class="code" href="classmemory_1_1range.html">range</a> r{std::numeric_limits&lt;std::uint64_t&gt;::max(), 0u};</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    segment = <a class="code" href="classmemory_1_1segment.html">memory::segment</a>{r, <span class="keyword">false</span>};</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
@@ -225,215 +225,222 @@ $(document).ready(function(){initNavTree('allocator_8cpp_source.html','');});
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                m_Committed.emplace_back(r.end, committed.end);</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                committed.end = r.begin;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keywordflow">goto</span> free;</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; free : m_Free)</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    {</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">if</span>(free.begin == r.end)</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        {</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            free.begin = r.begin;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            <span class="keywordflow">goto</span> collapse;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        }</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(free.end == r.begin)</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            free.end = r.end;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keywordflow">goto</span> collapse;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        }</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    }</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    m_Free.emplace_back(r);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    collapse:</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = std::begin(m_Free); it != std::end(m_Free); ++it)</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    {</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> it_next = std::begin(m_Free); it_next != std::end(m_Free); ++it_next)</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        {</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">if</span>(it == it_next)</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <span class="keywordflow">if</span>(it-&gt;end == it_next-&gt;begin)</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                it-&gt;end = it_next-&gt;end;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                m_Free.erase(it_next);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <span class="keywordflow">goto</span> end;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            }</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span>(it-&gt;begin == it_next-&gt;end)</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                it-&gt;begin = it_next-&gt;end;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                m_Free.erase(it_next);</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <span class="keywordflow">goto</span> end;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            }</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        }</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;end:</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;std::vector&lt;range&gt; default_allocator::get_committed()</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;{</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">if</span>(m_Committed.size() == 0)</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordflow">return</span> {};</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">if</span>(m_Free.size() == 0)</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordflow">return</span> std::vector&lt;range&gt;{ { std::begin(m_Committed)-&gt;begin, std::end(m_Committed)-&gt;end }};</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    std::vector&lt;range&gt; all_ranges{};</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordflow">if</span>(std::begin(m_Free)-&gt;begin &gt; std::begin(m_Committed)-&gt;end)</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        all_ranges.emplace_back(std::begin(m_Committed)-&gt;begin, std::begin(m_Free)-&gt;begin);</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordflow">for</span>(std::list&lt;range&gt;::iterator it = std::begin(m_Free), next = std::next(it, 1); next != std::end(m_Free); ++it, ++next)</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    {</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        all_ranges.emplace_back(it-&gt;end, next-&gt;begin);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    }</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordflow">if</span>(m_Free.size() &gt; 0 &amp;&amp; m_Committed.size() &gt; 0 &amp;&amp; std::prev(std::end(m_Free), 1)-&gt;end &lt; std::prev(std::end(m_Committed),1)-&gt;begin)</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    {</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        all_ranges.emplace_back(std::prev(std::end(m_Free),1)-&gt;end, std::prev(std::end(m_Committed),1)-&gt;end);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">return</span> all_ranges;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;}</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;std::vector&lt;range&gt; default_allocator::get_available()</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;{</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    m_Free.sort([](<span class="keyword">const</span> range&amp; first, <span class="keyword">const</span> range&amp; second) { <span class="keywordflow">return</span> first.begin &lt; second.begin; });</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">return</span> std::vector&lt;range&gt;{std::begin(m_Free), std::end(m_Free)};</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keywordtype">void</span> default_allocator::do_compact(region* region)</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;{</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    m_Free.sort([](<span class="keyword">const</span> range&amp; first, <span class="keyword">const</span> range&amp; second) { <span class="keywordflow">return</span> first.begin &lt; second.begin; });</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    m_Committed.sort([](<span class="keyword">const</span> range&amp; first, <span class="keyword">const</span> range&amp; second) { <span class="keywordflow">return</span> first.begin &lt; second.begin; });</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keyword">auto</span> free_it = std::begin(m_Free);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">goto</span> fail;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    free:</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; free : m_Free)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">if</span>(free.begin == r.end)</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            free.begin = r.begin;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <span class="keywordflow">goto</span> collapse;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(free.end == r.begin)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            free.end = r.end;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordflow">goto</span> collapse;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        }</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    m_Free.emplace_back(r);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    collapse:</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = std::begin(m_Free); it != std::end(m_Free); ++it)</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    {</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> it_next = std::begin(m_Free); it_next != std::end(m_Free); ++it_next)</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <span class="keywordflow">if</span>(it == it_next)</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            <span class="keywordflow">if</span>(it-&gt;end == it_next-&gt;begin)</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                it-&gt;end = it_next-&gt;end;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                m_Free.erase(it_next);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                <span class="keywordflow">goto</span> end;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            }</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span>(it-&gt;begin == it_next-&gt;end)</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                it-&gt;begin = it_next-&gt;end;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                m_Free.erase(it_next);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                <span class="keywordflow">goto</span> end;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;end:</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;fail:</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;std::vector&lt;range&gt; default_allocator::get_committed()</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;{</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordflow">if</span>(m_Committed.size() == 0)</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">return</span> {};</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">if</span>(m_Free.size() == 0)</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">return</span> std::vector&lt;range&gt;{ { std::begin(m_Committed)-&gt;begin, std::end(m_Committed)-&gt;end }};</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    std::vector&lt;range&gt; all_ranges{};</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordflow">if</span>(std::begin(m_Free)-&gt;begin &gt; std::begin(m_Committed)-&gt;end)</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        all_ranges.emplace_back(std::begin(m_Committed)-&gt;begin, std::begin(m_Free)-&gt;begin);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    }</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordflow">for</span>(std::list&lt;range&gt;::iterator it = std::begin(m_Free), next = std::next(it, 1); next != std::end(m_Free); ++it, ++next)</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        all_ranges.emplace_back(it-&gt;end, next-&gt;begin);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordflow">if</span>(m_Free.size() &gt; 0 &amp;&amp; m_Committed.size() &gt; 0 &amp;&amp; std::prev(std::end(m_Free), 1)-&gt;end &lt; std::prev(std::end(m_Committed),1)-&gt;begin)</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    {</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        all_ranges.emplace_back(std::prev(std::end(m_Free),1)-&gt;end, std::prev(std::end(m_Committed),1)-&gt;end);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    }</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordflow">return</span> all_ranges;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;}</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;std::vector&lt;range&gt; default_allocator::get_available()</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;{</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    m_Free.sort([](<span class="keyword">const</span> range&amp; first, <span class="keyword">const</span> range&amp; second) { <span class="keywordflow">return</span> first.begin &lt; second.begin; });</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">return</span> std::vector&lt;range&gt;{std::begin(m_Free), std::end(m_Free)};</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keyword">auto</span> commit_it = std::begin(m_Committed);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordflow">while</span>(free_it != std::end(m_Free) &amp;&amp; commit_it != std::end(m_Committed))</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    {</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        commit_it = std::find_if(commit_it, std::end(m_Committed), [&amp;free_it](<span class="keyword">const</span> range&amp; element) { <span class="keywordflow">return</span> element &gt; *free_it; });</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keywordtype">void</span> default_allocator::do_compact(region* region)</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;{</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    m_Free.sort([](<span class="keyword">const</span> range&amp; first, <span class="keyword">const</span> range&amp; second) { <span class="keywordflow">return</span> first.begin &lt; second.begin; });</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    m_Committed.sort([](<span class="keyword">const</span> range&amp; first, <span class="keyword">const</span> range&amp; second) { <span class="keywordflow">return</span> first.begin &lt; second.begin; });</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordflow">while</span>(commit_it != std::end(m_Committed) &amp;&amp; free_it-&gt;size() &gt;= commit_it-&gt;size())</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        {</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keyword">auto</span> old_range = *commit_it;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            <a class="code" href="classmemory_1_1range.html">memory::range</a> new_range{free_it-&gt;begin, free_it-&gt;begin + commit_it-&gt;size()};</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            <span class="keywordflow">if</span>(is_physically_backed())</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                std::memcpy((<span class="keywordtype">void</span>*)(free_it-&gt;begin), (<span class="keywordtype">void</span>*)(old_range.begin), old_range.size());</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            commit_it-&gt;begin = new_range.begin;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            commit_it-&gt;end = new_range.end;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            free_it-&gt;begin = new_range.end;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <span class="keywordflow">if</span>(old_range.begin == free_it-&gt;end)</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            {</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                free_it-&gt;end = old_range.end;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                <span class="keywordflow">if</span>(<span class="keyword">auto</span> next = std::next(free_it, 1); next != std::end(m_Free) &amp;&amp; free_it-&gt;end == next-&gt;begin)</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                {</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                    free_it-&gt;end = next-&gt;end;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                    m_Free.erase(next);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                }</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            }</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            {</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                <span class="keyword">auto</span> insert_loc = std::find_if(free_it, std::end(m_Free), [&amp;old_range](<span class="keyword">const</span> range&amp; element) { <span class="keywordflow">return</span> old_range.begin == element.end;});</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                <span class="keywordflow">if</span>(insert_loc != std::end(m_Free))</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                {</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                    insert_loc-&gt;end = old_range.end;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                }</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                {</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                    <span class="keyword">auto</span> loc = std::find_if(free_it, std::end(m_Free), [&amp;old_range](<span class="keyword">const</span> range&amp; element) { <span class="keywordflow">return</span> old_range.begin &gt; element.begin; });</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                    m_Free.emplace(std::prev(loc ,1), old_range);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                }</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            }</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            commit_it = std::next(commit_it, 1);</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        }</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        free_it = std::next(free_it, 1);</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    m_Free.erase(std::remove_if(std::begin(m_Free), std::end(m_Free), [](<span class="keyword">const</span> range&amp; element) { <span class="keywordflow">return</span> element.size() == 0; }), std::end(m_Free));</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;}</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="keywordtype">bool</span> default_allocator::get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;{</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordflow">return</span> std::find_if(std::begin(m_Committed), std::end(m_Committed), [&amp;segment](<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">memory::range</a>&amp; range)</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                        {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                            <span class="keywordflow">return</span> &amp;segment.range() == &amp;range;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                        }) != std::end(m_Committed);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keywordtype">void</span> block_allocator::initialize(region* region)</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;{</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = (size_t)std::floor((<span class="keywordtype">double</span>)region-&gt;size() / (double)m_BlockSize);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0u; i &lt; size; ++i)</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    {</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        m_Free.emplace(i);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    }</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    m_Ranges.resize((<span class="keywordtype">size_t</span>)std::floor((<span class="keywordtype">double</span>)region-&gt;size() / (double)m_BlockSize));</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;}</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;std::optional&lt;segment&gt; block_allocator::do_allocate(region* region, std::size_t bytes)</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;{</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordflow">if</span> (m_Free.size() == 0)</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="keywordflow">return</span> {};</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keyword">auto</span> index = m_Free.top();</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keyword">auto</span> free_it = std::begin(m_Free);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keyword">auto</span> commit_it = std::begin(m_Committed);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">while</span>(free_it != std::end(m_Free) &amp;&amp; commit_it != std::end(m_Committed))</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    {</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        commit_it = std::find_if(commit_it, std::end(m_Committed), [&amp;free_it](<span class="keyword">const</span> range&amp; element) { <span class="keywordflow">return</span> element &gt; *free_it; });</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="keywordflow">while</span>(commit_it != std::end(m_Committed) &amp;&amp; free_it-&gt;size() &gt;= commit_it-&gt;size())</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        {</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            <span class="keyword">auto</span> old_range = *commit_it;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            <a class="code" href="classmemory_1_1range.html">memory::range</a> new_range{free_it-&gt;begin, free_it-&gt;begin + commit_it-&gt;size()};</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            <span class="keywordflow">if</span>(is_physically_backed())</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                std::memcpy((<span class="keywordtype">void</span>*)(free_it-&gt;begin), (<span class="keywordtype">void</span>*)(old_range.begin), old_range.size());</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            commit_it-&gt;begin = new_range.begin;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            commit_it-&gt;end = new_range.end;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            free_it-&gt;begin = new_range.end;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            <span class="keywordflow">if</span>(old_range.begin == free_it-&gt;end)</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            {</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                free_it-&gt;end = old_range.end;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                <span class="keywordflow">if</span>(<span class="keyword">auto</span> next = std::next(free_it, 1); next != std::end(m_Free) &amp;&amp; free_it-&gt;end == next-&gt;begin)</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                {</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                    free_it-&gt;end = next-&gt;end;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                    m_Free.erase(next);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                }</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            }</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            {</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                <span class="keyword">auto</span> insert_loc = std::find_if(free_it, std::end(m_Free), [&amp;old_range](<span class="keyword">const</span> range&amp; element) { <span class="keywordflow">return</span> old_range.begin == element.end;});</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                <span class="keywordflow">if</span>(insert_loc != std::end(m_Free))</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                {</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                    insert_loc-&gt;end = old_range.end;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                }</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                {</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                    <span class="keyword">auto</span> loc = std::find_if(free_it, std::end(m_Free), [&amp;old_range](<span class="keyword">const</span> range&amp; element) { <span class="keywordflow">return</span> old_range.begin &gt; element.begin; });</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                    m_Free.emplace(std::prev(loc ,1), old_range);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                }</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            }</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            commit_it = std::next(commit_it, 1);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        free_it = std::next(free_it, 1);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    }</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    m_Free.erase(std::remove_if(std::begin(m_Free), std::end(m_Free), [](<span class="keyword">const</span> range&amp; element) { <span class="keywordflow">return</span> element.size() == 0; }), std::end(m_Free));</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;}</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="keywordtype">bool</span> default_allocator::get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;{</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="keywordflow">return</span> std::find_if(std::begin(m_Committed), std::end(m_Committed), [&amp;segment](<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">memory::range</a>&amp; range)</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                        {</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                            <span class="keywordflow">return</span> &amp;segment.range() == &amp;range;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                        }) != std::end(m_Committed);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;}</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keywordtype">void</span> block_allocator::initialize(region* region)</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;{</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> size = (size_t)std::floor((<span class="keywordtype">double</span>)region-&gt;size() / (double)m_BlockSize);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0u; i &lt; size; ++i)</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    {</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        m_Free.emplace(i);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    }</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    m_Ranges.resize((<span class="keywordtype">size_t</span>)std::floor((<span class="keywordtype">double</span>)region-&gt;size() / (double)m_BlockSize));</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;}</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    m_Ranges[index].begin = (std::uintptr_t)(region-&gt;data()) + index * m_BlockSize;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    m_Ranges[index].end = m_Ranges[index].begin + m_BlockSize;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordflow">if</span> (commit(m_Ranges[index]))</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    {</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        m_Free.pop();</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keywordflow">return</span> std::optional&lt;segment&gt;{std::in_place_t{}, m_Ranges[index], is_physically_backed()};</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    }</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keywordflow">return</span> {};</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;}</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="keywordtype">bool</span> block_allocator::do_deallocate(segment&amp; segment)</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;{</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keyword">auto</span> index = ((std::uintptr_t)(&amp;segment.range()) - (std::uintptr_t)(m_Ranges.data())) / m_BlockSize;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    m_Free.push(index);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    m_Ranges[index].begin = 0;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    m_Ranges[index].end = 0;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;}</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;std::vector&lt;range&gt; block_allocator::get_committed()</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;{</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keyword">auto</span> copy = m_Ranges;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keyword">auto</span> it = std::remove_if(std::begin(copy), std::end(copy), [](<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">memory::range</a>&amp; range)</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    {</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keywordflow">return</span> range.end == 0 &amp;&amp; range.begin == 0;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    });</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    copy.erase(it, std::end(copy));</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;}</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;std::vector&lt;range&gt; block_allocator::get_available()</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;{</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keyword">auto</span> copy = m_Ranges;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;std::optional&lt;segment&gt; block_allocator::do_allocate(region* region, std::size_t bytes)</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;{</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordflow">if</span> (m_Free.size() == 0)</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">return</span> {};</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keyword">auto</span> index = m_Free.top();</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    m_Ranges[index].begin = (std::uintptr_t)(region-&gt;data()) + index * m_BlockSize;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    m_Ranges[index].end = m_Ranges[index].begin + m_BlockSize;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">if</span> (commit(m_Ranges[index]))</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    {</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        m_Free.pop();</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keywordflow">return</span> std::optional&lt;segment&gt;{std::in_place_t{}, m_Ranges[index], is_physically_backed()};</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    }</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keywordflow">return</span> {};</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;}</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="keywordtype">bool</span> block_allocator::do_deallocate(segment&amp; segment)</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;{</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keyword">auto</span> index = ((std::uintptr_t)(&amp;segment.range()) - (std::uintptr_t)(m_Ranges.data())) / m_BlockSize;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    m_Free.push(index);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    m_Ranges[index].begin = 0;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    m_Ranges[index].end = 0;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;}</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;std::vector&lt;range&gt; block_allocator::get_committed()</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;{</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keyword">auto</span> copy = m_Ranges;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="keyword">auto</span> it = std::remove_if(std::begin(copy), std::end(copy), [](<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">memory::range</a>&amp; range)</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    {</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="keywordflow">return</span> range.end == 0 &amp;&amp; range.begin == 0;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    });</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    copy.erase(it, std::end(copy));</div>
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keyword">auto</span> it = std::remove_if(std::begin(copy), std::end(copy), [](<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">memory::range</a>&amp; range)</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    {</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keywordflow">return</span> range.end == 0 &amp;&amp; range.begin == 0;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    });</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    copy.erase(std::begin(copy), it);</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordflow">return</span> copy;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;}</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keywordtype">bool</span> block_allocator::get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;{</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keywordflow">return</span> segment.range().size() == m_BlockSize &amp;&amp;     <span class="comment">// correct size</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        m_Free.size() != m_Ranges.size() &amp;&amp;             <span class="comment">// there are actual allocations</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        segment.range().begin - m_Ranges[0].begin % m_BlockSize == 0 &amp;&amp; <span class="comment">// it is aligned correctly</span></div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        std::find_if(std::begin(m_Ranges), std::end(m_Ranges), [&amp;segment](<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">memory::range</a>&amp; range)   <span class="comment">// expensive search</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                        {</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                            <span class="keywordflow">return</span> &amp;segment.range() == &amp;range;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                        }) != std::end(m_Ranges);</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;}</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;}</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;std::vector&lt;range&gt; block_allocator::get_available()</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;{</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keyword">auto</span> copy = m_Ranges;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keyword">auto</span> it = std::remove_if(std::begin(copy), std::end(copy), [](<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">memory::range</a>&amp; range)</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    {</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">return</span> range.end == 0 &amp;&amp; range.begin == 0;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    });</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    copy.erase(std::begin(copy), it);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordflow">return</span> copy;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;}</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="keywordtype">bool</span> block_allocator::get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;{</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordflow">return</span> segment.range().size() == m_BlockSize &amp;&amp;     <span class="comment">// correct size</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        m_Free.size() != m_Ranges.size() &amp;&amp;             <span class="comment">// there are actual allocations</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        segment.range().begin - m_Ranges[0].begin % m_BlockSize == 0 &amp;&amp; <span class="comment">// it is aligned correctly</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        std::find_if(std::begin(m_Ranges), std::end(m_Ranges), [&amp;segment](<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">memory::range</a>&amp; range)   <span class="comment">// expensive search</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                        {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                            <span class="keywordflow">return</span> &amp;segment.range() == &amp;range;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                        }) != std::end(m_Ranges);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;}</div>
 <div class="ttc" id="classmemory_1_1region_html"><div class="ttname"><a href="classmemory_1_1region.html">memory::region</a></div><div class="ttdoc">defines a region of memory that might be physically backed depending on the allocator. </div><div class="ttdef"><b>Definition:</b> <a href="region_8h_source.html#l00018">region.h:18</a></div></div>
 <div class="ttc" id="classmemory_1_1range_html"><div class="ttname"><a href="classmemory_1_1range.html">memory::range</a></div><div class="ttdoc">defines a begin/end location in (virtual) memory (in respect to the region, or segment). </div><div class="ttdef"><b>Definition:</b> <a href="psl_2inc_2memory_2range_8h_source.html#l00007">range.h:7</a></div></div>
 <div class="ttc" id="classmemory_1_1segment_html"><div class="ttname"><a href="classmemory_1_1segment.html">memory::segment</a></div><div class="ttdoc">a segment defines a addressable and mapped region of memory. </div><div class="ttdef"><b>Definition:</b> <a href="segment_8h_source.html#l00009">segment.h:9</a></div></div>
