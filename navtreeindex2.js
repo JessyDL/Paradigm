@@ -220,7 +220,7 @@ var NAVTREEINDEX2 =
 "classcore_1_1systems_1_1input.html#afe2b03021701ce7c0c0f269a0e54c244afef71e5b9122d189dce323efa28a2ff8":[3,0,0,6,0,3,9],
 "classes.html":[3,1],
 "classmemory_1_1allocator__base.html":[3,0,1,0],
-"classmemory_1_1allocator__base.html#a0c1a2dfb50d276e1264e5aedb56c3069":[3,0,1,0,13],
+"classmemory_1_1allocator__base.html#a0c1a2dfb50d276e1264e5aedb56c3069":[3,0,1,0,14],
 "classmemory_1_1allocator__base.html#a128d2b0abaa5c09d15b4dfb45c8c6a0b":[3,0,1,0,3],
 "classmemory_1_1allocator__base.html#a2bc4dab10acef2888165886767a82788":[3,0,1,0,5],
 "classmemory_1_1allocator__base.html#a470d094a9b601ed4e71c871042566348":[3,0,1,0,6],
@@ -232,6 +232,7 @@ var NAVTREEINDEX2 =
 "classmemory_1_1allocator__base.html#a965361530e1829cd69d075f1ea3f894b":[3,0,1,0,8],
 "classmemory_1_1allocator__base.html#aaed0b3e05165b0016a06efa6d3a82253":[3,0,1,0,1],
 "classmemory_1_1allocator__base.html#ad5d9bee43e84374b6a472eab100778f4":[3,0,1,0,0],
+"classmemory_1_1allocator__base.html#ae1c30fff87def8364fb81e91d985db80":[3,0,1,0,13],
 "classmemory_1_1allocator__base.html#ae30458b0f04867bebd9cf36b957a260b":[3,0,1,0,10],
 "classmemory_1_1allocator__base.html#aed158e962608ff6fb564ea111a462c6e":[3,0,1,0,7],
 "classmemory_1_1block__allocator.html":[3,0,1,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "classmemory_1_1range.html#a53c5fcf21f8824f4f801edc1f5bde55a":[3,0,1,3,12],
 "classmemory_1_1range.html#a79af4b79f7b2b26a7a72b19b89490d49":[3,0,1,3,17],
 "classmemory_1_1range.html#a7ed0ef4f2ec062c8b31b3608f618a7e0":[3,0,1,3,6],
-"classmemory_1_1range.html#a8028c2c8be0f64d1137aa3c3578250bc":[3,0,1,3,14],
-"classmemory_1_1range.html#a8f72a977bf419516d157de27cf9a29fb":[3,0,1,3,15]
+"classmemory_1_1range.html#a8028c2c8be0f64d1137aa3c3578250bc":[3,0,1,3,14]
 };

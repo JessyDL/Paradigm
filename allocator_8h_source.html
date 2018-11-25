@@ -118,95 +118,97 @@ $(document).ready(function(){initNavTree('allocator_8h_source.html','');});
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespacememory.html">   10</a></span>&#160;<span class="keyword">namespace </span>memory</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">class </span><a class="code" href="classmemory_1_1region.html">region</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classmemory_1_1allocator__base.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classmemory_1_1region.html">region</a>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>(<span class="keywordtype">bool</span> physically_backed = <span class="keyword">true</span>) : m_IsPhysicallyBacked(physically_backed) {};</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>(<span class="keyword">const</span> <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        [[nodiscard]] std::optional&lt;segment&gt; allocate(std::size_t bytes)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordflow">if</span>(bytes == 0)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordflow">return</span> do_allocate(m_Region, bytes);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        };</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">bool</span> deallocate(<a class="code" href="classmemory_1_1segment.html">segment</a>&amp; <a class="code" href="classmemory_1_1segment.html">segment</a>);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        std::vector&lt;range&gt; committed();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        std::vector&lt;range&gt; available();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">bool</span> is_physically_backed() <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordflow">return</span> m_IsPhysicallyBacked;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        };</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">size_t</span> alignment() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">bool</span> owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">void</span> compact();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">bool</span> commit(<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">range</a>&amp; <a class="code" href="classmemory_1_1range.html">range</a>);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="classmemory_1_1region.html">region</a> * m_Region{<span class="keyword">nullptr</span>};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">virtual</span> std::optional&lt;segment&gt; do_allocate(<a class="code" href="classmemory_1_1region.html">region</a>* <a class="code" href="classmemory_1_1region.html">region</a>, std::size_t bytes) = 0;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> do_deallocate(segment&amp; segment) = 0;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> initialize([[maybe_unused]] region* region) {};</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">virtual</span> std::vector&lt;range&gt; get_committed() = 0;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">virtual</span> std::vector&lt;range&gt; get_available() = 0;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> do_compact([[maybe_unused]] region* region) {};</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept = 0;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">bool</span> m_IsPhysicallyBacked{<span class="keyword">true</span>};</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    };</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classmemory_1_1default__allocator.html">   60</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classmemory_1_1default__allocator.html">default_allocator</a> : <span class="keyword">public</span> <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <a class="code" href="classmemory_1_1default__allocator.html">default_allocator</a>(<span class="keywordtype">bool</span> physically_backed = <span class="keyword">true</span>) : <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>(physically_backed) {};</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classmemory_1_1default__allocator.html">default_allocator</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        std::optional&lt;segment&gt; do_allocate(<a class="code" href="classmemory_1_1region.html">region</a>* <a class="code" href="classmemory_1_1region.html">region</a>, std::size_t bytes) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">bool</span> do_deallocate(<a class="code" href="classmemory_1_1segment.html">segment</a>&amp; <a class="code" href="classmemory_1_1segment.html">segment</a>) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">void</span> initialize(region* region) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        std::vector&lt;range&gt; get_committed() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        std::vector&lt;range&gt; get_available() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">void</span> do_compact(region* region) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">bool</span> get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        std::list&lt;range&gt; m_Committed;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        std::list&lt;range&gt; m_Free;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    };</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classmemory_1_1block__allocator.html">   78</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classmemory_1_1block__allocator.html">block_allocator</a> : <span class="keyword">public</span> <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="code" href="classmemory_1_1block__allocator.html">block_allocator</a>(<span class="keywordtype">size_t</span> block_size, <span class="keywordtype">bool</span> physically_backed = <span class="keyword">true</span>) </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            : <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>(physically_backed), m_BlockSize(block_size) {};</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classmemory_1_1block__allocator.html">block_allocator</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        std::optional&lt;segment&gt; do_allocate(<a class="code" href="classmemory_1_1region.html">region</a>* <a class="code" href="classmemory_1_1region.html">region</a>, std::size_t bytes) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordtype">bool</span> do_deallocate(<a class="code" href="classmemory_1_1segment.html">segment</a>&amp; <a class="code" href="classmemory_1_1segment.html">segment</a>) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordtype">void</span> initialize(region* region) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        std::vector&lt;range&gt; get_committed() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        std::vector&lt;range&gt; get_available() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordtype">bool</span> get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">class </span><a class="code" href="classmemory_1_1range.html">range</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classmemory_1_1allocator__base.html">   15</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classmemory_1_1region.html">region</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>(<span class="keywordtype">bool</span> physically_backed = <span class="keyword">true</span>) : m_IsPhysicallyBacked(physically_backed) {};</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>(<span class="keyword">const</span> <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        [[nodiscard]] std::optional&lt;segment&gt; allocate(std::size_t bytes)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">if</span>(bytes == 0)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keywordflow">return</span> do_allocate(m_Region, bytes);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        };</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">bool</span> deallocate(<a class="code" href="classmemory_1_1segment.html">segment</a>&amp; <a class="code" href="classmemory_1_1segment.html">segment</a>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        std::vector&lt;range&gt; committed();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        std::vector&lt;range&gt; available();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">bool</span> is_physically_backed() <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">return</span> m_IsPhysicallyBacked;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        };</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">size_t</span> alignment() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">bool</span> owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> compact();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">bool</span> commit(<span class="keyword">const</span> <a class="code" href="classmemory_1_1range.html">range</a>&amp; <a class="code" href="classmemory_1_1range.html">range</a>);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="classmemory_1_1range.html">memory::range</a> get_range() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="classmemory_1_1region.html">region</a> * m_Region{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">virtual</span> std::optional&lt;segment&gt; do_allocate(<a class="code" href="classmemory_1_1region.html">region</a>* <a class="code" href="classmemory_1_1region.html">region</a>, std::size_t bytes) = 0;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> do_deallocate(segment&amp; segment) = 0;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> initialize([[maybe_unused]] region* region) {};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">virtual</span> std::vector&lt;range&gt; get_committed() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">virtual</span> std::vector&lt;range&gt; get_available() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> do_compact([[maybe_unused]] region* region) {};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept = 0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">bool</span> m_IsPhysicallyBacked{<span class="keyword">true</span>};</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    };</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classmemory_1_1default__allocator.html">   62</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classmemory_1_1default__allocator.html">default_allocator</a> : <span class="keyword">public</span> <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="classmemory_1_1default__allocator.html">default_allocator</a>(<span class="keywordtype">bool</span> physically_backed = <span class="keyword">true</span>) : <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>(physically_backed) {};</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classmemory_1_1default__allocator.html">default_allocator</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::optional&lt;segment&gt; do_allocate(<a class="code" href="classmemory_1_1region.html">region</a>* <a class="code" href="classmemory_1_1region.html">region</a>, std::size_t bytes) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">bool</span> do_deallocate(<a class="code" href="classmemory_1_1segment.html">segment</a>&amp; <a class="code" href="classmemory_1_1segment.html">segment</a>) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">void</span> initialize(region* region) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        std::vector&lt;range&gt; get_committed() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        std::vector&lt;range&gt; get_available() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">void</span> do_compact(region* region) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">bool</span> get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        std::list&lt;range&gt; m_Committed;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::list&lt;range&gt; m_Free;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    };</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classmemory_1_1block__allocator.html">   80</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classmemory_1_1block__allocator.html">block_allocator</a> : <span class="keyword">public</span> <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="classmemory_1_1block__allocator.html">block_allocator</a>(<span class="keywordtype">size_t</span> block_size, <span class="keywordtype">bool</span> physically_backed = <span class="keyword">true</span>) </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            : <a class="code" href="classmemory_1_1allocator__base.html">allocator_base</a>(physically_backed), m_BlockSize(block_size) {};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classmemory_1_1block__allocator.html">block_allocator</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        std::optional&lt;segment&gt; do_allocate(<a class="code" href="classmemory_1_1region.html">region</a>* <a class="code" href="classmemory_1_1region.html">region</a>, std::size_t bytes) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordtype">bool</span> do_deallocate(<a class="code" href="classmemory_1_1segment.html">segment</a>&amp; <a class="code" href="classmemory_1_1segment.html">segment</a>) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordtype">void</span> initialize(region* region) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        std::vector&lt;range&gt; get_committed() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        std::vector&lt;range&gt; get_available() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        std::vector&lt;memory::range&gt; m_Ranges;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        std::stack&lt;size_t&gt; m_Free;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> m_BlockSize;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    };</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordtype">bool</span> get_owns(<span class="keyword">const</span> <a class="code" href="classmemory_1_1segment.html">memory::segment</a>&amp; segment) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        std::vector&lt;memory::range&gt; m_Ranges;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        std::stack&lt;size_t&gt; m_Free;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> m_BlockSize;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    };</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
 <div class="ttc" id="classmemory_1_1region_html"><div class="ttname"><a href="classmemory_1_1region.html">memory::region</a></div><div class="ttdoc">defines a region of memory that might be physically backed depending on the allocator. </div><div class="ttdef"><b>Definition:</b> <a href="region_8h_source.html#l00018">region.h:18</a></div></div>
-<div class="ttc" id="classmemory_1_1allocator__base_html"><div class="ttname"><a href="classmemory_1_1allocator__base.html">memory::allocator_base</a></div><div class="ttdoc">base class that defines the interface for an allocator. </div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00014">allocator.h:14</a></div></div>
-<div class="ttc" id="classmemory_1_1block__allocator_html"><div class="ttname"><a href="classmemory_1_1block__allocator.html">memory::block_allocator</a></div><div class="ttdoc">predifined block size allocator, much faster than most allocators, but can only allocate one sized bl...</div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00078">allocator.h:78</a></div></div>
+<div class="ttc" id="classmemory_1_1allocator__base_html"><div class="ttname"><a href="classmemory_1_1allocator__base.html">memory::allocator_base</a></div><div class="ttdoc">base class that defines the interface for an allocator. </div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00015">allocator.h:15</a></div></div>
+<div class="ttc" id="classmemory_1_1block__allocator_html"><div class="ttname"><a href="classmemory_1_1block__allocator.html">memory::block_allocator</a></div><div class="ttdoc">predifined block size allocator, much faster than most allocators, but can only allocate one sized bl...</div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00080">allocator.h:80</a></div></div>
 <div class="ttc" id="classmemory_1_1range_html"><div class="ttname"><a href="classmemory_1_1range.html">memory::range</a></div><div class="ttdoc">defines a begin/end location in (virtual) memory (in respect to the region, or segment). </div><div class="ttdef"><b>Definition:</b> <a href="psl_2inc_2memory_2range_8h_source.html#l00007">range.h:7</a></div></div>
 <div class="ttc" id="classmemory_1_1segment_html"><div class="ttname"><a href="classmemory_1_1segment.html">memory::segment</a></div><div class="ttdoc">a segment defines a addressable and mapped region of memory. </div><div class="ttdef"><b>Definition:</b> <a href="segment_8h_source.html#l00009">segment.h:9</a></div></div>
-<div class="ttc" id="classmemory_1_1default__allocator_html"><div class="ttname"><a href="classmemory_1_1default__allocator.html">memory::default_allocator</a></div><div class="ttdoc">default allocator that internally works using lists </div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00060">allocator.h:60</a></div></div>
+<div class="ttc" id="classmemory_1_1default__allocator_html"><div class="ttname"><a href="classmemory_1_1default__allocator.html">memory::default_allocator</a></div><div class="ttdoc">default allocator that internally works using lists </div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00062">allocator.h:62</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

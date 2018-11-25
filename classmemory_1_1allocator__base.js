@@ -13,5 +13,6 @@ var classmemory_1_1allocator__base =
     [ "owns", "classmemory_1_1allocator__base.html#ae30458b0f04867bebd9cf36b957a260b", null ],
     [ "compact", "classmemory_1_1allocator__base.html#a55afd4a585a25537de1ad96ea5d30537", null ],
     [ "commit", "classmemory_1_1allocator__base.html#a60e6e56dd75fa7d118ad0db1a6a74579", null ],
+    [ "get_range", "classmemory_1_1allocator__base.html#ae1c30fff87def8364fb81e91d985db80", null ],
     [ "region", "classmemory_1_1allocator__base.html#a0c1a2dfb50d276e1264e5aedb56c3069", null ]
 ];
