@@ -1,5 +1,6 @@
 var namespacecore_1_1gfx =
 [
+    [ "drawgroup", "classcore_1_1gfx_1_1drawgroup.html", "classcore_1_1gfx_1_1drawgroup" ],
     [ "material", "classcore_1_1gfx_1_1material.html", "classcore_1_1gfx_1_1material" ],
     [ "pass", "classcore_1_1gfx_1_1pass.html", "classcore_1_1gfx_1_1pass" ],
     [ "pipeline_key", "structcore_1_1gfx_1_1pipeline__key.html", "structcore_1_1gfx_1_1pipeline__key" ],

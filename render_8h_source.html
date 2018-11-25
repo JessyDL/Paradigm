@@ -159,25 +159,26 @@ $(document).ready(function(){initNavTree('render_8h_source.html','');});
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            psl::vec4 viewDir;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        };</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        render(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::context&gt;</a> context,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;               <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::swapchain&gt;</a> swapchain,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;               <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::os::surface&gt;</a> surface, </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;               <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">void</span> announce(core::ecs::state&amp; state);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">void</span> tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">void</span> update_buffer(<span class="keywordtype">size_t</span> index, <span class="keyword">const</span> core::ecs::components::transform&amp; transform,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                           <span class="keyword">const</span> core::ecs::components::camera&amp; camera);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1pass.html">core::gfx::pass</a> m_Pass;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::swapchain&gt;</a> m_Swapchain;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::os::surface&gt;</a> m_Surface;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        std::vector&lt;memory::segment&gt; fdatasegment;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> m_Buffer;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    };</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;} <span class="comment">// namespace core::ecs::systems</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        render(core::ecs::state&amp; state,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;               <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::context&gt;</a> context,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;               <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::swapchain&gt;</a> swapchain,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;               <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::os::surface&gt;</a> surface, </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;               <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> buffer);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">void</span> tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span> update_buffer(<span class="keywordtype">size_t</span> index, <span class="keyword">const</span> core::ecs::components::transform&amp; transform,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                           <span class="keyword">const</span> core::ecs::components::camera&amp; camera);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1pass.html">core::gfx::pass</a> m_Pass;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::swapchain&gt;</a> m_Swapchain;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::os::surface&gt;</a> m_Surface;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        std::vector&lt;memory::segment&gt; fdatasegment;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::buffer&gt;</a> m_Buffer;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">// namespace core::ecs::systems</span></div>
 <div class="ttc" id="classcore_1_1gfx_1_1pass_html"><div class="ttname"><a href="classcore_1_1gfx_1_1pass.html">core::gfx::pass</a></div><div class="ttdoc">a pass describes a start-to-finish sequence of commands to render into a set of rendertargets. </div><div class="ttdef"><b>Definition:</b> <a href="pass_8h_source.html#l00033">pass.h:33</a></div></div>
 <div class="ttc" id="classcore_1_1os_1_1surface_html"><div class="ttname"><a href="classcore_1_1os_1_1surface.html">core::os::surface</a></div><div class="ttdoc">primitive object that create a surface we can render on. </div><div class="ttdef"><b>Definition:</b> <a href="surface_8h_source.html#l00030">surface.h:30</a></div></div>
 <div class="ttc" id="classcore_1_1resource_1_1handle_html"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt; core::gfx::context &gt;</a></div></div>

@@ -20,6 +20,7 @@ var hierarchy =
     [ "core::ecs::state::dependency_pack", "classcore_1_1ecs_1_1state_1_1dependency__pack.html", null ],
     [ "core::data::framebuffer::attachment::description", "classcore_1_1data_1_1framebuffer_1_1attachment_1_1description.html", null ],
     [ "utility::platform::directory", "classutility_1_1platform_1_1directory.html", null ],
+    [ "core::gfx::drawgroup", "classcore_1_1gfx_1_1drawgroup.html", null ],
     [ "core::meta::shader::instance::element", "classcore_1_1meta_1_1shader_1_1instance_1_1element.html", null ],
     [ "core::ecs::entity", "structcore_1_1ecs_1_1entity.html", null ],
     [ "psl::meta::file", "classpsl_1_1meta_1_1file.html", [
