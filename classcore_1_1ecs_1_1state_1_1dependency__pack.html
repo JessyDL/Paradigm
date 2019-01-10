@@ -121,14 +121,10 @@ $(document).ready(function(){initNavTree('classcore_1_1ecs_1_1state_1_1dependenc
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4b742eb208f9e2ac63af9f40196f16f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b742eb208f9e2ac63af9f40196f16f2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html#a4b742eb208f9e2ac63af9f40196f16f2">dependency_pack</a> (core::ecs::vector&lt; <a class="el" href="structcore_1_1ecs_1_1entity.html">entity</a> &gt; &amp;entities)</td></tr>
-<tr class="memdesc:a4b742eb208f9e2ac63af9f40196f16f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructs a unique set of dependencies <br/></td></tr>
-<tr class="separator:a4b742eb208f9e2ac63af9f40196f16f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13d6c1188ccfb452b6789d88fdfdae66"><td class="memTemplParams" colspan="2"><a class="anchor" id="a13d6c1188ccfb452b6789d88fdfdae66"></a>
+<tr class="memitem:a344cfa6bb77abac8aecb9f563665190b"><td class="memTemplParams" colspan="2"><a class="anchor" id="a344cfa6bb77abac8aecb9f563665190b"></a>
 template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:a13d6c1188ccfb452b6789d88fdfdae66"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>dependency_pack</b> (core::ecs::vector&lt; <a class="el" href="structcore_1_1ecs_1_1entity.html">entity</a> &gt; &amp;entities, Ts &amp;&amp;...filters)</td></tr>
-<tr class="separator:a13d6c1188ccfb452b6789d88fdfdae66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a344cfa6bb77abac8aecb9f563665190b"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>dependency_pack</b> (<a class="el" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a>&lt; Ts...&gt; &amp;<a class="el" href="classcore_1_1ecs_1_1pack.html">pack</a>)</td></tr>
+<tr class="separator:a344cfa6bb77abac8aecb9f563665190b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9615dc0b5362e833a98330790d676749"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9615dc0b5362e833a98330790d676749"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>dependency_pack</b> (const <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;other)=default</td></tr>
 <tr class="separator:a9615dc0b5362e833a98330790d676749"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,22 +137,6 @@ template&lt;typename... Ts&gt; </td></tr>
 <tr class="memitem:aeba89f284f4276249da093b6ad537423"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeba89f284f4276249da093b6ad537423"></a>
 <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;&amp;)=default</td></tr>
 <tr class="separator:aeba89f284f4276249da093b6ad537423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19e12ce373b2522798123bc9568c6899"><td class="memTemplParams" colspan="2"><a class="anchor" id="a19e12ce373b2522798123bc9568c6899"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a19e12ce373b2522798123bc9568c6899"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add</b> (core::ecs::vector&lt; T &gt; &amp;vec) noexcept</td></tr>
-<tr class="separator:a19e12ce373b2522798123bc9568c6899"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a219091b0e06156f72e5141706855faed"><td class="memTemplParams" colspan="2"><a class="anchor" id="a219091b0e06156f72e5141706855faed"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a219091b0e06156f72e5141706855faed"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add</b> (core::ecs::vector&lt; const T &gt; &amp;vec) noexcept</td></tr>
-<tr class="separator:a219091b0e06156f72e5141706855faed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb6ae8e7a8b81b315691cb5ce1ac8f48"><td class="memTemplParams" colspan="2"><a class="anchor" id="abb6ae8e7a8b81b315691cb5ce1ac8f48"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:abb6ae8e7a8b81b315691cb5ce1ac8f48"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add</b> (core::ecs::filter&lt; T &gt; &amp;filter) noexcept</td></tr>
-<tr class="separator:abb6ae8e7a8b81b315691cb5ce1ac8f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a782db4218b70930cf86bfe444ceb5438"><td class="memTemplParams" colspan="2"><a class="anchor" id="a782db4218b70930cf86bfe444ceb5438"></a>
-template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:a782db4218b70930cf86bfe444ceb5438"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add</b> (Ts &amp;&amp;...args) noexcept</td></tr>
-<tr class="separator:a782db4218b70930cf86bfe444ceb5438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -167,7 +147,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::ecs::state</b>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>systems can have various dependencies, for example a movement system could have dependencies on both a core::ecs::components::transform component and a core::ecs::components::renderable component. This dependency will output a set of <a class="el" href="structcore_1_1ecs_1_1entity.html" title="entity points to a collection of components ">core::ecs::entity</a>'s that have all required core::ecs::components present. Certain systems could have sets of dependencies, for example the render system requires knowing about both all <code>core::ecs::components::renderable</code> that have a <code>core::ecs::components::transform</code>, but also needs to know all <code>core::ecs::components::camera's</code>. So that system would require several <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html" title="describes a set of dependencies for a given system ">dependency_pack</a>'s. </p>
 
-<p>Definition at line <a class="el" href="state_8h_source.html#l00202">202</a> of file <a class="el" href="state_8h_source.html">state.h</a>.</p>
+<p>Definition at line <a class="el" href="state_8h_source.html#l00430">430</a> of file <a class="el" href="state_8h_source.html">state.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/travis/build/JessyDL/paradigm/core/inc/ecs/<a class="el" href="state_8h_source.html">state.h</a></li>
 </ul>

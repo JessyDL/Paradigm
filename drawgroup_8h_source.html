@@ -143,19 +143,20 @@ $(document).ready(function(){initNavTree('drawgroup_8h_source.html','');});
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">bool</span> <span class="keyword">remove</span>(core::resource::indirect_handle&lt;core::gfx::framebuffer&gt; framebuffer);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        drawcall&amp; add(<span class="keyword">const</span> drawlayer&amp; layer, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::material&gt;</a> <a class="code" href="classcore_1_1gfx_1_1material.html">material</a>) noexcept;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">void</span> build(vk::CommandBuffer cmdBuffer, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;framebuffer&gt;</a> framebuffer, uint32_t index, std::optional&lt;<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::material&gt;</a>&gt; replacement = std::nullopt);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> build(vk::CommandBuffer cmdBuffer, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;swapchain&gt;</a> swapchain, uint32_t index, std::optional&lt;<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::material&gt;</a>&gt; replacement = std::nullopt);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="comment">//bool remove(const drawlayer&amp; layer);</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">//bool remove(const drawcall&amp; call);</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="comment">//bool remove(const drawlayer&amp; layer, const drawcall&amp; call);</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        std::map&lt;drawlayer, std::vector&lt;drawcall&gt;&gt; m_Group;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::swapchain&gt;</a> m_Swapchain;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        std::vector&lt;core::resource::handle&lt;core::gfx::framebuffer&gt;&gt; m_Framebuffers;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        std::optional&lt;std::reference_wrapper&lt;drawcall&gt;&gt; <span class="keyword">get</span>(<span class="keyword">const</span> drawlayer&amp; layer, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::material&gt;</a> material) noexcept;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> build(vk::CommandBuffer cmdBuffer, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;framebuffer&gt;</a> framebuffer, uint32_t index, std::optional&lt;<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::material&gt;</a>&gt; replacement = std::nullopt);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">void</span> build(vk::CommandBuffer cmdBuffer, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;swapchain&gt;</a> swapchain, uint32_t index, std::optional&lt;<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::material&gt;</a>&gt; replacement = std::nullopt);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">//bool remove(const drawlayer&amp; layer);</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="comment">//bool remove(const drawcall&amp; call);</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="comment">//bool remove(const drawlayer&amp; layer, const drawcall&amp; call);</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        std::map&lt;drawlayer, std::vector&lt;drawcall&gt;&gt; m_Group;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::swapchain&gt;</a> m_Swapchain;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        std::vector&lt;core::resource::handle&lt;core::gfx::framebuffer&gt;&gt; m_Framebuffers;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    };</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
 <div class="ttc" id="classcore_1_1gfx_1_1material_html"><div class="ttname"><a href="classcore_1_1gfx_1_1material.html">core::gfx::material</a></div><div class="ttdoc">class that creates a bindable collection of resources that can be used in conjuction with a surface t...</div><div class="ttdef"><b>Definition:</b> <a href="gfx_2material_8h_source.html#l00028">material.h:28</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1swapchain_html"><div class="ttname"><a href="classcore_1_1gfx_1_1swapchain.html">core::gfx::swapchain</a></div><div class="ttdoc">describes a framebuffer that is specially handled and created by the driver </div><div class="ttdef"><b>Definition:</b> <a href="swapchain_8h_source.html#l00028">swapchain.h:28</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1framebuffer_html"><div class="ttname"><a href="classcore_1_1gfx_1_1framebuffer.html">core::gfx::framebuffer</a></div><div class="ttdoc">describes a set of images to use as rendertargets </div><div class="ttdef"><b>Definition:</b> <a href="vk_2framebuffer_8h_source.html#l00021">framebuffer.h:21</a></div></div>
@@ -166,7 +167,7 @@ $(document).ready(function(){initNavTree('drawgroup_8h_source.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_071e1b64239a6677b6e70b7a2c735c10.html">core</a></li><li class="navelem"><a class="el" href="dir_9160a88f735f7466501c9ec570fde59d.html">inc</a></li><li class="navelem"><a class="el" href="dir_c90829adbfb9424ee64f3e652986619f.html">gfx</a></li><li class="navelem"><b>drawgroup.h</b></li>
+    <li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_7e868af64e31779987291c90ae140f88.html">inc</a></li><li class="navelem"><a class="el" href="dir_2656102bfaf9d40704fa4309a1ebccdb.html">gfx</a></li><li class="navelem"><b>drawgroup.h</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

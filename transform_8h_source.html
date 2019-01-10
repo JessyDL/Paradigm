@@ -111,38 +111,22 @@ $(document).ready(function(){initNavTree('transform_8h_source.html','');});
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span>core::ecs::components</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keyword">struct </span>dead_tag {};</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keyword">struct </span>lifetime</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        lifetime(<span class="keywordtype">float</span> value = 10.0f) : value(value) {};</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keywordtype">float</span> value{};</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    };</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">struct </span>velocity</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        velocity() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        velocity(psl::vec3 direction, <span class="keywordtype">float</span> force, <span class="keywordtype">float</span> inertia) : direction(direction), force(force), inertia(inertia) {};</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        psl::vec3 direction;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordtype">float</span> force;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordtype">float</span> inertia;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    };</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">struct </span>transform</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        transform() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        transform(<span class="keyword">const</span> psl::vec3&amp; position) : position(position) {};</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        transform(<span class="keyword">const</span> psl::vec3&amp; position, <span class="keyword">const</span> psl::vec3&amp; scale) : position(position), scale(scale) {};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        psl::quat rotation{1,0,0,0};</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        psl::vec3 position{ psl::vec3::zero };</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        psl::vec3 scale{ psl::vec3::one };</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keyword">struct </span>transform</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        transform() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        transform(<span class="keyword">const</span> psl::vec3&amp; position) : position(position) {};</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        transform(<span class="keyword">const</span> psl::vec3&amp; position, <span class="keyword">const</span> psl::vec3&amp; scale) : position(position), scale(scale) {};</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        psl::quat rotation{1,0,0,0};</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        psl::vec3 position{ psl::vec3::zero };</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        psl::vec3 scale{ psl::vec3::one };</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    };</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_071e1b64239a6677b6e70b7a2c735c10.html">core</a></li><li class="navelem"><a class="el" href="dir_9160a88f735f7466501c9ec570fde59d.html">inc</a></li><li class="navelem"><a class="el" href="dir_99a647bb52586874a9dac57de85d2e88.html">ecs</a></li><li class="navelem"><a class="el" href="dir_c4efa2e1605f83ee5ea0c57140f8c54c.html">components</a></li><li class="navelem"><b>transform.h</b></li>
+    <li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_7e868af64e31779987291c90ae140f88.html">inc</a></li><li class="navelem"><a class="el" href="dir_8187f6e149452a69b0427ea9f88a73f6.html">ecs</a></li><li class="navelem"><a class="el" href="dir_d5b7c971586ba64a8b976f0cc22e79ae.html">components</a></li><li class="navelem"><b>transform.h</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

@@ -115,37 +115,32 @@ $(document).ready(function(){initNavTree('geometry__instance_8h_source.html','')
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">struct </span>transform;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">struct </span>renderable;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">struct </span>lifetime;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">struct </span>velocity;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;} <span class="comment">// namespace core::ecs::components</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>core::ecs::systems</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">class </span>geometry_instance</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        core::ecs::vector&lt;core::ecs::components::transform&gt; m_Transforms;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        core::ecs::vector&lt;const core::ecs::components::renderable&gt; m_Renderers;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        core::ecs::vector&lt;const core::ecs::components::velocity&gt; m_Velocity;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        core::ecs::vector&lt;core::ecs::entity&gt; m_Entities;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;} <span class="comment">// namespace core::ecs::components</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>core::ecs::systems</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">class </span>geometry_instance</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;const core::ecs::components::renderable, core::ecs::components::transform&gt;</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            m_Geometry;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;      <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        geometry_instance(core::ecs::state&amp; state);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        core::ecs::vector&lt;const core::ecs::components::transform&gt; m_CamTransform;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        core::ecs::vector&lt;core::ecs::entity&gt; m_CamEntities;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        core::ecs::vector&lt;core::ecs::components::lifetime&gt; m_Lifetime;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        core::ecs::vector&lt;core::ecs::entity&gt; m_LifeEntities;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        geometry_instance(core::ecs::state&amp; state);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">void</span> tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    };</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">void</span> tick(<a class="code" href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a>&amp; commands, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    };</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <span class="comment">// namespace core::ecs::systems</span></div>
+<div class="ttc" id="classcore_1_1ecs_1_1commands_html"><div class="ttname"><a href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a></div><div class="ttdoc">contains commands for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="state_8h_source.html#l01256">state.h:1256</a></div></div>
+<div class="ttc" id="classcore_1_1ecs_1_1pack_html"><div class="ttname"><a href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt; const core::ecs::components::renderable, core::ecs::components::transform &gt;</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_071e1b64239a6677b6e70b7a2c735c10.html">core</a></li><li class="navelem"><a class="el" href="dir_9160a88f735f7466501c9ec570fde59d.html">inc</a></li><li class="navelem"><a class="el" href="dir_99a647bb52586874a9dac57de85d2e88.html">ecs</a></li><li class="navelem"><a class="el" href="dir_9035074a81e71a97fd1f7a287f25b83e.html">systems</a></li><li class="navelem"><b>geometry_instance.h</b></li>
+    <li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_7e868af64e31779987291c90ae140f88.html">inc</a></li><li class="navelem"><a class="el" href="dir_8187f6e149452a69b0427ea9f88a73f6.html">ecs</a></li><li class="navelem"><a class="el" href="dir_1e300742ae92ad7878e286ee584aa9d2.html">systems</a></li><li class="navelem"><b>geometry_instance.h</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

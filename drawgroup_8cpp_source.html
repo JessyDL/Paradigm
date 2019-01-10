@@ -253,6 +253,23 @@ $(document).ready(function(){initNavTree('drawgroup_8cpp_source.html','');});
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">return</span> m_Group[layer].emplace_back(<a class="code" href="classcore_1_1gfx_1_1material.html">material</a>);</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;std::optional&lt;std::reference_wrapper&lt;drawcall&gt;&gt; drawgroup::get(<span class="keyword">const</span> drawlayer&amp; layer, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::material&gt;</a> <a class="code" href="classcore_1_1gfx_1_1material.html">material</a>) noexcept</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;{</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">auto</span> it = m_Group.find(layer);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">if</span> (it != std::end(m_Group))</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">if</span>(<span class="keyword">auto</span> matIt = std::find_if(std::begin(it-&gt;second), std::end(it-&gt;second), [&amp;<a class="code" href="classcore_1_1gfx_1_1material.html">material</a>](<span class="keyword">const</span> drawcall&amp; call)</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordflow">return</span> call.material() == <a class="code" href="classcore_1_1gfx_1_1material.html">material</a>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        }); matIt != std::end(it-&gt;second))</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <span class="keywordflow">return</span> *matIt;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
 <div class="ttc" id="classcore_1_1gfx_1_1material_html_a42cb55db628806b2795247b145c3bbbf"><div class="ttname"><a href="classcore_1_1gfx_1_1material.html#a42cb55db628806b2795247b145c3bbbf">core::gfx::material::instances</a></div><div class="ttdeci">uint32_t instances(const core::resource::handle&lt; core::gfx::geometry &gt; geometry) const </div><div class="ttdoc">returns the instance count currently used for the given piece of geometry. </div><div class="ttdef"><b>Definition:</b> <a href="gfx_2material_8cpp_source.html#l00236">material.cpp:236</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1material_html_a66497854e2116503460f7058480fbcf0"><div class="ttname"><a href="classcore_1_1gfx_1_1material.html#a66497854e2116503460f7058480fbcf0">core::gfx::material::bind_geometry</a></div><div class="ttdeci">bool bind_geometry(vk::CommandBuffer cmdBuffer, const core::resource::handle&lt; core::gfx::geometry &gt; geometry)</div><div class="ttdoc">prepares the material for rendering by binding the geometry&#39;s instance data. </div><div class="ttdef"><b>Definition:</b> <a href="gfx_2material_8cpp_source.html#l00218">material.cpp:218</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1material_html"><div class="ttname"><a href="classcore_1_1gfx_1_1material.html">core::gfx::material</a></div><div class="ttdoc">class that creates a bindable collection of resources that can be used in conjuction with a surface t...</div><div class="ttdef"><b>Definition:</b> <a href="gfx_2material_8h_source.html#l00028">material.h:28</a></div></div>
@@ -265,7 +282,7 @@ $(document).ready(function(){initNavTree('drawgroup_8cpp_source.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_071e1b64239a6677b6e70b7a2c735c10.html">core</a></li><li class="navelem"><a class="el" href="dir_e78b788e6c99d1816bb9bda3e96ba6b8.html">src</a></li><li class="navelem"><a class="el" href="dir_0e31198f2b9122d739b4e10f41744b4a.html">gfx</a></li><li class="navelem"><b>drawgroup.cpp</b></li>
+    <li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_90fd98a0ba30abf7a6068a44995d2d6b.html">src</a></li><li class="navelem"><a class="el" href="dir_a4d9d82909500c5f8962de4b1fbe9aa5.html">gfx</a></li><li class="navelem"><b>drawgroup.cpp</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

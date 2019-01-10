@@ -330,31 +330,53 @@ $(document).ready(function(){initNavTree('matrix_8h_source.html','');});
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                                                  <span class="keyword">const</span> tmat&lt;precision_t, d2, d3&gt;&amp; right) noexcept</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    {</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        tmat&lt;precision_t, d1, d3&gt; res{1};</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> column = 0; column &lt; d1; column++)</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="keywordflow">if</span> constexpr(d1 * d3 == 16)</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        {</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> row = 0; row &lt; d3; row++)</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            {</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                res[{row, column}] = precision_t{0};</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> p = 0; p &lt; d2; p++)</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                {</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                    res[{row, column}] += left[{p, column}] * right[{row, p}];</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                }</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            }</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        }</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keywordflow">return</span> res;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    }</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;} <span class="comment">// namespace psl</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="keyword">namespace </span>psl::math</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;{}</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            __m128 a_line, b_line, r_line;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 16; i += 4)</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            {</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                <span class="comment">// unroll the first step of the loop to avoid having to initialize r_line to zero</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                a_line = _mm_load_ps(left.value.data());         <span class="comment">// a_line = vec4(column(a, 0))</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                b_line = _mm_set1_ps(right[i]);      <span class="comment">// b_line = vec4(b[i][0])</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                r_line = _mm_mul_ps(a_line, b_line); <span class="comment">// r_line = a_line * b_line</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 1; j &lt; 4; j++)</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                {</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                    a_line = _mm_load_ps(&amp;left[j * 4]); <span class="comment">// a_line = vec4(column(a, j))</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                    b_line = _mm_set1_ps(right[i + j]);  <span class="comment">// b_line = vec4(b[i][j])</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                                                   <span class="comment">// r_line += a_line * b_line</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                    r_line = _mm_add_ps(_mm_mul_ps(a_line, b_line), r_line);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                }</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                _mm_store_ps(&amp;res[i], r_line);     <span class="comment">// r[i] = r_line</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        }</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> column = 0; column &lt; d1; column++)</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            {</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> row = 0; row &lt; d3; row++)</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                    res[{row, column}] = precision_t{0};</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> p = 0; p &lt; d2; p++)</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                    {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                        res[{row, column}] += left[{p, column}] * right[{row, p}];</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                    }</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            }</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        }</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keywordflow">return</span> res;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    }</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;} <span class="comment">// namespace psl</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="keyword">namespace </span>psl::math</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;{}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_857595d91812b02e8c2d8722bada823e.html">psl</a></li><li class="navelem"><a class="el" href="dir_1c2fcdabcbe783d36ef9dfcea9a7a7d4.html">inc</a></li><li class="navelem"><a class="el" href="dir_2e63a296619e6f1d09b7c9619d4b1784.html">math</a></li><li class="navelem"><b>matrix.h</b></li>
+    <li class="navelem"><a class="el" href="dir_a1556dadab30d217fbfc78bbc628eb33.html">psl</a></li><li class="navelem"><a class="el" href="dir_e52b4d66bdf46265e4d1ecc7f504bc09.html">inc</a></li><li class="navelem"><a class="el" href="dir_7446bd04209b021d6eb4db993408394a.html">math</a></li><li class="navelem"><b>matrix.h</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

@@ -118,58 +118,59 @@ $(document).ready(function(){initNavTree('fly_8h_source.html','');});
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classcore_1_1systems_1_1input.html">core::systems::input</a>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        core::ecs::vector&lt;core::ecs::components::transform&gt; m_Transforms;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        core::ecs::vector&lt;core::ecs::entity&gt; m_Entities;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        fly(core::ecs::state&amp; state, <a class="code" href="classcore_1_1systems_1_1input.html">core::systems::input</a>&amp; inputSystem);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        ~fly();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordtype">void</span> tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">void</span> on_key_pressed(<a class="code" href="classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4a">core::systems::input::keycode</a> keyCode);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">void</span> on_key_released(<a class="code" href="classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4a">core::systems::input::keycode</a> keyCode);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">void</span> on_mouse_move(<a class="code" href="structcore_1_1systems_1_1input_1_1mouse__delta.html">core::systems::input::mouse_delta</a> delta);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">void</span> on_scroll(<a class="code" href="structcore_1_1systems_1_1input_1_1scroll__delta.html">core::systems::input::scroll_delta</a> delta);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">void</span> on_mouse_pressed(<a class="code" href="classcore_1_1systems_1_1input.html#afe2b03021701ce7c0c0f269a0e54c244">core::systems::input::mousecode</a> mCode);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">void</span> on_mouse_released(<a class="code" href="classcore_1_1systems_1_1input.html#afe2b03021701ce7c0c0f269a0e54c244">core::systems::input::mousecode</a> mCode);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">void</span> pitch_to(<span class="keywordtype">float</span> degrees);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">void</span> head_to(<span class="keywordtype">float</span> degrees);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="classcore_1_1systems_1_1input.html">core::systems::input</a>&amp; m_InputSystem;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        std::array&lt;bool, 4&gt; m_Moving{<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">bool</span> m_Up{<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        psl::vec3 m_MoveVector{0};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        int64_t m_MouseX{1};</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        int64_t m_MouseY{1};</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        int64_t m_MouseTargetX{1};</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        int64_t m_MouseTargetY{1};</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">float</span> m_Pitch{ 0.0f };</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">float</span> m_Heading{ 0.0f };</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">float</span> m_AngleH{ 0.0f };</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">float</span> m_AngleV{ 0.0f };</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">float</span> m_MoveSpeed{1.0f};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> m_MoveStepIncrease{0.035f};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">bool</span> m_AllowRotating{<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">bool</span> m_Boost {<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    };</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;core::ecs::components::transform, core::ecs::filter&lt;core::ecs::components::input_tag&gt;</a>&gt; m_Movables;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        fly(core::ecs::state&amp; state, <a class="code" href="classcore_1_1systems_1_1input.html">core::systems::input</a>&amp; inputSystem);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        ~fly();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">void</span> tick(<a class="code" href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a>&amp; commands, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">void</span> on_key_pressed(<a class="code" href="classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4a">core::systems::input::keycode</a> keyCode);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">void</span> on_key_released(<a class="code" href="classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4a">core::systems::input::keycode</a> keyCode);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">void</span> on_mouse_move(<a class="code" href="structcore_1_1systems_1_1input_1_1mouse__delta.html">core::systems::input::mouse_delta</a> delta);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">void</span> on_scroll(<a class="code" href="structcore_1_1systems_1_1input_1_1scroll__delta.html">core::systems::input::scroll_delta</a> delta);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">void</span> on_mouse_pressed(<a class="code" href="classcore_1_1systems_1_1input.html#afe2b03021701ce7c0c0f269a0e54c244">core::systems::input::mousecode</a> mCode);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">void</span> on_mouse_released(<a class="code" href="classcore_1_1systems_1_1input.html#afe2b03021701ce7c0c0f269a0e54c244">core::systems::input::mousecode</a> mCode);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">void</span> pitch_to(<span class="keywordtype">float</span> degrees);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">void</span> head_to(<span class="keywordtype">float</span> degrees);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="classcore_1_1systems_1_1input.html">core::systems::input</a>&amp; m_InputSystem;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        std::array&lt;bool, 4&gt; m_Moving{<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">bool</span> m_Up{<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        psl::vec3 m_MoveVector{0};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        int64_t m_MouseX{1};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        int64_t m_MouseY{1};</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        int64_t m_MouseTargetX{1};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        int64_t m_MouseTargetY{1};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">float</span> m_Pitch{ 0.0f };</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">float</span> m_Heading{ 0.0f };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">float</span> m_AngleH{ 0.0f };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">float</span> m_AngleV{ 0.0f };</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">float</span> m_MoveSpeed{1.0f};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> m_MoveStepIncrease{0.035f};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">bool</span> m_AllowRotating{<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">bool</span> m_Boost {<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    };</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
 <div class="ttc" id="structcore_1_1systems_1_1input_1_1scroll__delta_html"><div class="ttname"><a href="structcore_1_1systems_1_1input_1_1scroll__delta.html">core::systems::input::scroll_delta</a></div><div class="ttdoc">delta information for the mouse scroll wheel. </div><div class="ttdef"><b>Definition:</b> <a href="input_8h_source.html#l00059">input.h:59</a></div></div>
 <div class="ttc" id="classcore_1_1systems_1_1input_html"><div class="ttname"><a href="classcore_1_1systems_1_1input.html">core::systems::input</a></div><div class="ttdoc">handles all inputs and sends out generic events that can be subscribed to. </div><div class="ttdef"><b>Definition:</b> <a href="input_8h_source.html#l00022">input.h:22</a></div></div>
 <div class="ttc" id="classcore_1_1systems_1_1input_html_ae53b5000e2500becf5f1e6f67bda4e4a"><div class="ttname"><a href="classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4a">core::systems::input::keycode</a></div><div class="ttdeci">keycode</div><div class="ttdoc">contains the generic keycodes that platform specific key codes get translated to. ...</div><div class="ttdef"><b>Definition:</b> <a href="input_8h_source.html#l00338">input.h:338</a></div></div>
+<div class="ttc" id="classcore_1_1ecs_1_1commands_html"><div class="ttname"><a href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a></div><div class="ttdoc">contains commands for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="state_8h_source.html#l01256">state.h:1256</a></div></div>
 <div class="ttc" id="classcore_1_1systems_1_1input_html_afe2b03021701ce7c0c0f269a0e54c244"><div class="ttname"><a href="classcore_1_1systems_1_1input.html#afe2b03021701ce7c0c0f269a0e54c244">core::systems::input::mousecode</a></div><div class="ttdeci">mousecode</div><div class="ttdoc">codes for the various mouse buttons. </div><div class="ttdef"><b>Definition:</b> <a href="input_8h_source.html#l00044">input.h:44</a></div></div>
+<div class="ttc" id="classcore_1_1ecs_1_1pack_html"><div class="ttname"><a href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a></div><div class="ttdoc">an iterable container to work with components and entities. </div><div class="ttdef"><b>Definition:</b> <a href="pack_8h_source.html#l00012">pack.h:12</a></div></div>
 <div class="ttc" id="structcore_1_1systems_1_1input_1_1mouse__delta_html"><div class="ttname"><a href="structcore_1_1systems_1_1input_1_1mouse__delta.html">core::systems::input::mouse_delta</a></div><div class="ttdoc">contains the mouse delta coordinates in respect to the last message tick. </div><div class="ttdef"><b>Definition:</b> <a href="input_8h_source.html#l00028">input.h:28</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_071e1b64239a6677b6e70b7a2c735c10.html">core</a></li><li class="navelem"><a class="el" href="dir_9160a88f735f7466501c9ec570fde59d.html">inc</a></li><li class="navelem"><a class="el" href="dir_99a647bb52586874a9dac57de85d2e88.html">ecs</a></li><li class="navelem"><a class="el" href="dir_9035074a81e71a97fd1f7a287f25b83e.html">systems</a></li><li class="navelem"><b>fly.h</b></li>
+    <li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_7e868af64e31779987291c90ae140f88.html">inc</a></li><li class="navelem"><a class="el" href="dir_8187f6e149452a69b0427ea9f88a73f6.html">ecs</a></li><li class="navelem"><a class="el" href="dir_1e300742ae92ad7878e286ee584aa9d2.html">systems</a></li><li class="navelem"><b>fly.h</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

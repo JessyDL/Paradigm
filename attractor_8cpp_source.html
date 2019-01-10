@@ -113,42 +113,40 @@ $(document).ready(function(){initNavTree('attractor_8cpp_source.html','');});
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ecs/components/renderable.h&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ecs/components/transform.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;ecs/components/input_tag.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using namespace </span>core::ecs::systems;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using namespace </span>psl::math;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;attractor::attractor(core::ecs::state&amp; state)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    state.register_system(*<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, {m_Entities, m_Transforms, m_Velocity});</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, {m_AttractorEntities, m_AttractorTransform, m_Attractors});</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> attractor::tick(core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime)</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; m_Entities.size(); ++i)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> u = 0; u &lt; m_AttractorEntities.size(); ++u)</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> mag = saturate((m_Attractors[u].radius - magnitude(m_Transforms[i].position - m_AttractorTransform[u].position)) / m_Attractors[u].radius) * dTime.count();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> direction = normalize(m_AttractorTransform[u].position - m_Transforms[i].position) * m_Attractors[u].force;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="comment">//m_Transforms[i].position[0] = mix(m_Transforms[i].position[0], m_CamTransform[0].position[0], mag);</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="comment">//m_Transforms[i].position[1] = mix(m_Transforms[i].position[1], m_CamTransform[0].position[1], mag);</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="comment">//m_Transforms[i].position[2] = mix(m_Transforms[i].position[2], m_CamTransform[0].position[2], mag);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ecs/components/velocity.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using namespace </span>core::ecs::systems;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using namespace </span>psl::math;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;attractor::attractor(core::ecs::state&amp; state)</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    state.register_system(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, core::ecs::tick{}, m_Movables);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, core::ecs::tick{}, m_Attractors);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> attractor::tick(<a class="code" href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a>&amp; commands, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    PROFILE_SCOPE(core::profiler)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    for (auto [movTrans, movVel] : m_Movables)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> [attrTransform, attractor] : m_Attractors)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> mag = saturate((attractor.radius - magnitude(movTrans.position - attrTransform.position)) / attractor.radius) * dTime.count();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span> direction = normalize(attrTransform.position - movTrans.position) * attractor.force;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            m_Velocity[i].direction[0] = mix(m_Velocity[i].direction[0], direction[0], mag);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            m_Velocity[i].direction[1] = mix(m_Velocity[i].direction[1], direction[1], mag);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            m_Velocity[i].direction[2] = mix(m_Velocity[i].direction[2], direction[2], mag);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="comment">//m_Velocity[i].direction = normalize(m_Velocity[i].direction);</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            movVel.direction = mix&lt;float, float, float, 3&gt;(movVel.direction, direction, mag);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="ttc" id="classcore_1_1ecs_1_1commands_html"><div class="ttname"><a href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a></div><div class="ttdoc">contains commands for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="state_8h_source.html#l01256">state.h:1256</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_071e1b64239a6677b6e70b7a2c735c10.html">core</a></li><li class="navelem"><a class="el" href="dir_e78b788e6c99d1816bb9bda3e96ba6b8.html">src</a></li><li class="navelem"><a class="el" href="dir_3734828d1393d6d4c1d13f887d6e3ba0.html">ecs</a></li><li class="navelem"><a class="el" href="dir_b5107cd2417d2d08c62af0cf76f1ce89.html">systems</a></li><li class="navelem"><b>attractor.cpp</b></li>
+    <li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_90fd98a0ba30abf7a6068a44995d2d6b.html">src</a></li><li class="navelem"><a class="el" href="dir_39f7d7050dfaa5d293eda325813e8ed5.html">ecs</a></li><li class="navelem"><a class="el" href="dir_fdfec7b1ad5724cc21c0daa08b0368ff.html">systems</a></li><li class="navelem"><b>attractor.cpp</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

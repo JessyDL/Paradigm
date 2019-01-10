@@ -161,6 +161,10 @@ template&lt;typename precision_t &gt; </td></tr>
 template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:ae1eb3722be08c3d9af8450374060a860"><td class="memTemplItemLeft" align="right" valign="top">static constexpr precision_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>clamp</b> (precision_t value, precision_t min=0, precision_t max=1) noexcept</td></tr>
 <tr class="separator:ae1eb3722be08c3d9af8450374060a860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a823308d0cfd1d04d0e98f0b60ae9f3a9"><td class="memTemplParams" colspan="2"><a class="anchor" id="a823308d0cfd1d04d0e98f0b60ae9f3a9"></a>
+template&lt;typename precision_t , size_t dimensions&gt; </td></tr>
+<tr class="memitem:a823308d0cfd1d04d0e98f0b60ae9f3a9"><td class="memTemplItemLeft" align="right" valign="top">static constexpr precision_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>distance</b> (const tvec&lt; precision_t, dimensions &gt; &amp;vec1, const tvec&lt; precision_t, dimensions &gt; &amp;vec2) noexcept</td></tr>
+<tr class="separator:a823308d0cfd1d04d0e98f0b60ae9f3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4541745eefb9a98437888bbf2ea2efe5"><td class="memTemplParams" colspan="2"><a class="anchor" id="a4541745eefb9a98437888bbf2ea2efe5"></a>
 template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:a4541745eefb9a98437888bbf2ea2efe5"><td class="memTemplItemLeft" align="right" valign="top">static constexpr tquat<br class="typebreak"/>
@@ -235,6 +239,16 @@ template&lt;typename precision_t &gt; </td></tr>
 template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:a8240ccaa91be519379865a0801490068"><td class="memTemplItemLeft" align="right" valign="top">static constexpr precision_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>mix</b> (const precision_t &amp;x, const precision_t &amp;y, precision_t a) noexcept</td></tr>
 <tr class="separator:a8240ccaa91be519379865a0801490068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9e781aecb989394ca3d09513db96236"><td class="memTemplParams" colspan="2"><a class="anchor" id="ac9e781aecb989394ca3d09513db96236"></a>
+template&lt;typename element1_t , typename element2_t , typename precision_t , size_t N&gt; </td></tr>
+<tr class="memitem:ac9e781aecb989394ca3d09513db96236"><td class="memTemplItemLeft" align="right" valign="top">static constexpr std::array<br class="typebreak"/>
+&lt; element1_t, N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>mix</b> (const std::array&lt; element1_t, N &gt; &amp;x, const std::array&lt; element2_t, N &gt; &amp;y, precision_t a) noexcept</td></tr>
+<tr class="separator:ac9e781aecb989394ca3d09513db96236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47c135d3e8225044893f8721520c4eb6"><td class="memTemplParams" colspan="2"><a class="anchor" id="a47c135d3e8225044893f8721520c4eb6"></a>
+template&lt;typename element1_t , typename element2_t , typename precision_t , size_t N&gt; </td></tr>
+<tr class="memitem:a47c135d3e8225044893f8721520c4eb6"><td class="memTemplItemLeft" align="right" valign="top">static constexpr std::array<br class="typebreak"/>
+&lt; element1_t, N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>mix</b> (const psl::tvec&lt; element1_t, N &gt; &amp;x, const psl::tvec&lt; element2_t, N &gt; &amp;y, precision_t a) noexcept</td></tr>
+<tr class="separator:a47c135d3e8225044893f8721520c4eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbb67b586ad4b3766f3f627586a68516"><td class="memTemplParams" colspan="2"><a class="anchor" id="afbb67b586ad4b3766f3f627586a68516"></a>
 template&lt;typename precision_t &gt; </td></tr>
 <tr class="memitem:afbb67b586ad4b3766f3f627586a68516"><td class="memTemplItemLeft" align="right" valign="top">static constexpr precision_t&#160;</td><td class="memTemplItemRight" valign="bottom"><b>dot</b> (const tquat&lt; precision_t &gt; &amp;left, const tquat&lt; precision_t &gt; &amp;right) noexcept</td></tr>

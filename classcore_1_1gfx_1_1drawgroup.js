@@ -15,6 +15,7 @@ var classcore_1_1gfx_1_1drawgroup =
     [ "remove", "classcore_1_1gfx_1_1drawgroup.html#aea15ca976b85a42326da5862e9901077", null ],
     [ "remove", "classcore_1_1gfx_1_1drawgroup.html#ad4f87f2bb49964deb354f17855216e1b", null ],
     [ "add", "classcore_1_1gfx_1_1drawgroup.html#acdad78d44d045c601298ed98275feae5", null ],
+    [ "get", "classcore_1_1gfx_1_1drawgroup.html#a6944a854a1466e540526f757e3053467", null ],
     [ "build", "classcore_1_1gfx_1_1drawgroup.html#a20d684981476029109d4cdc0136261b2", null ],
     [ "build", "classcore_1_1gfx_1_1drawgroup.html#a43d253b1fb2989a5a83b9d630228a2ae", null ]
 ];
