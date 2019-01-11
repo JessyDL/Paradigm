@@ -758,7 +758,7 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;        queueCreateInfo[0].queueCount       = 1;</div>
 <div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;        queueCreateInfo[0].pQueuePriorities = queuePriorities.data();</div>
 <div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;</div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;        <span class="keywordflow">if</span>(!utility::vulkan::check(create_device(queueCreateInfo.data(), queueCreateInfo.size(), m_Device)))</div>
+<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;        <span class="keywordflow">if</span>(!utility::vulkan::check(create_device(queueCreateInfo.data(), (uint32_t)queueCreateInfo.size(), m_Device)))</div>
 <div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;        {</div>
 <div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;            core::ivk::log-&gt;critical(<span class="stringliteral">&quot;Could not create a Vulkan device.&quot;</span>);</div>
 <div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;            std::exit(-1);</div>
@@ -781,7 +781,7 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;        queueCreateInfo[1].pQueuePriorities = queuePriorities.data();</div>
 <div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;</div>
 <div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;        <span class="keywordflow">if</span>(!utility::vulkan::check(create_device(queueCreateInfo.data(), queueCreateInfo.size(), m_Device)))</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;        <span class="keywordflow">if</span>(!utility::vulkan::check(create_device(queueCreateInfo.data(), (uint32_t)queueCreateInfo.size(), m_Device)))</div>
 <div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;        {</div>
 <div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;            core::ivk::log-&gt;critical(<span class="stringliteral">&quot;Could not create a Vulkan device.&quot;</span>);</div>
 <div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;            std::exit(-1);</div>

@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('drawgroup_8cpp_source.html','');});
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                geometryHandle-&gt;bind(cmdBuffer, <a class="code" href="classcore_1_1gfx_1_1material.html">material</a>);</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <a class="code" href="classcore_1_1gfx_1_1material.html">material</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1material.html#a66497854e2116503460f7058480fbcf0">bind_geometry</a>(cmdBuffer, geometryHandle);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                cmdBuffer.drawIndexed(geometryHandle-&gt;data()-&gt;indices().size(), instance_n, 0, 0, 0);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                cmdBuffer.drawIndexed((uint32_t)geometryHandle-&gt;data()-&gt;indices().size(), instance_n, 0, 0, 0);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        }</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
@@ -181,7 +181,7 @@ $(document).ready(function(){initNavTree('drawgroup_8cpp_source.html','');});
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                geometryHandle-&gt;bind(cmdBuffer, <a class="code" href="classcore_1_1gfx_1_1material.html">material</a>);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <a class="code" href="classcore_1_1gfx_1_1material.html">material</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1material.html#a66497854e2116503460f7058480fbcf0">bind_geometry</a>(cmdBuffer, geometryHandle);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                cmdBuffer.drawIndexed(geometryHandle-&gt;data()-&gt;indices().size(), instance_n, 0, 0, 0);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                cmdBuffer.drawIndexed((uint32_t)geometryHandle-&gt;data()-&gt;indices().size(), instance_n, 0, 0, 0);</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>

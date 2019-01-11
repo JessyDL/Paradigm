@@ -180,10 +180,10 @@ $(document).ready(function(){initNavTree('pass_8cpp_source.html','');});
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    m_LastBuildFrame = m_FrameCount;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    m_Context-&gt;<a class="code" href="classcore_1_1gfx_1_1context.html#abec09333ef3bd9573c43e050085452be">device</a>().waitIdle();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    m_Context-&gt;<a class="code" href="classcore_1_1gfx_1_1context.html#abec09333ef3bd9573c43e050085452be">device</a>().freeCommandBuffers(m_Context-&gt;<a class="code" href="classcore_1_1gfx_1_1context.html#ab76c30b774f07eb2661f9c1b00f72837">command_pool</a>(), m_DrawCommandBuffers.size(),</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    m_Context-&gt;<a class="code" href="classcore_1_1gfx_1_1context.html#abec09333ef3bd9573c43e050085452be">device</a>().freeCommandBuffers(m_Context-&gt;<a class="code" href="classcore_1_1gfx_1_1context.html#ab76c30b774f07eb2661f9c1b00f72837">command_pool</a>(), (uint32_t)m_DrawCommandBuffers.size(),</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                                           m_DrawCommandBuffers.data());</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    m_Buffers = m_DrawCommandBuffers.size();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    m_Buffers = (uint32_t)m_DrawCommandBuffers.size();</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    vk::CommandBufferAllocateInfo cmdBufAllocateInfo;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    cmdBufAllocateInfo.commandPool        = m_Context-&gt;<a class="code" href="classcore_1_1gfx_1_1context.html#ab76c30b774f07eb2661f9c1b00f72837">command_pool</a>();</div>
@@ -384,7 +384,7 @@ $(document).ready(function(){initNavTree('pass_8cpp_source.html','');});
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    }</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    {</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        m_SubmitInfo.waitSemaphoreCount = semaphores.size();</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        m_SubmitInfo.waitSemaphoreCount = (uint32_t)semaphores.size();</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        m_SubmitInfo.pWaitSemaphores    = semaphores.data();</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = 0; i &lt; semaphores.size(); ++i) stageFlags.push_back(m_SubmitPipelineStages);</div>

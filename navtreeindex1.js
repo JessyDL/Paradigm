@@ -1,5 +1,8 @@
 var NAVTREEINDEX1 =
 {
+"classcore_1_1gfx_1_1buffer.html#a1fa9fe61eab8f498a9224d885ec84cf7":[3,0,0,1,5,10],
+"classcore_1_1gfx_1_1buffer.html#a2676a1a64b89fd492537129a618b88cf":[3,0,0,1,5,2],
+"classcore_1_1gfx_1_1buffer.html#a44a7ca6b70e8900970716b86b914cef2":[3,0,0,1,5,5],
 "classcore_1_1gfx_1_1buffer.html#a477db5ad83ad0324e6d141b7a298bfab":[3,0,0,1,5,16],
 "classcore_1_1gfx_1_1buffer.html#a597b700baf57e053c270921cedd6657d":[3,0,0,1,5,8],
 "classcore_1_1gfx_1_1buffer.html#a6333a7fa1d58ef35c44f604147393ce6":[3,0,0,1,5,15],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "classcore_1_1meta_1_1shader_1_1vertex.html":[3,0,0,2,0,1],
 "classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html":[3,0,0,2,0,1,0],
 "classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html#a1a79815747953e92a120a9c97d33d03e":[3,0,0,2,0,1,0,2],
-"classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html#a3b3278ca89d844752eeb7d3644bf8628":[3,0,0,2,0,1,0,11],
-"classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html#a457805ff7527cfa02914a2260e518f3d":[3,0,0,2,0,1,0,8],
-"classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html#a5e75599712c5990a86f2109a1dff7c16":[3,0,0,2,0,1,0,10],
-"classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html#a71d7fe7b578abf4aef8b1244e7a3d2ae":[3,0,0,2,0,1,0,0]
+"classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html#a3b3278ca89d844752eeb7d3644bf8628":[3,0,0,2,0,1,0,11]
 };

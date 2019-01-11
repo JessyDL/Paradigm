@@ -526,7 +526,7 @@ $(document).ready(function(){initNavTree('state_8h_source.html','');});
 <div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;            <span class="keyword">template</span> &lt;std::size_t... Is, <span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;            <span class="keyword">auto</span> create_dependency_filters(std::index_sequence&lt;Is...&gt;, T&amp; t)</div>
 <div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;            {</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                (add(t.reference_get&lt;Is&gt;()), ...);</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                (add(t.template reference_get&lt;Is&gt;()), ...);</div>
 <div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;            }</div>
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;</div>
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>

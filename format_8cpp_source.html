@@ -1495,13 +1495,13 @@ $(document).ready(function(){initNavTree('format_8cpp_source.html','');});
 <div class="line"><a name="l01387"></a><span class="lineno"> 1387</span>&#160;        <span class="keyword">auto</span>&amp; node = target.m_NodeData.emplace_back(std::forward&lt;psl::format::data&gt;(psl::format::data(&amp;target, (nodes_t)i)));</div>
 <div class="line"><a name="l01388"></a><span class="lineno"> 1388</span>&#160;        node.m_Type = (psl::format::type)entries[i].type;</div>
 <div class="line"><a name="l01389"></a><span class="lineno"> 1389</span>&#160;        node.m_Name = std::make_pair(entries[i].name_start, entries[i].name_size);</div>
-<div class="line"><a name="l01390"></a><span class="lineno"> 1390</span>&#160;        node.m_Depth = entries[i].depth;</div>
+<div class="line"><a name="l01390"></a><span class="lineno"> 1390</span>&#160;        node.m_Depth = (children_t)entries[i].depth;</div>
 <div class="line"><a name="l01391"></a><span class="lineno"> 1391</span>&#160;        <span class="keywordflow">switch</span>(node.type())</div>
 <div class="line"><a name="l01392"></a><span class="lineno"> 1392</span>&#160;        {</div>
 <div class="line"><a name="l01393"></a><span class="lineno"> 1393</span>&#160;            <span class="keywordflow">case</span> type::COLLECTION:</div>
 <div class="line"><a name="l01394"></a><span class="lineno"> 1394</span>&#160;            {</div>
 <div class="line"><a name="l01395"></a><span class="lineno"> 1395</span>&#160;                <span class="keyword">auto</span>&amp; val = node.reinterpret_as_collection();</div>
-<div class="line"><a name="l01396"></a><span class="lineno"> 1396</span>&#160;                val = content_header[i].offsets[0];</div>
+<div class="line"><a name="l01396"></a><span class="lineno"> 1396</span>&#160;                val = (collection_t)content_header[i].offsets[0];</div>
 <div class="line"><a name="l01397"></a><span class="lineno"> 1397</span>&#160;            } <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l01398"></a><span class="lineno"> 1398</span>&#160;            <span class="keywordflow">case</span> type::VALUE:</div>
 <div class="line"><a name="l01399"></a><span class="lineno"> 1399</span>&#160;            {</div>

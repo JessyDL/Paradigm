@@ -327,8 +327,8 @@ $(document).ready(function(){initNavTree('profiler_8cpp_source.html','');});
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                name = frame_data.m_IDMap.at(scope.name);</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                </div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            }</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            int32_t bufferSize = scope.depth * 2 + 20 - durationStr.size() - percentageStr.size();</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            res += psl::string(scope.depth * 2, <span class="charliteral">&#39; &#39;</span>) + percentageStr + <span class="stringliteral">&quot; - &quot;</span> + durationStr + psl::string(std::max(bufferSize, 2), <span class="charliteral">&#39; &#39;</span>) + name + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="keywordtype">size_t</span> bufferSize = scope.depth * 2 + 20 - durationStr.size() - percentageStr.size();</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            res += psl::string(scope.depth * 2, <span class="charliteral">&#39; &#39;</span>) + percentageStr + <span class="stringliteral">&quot; - &quot;</span> + durationStr + psl::string(std::max(bufferSize, (<span class="keywordtype">size_t</span>)2), <span class="charliteral">&#39; &#39;</span>) + name + <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        }</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        res += <span class="stringliteral">&quot;endframe\n--------------------------------------------------------------------------------\n&quot;</span>;</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        i = (i + 1) % m_Frames.size();</div>

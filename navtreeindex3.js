@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4aae7e0e72401a9f2718ed0f39f2861d702":[3,0,0,6,0,4,56],
+"classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4aae902674982fc99aa343cdd94da7476c3":[3,0,0,6,0,4,64],
+"classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4aae9a23c5ce3d34b40123d65ca14b2e88f":[3,0,0,6,0,4,73],
 "classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4aaebd7820c520d05eca2d775c37d141273":[3,0,0,6,0,4,108],
 "classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4aaf09564c9ca56850d4cd6b3319e541aee":[3,0,0,6,0,4,16],
 "classcore_1_1systems_1_1input.html#ae53b5000e2500becf5f1e6f67bda4e4aaf186217753c37b9b9f958d906208506e":[3,0,0,6,0,4,14],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "entity_8h_source.html":[4,0,0,0,1,3],
 "enumerate_8h_source.html":[4,0,1,0,10],
 "event_8h_source.html":[4,0,1,0,11],
-"evoke_8h_source.html":[4,0,1,0,12],
-"expected_8h_source.html":[4,0,1,0,13],
-"fallback_2quaternion_8h_source.html":[4,0,1,0,0,2,0],
-"fallback_2vec_8h_source.html":[4,0,1,0,0,2,1]
+"evoke_8h_source.html":[4,0,1,0,12]
 };

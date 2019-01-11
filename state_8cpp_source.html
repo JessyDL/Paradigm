@@ -525,36 +525,40 @@ $(document).ready(function(){initNavTree('state_8cpp_source.html','');});
 <div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; entityMap = cmds.m_EntityMap;</div>
 <div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [key, cInfo] : cmds.m_Components)</div>
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    {</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;        copy_components(key, cInfo.entities, cInfo.size, [&amp;key, &amp;cInfo, &amp;entityMap](<a class="code" href="structcore_1_1ecs_1_1entity.html">entity</a> e) {</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;            <span class="keyword">auto</span> eIt = entityMap.find(e);</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;            <span class="keyword">auto</span> cIt = std::find_if(</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                std::begin(eIt-&gt;second), std::end(eIt-&gt;second),</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;                [&amp;key](<span class="keyword">const</span> std::pair&lt;details::component_key_t, size_t&gt; keyPair) { <span class="keywordflow">return</span> key == keyPair.first; });</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            <span class="keywordflow">return</span> ((std::uintptr_t)cInfo.region.data() + (cInfo.size * cIt-&gt;second));</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        });</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        m_StateChange[(m_Tick + 1) % 2].added_components[key].insert(std::end(m_StateChange[(m_Tick + 1) % 2].added_components[key]), std::begin(cInfo.entities), std::end(cInfo.entities));</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    }</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    <span class="comment">// remove entities</span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    destroy(cmds.m_MarkedForDestruction);</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    <span class="comment">// remove components</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp;[key, entities] : cmds.m_ErasedComponents)</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    {</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        <span class="keywordflow">if</span> (entities.size() == 0)</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;        std::vector&lt;entity&gt; erased_entities;</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        <span class="keyword">auto</span> compIt = m_Components.find(key);</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        <span class="keywordflow">if</span> (compIt == std::end(m_Components))</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;        <span class="comment">// https://stackoverflow.com/questions/46114214/lambda-implicit-capture-fails-with-variable-declared-from-structured-binding</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;        <span class="comment">// workaround for wording in standard that is being followed by clang/gcc implicitly.</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; named_key{key};</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; named_cInfo{cInfo};</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;        copy_components(key, cInfo.entities, cInfo.size, [&amp;named_key, &amp;named_cInfo, &amp;entityMap](<a class="code" href="structcore_1_1ecs_1_1entity.html">entity</a> e) {</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            <span class="keyword">auto</span> eIt = entityMap.find(e);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;            <span class="keyword">auto</span> cIt = std::find_if(</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;                std::begin(eIt-&gt;second), std::end(eIt-&gt;second),</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                [&amp;named_key](<span class="keyword">const</span> std::pair&lt;details::component_key_t, size_t&gt; keyPair) { <span class="keywordflow">return</span> named_key == keyPair.first; });</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;            <span class="keywordflow">return</span> ((std::uintptr_t)named_cInfo.region.data() + (named_cInfo.size * cIt-&gt;second));</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        });</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        m_StateChange[(m_Tick + 1) % 2].added_components[key].insert(std::end(m_StateChange[(m_Tick + 1) % 2].added_components[key]), std::begin(cInfo.entities), std::end(cInfo.entities));</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    }</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="comment">// remove entities</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    destroy(cmds.m_MarkedForDestruction);</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    <span class="comment">// remove components</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp;[key, entities] : cmds.m_ErasedComponents)</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    {</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        <span class="keywordflow">if</span> (entities.size() == 0)</div>
 <div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        std::set_intersection(std::begin(entities), std::end(entities), std::begin(compIt-&gt;second.entities), std::end(compIt-&gt;second.entities), std::back_inserter(erased_entities));</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        destroy_component_generator_ids(compIt-&gt;second, erased_entities);</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        std::vector&lt;entity&gt; remaining_entities;</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        std::set_difference(std::begin(compIt-&gt;second.entities), std::end(compIt-&gt;second.entities), std::begin(erased_entities), std::end(erased_entities), std::back_inserter(remaining_entities));</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        compIt-&gt;second.entities = remaining_entities;</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        m_StateChange[(m_Tick + 1) % 2].removed_components[key].insert(std::end(m_StateChange[(m_Tick + 1) % 2].removed_components[key]), std::begin(entities), std::end(entities));</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    }</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;}</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        std::vector&lt;entity&gt; erased_entities;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        <span class="keyword">auto</span> compIt = m_Components.find(key);</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        <span class="keywordflow">if</span> (compIt == std::end(m_Components))</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        std::set_intersection(std::begin(entities), std::end(entities), std::begin(compIt-&gt;second.entities), std::end(compIt-&gt;second.entities), std::back_inserter(erased_entities));</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        destroy_component_generator_ids(compIt-&gt;second, erased_entities);</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;        std::vector&lt;entity&gt; remaining_entities;</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        std::set_difference(std::begin(compIt-&gt;second.entities), std::end(compIt-&gt;second.entities), std::begin(erased_entities), std::end(erased_entities), std::back_inserter(remaining_entities));</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;        compIt-&gt;second.entities = remaining_entities;</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;        m_StateChange[(m_Tick + 1) % 2].removed_components[key].insert(std::end(m_StateChange[(m_Tick + 1) % 2].removed_components[key]), std::begin(entities), std::end(entities));</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    }</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;}</div>
 <div class="ttc" id="structcore_1_1ecs_1_1entity_html"><div class="ttname"><a href="structcore_1_1ecs_1_1entity.html">core::ecs::entity</a></div><div class="ttdoc">entity points to a collection of components </div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00013">entity.h:13</a></div></div>
 <div class="ttc" id="structcore_1_1ecs_1_1filter_html"><div class="ttname"><a href="structcore_1_1ecs_1_1filter.html">core::ecs::filter</a></div><div class="ttdoc">tag allows you to filter on sets of components </div><div class="ttdef"><b>Definition:</b> <a href="selectors_8h_source.html#l00076">selectors.h:76</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1commands_html"><div class="ttname"><a href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a></div><div class="ttdoc">contains commands for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="state_8h_source.html#l01256">state.h:1256</a></div></div>
