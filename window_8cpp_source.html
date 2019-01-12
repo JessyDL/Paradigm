@@ -106,81 +106,82 @@ $(document).ready(function(){initNavTree('window_8cpp_source.html','');});
 <div class="title">window.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;stdafx.h&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;data/window.h&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">using namespace </span>psl;</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">using namespace </span>core::data;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using namespace </span>core::gfx;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;data/window.h&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;systems/resource.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;meta.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">using namespace </span>psl;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using namespace </span>core::data;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using namespace </span>core::gfx;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;window::window(<span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">UID</a>&amp; uid, <a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache)</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    : <a class="code" href="classcore_1_1data_1_1window.html">window</a>::<a class="code" href="classcore_1_1data_1_1window.html">window</a>()</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;}</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;window::window(<span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">UID</a>&amp; uid, <a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache)</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    : <a class="code" href="classcore_1_1data_1_1window.html">window</a>::<a class="code" href="classcore_1_1data_1_1window.html">window</a>()</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;window::window(<span class="keyword">const</span> <a class="code" href="classcore_1_1data_1_1window.html">window</a>&amp; other, <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">UID</a>&amp; uid, <a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, psl::string8::view name) noexcept</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    : m_Width(other.m_Width), m_Height(other.m_Height), m_WindowMode(other.m_WindowMode),</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;      m_Buffering(other.m_Buffering), m_Name(name)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;window::window(uint32_t width, uint32_t height, <a class="code" href="namespacecore_1_1gfx.html#a11a4c4ab27e21f12bb4a783aab81b465">surface_mode</a> mode, <a class="code" href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">core::gfx::buffering</a> <a class="code" href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">buffering</a>, psl::string8::view name)</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    : m_Width(width), m_Height(height), m_WindowMode(mode), m_Buffering(buffering), m_Name(name)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;window::window(<span class="keyword">const</span> <a class="code" href="classcore_1_1data_1_1window.html">window</a>&amp; other, <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">UID</a>&amp; uid, <a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, psl::string8::view name) noexcept</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    : m_Width(other.m_Width), m_Height(other.m_Height), m_WindowMode(other.m_WindowMode),</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      m_Buffering(other.m_Buffering), m_Name(name)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;window::window(uint32_t width, uint32_t height, <a class="code" href="namespacecore_1_1gfx.html#a11a4c4ab27e21f12bb4a783aab81b465">surface_mode</a> mode, <a class="code" href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">core::gfx::buffering</a> <a class="code" href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">buffering</a>, psl::string8::view name)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    : m_Width(width), m_Height(height), m_WindowMode(mode), m_Buffering(buffering), m_Name(name)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a4b6c996d7cc15be5fa27a815070f01c4">   31</a></span>&#160;uint32_t window::width()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> m_Width.value;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a3d6f47cad1732e631e3ed0020688c8e4">   35</a></span>&#160;<span class="keywordtype">void</span> window::width(uint32_t width)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    m_Width = width;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#ad7fc58ceef75511a755a1c3dc057b6f9">   39</a></span>&#160;uint32_t window::height()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> m_Height.value;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a459d7e3321339ae169caed048b895a5c">   43</a></span>&#160;<span class="keywordtype">void</span> window::height(uint32_t height)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    m_Height = height;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#acdd1edf5df74baead79c19e437311d8d">   47</a></span>&#160;psl::string8::view window::name()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> m_Name.value;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a0154d02ae2785a92c9a34bf63b311b30">   51</a></span>&#160;<span class="keywordtype">void</span> window::name(psl::string8::view name)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    m_Name = name;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a381210bb7a43c20c3d678f8fed0fae66">   55</a></span>&#160;<a class="code" href="namespacecore_1_1gfx.html#a11a4c4ab27e21f12bb4a783aab81b465">core::gfx::surface_mode</a> window::mode()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> m_WindowMode.value;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a9c5349e200167bac27398864f09069c8">   59</a></span>&#160;<span class="keywordtype">void</span> window::mode(<a class="code" href="namespacecore_1_1gfx.html#a11a4c4ab27e21f12bb4a783aab81b465">core::gfx::surface_mode</a> mode)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    m_WindowMode = mode;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a49b49ee1c55952a9c548e1f419ce2aa0">   63</a></span>&#160;<a class="code" href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">core::gfx::buffering</a> window::buffering()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> m_Buffering.value;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a31f80f496d7e46cf9cae86d7cf2da770">   67</a></span>&#160;<span class="keywordtype">void</span> window::buffering(<a class="code" href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">core::gfx::buffering</a> mode)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    m_Buffering = mode;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
-<div class="ttc" id="namespacecore_1_1gfx_html_a11a4c4ab27e21f12bb4a783aab81b465"><div class="ttname"><a href="namespacecore_1_1gfx.html#a11a4c4ab27e21f12bb4a783aab81b465">core::gfx::surface_mode</a></div><div class="ttdeci">surface_mode</div><div class="ttdoc">how should the surface be rendered. </div><div class="ttdef"><b>Definition:</b> <a href="window_8h_source.html#l00017">window.h:17</a></div></div>
-<div class="ttc" id="classcore_1_1data_1_1window_html"><div class="ttname"><a href="classcore_1_1data_1_1window.html">core::data::window</a></div><div class="ttdoc">contains the data to initialize a core::os::surface </div><div class="ttdef"><b>Definition:</b> <a href="window_8h_source.html#l00028">window.h:28</a></div></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a4b6c996d7cc15be5fa27a815070f01c4">   32</a></span>&#160;uint32_t window::width()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> m_Width.value;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a3d6f47cad1732e631e3ed0020688c8e4">   36</a></span>&#160;<span class="keywordtype">void</span> window::width(uint32_t width)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    m_Width = width;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#ad7fc58ceef75511a755a1c3dc057b6f9">   40</a></span>&#160;uint32_t window::height()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">return</span> m_Height.value;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a459d7e3321339ae169caed048b895a5c">   44</a></span>&#160;<span class="keywordtype">void</span> window::height(uint32_t height)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    m_Height = height;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#acdd1edf5df74baead79c19e437311d8d">   48</a></span>&#160;psl::string8::view window::name()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> m_Name.value;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a0154d02ae2785a92c9a34bf63b311b30">   52</a></span>&#160;<span class="keywordtype">void</span> window::name(psl::string8::view name)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    m_Name = name;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a381210bb7a43c20c3d678f8fed0fae66">   56</a></span>&#160;<a class="code" href="namespacecore_1_1gfx.html#a11a4c4ab27e21f12bb4a783aab81b465">core::gfx::surface_mode</a> window::mode()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> m_WindowMode.value;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a9c5349e200167bac27398864f09069c8">   60</a></span>&#160;<span class="keywordtype">void</span> window::mode(<a class="code" href="namespacecore_1_1gfx.html#a11a4c4ab27e21f12bb4a783aab81b465">core::gfx::surface_mode</a> mode)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    m_WindowMode = mode;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a49b49ee1c55952a9c548e1f419ce2aa0">   64</a></span>&#160;<a class="code" href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">core::gfx::buffering</a> window::buffering()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> m_Buffering.value;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classcore_1_1data_1_1window.html#a31f80f496d7e46cf9cae86d7cf2da770">   68</a></span>&#160;<span class="keywordtype">void</span> window::buffering(<a class="code" href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">core::gfx::buffering</a> mode)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    m_Buffering = mode;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="ttc" id="namespacecore_1_1gfx_html_a11a4c4ab27e21f12bb4a783aab81b465"><div class="ttname"><a href="namespacecore_1_1gfx.html#a11a4c4ab27e21f12bb4a783aab81b465">core::gfx::surface_mode</a></div><div class="ttdeci">surface_mode</div><div class="ttdoc">how should the surface be rendered. </div><div class="ttdef"><b>Definition:</b> <a href="window_8h_source.html#l00028">window.h:28</a></div></div>
+<div class="ttc" id="classcore_1_1data_1_1window_html"><div class="ttname"><a href="classcore_1_1data_1_1window.html">core::data::window</a></div><div class="ttdoc">contains the data to initialize a core::os::surface </div><div class="ttdef"><b>Definition:</b> <a href="window_8h_source.html#l00039">window.h:39</a></div></div>
 <div class="ttc" id="structpsl_1_1_u_i_d_html"><div class="ttname"><a href="structpsl_1_1_u_i_d.html">psl::UID</a></div><div class="ttdoc">is an object holding a Unique IDentifier (UID) </div><div class="ttdef"><b>Definition:</b> <a href="meta_8h_source.html#l00020">meta.h:20</a></div></div>
-<div class="ttc" id="namespacecore_1_1gfx_html_aabe6d19fbf8443e45d8b5d68366cd990"><div class="ttname"><a href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">core::gfx::buffering</a></div><div class="ttdeci">buffering</div><div class="ttdoc">how many render buffers should there be. </div><div class="ttdef"><b>Definition:</b> <a href="window_8h_source.html#l00007">window.h:7</a></div></div>
-<div class="ttc" id="classcore_1_1resource_1_1cache_html"><div class="ttname"><a href="classcore_1_1resource_1_1cache.html">core::resource::cache</a></div><div class="ttdoc">represents a container of resources and their UID mappings </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00238">resource.h:238</a></div></div>
+<div class="ttc" id="namespacecore_1_1gfx_html_aabe6d19fbf8443e45d8b5d68366cd990"><div class="ttname"><a href="namespacecore_1_1gfx.html#aabe6d19fbf8443e45d8b5d68366cd990">core::gfx::buffering</a></div><div class="ttdeci">buffering</div><div class="ttdoc">how many render buffers should there be. </div><div class="ttdef"><b>Definition:</b> <a href="window_8h_source.html#l00018">window.h:18</a></div></div>
+<div class="ttc" id="classcore_1_1resource_1_1cache_html"><div class="ttname"><a href="classcore_1_1resource_1_1cache.html">core::resource::cache</a></div><div class="ttdoc">represents a container of resources and their UID mappings </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00241">resource.h:241</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

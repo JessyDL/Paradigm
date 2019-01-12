@@ -350,7 +350,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 <div class="textblock"><p>the input class is responsible for translating platform specific input events to a more generalised format, and sending out events that have been subscribed to. for example it will translate all keyboard input messages into a generic key message that remains the same for all platforms. You can however reverse-translate back into the platform specific key messages. Every input instance is tied to a <a class="el" href="classcore_1_1os_1_1surface.html" title="primitive object that create a surface we can render on. ">core::os::surface</a>, and all its data (such as mouse coordinates) is invariably tied to that regardless if the actual platform only has a singleton input system. </p>
 <dl class="section warning"><dt>Warning</dt><dd>all input state persists till the next platform specific message loop. this means that the <a class="el" href="structcore_1_1systems_1_1input_1_1mouse__delta.html" title="contains the mouse delta coordinates in respect to the last message tick. ">mouse_delta</a> can be the same for several frames untill the input system gets an update. that's why you should prefer listening to the events rather than iterating the input system itself. </dd></dl>
 
-<p>Definition at line <a class="el" href="input_8h_source.html#l00022">22</a> of file <a class="el" href="input_8h_source.html">input.h</a>.</p>
+<p>Definition at line <a class="el" href="input_8h_source.html#l00028">28</a> of file <a class="el" href="input_8h_source.html">input.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ac8a9245db626921a8c56e936d696b6da"></a>
 <div class="memitem">
@@ -374,7 +374,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::os::surface</b
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the current mouse coordinate information </dd></dl>
 
-<p>Definition at line <a class="el" href="input_8h_source.html#l00631">631</a> of file <a class="el" href="input_8h_source.html">input.h</a>.</p>
+<p>Definition at line <a class="el" href="input_8h_source.html#l00637">637</a> of file <a class="el" href="input_8h_source.html">input.h</a>.</p>
 
 </div>
 </div>

@@ -107,66 +107,71 @@ $(document).ready(function(){initNavTree('vk_2shader_8h_source.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span>core::meta</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keyword">class </span>shader;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;}</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;ustring.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;meta.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;systems/resource.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;optional&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;vulkan_stdafx.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>core::gfx</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>core::meta</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">class </span>context;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1shader.html">   18</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structcore_1_1gfx_1_1shader_1_1specialization.html">   22</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            psl::string8_t name;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>() : name(u8<span class="stringliteral">&quot;main&quot;</span>) {};</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>(<span class="keyword">const</span> <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>&amp; other) : name(other.name)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            }</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>&amp; other)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <span class="keywordflow">return</span> name == other.name;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">class </span>shader;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>core::gfx</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">class </span>context;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1shader.html">   23</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structcore_1_1gfx_1_1shader_1_1specialization.html">   27</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            psl::string8_t name;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>() : name(u8<span class="stringliteral">&quot;main&quot;</span>) {};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>(<span class="keyword">const</span> <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>&amp; other) : name(other.name)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>&amp; other)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                <span class="keywordflow">return</span> name != other.name;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        };</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>(<span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp; uid, <a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, <a class="code" href="classpsl_1_1meta_1_1file.html">psl::meta::file</a>* metaFile, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::context&gt;</a> <a class="code" href="classcore_1_1gfx_1_1context.html">context</a>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>(<span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp; uid, <a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::context&gt;</a> <a class="code" href="classcore_1_1gfx_1_1context.html">context</a>, <span class="keyword">const</span> std::vector&lt;specialization&gt; specializations);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        ~<a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>(<span class="keyword">const</span> <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>(<a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp; operator=(<a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        std::optional&lt;vk::PipelineShaderStageCreateInfo&gt; <a class="code" href="classcore_1_1gfx_1_1shader.html#ae973b03c974f76f9cf3ad970595a8e71">pipeline</a>(<span class="keyword">const</span> <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>&amp; description = <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>{});</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>* <a class="code" href="classcore_1_1gfx_1_1shader.html#a73a8fdfe848d97ef14d351ebe8933e65">meta</a>() const noexcept;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    private:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        core::resource::handle&lt;core::gfx::<a class="code" href="classcore_1_1gfx_1_1context.html">context</a>&gt; m_Context;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        std::vector&lt;std::pair&lt;specialization, vk::PipelineShaderStageCreateInfo&gt;&gt; m_Specializations;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        core::resource::cache&amp; m_Cache;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        core::<a class="code" href="classcore_1_1gfx_1_1shader.html#a73a8fdfe848d97ef14d351ebe8933e65">meta</a>::<a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>* m_Meta;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        const psl::UID m_UID;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    };</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>&amp; other)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keywordflow">return</span> name == other.name;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>&amp; other)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                <span class="keywordflow">return</span> name != other.name;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>(<span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp; uid, <a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, <a class="code" href="classpsl_1_1meta_1_1file.html">psl::meta::file</a>* metaFile, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::context&gt;</a> <a class="code" href="classcore_1_1gfx_1_1context.html">context</a>);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>(<span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a>&amp; uid, <a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::context&gt;</a> <a class="code" href="classcore_1_1gfx_1_1context.html">context</a>, <span class="keyword">const</span> std::vector&lt;specialization&gt; specializations);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        ~<a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>(<span class="keyword">const</span> <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>(<a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp; operator=(<a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        std::optional&lt;vk::PipelineShaderStageCreateInfo&gt; <a class="code" href="classcore_1_1gfx_1_1shader.html#ae973b03c974f76f9cf3ad970595a8e71">pipeline</a>(<span class="keyword">const</span> <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>&amp; description = <a class="code" href="structcore_1_1gfx_1_1shader_1_1specialization.html">specialization</a>{});</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>* <a class="code" href="classcore_1_1gfx_1_1shader.html#a73a8fdfe848d97ef14d351ebe8933e65">meta</a>() const noexcept;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    private:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        core::resource::handle&lt;core::gfx::<a class="code" href="classcore_1_1gfx_1_1context.html">context</a>&gt; m_Context;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        std::vector&lt;std::pair&lt;specialization, vk::PipelineShaderStageCreateInfo&gt;&gt; m_Specializations;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        core::resource::cache&amp; m_Cache;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        core::<a class="code" href="classcore_1_1gfx_1_1shader.html#a73a8fdfe848d97ef14d351ebe8933e65">meta</a>::<a class="code" href="classcore_1_1gfx_1_1shader.html">shader</a>* m_Meta;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        const psl::UID m_UID;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    };</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
 <div class="ttc" id="classcore_1_1gfx_1_1shader_html_ae973b03c974f76f9cf3ad970595a8e71"><div class="ttname"><a href="classcore_1_1gfx_1_1shader.html#ae973b03c974f76f9cf3ad970595a8e71">core::gfx::shader::pipeline</a></div><div class="ttdeci">std::optional&lt; vk::PipelineShaderStageCreateInfo &gt; pipeline(const specialization &amp;description=specialization{})</div><div class="ttdef"><b>Definition:</b> <a href="vk_2shader_8cpp_source.html#l00097">shader.cpp:97</a></div></div>
 <div class="ttc" id="structpsl_1_1_u_i_d_html"><div class="ttname"><a href="structpsl_1_1_u_i_d.html">psl::UID</a></div><div class="ttdoc">is an object holding a Unique IDentifier (UID) </div><div class="ttdef"><b>Definition:</b> <a href="meta_8h_source.html#l00020">meta.h:20</a></div></div>
-<div class="ttc" id="classcore_1_1gfx_1_1context_html"><div class="ttname"><a href="classcore_1_1gfx_1_1context.html">core::gfx::context</a></div><div class="ttdoc">encapsulated a graphics context. </div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00111">context.h:111</a></div></div>
+<div class="ttc" id="classcore_1_1gfx_1_1context_html"><div class="ttname"><a href="classcore_1_1gfx_1_1context.html">core::gfx::context</a></div><div class="ttdoc">encapsulated a graphics context. </div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00122">context.h:122</a></div></div>
 <div class="ttc" id="classpsl_1_1meta_1_1file_html"><div class="ttname"><a href="classpsl_1_1meta_1_1file.html">psl::meta::file</a></div><div class="ttdoc">disk-based representation of a runtime instance. </div><div class="ttdef"><b>Definition:</b> <a href="library_8h_source.html#l00031">library.h:31</a></div></div>
-<div class="ttc" id="structcore_1_1gfx_1_1shader_1_1specialization_html"><div class="ttname"><a href="structcore_1_1gfx_1_1shader_1_1specialization.html">core::gfx::shader::specialization</a></div><div class="ttdoc">contains the specialization info that might be used by the shader. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2shader_8h_source.html#l00022">shader.h:22</a></div></div>
+<div class="ttc" id="structcore_1_1gfx_1_1shader_1_1specialization_html"><div class="ttname"><a href="structcore_1_1gfx_1_1shader_1_1specialization.html">core::gfx::shader::specialization</a></div><div class="ttdoc">contains the specialization info that might be used by the shader. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2shader_8h_source.html#l00027">shader.h:27</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1shader_html_a73a8fdfe848d97ef14d351ebe8933e65"><div class="ttname"><a href="classcore_1_1gfx_1_1shader.html#a73a8fdfe848d97ef14d351ebe8933e65">core::gfx::shader::meta</a></div><div class="ttdeci">core::meta::shader * meta() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="vk_2shader_8cpp_source.html#l00135">shader.cpp:135</a></div></div>
-<div class="ttc" id="classcore_1_1resource_1_1cache_html"><div class="ttname"><a href="classcore_1_1resource_1_1cache.html">core::resource::cache</a></div><div class="ttdoc">represents a container of resources and their UID mappings </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00238">resource.h:238</a></div></div>
-<div class="ttc" id="classcore_1_1gfx_1_1shader_html"><div class="ttname"><a href="classcore_1_1gfx_1_1shader.html">core::gfx::shader</a></div><div class="ttdoc">creates a shader object from a SPIR-V module </div><div class="ttdef"><b>Definition:</b> <a href="vk_2shader_8h_source.html#l00018">shader.h:18</a></div></div>
+<div class="ttc" id="classcore_1_1resource_1_1cache_html"><div class="ttname"><a href="classcore_1_1resource_1_1cache.html">core::resource::cache</a></div><div class="ttdoc">represents a container of resources and their UID mappings </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00241">resource.h:241</a></div></div>
+<div class="ttc" id="classcore_1_1gfx_1_1shader_html"><div class="ttname"><a href="classcore_1_1gfx_1_1shader.html">core::gfx::shader</a></div><div class="ttdoc">creates a shader object from a SPIR-V module </div><div class="ttdef"><b>Definition:</b> <a href="vk_2shader_8h_source.html#l00023">shader.h:23</a></div></div>
 <div class="ttc" id="classcore_1_1resource_1_1handle_html"><div class="ttname"><a href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt; core::gfx::context &gt;</a></div></div>
-<div class="ttc" id="classcore_1_1meta_1_1shader_html"><div class="ttname"><a href="classcore_1_1meta_1_1shader.html">core::meta::shader</a></div><div class="ttdoc">contains extensions for meta data when loading shader files. </div><div class="ttdef"><b>Definition:</b> <a href="meta_2shader_8h_source.html#l00011">shader.h:11</a></div></div>
+<div class="ttc" id="classcore_1_1meta_1_1shader_html"><div class="ttname"><a href="classcore_1_1meta_1_1shader.html">core::meta::shader</a></div><div class="ttdoc">contains extensions for meta data when loading shader files. </div><div class="ttdef"><b>Definition:</b> <a href="meta_2shader_8h_source.html#l00016">shader.h:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

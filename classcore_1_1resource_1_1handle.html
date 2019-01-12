@@ -204,7 +204,7 @@ class core::resource::handle&lt; T &gt;</h3>
 
 <p>resource handles are used to manage the lifetime of resources, and tracking dependencies (i.e. who uses what). It is supposed to be used with a <a class="el" href="classcore_1_1resource_1_1cache.html" title="represents a container of resources and their UID mappings ">core::resource::cache</a>. </p>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00033">33</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="drawcall_8h_source.html#l00009">9</a> of file <a class="el" href="drawcall_8h_source.html">drawcall.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acd7e6d66599daaf6d94e1cec5934403e"></a>
 <div class="memitem">
@@ -241,7 +241,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <dl class="section note"><dt>Note</dt><dd>only used in the scenario of "create_shared" </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00575">575</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00506">506</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -288,7 +288,7 @@ template&lt;typename... Args, typename  = typename std::enable_if&lt;										s
 </div><div class="memdoc">
 <p>special form of the constructor that will create a detached clone of the handle you use as the source. this will create a new resource, that branches off from the current state the other resource is in. it invokes the copy constructor of the contained type, and so if it is not present, this will not compile. </p>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00598">598</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00529">529</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -317,7 +317,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>true of the handle has a valid, loaded object. </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00634">634</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00565">565</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -349,7 +349,7 @@ template&lt;typename... Args&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>true if the resource is loaded</dd></dl>
 <p>loads the resource with the given arguments. In case the resource already exists, the arguments are ignored and the already loaded resource is returned instead. </p>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00652">652</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00583">583</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -386,7 +386,7 @@ template&lt;typename T&gt; </div>
 <p>&gt;ill try to unload the resource. In case that this is the last handle to the resource, it will clean itself up and return success, otherwise it will fail and return false. It will also fail when the resource is not yet loaded, and it will <em>not</em> unload when it finally is loaded, you'll have to call this again. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Regardless of success, the handle will become invalid. </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00784">784</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00715">715</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -414,7 +414,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>the UID assigned to the handle </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00792">792</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00723">723</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
@@ -445,11 +445,12 @@ template&lt;typename T&gt; </div>
 <dd>
 the <a class="el" href="classcore_1_1resource_1_1handle.html#aa8046384a86c913041c0910a5f1f02f3">ID()</a> and <a class="el" href="classcore_1_1resource_1_1handle.html#ac428d465a3e75aea31f2104f47cab47d">RUID()</a> are the same for generated resources, as then the "Resource UID" is considered the memory location of the handle. </dd></dl>
 
-<p>Definition at line <a class="el" href="resource_8h_source.html#l00801">801</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
+<p>Definition at line <a class="el" href="resource_8h_source.html#l00732">732</a> of file <a class="el" href="resource_8h_source.html">resource.h</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/home/travis/build/JessyDL/paradigm/core/inc/gfx/<a class="el" href="drawcall_8h_source.html">drawcall.h</a></li>
 <li>/home/travis/build/JessyDL/paradigm/core/inc/systems/<a class="el" href="resource_8h_source.html">resource.h</a></li>
 </ul>
 </div><!-- contents -->

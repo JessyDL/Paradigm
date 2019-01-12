@@ -10,7 +10,7 @@ var dir_7e868af64e31779987291c90ae140f88 =
     [ "vk", "dir_cd44e822d053ffa9b53e4c4ac0dd0549.html", "dir_cd44e822d053ffa9b53e4c4ac0dd0549" ],
     [ "conversion_utils.h", "conversion__utils_8h_source.html", null ],
     [ "header_info.h", "header__info_8h_source.html", null ],
-    [ "logging.h", "logging_8h_source.html", null ],
+    [ "logging.h", "core_2inc_2logging_8h_source.html", null ],
     [ "stdafx.h", "stdafx_8h_source.html", null ],
     [ "stdb_truetype.h", "stdb__truetype_8h_source.html", null ],
     [ "targetver.h", "targetver_8h_source.html", null ],

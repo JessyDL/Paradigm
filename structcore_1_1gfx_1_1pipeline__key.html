@@ -150,7 +150,7 @@ const vk::RenderPass&#160;</td><td class="memItemRight" valign="bottom"><a class
 <div class="textblock"><p>when you want to store, and lookup pipelines based on their properties, then <a class="el" href="structcore_1_1gfx_1_1pipeline__key.html" title="the pipeline key creates a hash of the important elements of a vk::Pipeline ">pipeline_key</a> is the way to go. the pipeline key allows you to calculate a hash based on the identifying properties that make it unique (for the GPU), and easily retrieve it. to see this being used, check <a class="el" href="classcore_1_1gfx_1_1pipeline__cache.html" title="the pipeline cache allows sharing of pipelines between various materials. ">core::gfx::pipeline_cache</a>. </p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classcore_1_1gfx_1_1pipeline__cache.html" title="the pipeline cache allows sharing of pipelines between various materials. ">core::gfx::pipeline_cache</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="pipeline__cache_8h_source.html#l00026">26</a> of file <a class="el" href="pipeline__cache_8h_source.html">pipeline_cache.h</a>.</p>
+<p>Definition at line <a class="el" href="pipeline__cache_8h_source.html#l00033">33</a> of file <a class="el" href="pipeline__cache_8h_source.html">pipeline_cache.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a4edec7a9f9a5ee120f2d28d8d7964fbe"></a>
 <div class="memitem">
@@ -183,7 +183,7 @@ const vk::RenderPass&#160;</td><td class="memItemRight" valign="bottom"><a class
 </div><div class="memdoc">
 <dl class="section warning"><dt>Warning</dt><dd>the <a class="el" href="structcore_1_1gfx_1_1pipeline__key.html" title="the pipeline key creates a hash of the important elements of a vk::Pipeline ">pipeline_key</a> does not update when the material data has been updated. the material will no longer be able to use this key when it changes its properties. </dd></dl>
 
-<p>Definition at line <a class="el" href="pipeline__cache_8cpp_source.html#l00070">70</a> of file <a class="el" href="pipeline__cache_8cpp_source.html">pipeline_cache.cpp</a>.</p>
+<p>Definition at line <a class="el" href="pipeline__cache_8cpp_source.html#l00071">71</a> of file <a class="el" href="pipeline__cache_8cpp_source.html">pipeline_cache.cpp</a>.</p>
 
 </div>
 </div>
