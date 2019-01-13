@@ -680,18 +680,18 @@ $(document).ready(function(){initNavTree('state_8h_source.html','');});
 <div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;            }</div>
 <div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;            <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;            {</div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;                <span class="keyword">auto</span> halfway_it = std::next(std::begin(entities), entities.size() / 2);</div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;                <span class="keywordflow">if</span> (halfway_it != std::end(entities) &amp;&amp; halfway_it != std::begin(entities))</div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;                <span class="keyword">auto</span> batch_size = entities.size() / 2;</div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;                <span class="keywordflow">if</span> (batch_size &gt; 2)</div>
 <div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;                {</div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;                    copy_components(key, psl::array_view&lt;entity&gt;(std::begin(entities), halfway_it), component_size, std::forward&lt;Fn&gt;(<span class="keyword">function</span>));</div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;                    copy_components(key, psl::array_view&lt;entity&gt;(halfway_it, std::end(entities)), component_size, std::forward&lt;Fn&gt;(<span class="keyword">function</span>));</div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;                    copy_components(key, psl::array_view&lt;entity&gt;(std::begin(entities), batch_size), component_size, std::forward&lt;Fn&gt;(<span class="keyword">function</span>));</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;                    copy_components(key, psl::array_view&lt;entity&gt;(std::next(std::begin(entities), batch_size), entities.size() - batch_size), component_size, std::forward&lt;Fn&gt;(<span class="keyword">function</span>));</div>
 <div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;                }</div>
 <div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;                <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;                {</div>
 <div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;                    <span class="keyword">auto</span> it = std::begin(entities);</div>
 <div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;                    <span class="keywordflow">for</span> (<span class="keyword">auto</span> e : entities)</div>
 <div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;                    {</div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;                        copy_components(key, psl::array_view&lt;entity&gt;(it, std::next(it)), component_size, std::forward&lt;Fn&gt;(<span class="keyword">function</span>));</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;                        copy_components(key, psl::array_view&lt;entity&gt;(it, 1), component_size, std::forward&lt;Fn&gt;(<span class="keyword">function</span>));</div>
 <div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;                        it = std::next(it);</div>
 <div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;                    }</div>
 <div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;                }</div>
@@ -858,9 +858,9 @@ $(document).ready(function(){initNavTree('state_8h_source.html','');});
 <div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;</div>
 <div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;      <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;          <span class="keywordtype">void</span> prepare_system(std::chrono::duration&lt;float&gt; dTime, memory::raw_region&amp; cache_offset, <span class="keywordtype">size_t</span> offset, <span class="keywordtype">void</span>* system, std::vector&lt;dependency_pack&gt;&amp; bindings);</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;          <span class="keywordtype">void</span> prepare_data(psl::array_view&lt;entity&gt; entities, memory::raw_region&amp; cache_offset, <span class="keywordtype">size_t</span> offset, psl::array_view&lt;std::uintptr_t&gt;&amp; target);</div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;          <span class="keywordtype">void</span> prepare_system(memory::raw_region&amp; cache, <span class="keywordtype">size_t</span> cache_offset, <span class="keywordtype">void</span>* system, std::vector&lt;dependency_pack&gt;&amp; bindings);</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;          <span class="keywordtype">size_t</span> prepare_bindings(psl::array_view&lt;entity&gt; entities, memory::raw_region&amp; cache, <span class="keywordtype">size_t</span> cache_offset, dependency_pack&amp; dep_pack);</div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;          <span class="keywordtype">size_t</span> prepare_data(psl::array_view&lt;entity&gt; entities, memory::raw_region&amp; cache, <span class="keywordtype">size_t</span> cache_offset, <span class="keyword">const</span> std::pair&lt; details::component_key_t, psl::array_view&lt;std::uintptr_t&gt;*&gt;&amp; binding, <span class="keywordtype">size_t</span> element_size);</div>
 <div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;          std::vector&lt;entity&gt; filter(<span class="keyword">const</span> dependency_pack&amp; pack)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="keyword">          </span>{</div>
 <div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;              std::optional&lt;std::vector&lt;entity&gt;&gt; result{ std::nullopt };</div>

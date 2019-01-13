@@ -230,7 +230,7 @@ $(document).ready(function(){initNavTree('array__view_8h_source.html','');});
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        array_view(pointer first, pointer last) : first(first), last(last){};</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> IT&gt;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        array_view(IT first, IT last) : first(&amp;(*first)), last(&amp;(*last)){};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        array_view(IT first, <span class="keywordtype">size_t</span> count) : first(std::addressof(*first)), last((pointer)((std::uintptr_t)std::addressof(*first) + count * sizeof(T))){};</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        array_view(<span class="keyword">const</span> std::vector&lt;value_type&gt;&amp; container)</div>

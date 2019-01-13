@@ -115,19 +115,88 @@ $(document).ready(function(){initNavTree('death_8cpp_source.html','');});
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using namespace </span>core::ecs;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;death::death(state&amp; state)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    state.register_system(*<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, ecs::tick{}, m_Dead);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> death::tick(<a class="code" href="classcore_1_1ecs_1_1commands.html">commands</a>&amp; <a class="code" href="classcore_1_1ecs_1_1commands.html">commands</a>, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime)</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    PROFILE_SCOPE(core::profiler)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    commands.destroy(m_Dead.get&lt;core::ecs::<a class="code" href="structcore_1_1ecs_1_1entity.html">entity</a>&gt;());</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">struct </span>func_traits : <span class="keyword">public</span> func_traits&lt;decltype(&amp;T::operator())&gt;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{};</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> Ret, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">struct </span>func_traits&lt;Ret (C::*)(Args...)&gt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">using</span> result_t  = Ret;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">using</span> arguments_t = std::tuple&lt;Args...&gt;;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ret, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">struct </span>func_traits&lt;Ret (*)(Args...)&gt;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">using</span> result_t  = Ret;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">using</span> arguments_t = std::tuple&lt;Args...&gt;;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> Ret, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">struct </span>func_traits&lt;Ret (C::*)(Args...) const&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> result_t  = Ret;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">using</span> arguments_t = std::tuple&lt;Args...&gt;;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class </span>Fn, <span class="keyword">class</span>... Args&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> test_func(Fn&amp;&amp; fn, Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> constexpr(std::is_member_function_pointer&lt;Fn&gt;::value)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">//static_assert(std::is_pointer&lt;typename std::decay&lt;Fn&gt;::type&gt;::value);</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">//static_assert(std::is_member_function_pointer&lt;Fn&gt;::value);</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">auto</span> dSys = std::bind(std::forward&lt;Fn&gt;(fn), std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">auto</span> y  = [&amp;dSys]() {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;           <span class="keyword">auto</span> tuple = <span class="keyword">typename</span> func_traits&lt;typename std::decay&lt;Fn&gt;::type&gt;::arguments_t{2, 2.0};</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;           dSys.operator()(std::get&lt;0&gt;(tuple), std::get&lt;1&gt;(tuple));</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    };</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> Fn&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">void</span> test_func(Fn&amp;&amp; fn)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">auto</span> y = [&amp;fn]() {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">auto</span> tuple = <span class="keyword">typename</span> func_traits&lt;typename std::decay&lt;Fn&gt;::type&gt;::arguments_t{3, 2.0};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        fn.operator()(std::get&lt;0&gt;(tuple), std::get&lt;1&gt;(tuple));</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    };</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> test(<span class="keywordtype">int</span>, <span class="keywordtype">double</span>) {}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;death::death(state&amp; state)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    state.register_system(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    state.register_dependency(*<span class="keyword">this</span>, ecs::tick{}, m_Dead);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    test_func(test, std::placeholders::_1, std::placeholders::_2);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    test_func(&amp;death::easy, <span class="keyword">this</span>, std::placeholders::_1, std::placeholders::_2);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    test_func([](<span class="keywordtype">int</span> x, <span class="keywordtype">double</span> y) { x = 0; });</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">auto</span> dSys = std::bind(&amp;death::easy, <span class="keyword">this</span>, std::placeholders::_1, std::placeholders::_2);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">auto</span> y  = [&amp;dSys]() { dSys.operator()(5, 3.0); };</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">void</span> death::easy(<span class="keywordtype">int</span>, <span class="keywordtype">double</span>) {}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> death::tick(<a class="code" href="classcore_1_1ecs_1_1commands.html">commands</a>&amp; <a class="code" href="classcore_1_1ecs_1_1commands.html">commands</a>, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    PROFILE_SCOPE(core::profiler)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    commands.destroy(m_Dead.get&lt;core::ecs::<a class="code" href="structcore_1_1ecs_1_1entity.html">entity</a>&gt;());</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> death::death_system(</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    commands&amp; commands, std::chrono::duration&lt;<span class="keywordtype">float</span>&gt; dTime, std::chrono::duration&lt;<span class="keywordtype">float</span>&gt; rTime,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    core::ecs::<a class="code" href="classcore_1_1ecs_1_1pack.html">pack</a>&lt;core::ecs::entity, core::ecs::<a class="code" href="structcore_1_1ecs_1_1on__add.html">on_add</a>&lt;core::ecs::components::dead_tag&gt;&gt; dead_pack)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    PROFILE_SCOPE(core::profiler)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    commands.destroy(dead_pack.get&lt;core::ecs::entity&gt;());</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
 <div class="ttc" id="structcore_1_1ecs_1_1entity_html"><div class="ttname"><a href="structcore_1_1ecs_1_1entity.html">core::ecs::entity</a></div><div class="ttdoc">entity points to a collection of components </div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00013">entity.h:13</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1commands_html"><div class="ttname"><a href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a></div><div class="ttdoc">contains commands for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="state_8h_source.html#l01264">state.h:1264</a></div></div>
+<div class="ttc" id="classcore_1_1ecs_1_1pack_html"><div class="ttname"><a href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a></div><div class="ttdoc">an iterable container to work with components and entities. </div><div class="ttdef"><b>Definition:</b> <a href="pack_8h_source.html#l00013">pack.h:13</a></div></div>
+<div class="ttc" id="structcore_1_1ecs_1_1on__add_html"><div class="ttname"><a href="structcore_1_1ecs_1_1on__add.html">core::ecs::on_add</a></div><div class="ttdoc">tag that allows you to select entities (and components) that have recently added the given component ...</div><div class="ttdef"><b>Definition:</b> <a href="selectors_8h_source.html#l00014">selectors.h:14</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
