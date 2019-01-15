@@ -8,7 +8,7 @@ var searchData=
   ['platform',['platform',['../namespaceutility_1_1platform.html',1,'utility']]],
   ['string',['string',['../namespaceutility_1_1string.html',1,'utility']]],
   ['templates',['templates',['../namespaceutility_1_1templates.html',1,'utility']]],
-  ['uid',['UID',['../structpsl_1_1_u_i_d.html#a9bc059d6d549febdbc469c7d38141c55',1,'psl::UID::UID()'],['../structpsl_1_1_u_i_d.html#aa4fe382f9ff34e706a27849cf356db16',1,'psl::UID::UID(const PUID &amp;id)']]],
+  ['uid',['UID',['../structpsl_1_1_u_i_d.html#a9441b815ea346351f27b25897953f1b3',1,'psl::UID::UID()=default'],['../structpsl_1_1_u_i_d.html#a2bfd45155d096c7f072b7c3f24bbf0c3',1,'psl::UID::UID(const PUID &amp;id)']]],
   ['uid',['UID',['../structpsl_1_1_u_i_d.html',1,'psl']]],
   ['unload',['unload',['../classcore_1_1resource_1_1handle.html#a4a7b7fdd7e0bd7916434084ad8048a6d',1,'core::resource::handle::unload()'],['../classpsl_1_1meta_1_1library.html#a27e240bd3b3cb65018db5ec58f7178f4',1,'psl::meta::library::unload()']]],
   ['unsubscribe',['unsubscribe',['../classcore_1_1systems_1_1input.html#a0c3b8d537541138ea83975e36b4afbd1',1,'core::systems::input::unsubscribe(T &amp;target)'],['../classcore_1_1systems_1_1input.html#af633b8abecb12b7a950fa4b2881dd43b',1,'core::systems::input::unsubscribe(T *target)']]],
