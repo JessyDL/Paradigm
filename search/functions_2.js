@@ -13,7 +13,6 @@ var searchData=
   ['compare_5fop',['compare_op',['../classcore_1_1data_1_1sampler.html#aa1e3960d84238301fd94f9eb1be44c47',1,'core::data::sampler::compare_op() const '],['../classcore_1_1data_1_1sampler.html#afb11a521e48b527aca69c12a70dbe5e2',1,'core::data::sampler::compare_op(vk::CompareOp value)']]],
   ['compatible',['compatible',['../classcore_1_1gfx_1_1geometry.html#a28060fb1f568a826a526e33b833de482',1,'core::gfx::geometry']]],
   ['contains',['contains',['../classpsl_1_1meta_1_1library.html#ad2033b291702b6997b4ed96c6232ef1a',1,'psl::meta::library']]],
-  ['convert',['convert',['../structpsl_1_1_u_i_d.html#aefe3bc7a029fd43a9c4c0a77de5f681b',1,'psl::UID']]],
   ['copy',['copy',['../namespacecore_1_1resource.html#aff038c7144a720146e78fb448b33d469',1,'core::resource']]],
   ['copy_5ffrom',['copy_from',['../classcore_1_1gfx_1_1buffer.html#ae3aaca937d0128110066efa50c33d318',1,'core::gfx::buffer']]],
   ['copy_5fto_5fhost',['copy_to_host',['../classcore_1_1gfx_1_1buffer.html#a477db5ad83ad0324e6d141b7a298bfab',1,'core::gfx::buffer::copy_to_host(bool compressed_copy=true) const '],['../classcore_1_1gfx_1_1buffer.html#a937221ca3996089bb8b9a6ca2c3fcb7c',1,'core::gfx::buffer::copy_to_host(const std::vector&lt; vk::BufferCopy &gt; &amp;copyRegions) const ']]],

@@ -9,7 +9,7 @@ var structpsl_1_1_u_i_d =
     [ "operator=", "structpsl_1_1_u_i_d.html#a82643d0917e17914a2f1bb7165036800", null ],
     [ "operator=", "structpsl_1_1_u_i_d.html#ad96a4fd8b906d043ad60deaf5684e9c6", null ],
     [ "to_string", "structpsl_1_1_u_i_d.html#a8b2dae10ee294b648bbac28e04580fe0", null ],
-    [ "convert", "structpsl_1_1_u_i_d.html#aefe3bc7a029fd43a9c4c0a77de5f681b", null ],
+    [ "from_string", "structpsl_1_1_u_i_d.html#a1285ee28432e61c37315e781aded2775", null ],
     [ "valid", "structpsl_1_1_u_i_d.html#a35d2d2ce5b876fb2dffd53b051b1f46f", null ],
     [ "generate", "structpsl_1_1_u_i_d.html#aa9f7b5541b9aac957970f7265c657234", null ],
     [ "operator==", "structpsl_1_1_u_i_d.html#a8caed5644c537a1d74efe3337de2d001", null ],
