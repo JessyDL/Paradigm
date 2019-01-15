@@ -206,7 +206,6 @@ var NAVTREEINDEX3 =
 "data_2sampler_8cpp_source.html":[4,0,0,1,0,5],
 "data_2sampler_8h_source.html":[4,0,0,0,0,5],
 "dead__tag_8h_source.html":[4,0,0,0,1,0,1],
-"death_8cpp_source.html":[4,0,0,1,1,0,1],
 "death_8h_source.html":[4,0,0,0,1,1,1],
 "delegate_8h_source.html":[4,0,1,0,10],
 "deprecated.html":[1],
@@ -249,5 +248,6 @@ var NAVTREEINDEX3 =
 "drawgroup_8h_source.html":[4,0,0,0,2,1],
 "drawlayer_8h_source.html":[4,0,0,0,2,2],
 "ecs_8hpp_source.html":[4,0,0,0,1,2],
-"entity_8h_source.html":[4,0,0,0,1,3]
+"entity_8h_source.html":[4,0,0,0,1,3],
+"enumerate_8h_source.html":[4,0,1,0,11]
 };

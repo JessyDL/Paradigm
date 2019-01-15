@@ -108,27 +108,32 @@ $(document).ready(function(){initNavTree('systems_2lifetime_8h_source.html','');
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;ecs/ecs.hpp&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span>core::ecs::components</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keyword">struct </span>lifetime;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;}</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>core::ecs::systems</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">class </span>lifetime</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        lifetime(core::ecs::state&amp; state);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">void</span> tick(<a class="code" href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a>&amp; commands, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;core::ecs::entity, core::ecs::components::lifetime&gt;</a> m_Lifetime;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    };</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
-<div class="ttc" id="classcore_1_1ecs_1_1commands_html"><div class="ttname"><a href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a></div><div class="ttdoc">contains commands for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="state_8h_source.html#l01510">state.h:1510</a></div></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;ecs/components/lifetime.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;ecs/components/dead_tag.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>core::ecs::systems</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">auto</span> lifetime = [](<a class="code" href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a>&amp; commands, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime,</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                       <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;core::ecs::entity, core::ecs::components::lifetime&gt;</a> life_pack)</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keyword">using namespace </span>core::ecs;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keyword">using namespace </span>core::ecs::components;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        std::vector&lt;entity&gt; dead_entities;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>[<a class="code" href="structcore_1_1ecs_1_1entity.html">entity</a>, lifetime] : life_pack)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            lifetime.value -= dTime.count();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="keywordflow">if</span>(lifetime.value &lt;= 0.0f)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                dead_entities.emplace_back(<a class="code" href="structcore_1_1ecs_1_1entity.html">entity</a>);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        }</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classcore_1_1ecs_1_1commands.html">commands</a>.add_component&lt;dead_tag&gt;(dead_entities);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classcore_1_1ecs_1_1commands.html">commands</a>.remove_component&lt;components::lifetime&gt;(dead_entities);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    };</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="ttc" id="structcore_1_1ecs_1_1entity_html"><div class="ttname"><a href="structcore_1_1ecs_1_1entity.html">core::ecs::entity</a></div><div class="ttdoc">entity points to a collection of components </div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00013">entity.h:13</a></div></div>
+<div class="ttc" id="classcore_1_1ecs_1_1commands_html"><div class="ttname"><a href="classcore_1_1ecs_1_1commands.html">core::ecs::commands</a></div><div class="ttdoc">contains commands for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="state_8h_source.html#l01656">state.h:1656</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1pack_html"><div class="ttname"><a href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a></div><div class="ttdoc">an iterable container to work with components and entities. </div><div class="ttdef"><b>Definition:</b> <a href="pack_8h_source.html#l00013">pack.h:13</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
