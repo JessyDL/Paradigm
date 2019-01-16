@@ -123,27 +123,30 @@ $(document).ready(function(){initNavTree('classcore_1_1ecs_1_1pack.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a5bf770cdc9daa6ef0df15148c2cab19d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5bf770cdc9daa6ef0df15148c2cab19d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>pack_t</b> = typename details::typelist_to_pack_view&lt; Ts...&gt;::type</td></tr>
-<tr class="separator:a5bf770cdc9daa6ef0df15148c2cab19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d496d937f7f1c7f1d87de7b9354b846"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d496d937f7f1c7f1d87de7b9354b846"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>filter_t</b> = typename details::typelist_to_pack&lt; Ts...&gt;::type</td></tr>
-<tr class="separator:a2d496d937f7f1c7f1d87de7b9354b846"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55fcd046a17c8ff16504fbbf9607d51f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55fcd046a17c8ff16504fbbf9607d51f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>combine_t</b> = typename details::typelist_to_combine_pack&lt; Ts...&gt;::type</td></tr>
-<tr class="separator:a55fcd046a17c8ff16504fbbf9607d51f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e6e3a814baa7e8f00b9e6cebbbf595e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e6e3a814baa7e8f00b9e6cebbbf595e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>break_t</b> = typename details::typelist_to_break_pack&lt; Ts...&gt;::type</td></tr>
-<tr class="separator:a9e6e3a814baa7e8f00b9e6cebbbf595e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9b71cd6ab234e6d55352d9140aa4c3d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9b71cd6ab234e6d55352d9140aa4c3d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>add_t</b> = typename details::typelist_to_add_pack&lt; Ts...&gt;::type</td></tr>
-<tr class="separator:af9b71cd6ab234e6d55352d9140aa4c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8421465a12c1d6b26f1501d71d7e5fb3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8421465a12c1d6b26f1501d71d7e5fb3"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>remove_t</b> = typename details::typelist_to_remove_pack&lt; Ts...&gt;::type</td></tr>
-<tr class="separator:a8421465a12c1d6b26f1501d71d7e5fb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26c92af2d7987514e7a11ce48aa6f381"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26c92af2d7987514e7a11ce48aa6f381"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>except_t</b> = typename details::typelist_to_except_pack&lt; Ts...&gt;::type</td></tr>
-<tr class="separator:a26c92af2d7987514e7a11ce48aa6f381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a204aa35aba9afde0ac17459b5310011c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a204aa35aba9afde0ac17459b5310011c"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>pack_t</b> = typename type_pack&lt; Ts...&gt;::pack_t</td></tr>
+<tr class="separator:a204aa35aba9afde0ac17459b5310011c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a621dc71737639ca6e48844063640c8a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a621dc71737639ca6e48844063640c8a4"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>filter_t</b> = typename type_pack&lt; Ts...&gt;::filter_t</td></tr>
+<tr class="separator:a621dc71737639ca6e48844063640c8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2a3382a2dc80b5db3db7458aff4bad0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2a3382a2dc80b5db3db7458aff4bad0"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>combine_t</b> = typename type_pack&lt; Ts...&gt;::combine_t</td></tr>
+<tr class="separator:ac2a3382a2dc80b5db3db7458aff4bad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d10c619a1bf9e136d1e61b23287babe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d10c619a1bf9e136d1e61b23287babe"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>break_t</b> = typename type_pack&lt; Ts...&gt;::break_t</td></tr>
+<tr class="separator:a9d10c619a1bf9e136d1e61b23287babe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbfbe172979474cad99309cee47a1cb7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abbfbe172979474cad99309cee47a1cb7"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>add_t</b> = typename type_pack&lt; Ts...&gt;::add_t</td></tr>
+<tr class="separator:abbfbe172979474cad99309cee47a1cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00e3e381eff4bbd9edd2aeb27ddbe4e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00e3e381eff4bbd9edd2aeb27ddbe4e6"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>remove_t</b> = typename type_pack&lt; Ts...&gt;::remove_t</td></tr>
+<tr class="separator:a00e3e381eff4bbd9edd2aeb27ddbe4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27364abc0e4a672f95d8730674eede06"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27364abc0e4a672f95d8730674eede06"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>except_t</b> = typename type_pack&lt; Ts...&gt;::except_t</td></tr>
+<tr class="separator:a27364abc0e4a672f95d8730674eede06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50d2a86abc9606b4332e2c52242d9cce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50d2a86abc9606b4332e2c52242d9cce"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>policy_t</b> = typename type_pack&lt; Ts...&gt;::policy_t</td></tr>
+<tr class="separator:a50d2a86abc9606b4332e2c52242d9cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -191,7 +194,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::ecs::state</b>
 class core::ecs::pack&lt; Ts &gt;</h3>
 
 
-<p>Definition at line <a class="el" href="pack_8h_source.html#l00013">13</a> of file <a class="el" href="pack_8h_source.html">pack.h</a>.</p>
+<p>Definition at line <a class="el" href="pack_8h_source.html#l00018">18</a> of file <a class="el" href="pack_8h_source.html">pack.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/travis/build/JessyDL/paradigm/core/inc/ecs/<a class="el" href="pack_8h_source.html">pack.h</a></li>
 </ul>
