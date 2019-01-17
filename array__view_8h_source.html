@@ -230,7 +230,7 @@ $(document).ready(function(){initNavTree('array__view_8h_source.html','');});
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        array_view(pointer first, pointer last) : first(first), last(last){};</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> IT&gt;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        array_view(IT first, <span class="keywordtype">size_t</span> count) : first(std::addressof(*first)), last((pointer)((std::uintptr_t)std::addressof(*first) + count * sizeof(T))){};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        array_view(IT first, <span class="keywordtype">size_t</span> count) : first((count&gt;0)?std::addressof(*first):nullptr), last((count &gt; 0) ? (pointer)((std::uintptr_t)std::addressof(*first) + count * sizeof(T)):nullptr){};</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        array_view(<span class="keyword">const</span> std::vector&lt;value_type&gt;&amp; container)</div>
@@ -266,11 +266,12 @@ $(document).ready(function(){initNavTree('array__view_8h_source.html','');});
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        pointer&amp; internal_data() { <span class="keywordflow">return</span> first; };</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;          pointer first;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;          pointer last;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    };</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;} <span class="comment">// namespace psl</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        pointer data() {<span class="keywordflow">return</span> first;};</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;          pointer first;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;          pointer last;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    };</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;} <span class="comment">// namespace psl</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
