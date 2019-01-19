@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>paradigm engine: core::ecs::state::dependency_pack Class Reference</title>
+<title>paradigm engine: core::ecs::details::mf_post_tick&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().post_tick(std::declval&lt; core::ecs::command_buffer &amp; &gt;()))&gt; &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('classcore_1_1ecs_1_1state_1_1dependency__pack.html','');});
+$(document).ready(function(){initNavTree('structcore_1_1ecs_1_1details_1_1mf__post__tick_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_13b7822da8f3d30be8ad5528af15910ca.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -105,50 +105,24 @@ $(document).ready(function(){initNavTree('classcore_1_1ecs_1_1state_1_1dependenc
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
-<a href="classcore_1_1ecs_1_1state_1_1dependency__pack-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">core::ecs::state::dependency_pack Class Reference</div>  </div>
+<div class="title">core::ecs::details::mf_post_tick&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().post_tick(std::declval&lt; core::ecs::command_buffer &amp; &gt;()))&gt; &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>describes a set of dependencies for a given system  
- <a href="classcore_1_1ecs_1_1state_1_1dependency__pack.html#details">More...</a></p>
+<p>SFINAE tag that is used to detect the method signature for the <code>post_tick</code> listener.  
+ <a href="structcore_1_1ecs_1_1details_1_1mf__post__tick_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_13b7822da8f3d30be8ad5528af15910ca.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="state_8h_source.html">state.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a344cfa6bb77abac8aecb9f563665190b"><td class="memTemplParams" colspan="2"><a class="anchor" id="a344cfa6bb77abac8aecb9f563665190b"></a>
-template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:a344cfa6bb77abac8aecb9f563665190b"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>dependency_pack</b> (<a class="el" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a>&lt; Ts...&gt; &amp;<a class="el" href="classcore_1_1ecs_1_1pack.html">pack</a>)</td></tr>
-<tr class="separator:a344cfa6bb77abac8aecb9f563665190b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9615dc0b5362e833a98330790d676749"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9615dc0b5362e833a98330790d676749"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>dependency_pack</b> (const <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;other)=default</td></tr>
-<tr class="separator:a9615dc0b5362e833a98330790d676749"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4aa2ea8c9a6c6152bd388ef935038964"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4aa2ea8c9a6c6152bd388ef935038964"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>dependency_pack</b> (<a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;&amp;other)=default</td></tr>
-<tr class="separator:a4aa2ea8c9a6c6152bd388ef935038964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e98191a5ee5cef7b7f586fa55c3b312"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e98191a5ee5cef7b7f586fa55c3b312"></a>
-<a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;)=default</td></tr>
-<tr class="separator:a5e98191a5ee5cef7b7f586fa55c3b312"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeba89f284f4276249da093b6ad537423"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeba89f284f4276249da093b6ad537423"></a>
-<a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:aeba89f284f4276249da093b6ad537423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a88802675a843cd85accb9eda1e3010d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a88802675a843cd85accb9eda1e3010d8"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>core::ecs::state</b></td></tr>
-<tr class="separator:a88802675a843cd85accb9eda1e3010d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>systems can have various dependencies, for example a movement system could have dependencies on both a core::ecs::components::transform component and a core::ecs::components::renderable component. This dependency will output a set of <a class="el" href="structcore_1_1ecs_1_1entity.html" title="entity points to a collection of components ">core::ecs::entity</a>'s that have all required core::ecs::components present. Certain systems could have sets of dependencies, for example the render system requires knowing about both all <code>core::ecs::components::renderable</code> that have a <code>core::ecs::components::transform</code>, but also needs to know all <code>core::ecs::components::camera's</code>. So that system would require several <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html" title="describes a set of dependencies for a given system ">dependency_pack</a>'s. </p>
 
-<p>Definition at line <a class="el" href="state_8h_source.html#l00628">628</a> of file <a class="el" href="state_8h_source.html">state.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<p>Inherits true_type.</p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename T&gt;<br/>
+struct core::ecs::details::mf_post_tick&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().post_tick(std::declval&lt; core::ecs::command_buffer &amp; &gt;()))&gt; &gt;</h3>
+
+
+<p>Definition at line <a class="el" href="state_8h_source.html#l00076">76</a> of file <a class="el" href="state_8h_source.html">state.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/home/travis/build/JessyDL/paradigm/core/inc/ecs/<a class="el" href="state_8h_source.html">state.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -156,7 +130,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>core::ecs::state</b>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacecore.html">core</a></li><li class="navelem"><a class="el" href="namespacecore_1_1ecs.html">ecs</a></li><li class="navelem"><b>state</b></li><li class="navelem"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">dependency_pack</a></li>
+    <li class="navelem"><a class="el" href="namespacecore.html">core</a></li><li class="navelem"><a class="el" href="namespacecore_1_1ecs.html">ecs</a></li><li class="navelem"><b>details</b></li><li class="navelem"><a class="el" href="structcore_1_1ecs_1_1details_1_1mf__post__tick_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_13b7822da8f3d30be8ad5528af15910ca.html">mf_post_tick< T, std::void_t< decltype(std::declval< T & >().post_tick(std::declval< core::ecs::command_buffer & >()))> ></a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

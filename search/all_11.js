@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['sampler',['sampler',['../classcore_1_1gfx_1_1sampler.html',1,'core::gfx']]],
   ['sampler',['sampler',['../classcore_1_1data_1_1sampler.html',1,'core::data']]],
+  ['sampler',['sampler',['../classcore_1_1gfx_1_1sampler.html',1,'core::gfx']]],
   ['sampler',['sampler',['../classcore_1_1data_1_1framebuffer.html#af8f5239c5f50f88441533ff13f749aa8',1,'core::data::framebuffer::sampler()'],['../classcore_1_1gfx_1_1framebuffer.html#a3cddab92867e2ff082c409e24b7d0c59',1,'core::gfx::framebuffer::sampler()']]],
   ['samplers',['samplers',['../classcore_1_1gfx_1_1material.html#a677e0250606c487161c69e6cbf7c532c',1,'core::gfx::material::samplers()'],['../namespaceutility_1_1application_1_1path.html#addd9957ee3a186dbf506ed76b8b52f89',1,'utility::application::path::samplers()']]],
   ['sanitize',['sanitize',['../classutility_1_1platform_1_1directory.html#a76574638d45018baee44461d085d6e5b',1,'utility::platform::directory']]],

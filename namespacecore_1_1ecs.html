@@ -105,6 +105,8 @@ $(document).ready(function(){initNavTree('namespacecore_1_1ecs.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">core::ecs Namespace Reference</div>  </div>
@@ -116,6 +118,9 @@ $(document).ready(function(){initNavTree('namespacecore_1_1ecs.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1ecs_1_1command__buffer.html">command_buffer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">contains <a class="el" href="classcore_1_1ecs_1_1command__buffer.html" title="contains command_buffer for the core::ecs::state to process at a later time ">command_buffer</a> for the core::ecs::state to process at a later time  <a href="classcore_1_1ecs_1_1command__buffer.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcore_1_1ecs_1_1entity.html">entity</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">entity points to a collection of components  <a href="structcore_1_1ecs_1_1entity.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,9 +147,25 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcore_1_1ecs_1_1filter.html">filter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">tag allows you to filter on sets of components  <a href="structcore_1_1ecs_1_1filter.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1ecs_1_1commands.html">commands</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">contains commands for the core::ecs::state to process at a later time  <a href="classcore_1_1ecs_1_1commands.html#details">More...</a><br/></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a13908868a4228d7d80864446fa0e140f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13908868a4228d7d80864446fa0e140f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>component_key_t</b> ) = const std::uintptr_t *(*)(</td></tr>
+<tr class="separator:a13908868a4228d7d80864446fa0e140f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:afb901ac18f9cff52536b07164a93896e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>threading</b> { <br/>
+&#160;&#160;<b>seq</b> = 0, 
+<b>sequential</b> = seq, 
+<b>par</b> = 1, 
+<b>parallel</b> = par, 
+<br/>
+&#160;&#160;<b>main</b> = 2
+<br/>
+ }</td></tr>
+<tr class="separator:afb901ac18f9cff52536b07164a93896e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>

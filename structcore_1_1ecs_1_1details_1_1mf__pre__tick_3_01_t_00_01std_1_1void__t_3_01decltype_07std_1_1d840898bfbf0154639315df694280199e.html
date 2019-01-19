@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>paradigm engine: Member List</title>
+<title>paradigm engine: core::ecs::details::mf_pre_tick&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().pre_tick(std::declval&lt; core::ecs::command_buffer &amp; &gt;()))&gt; &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('classcore_1_1ecs_1_1state_1_1dependency__pack.html','');});
+$(document).ready(function(){initNavTree('structcore_1_1ecs_1_1details_1_1mf__pre__tick_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_1d840898bfbf0154639315df694280199e.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -106,25 +106,31 @@ $(document).ready(function(){initNavTree('classcore_1_1ecs_1_1state_1_1dependenc
 
 <div class="header">
   <div class="headertitle">
-<div class="title">core::ecs::state::dependency_pack Member List</div>  </div>
+<div class="title">core::ecs::details::mf_pre_tick&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().pre_tick(std::declval&lt; core::ecs::command_buffer &amp; &gt;()))&gt; &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a>, including all inherited members.</p>
-<table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>core::ecs::state</b> (defined in <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a>)</td><td class="entry"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>dependency_pack</b>(core::ecs::pack&lt; Ts...&gt; &amp;pack) (defined in <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a>)</td><td class="entry"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>dependency_pack</b>()=default (defined in <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a>)</td><td class="entry"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>dependency_pack</b>(const dependency_pack &amp;other)=default (defined in <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a>)</td><td class="entry"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>dependency_pack</b>(dependency_pack &amp;&amp;other)=default (defined in <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a>)</td><td class="entry"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator=</b>(const dependency_pack &amp;)=default (defined in <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a>)</td><td class="entry"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator=</b>(dependency_pack &amp;&amp;)=default (defined in <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a>)</td><td class="entry"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>~dependency_pack</b>() noexcept=default (defined in <a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a>)</td><td class="entry"><a class="el" href="classcore_1_1ecs_1_1state_1_1dependency__pack.html">core::ecs::state::dependency_pack</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>SFINAE tag that is used to detect the method signature for the <code>pre_tick</code> listener.  
+ <a href="structcore_1_1ecs_1_1details_1_1mf__pre__tick_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_1d840898bfbf0154639315df694280199e.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="state_8h_source.html">state.h</a>&gt;</code></p>
+
+<p>Inherits true_type.</p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename T&gt;<br/>
+struct core::ecs::details::mf_pre_tick&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().pre_tick(std::declval&lt; core::ecs::command_buffer &amp; &gt;()))&gt; &gt;</h3>
+
+
+<p>Definition at line <a class="el" href="state_8h_source.html#l00065">65</a> of file <a class="el" href="state_8h_source.html">state.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>/home/travis/build/JessyDL/paradigm/core/inc/ecs/<a class="el" href="state_8h_source.html">state.h</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="namespacecore.html">core</a></li><li class="navelem"><a class="el" href="namespacecore_1_1ecs.html">ecs</a></li><li class="navelem"><b>details</b></li><li class="navelem"><a class="el" href="structcore_1_1ecs_1_1details_1_1mf__pre__tick_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_1d840898bfbf0154639315df694280199e.html">mf_pre_tick< T, std::void_t< decltype(std::declval< T & >().pre_tick(std::declval< core::ecs::command_buffer & >()))> ></a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
