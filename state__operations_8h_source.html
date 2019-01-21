@@ -251,7 +251,7 @@ $(document).ready(function(){initNavTree('state__operations_8h_source.html','');
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    }</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    std::vector&lt;entity&gt;&amp;&amp; add_component(</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    std::vector&lt;entity&gt; add_component(</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        details::key_value_container_t&lt;entity, std::vector&lt;std::pair&lt;component_key_t, size_t&gt;&gt;&gt;&amp; entityMap,</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        details::key_value_container_t&lt;component_key_t, details::component_info&gt;&amp; components,</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        psl::array_view&lt;entity&gt; entities, T&amp;&amp; _template) noexcept</div>
@@ -337,7 +337,7 @@ $(document).ready(function(){initNavTree('state__operations_8h_source.html','');
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    }</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    std::vector&lt;entity&gt;&amp;&amp; remove_component(</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    std::vector&lt;entity&gt; remove_component(</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        details::key_value_container_t&lt;entity, std::vector&lt;std::pair&lt;component_key_t, size_t&gt;&gt;&gt;&amp; entityMap,</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        details::key_value_container_t&lt;component_key_t, details::component_info&gt;&amp; components,</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        psl::array_view&lt;entity&gt; entities) noexcept</div>
