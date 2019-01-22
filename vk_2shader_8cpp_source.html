@@ -157,9 +157,9 @@ $(document).ready(function(){initNavTree('vk_2shader_8cpp_source.html','');});
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;               <span class="keyword">const</span> std::vector&lt;specialization&gt; specializations)</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    : m_Context(context), m_Cache(cache), m_UID(uid)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>&amp; meta = *cache.library().<a class="code" href="classpsl_1_1meta_1_1library.html#aef9fbac098dbaec1a9a6ff6dcba8b652">get</a>&lt;<a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>&gt;(uid).value();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span>(cache.library().<a class="code" href="classpsl_1_1meta_1_1library.html#aaa85f51ff23761e9ad7aabf89032f8f2">is_physical_file</a>(uid))</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">if</span>(cache.library().<a class="code" href="classpsl_1_1meta_1_1library.html#aaa85f51ff23761e9ad7aabf89032f8f2">is_physical_file</a>(uid))</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>&amp; meta = *cache.library().<a class="code" href="classpsl_1_1meta_1_1library.html#aef9fbac098dbaec1a9a6ff6dcba8b652">get</a>&lt;<a class="code" href="classcore_1_1meta_1_1shader.html">core::meta::shader</a>&gt;(uid).value();</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">auto</span> result = cache.library().<a class="code" href="classpsl_1_1meta_1_1library.html#a667f5b9b1544433ad7a8a94403d6afa3">load</a>(uid);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">if</span>(!result)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        {</div>

@@ -301,12 +301,12 @@ $(document).ready(function(){initNavTree('platform__utils_8cpp_source.html','');
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="preprocessor">#ifdef PLATFORM_WINDOWS</span></div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="preprocessor"></span>    std::vector&lt;void*&gt; stack{raw_trace(offset, depth)};</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;IMAGEHLP_SYMBOL64&gt; symbol = std::invoke([]() {</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        IMAGEHLP_SYMBOL64* symbol;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        symbol                = (IMAGEHLP_SYMBOL64*)calloc(<span class="keyword">sizeof</span>(IMAGEHLP_SYMBOL64) + 256 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>), 1);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        symbol-&gt;MaxNameLength = 255;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        symbol-&gt;SizeOfStruct  = <span class="keyword">sizeof</span>(IMAGEHLP_SYMBOL64);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        std::unique_ptr&lt;IMAGEHLP_SYMBOL64&gt; s{symbol};</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">return</span> s;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        IMAGEHLP_SYMBOL64* sPtr;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        sPtr                  = (IMAGEHLP_SYMBOL64*)calloc(<span class="keyword">sizeof</span>(IMAGEHLP_SYMBOL64) + 256 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>), 1);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        sPtr-&gt;MaxNameLength = 255;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        sPtr-&gt;SizeOfStruct  = <span class="keyword">sizeof</span>(IMAGEHLP_SYMBOL64);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        std::unique_ptr&lt;IMAGEHLP_SYMBOL64&gt; sUPtr{sPtr};</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">return</span> sUPtr;</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    });</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keyword">static</span> HANDLE process = std::invoke([]() {</div>
@@ -354,12 +354,12 @@ $(document).ready(function(){initNavTree('platform__utils_8cpp_source.html','');
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <a class="code" href="structutility_1_1debug_1_1trace__info.html">utility::debug::trace_info</a> info;</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="preprocessor">#ifdef PLATFORM_WINDOWS</span></div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor"></span>    <span class="keyword">static</span> std::unique_ptr&lt;IMAGEHLP_SYMBOL64&gt; symbol = std::invoke([]() {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        IMAGEHLP_SYMBOL64* symbol;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        symbol                = (IMAGEHLP_SYMBOL64*)calloc(<span class="keyword">sizeof</span>(IMAGEHLP_SYMBOL64) + 256 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>), 1);</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        symbol-&gt;MaxNameLength = 255;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        symbol-&gt;SizeOfStruct  = <span class="keyword">sizeof</span>(IMAGEHLP_SYMBOL64);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        std::unique_ptr&lt;IMAGEHLP_SYMBOL64&gt; s{symbol};</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        <span class="keywordflow">return</span> s;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        IMAGEHLP_SYMBOL64* sPtr;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        sPtr                  = (IMAGEHLP_SYMBOL64*)calloc(<span class="keyword">sizeof</span>(IMAGEHLP_SYMBOL64) + 256 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>), 1);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        sPtr-&gt;MaxNameLength = 255;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        sPtr-&gt;SizeOfStruct  = <span class="keyword">sizeof</span>(IMAGEHLP_SYMBOL64);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        std::unique_ptr&lt;IMAGEHLP_SYMBOL64&gt; sUPtr{sPtr};</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        <span class="keywordflow">return</span> sUPtr;</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    });</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="keyword">static</span> HANDLE process                            = std::invoke([]() {</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;           HANDLE h = GetCurrentProcess();</div>

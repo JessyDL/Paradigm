@@ -161,7 +161,7 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">struct </span>VKAPIVersion</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    VKAPIVersion(uint32_t version)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">explicit</span> VKAPIVersion(uint32_t version)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        : major((uint32_t)(version) &gt;&gt; 22), minor(((uint32_t)(version) &gt;&gt; 12) &amp; 0x3ff),</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;          patch((uint32_t)(version)&amp;0xfff){};</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
@@ -743,7 +743,7 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;    {</div>
 <div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;        m_PhysicalDeviceProperties = m_PhysicalDevice.getProperties();</div>
 <div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;    }</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;    <span class="keywordflow">catch</span>(std::exception e)</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;    <span class="keywordflow">catch</span>(<span class="keyword">const</span> std::exception&amp; e)</div>
 <div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;    {}</div>
 <div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;    m_PhysicalDeviceFeatures         = m_PhysicalDevice.getFeatures();</div>
 <div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;    m_PhysicalDeviceMemoryProperties = m_PhysicalDevice.getMemoryProperties();</div>

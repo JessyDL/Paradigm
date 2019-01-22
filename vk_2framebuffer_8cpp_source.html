@@ -138,160 +138,154 @@ $(document).ready(function(){initNavTree('vk_2framebuffer_8cpp_source.html','');
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// now we create the renderpass that describes the framebuffer</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::vector&lt;vk::AttachmentDescription&gt; attachmentDescriptions;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; binding : m_Bindings)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        attachmentDescriptions.push_back(binding.description);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    };</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// Collect attachment references</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    std::vector&lt;vk::AttachmentReference&gt; colorReferences;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    vk::AttachmentReference depthReference;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">bool</span> hasDepth = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">bool</span> hasColor = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::transform(std::begin(m_Bindings), std::end(m_Bindings), std::begin(attachmentDescriptions), [](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; binding)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {   <span class="keywordflow">return</span> binding.description; });</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// Collect attachment references</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::vector&lt;vk::AttachmentReference&gt; colorReferences;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    vk::AttachmentReference depthReference;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">bool</span> hasDepth = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">bool</span> hasColor = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    uint32_t attachmentIndex = 0;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    uint32_t attachmentIndex = 0;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; binding : m_Bindings)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">if</span>(utility::vulkan::is_depthstencil(binding.description.format))</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="comment">// Only one depth attachment allowed</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="comment">//assert(!hasDepth);</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            depthReference.attachment = attachmentIndex;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            depthReference.layout    = vk::ImageLayout::eDepthStencilAttachmentOptimal;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            hasDepth                  = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            colorReferences.push_back({attachmentIndex, vk::ImageLayout::eColorAttachmentOptimal});</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            hasColor = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        attachmentIndex++;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    };</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// Default render pass setup uses only one subpass</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    vk::SubpassDescription subpass;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    subpass.pipelineBindPoint = vk::PipelineBindPoint::eGraphics;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span>(hasColor)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        subpass.pColorAttachments   = colorReferences.data();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        subpass.colorAttachmentCount = <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(colorReferences.size());</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span>(hasDepth)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        subpass.pDepthStencilAttachment = &amp;depthReference;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">// Use subpass dependencies for attachment layout transitions</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    std::array&lt;vk::SubpassDependency, 2&gt; dependencies;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    dependencies[0].srcSubpass  = VK_SUBPASS_EXTERNAL;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    dependencies[0].dstSubpass  = 0;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    dependencies[0].srcStageMask  = vk::PipelineStageFlagBits::eBottomOfPipe;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    dependencies[0].dstStageMask  = vk::PipelineStageFlagBits::eColorAttachmentOutput;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    dependencies[0].srcAccessMask = vk::AccessFlagBits::eMemoryRead;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    dependencies[0].dstAccessMask =</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        vk::AccessFlagBits::eColorAttachmentRead | vk::AccessFlagBits::eColorAttachmentWrite;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    dependencies[0].dependencyFlags = vk::DependencyFlagBits::eByRegion;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    dependencies[1].srcSubpass   = 0;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    dependencies[1].dstSubpass   = VK_SUBPASS_EXTERNAL;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    dependencies[1].srcStageMask = vk::PipelineStageFlagBits::eColorAttachmentOutput;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    dependencies[1].dstStageMask = vk::PipelineStageFlagBits::eBottomOfPipe;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    dependencies[1].srcAccessMask =</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        vk::AccessFlagBits::eColorAttachmentRead | vk::AccessFlagBits::eColorAttachmentWrite;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    dependencies[1].dstAccessMask   = vk::AccessFlagBits::eMemoryRead;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    dependencies[1].dependencyFlags = vk::DependencyFlagBits::eByRegion;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">// Create render pass</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    vk::RenderPassCreateInfo renderPassInfo;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    renderPassInfo.pAttachments = attachmentDescriptions.data();</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    renderPassInfo.attachmentCount = <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(attachmentDescriptions.size());</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    renderPassInfo.subpassCount = 1;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    renderPassInfo.pSubpasses     = &amp;subpass;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    renderPassInfo.dependencyCount = 2;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    renderPassInfo.pDependencies   = dependencies.data();</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    utility::vulkan::check(m_Context-&gt;device().createRenderPass(&amp;renderPassInfo, <span class="keyword">nullptr</span>, &amp;m_RenderPass));</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="comment">// pre-allocate attachmentviews, and fill in all the data in the FBCI</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="comment">// we will override the views in the upcoming loop, where the device also will create the FBOs</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    std::vector&lt;vk::ImageView&gt; attachmentViews;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    attachmentViews.resize(m_Data-&gt;framebuffers());</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    vk::FramebufferCreateInfo framebufferInfo;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    framebufferInfo.renderPass      = m_RenderPass;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    framebufferInfo.pAttachments    = attachmentViews.data();</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    framebufferInfo.attachmentCount = <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(attachmentViews.size());</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    framebufferInfo.width           = m_Data-&gt;width();</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    framebufferInfo.height          = m_Data-&gt;height();</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    framebufferInfo.layers          = 0;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = 0u; i &lt; m_Data-&gt;framebuffers(); ++i)</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="comment">// Find. max number of layers across attachments &amp;&amp; store all attachment views</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        uint32_t maxLayers = 0u;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; binding : m_Bindings)</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        {</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            attachmentViews[binding.index] = binding.attachments[i].view;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            maxLayers                      = std::max(maxLayers, binding.attachments[i].subresourceRange.layerCount);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        }</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        framebufferInfo.layers = maxLayers;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        utility::vulkan::check(m_Context-&gt;device().createFramebuffer(&amp;framebufferInfo, <span class="keyword">nullptr</span>, &amp;m_Framebuffers[i]));</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;framebuffer::~framebuffer()</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;{</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    m_Context-&gt;device().destroyRenderPass(m_RenderPass);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; fb : m_Framebuffers) m_Context-&gt;device().destroyFramebuffer(fb);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;}</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classcore_1_1data_1_1framebuffer.html#a1fd23c1569e005ef6695d35704bf63ce">framebuffer::add</a>(<a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">UID</a>&amp; uid, vk::AttachmentDescription description, <span class="keywordtype">size_t</span> index,</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                      <span class="keywordtype">size_t</span> count)</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;{</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">auto</span> res = cache.library().<a class="code" href="classpsl_1_1meta_1_1library.html#aef9fbac098dbaec1a9a6ff6dcba8b652">get</a>&lt;<a class="code" href="classcore_1_1meta_1_1texture.html">core::meta::texture</a>&gt;(uid);</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">if</span>(!res) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; binding : m_Bindings)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">if</span>(utility::vulkan::is_depthstencil(binding.description.format))</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="comment">// Only one depth attachment allowed</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="comment">//assert(!hasDepth);</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            depthReference.attachment = attachmentIndex;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            depthReference.layout    = vk::ImageLayout::eDepthStencilAttachmentOptimal;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            hasDepth                  = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            colorReferences.push_back({attachmentIndex, vk::ImageLayout::eColorAttachmentOptimal});</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            hasColor = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        attachmentIndex++;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    };</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// Default render pass setup uses only one subpass</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    vk::SubpassDescription subpass;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    subpass.pipelineBindPoint = vk::PipelineBindPoint::eGraphics;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span>(hasColor)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        subpass.pColorAttachments   = colorReferences.data();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        subpass.colorAttachmentCount = <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(colorReferences.size());</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span>(hasDepth)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        subpass.pDepthStencilAttachment = &amp;depthReference;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">// Use subpass dependencies for attachment layout transitions</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    std::array&lt;vk::SubpassDependency, 2&gt; dependencies;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    dependencies[0].srcSubpass  = VK_SUBPASS_EXTERNAL;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    dependencies[0].dstSubpass  = 0;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    dependencies[0].srcStageMask  = vk::PipelineStageFlagBits::eBottomOfPipe;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    dependencies[0].dstStageMask  = vk::PipelineStageFlagBits::eColorAttachmentOutput;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    dependencies[0].srcAccessMask = vk::AccessFlagBits::eMemoryRead;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    dependencies[0].dstAccessMask =</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        vk::AccessFlagBits::eColorAttachmentRead | vk::AccessFlagBits::eColorAttachmentWrite;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    dependencies[0].dependencyFlags = vk::DependencyFlagBits::eByRegion;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    dependencies[1].srcSubpass   = 0;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    dependencies[1].dstSubpass   = VK_SUBPASS_EXTERNAL;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    dependencies[1].srcStageMask = vk::PipelineStageFlagBits::eColorAttachmentOutput;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    dependencies[1].dstStageMask = vk::PipelineStageFlagBits::eBottomOfPipe;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    dependencies[1].srcAccessMask =</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        vk::AccessFlagBits::eColorAttachmentRead | vk::AccessFlagBits::eColorAttachmentWrite;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    dependencies[1].dstAccessMask   = vk::AccessFlagBits::eMemoryRead;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    dependencies[1].dependencyFlags = vk::DependencyFlagBits::eByRegion;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// Create render pass</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    vk::RenderPassCreateInfo renderPassInfo;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    renderPassInfo.pAttachments = attachmentDescriptions.data();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    renderPassInfo.attachmentCount = <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(attachmentDescriptions.size());</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    renderPassInfo.subpassCount = 1;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    renderPassInfo.pSubpasses     = &amp;subpass;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    renderPassInfo.dependencyCount = 2;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    renderPassInfo.pDependencies   = dependencies.data();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    utility::vulkan::check(m_Context-&gt;device().createRenderPass(&amp;renderPassInfo, <span class="keyword">nullptr</span>, &amp;m_RenderPass));</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="comment">// pre-allocate attachmentviews, and fill in all the data in the FBCI</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">// we will override the views in the upcoming loop, where the device also will create the FBOs</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::vector&lt;vk::ImageView&gt; attachmentViews;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    attachmentViews.resize(m_Data-&gt;framebuffers());</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    vk::FramebufferCreateInfo framebufferInfo;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    framebufferInfo.renderPass      = m_RenderPass;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    framebufferInfo.pAttachments    = attachmentViews.data();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    framebufferInfo.attachmentCount = <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(attachmentViews.size());</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    framebufferInfo.width           = m_Data-&gt;width();</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    framebufferInfo.height          = m_Data-&gt;height();</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    framebufferInfo.layers          = 0;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = 0u; i &lt; m_Data-&gt;framebuffers(); ++i)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="comment">// Find. max number of layers across attachments &amp;&amp; store all attachment views</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        uint32_t maxLayers = 0u;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; binding : m_Bindings)</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        {</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            attachmentViews[binding.index] = binding.attachments[i].view;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            maxLayers                      = std::max(maxLayers, binding.attachments[i].subresourceRange.layerCount);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        framebufferInfo.layers = maxLayers;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        utility::vulkan::check(m_Context-&gt;device().createFramebuffer(&amp;framebufferInfo, <span class="keyword">nullptr</span>, &amp;m_Framebuffers[i]));</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;framebuffer::~framebuffer()</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;{</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    m_Context-&gt;device().destroyRenderPass(m_RenderPass);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; fb : m_Framebuffers) m_Context-&gt;device().destroyFramebuffer(fb);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;}</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classcore_1_1data_1_1framebuffer.html#a1fd23c1569e005ef6695d35704bf63ce">framebuffer::add</a>(<a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache, <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">UID</a>&amp; uid, vk::AttachmentDescription description, <span class="keywordtype">size_t</span> index,</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                      <span class="keywordtype">size_t</span> count)</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;{</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keyword">auto</span> res = cache.library().<a class="code" href="classpsl_1_1meta_1_1library.html#aef9fbac098dbaec1a9a6ff6dcba8b652">get</a>&lt;<a class="code" href="classcore_1_1meta_1_1texture.html">core::meta::texture</a>&gt;(uid);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordflow">if</span>(!res) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keyword">auto</span> meta = res.value();</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">auto</span> meta = res.value();</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    binding&amp; binding           = m_Bindings.emplace_back();</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    binding.description        = description;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    binding.description.<a class="code" href="classcore_1_1meta_1_1texture.html#a7d68d75763443d80dce41a4d2829c321">format</a> = meta-&gt;format();</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = index; i &lt; index + count; ++i)</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keyword">auto</span> <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a> = core::resource::create&lt;core::gfx::texture&gt;(cache, uid);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        m_Textures.push_back(<a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <a class="code" href="classcore_1_1data_1_1framebuffer_1_1attachment.html#a8edda07794c11a030e3717f90471bb50">attachment</a>&amp; <a class="code" href="classcore_1_1data_1_1framebuffer_1_1attachment.html#a8edda07794c11a030e3717f90471bb50">attachment</a>      = binding.attachments.emplace_back();</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        attachment.view             = <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1texture.html#ad09c62562474cee3911449462d7678ae">view</a>();</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        attachment.memory           = <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1texture.html#acf174399f98934941783c019da1ff29b">memory</a>();</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        attachment.subresourceRange = <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1texture.html#af7a2f7bba282072f7d9c3bc61e603a94">subResourceRange</a>();</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        attachment.image            = <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1texture.html#a1944b3ff136ceb49166c392824381d68">image</a>();</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    }</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;</div>
-<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a483d6d085a67bab678be10cb5f9db112">  169</a></span>&#160;std::vector&lt;framebuffer::attachment&gt; <a class="code" href="classcore_1_1data_1_1framebuffer.html#a2c189f8f21fb7dbd4e99c6793ed11787">framebuffer::attachments</a>(uint32_t index) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;{</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordflow">if</span>(index &gt;= m_Bindings.size()) <span class="keywordflow">return</span> {};</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    std::vector&lt;framebuffer::attachment&gt; res;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    res.reserve(m_Bindings.size());</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; binding : m_Bindings)</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    {</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        res.emplace_back((binding.attachments.size() &gt; 1) ? binding.attachments[index] : binding.attachments[0]);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    }</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">return</span> res;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;}</div>
-<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a3cddab92867e2ff082c409e24b7d0c59">  182</a></span>&#160;<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::sampler&gt;</a> <a class="code" href="classcore_1_1data_1_1framebuffer.html#af8f5239c5f50f88441533ff13f749aa8">framebuffer::sampler</a>() const noexcept { <span class="keywordflow">return</span> m_Sampler; }</div>
-<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a175a07e303acbbdfaf492ea993a98e47">  183</a></span>&#160;<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::data::framebuffer&gt;</a> framebuffer::data() const noexcept { <span class="keywordflow">return</span> m_Data; }</div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#aaecb7b3533988af2bcc0187bd9db7483">  184</a></span>&#160;vk::RenderPass framebuffer::render_pass() const noexcept { <span class="keywordflow">return</span> m_RenderPass; }</div>
-<div class="line"><a name="l00185"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a33ce8241f7d138273ff4cb6abdd767f7">  185</a></span>&#160;<span class="keyword">const</span> std::vector&lt;vk::Framebuffer&gt;&amp; <a class="code" href="classcore_1_1data_1_1framebuffer.html#a93651ce7f8434a5b8aaf230d2870c2d3">framebuffer::framebuffers</a>() const noexcept { <span class="keywordflow">return</span> m_Framebuffers; }</div>
-<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a0d85344159e150cf45317c6551e4a1ee">  186</a></span>&#160;vk::DescriptorImageInfo framebuffer::descriptor() const noexcept { <span class="keywordflow">return</span> m_Descriptor; }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    binding&amp; binding           = m_Bindings.emplace_back();</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    binding.description        = description;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    binding.description.<a class="code" href="classcore_1_1meta_1_1texture.html#a7d68d75763443d80dce41a4d2829c321">format</a> = meta-&gt;format();</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> i = index; i &lt; index + count; ++i)</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keyword">auto</span> <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a> = core::resource::create&lt;core::gfx::texture&gt;(cache, uid);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        m_Textures.push_back(<a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <a class="code" href="classcore_1_1data_1_1framebuffer_1_1attachment.html#a8edda07794c11a030e3717f90471bb50">attachment</a>&amp; <a class="code" href="classcore_1_1data_1_1framebuffer_1_1attachment.html#a8edda07794c11a030e3717f90471bb50">attachment</a>      = binding.attachments.emplace_back();</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        attachment.view             = <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1texture.html#ad09c62562474cee3911449462d7678ae">view</a>();</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        attachment.memory           = <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1texture.html#acf174399f98934941783c019da1ff29b">memory</a>();</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        attachment.subresourceRange = <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1texture.html#af7a2f7bba282072f7d9c3bc61e603a94">subResourceRange</a>();</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        attachment.image            = <a class="code" href="classcore_1_1gfx_1_1texture.html">texture</a>-&gt;<a class="code" href="classcore_1_1gfx_1_1texture.html#a1944b3ff136ceb49166c392824381d68">image</a>();</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a483d6d085a67bab678be10cb5f9db112">  167</a></span>&#160;std::vector&lt;framebuffer::attachment&gt; <a class="code" href="classcore_1_1data_1_1framebuffer.html#a2c189f8f21fb7dbd4e99c6793ed11787">framebuffer::attachments</a>(uint32_t index) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;{</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">if</span>(index &gt;= m_Bindings.size()) <span class="keywordflow">return</span> {};</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    std::vector&lt;framebuffer::attachment&gt; res;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    std::transform(std::begin(m_Bindings), std::end(m_Bindings), std::begin(res), [index](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; binding)</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    { <span class="keywordflow">return</span> (binding.attachments.size() &gt; 1) ? binding.attachments[index] : binding.attachments[0]; });</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordflow">return</span> res;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;}</div>
+<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a3cddab92867e2ff082c409e24b7d0c59">  176</a></span>&#160;<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::sampler&gt;</a> <a class="code" href="classcore_1_1data_1_1framebuffer.html#af8f5239c5f50f88441533ff13f749aa8">framebuffer::sampler</a>() const noexcept { <span class="keywordflow">return</span> m_Sampler; }</div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a175a07e303acbbdfaf492ea993a98e47">  177</a></span>&#160;<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::data::framebuffer&gt;</a> framebuffer::data() const noexcept { <span class="keywordflow">return</span> m_Data; }</div>
+<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#aaecb7b3533988af2bcc0187bd9db7483">  178</a></span>&#160;vk::RenderPass framebuffer::render_pass() const noexcept { <span class="keywordflow">return</span> m_RenderPass; }</div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a33ce8241f7d138273ff4cb6abdd767f7">  179</a></span>&#160;<span class="keyword">const</span> std::vector&lt;vk::Framebuffer&gt;&amp; <a class="code" href="classcore_1_1data_1_1framebuffer.html#a93651ce7f8434a5b8aaf230d2870c2d3">framebuffer::framebuffers</a>() const noexcept { <span class="keywordflow">return</span> m_Framebuffers; }</div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="classcore_1_1gfx_1_1framebuffer.html#a0d85344159e150cf45317c6551e4a1ee">  180</a></span>&#160;vk::DescriptorImageInfo framebuffer::descriptor() const noexcept { <span class="keywordflow">return</span> m_Descriptor; }</div>
 <div class="ttc" id="classcore_1_1gfx_1_1texture_html"><div class="ttname"><a href="classcore_1_1gfx_1_1texture.html">core::gfx::texture</a></div><div class="ttdoc">a texture resource used for rendering, either as target, or as input resource. </div><div class="ttdef"><b>Definition:</b> <a href="vk_2texture_8h_source.html#l00025">texture.h:25</a></div></div>
 <div class="ttc" id="classcore_1_1meta_1_1texture_html_a7d68d75763443d80dce41a4d2829c321"><div class="ttname"><a href="classcore_1_1meta_1_1texture.html#a7d68d75763443d80dce41a4d2829c321">core::meta::texture::format</a></div><div class="ttdeci">vk::Format format() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="meta_2texture_8cpp_source.html#l00025">texture.cpp:25</a></div></div>
 <div class="ttc" id="classcore_1_1data_1_1framebuffer_html_a1fd23c1569e005ef6695d35704bf63ce"><div class="ttname"><a href="classcore_1_1data_1_1framebuffer.html#a1fd23c1569e005ef6695d35704bf63ce">core::data::framebuffer::add</a></div><div class="ttdeci">const psl::UID &amp; add(uint32_t width, uint32_t height, uint32_t layerCount, vk::Format format, vk::ImageUsageFlags usage, vk::ClearValue clearValue, vk::AttachmentDescription descr)</div><div class="ttdoc">adds a core::data::framebuffer::attachment to the current framebuffer. </div><div class="ttdef"><b>Definition:</b> <a href="data_2framebuffer_8cpp_source.html#l00016">framebuffer.cpp:16</a></div></div>
