@@ -1302,8 +1302,8 @@ $(document).ready(function(){initNavTree('format_8cpp_source.html','');});
 <div class="line"><a name="l01194"></a><span class="lineno"> 1194</span>&#160;    <span class="keywordflow">if</span> (node.root() != <span class="keyword">this</span>)</div>
 <div class="line"><a name="l01195"></a><span class="lineno"> 1195</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l01196"></a><span class="lineno"> 1196</span>&#160;</div>
-<div class="line"><a name="l01197"></a><span class="lineno"> 1197</span>&#160;    <span class="keyword">auto</span> index_node = index_of(node);</div>
-<div class="line"><a name="l01198"></a><span class="lineno"> 1198</span>&#160;    <span class="keyword">auto</span> index_parent = index_of(new_parent);</div>
+<div class="line"><a name="l01197"></a><span class="lineno"> 1197</span>&#160;    <span class="comment">//auto index_node = index_of(node);</span></div>
+<div class="line"><a name="l01198"></a><span class="lineno"> 1198</span>&#160;    <span class="comment">//auto index_parent = index_of(new_parent);</span></div>
 <div class="line"><a name="l01199"></a><span class="lineno"> 1199</span>&#160;</div>
 <div class="line"><a name="l01200"></a><span class="lineno"> 1200</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l01201"></a><span class="lineno"> 1201</span>&#160;}</div>
@@ -1575,7 +1575,7 @@ $(document).ready(function(){initNavTree('format_8cpp_source.html','');});
 <div class="line"><a name="l01467"></a><span class="lineno"> 1467</span>&#160;</div>
 <div class="line"><a name="l01468"></a><span class="lineno"> 1468</span>&#160;    <span class="keywordflow">if</span>(setting.compact_string)</div>
 <div class="line"><a name="l01469"></a><span class="lineno"> 1469</span>&#160;    {</div>
-<div class="line"><a name="l01470"></a><span class="lineno"> 1470</span>&#160;        <span class="keywordtype">size_t</span> reserve = m_Content.size() + m_InternalData.size();</div>
+<div class="line"><a name="l01470"></a><span class="lineno"> 1470</span>&#160;        <span class="comment">//size_t reserve = m_Content.size() + m_InternalData.size();</span></div>
 <div class="line"><a name="l01471"></a><span class="lineno"> 1471</span>&#160;        compact_header header;</div>
 <div class="line"><a name="l01472"></a><span class="lineno"> 1472</span>&#160;        </div>
 <div class="line"><a name="l01473"></a><span class="lineno"> 1473</span>&#160;        <span class="keywordflow">return</span> header.build(*<span class="keyword">this</span>);</div>
@@ -1743,20 +1743,20 @@ $(document).ready(function(){initNavTree('format_8cpp_source.html','');});
 <div class="line"><a name="l01635"></a><span class="lineno"> 1635</span>&#160;        {</div>
 <div class="line"><a name="l01636"></a><span class="lineno"> 1636</span>&#160;        <span class="keywordflow">case</span> type::VALUE:</div>
 <div class="line"><a name="l01637"></a><span class="lineno"> 1637</span>&#160;        {</div>
-<div class="line"><a name="l01638"></a><span class="lineno"> 1638</span>&#160;            <span class="keyword">auto</span> [is_literal, content_info] = m_NodeData[current_index].reinterpret_as_value();</div>
-<div class="line"><a name="l01639"></a><span class="lineno"> 1639</span>&#160;            <span class="keyword">auto</span> content_index = content_info.first;</div>
-<div class="line"><a name="l01640"></a><span class="lineno"> 1640</span>&#160;            <span class="keyword">auto</span> content_size = content_info.second;</div>
-<div class="line"><a name="l01641"></a><span class="lineno"> 1641</span>&#160;            <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = rfind_last_index_of({ type::VALUE, type::VALUE_RANGE }, m_NodeData.begin() + current_index, m_NodeData.begin() + index); it != m_NodeData.begin() + current_index)</div>
-<div class="line"><a name="l01642"></a><span class="lineno"> 1642</span>&#160;            {</div>
-<div class="line"><a name="l01643"></a><span class="lineno"> 1643</span>&#160;                <span class="keyword">auto</span> last_value_node = it - m_NodeData.begin();</div>
-<div class="line"><a name="l01644"></a><span class="lineno"> 1644</span>&#160;                <span class="keywordflow">if</span> (it-&gt;m_Type == type::VALUE)</div>
-<div class="line"><a name="l01645"></a><span class="lineno"> 1645</span>&#160;                {</div>
-<div class="line"><a name="l01646"></a><span class="lineno"> 1646</span>&#160;                }</div>
-<div class="line"><a name="l01647"></a><span class="lineno"> 1647</span>&#160;                <span class="keywordflow">else</span></div>
-<div class="line"><a name="l01648"></a><span class="lineno"> 1648</span>&#160;                {</div>
+<div class="line"><a name="l01638"></a><span class="lineno"> 1638</span>&#160;            <span class="comment">//auto [is_literal, content_info] = m_NodeData[current_index].reinterpret_as_value();</span></div>
+<div class="line"><a name="l01639"></a><span class="lineno"> 1639</span>&#160;            <span class="comment">//auto content_index = content_info.first;</span></div>
+<div class="line"><a name="l01640"></a><span class="lineno"> 1640</span>&#160;            <span class="comment">//auto content_size = content_info.second;</span></div>
+<div class="line"><a name="l01641"></a><span class="lineno"> 1641</span>&#160;            <span class="comment">//if (auto it = rfind_last_index_of({ type::VALUE, type::VALUE_RANGE }, m_NodeData.begin() + current_index, m_NodeData.begin() + index); it != m_NodeData.begin() + current_index)</span></div>
+<div class="line"><a name="l01642"></a><span class="lineno"> 1642</span>&#160;            <span class="comment">//{</span></div>
+<div class="line"><a name="l01643"></a><span class="lineno"> 1643</span>&#160;            <span class="comment">//  //auto last_value_node = it - m_NodeData.begin();</span></div>
+<div class="line"><a name="l01644"></a><span class="lineno"> 1644</span>&#160;            <span class="comment">//  if (it-&gt;m_Type == type::VALUE)</span></div>
+<div class="line"><a name="l01645"></a><span class="lineno"> 1645</span>&#160;            <span class="comment">//  {</span></div>
+<div class="line"><a name="l01646"></a><span class="lineno"> 1646</span>&#160;            <span class="comment">//  }</span></div>
+<div class="line"><a name="l01647"></a><span class="lineno"> 1647</span>&#160;            <span class="comment">//  else</span></div>
+<div class="line"><a name="l01648"></a><span class="lineno"> 1648</span>&#160;            <span class="comment">//  {</span></div>
 <div class="line"><a name="l01649"></a><span class="lineno"> 1649</span>&#160;</div>
-<div class="line"><a name="l01650"></a><span class="lineno"> 1650</span>&#160;                }</div>
-<div class="line"><a name="l01651"></a><span class="lineno"> 1651</span>&#160;            }</div>
+<div class="line"><a name="l01650"></a><span class="lineno"> 1650</span>&#160;            <span class="comment">//  }</span></div>
+<div class="line"><a name="l01651"></a><span class="lineno"> 1651</span>&#160;            <span class="comment">//}</span></div>
 <div class="line"><a name="l01652"></a><span class="lineno"> 1652</span>&#160;</div>
 <div class="line"><a name="l01653"></a><span class="lineno"> 1653</span>&#160;        }<span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l01654"></a><span class="lineno"> 1654</span>&#160;        <span class="keywordflow">case</span> type::VALUE_RANGE:</div>

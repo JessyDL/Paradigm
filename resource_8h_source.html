@@ -439,7 +439,7 @@ $(document).ready(function(){initNavTree('resource_8h_source.html','');});
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <span class="comment">// memory::region m_Region;</span></div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <a class="code" href="classmemory_1_1allocator__base.html">memory::allocator_base</a>* m_Allocator;</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        std::unordered_map&lt;psl::UID, std::vector&lt;entry&gt;&gt; m_Handles;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keyword">static</span> uint64_t id;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keyword">static</span> uint64_t m_ID;</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    };</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keyword">namespace </span>details</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    {</div>
@@ -562,7 +562,7 @@ $(document).ready(function(){initNavTree('resource_8h_source.html','');});
 <div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;</div>
 <div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;</div>
 <div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        <span class="keyword">const</span> uint64_t container&lt;T&gt;::id{cache::id++};</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        <span class="keyword">const</span> uint64_t container&lt;T&gt;::id{cache::m_ID++};</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;</div>
 <div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;        <span class="keyword">const</span> details::vtable&amp; container&lt;T&gt;::m_vTable = details::vtable_for&lt;container&lt;T&gt;&gt;;</div>

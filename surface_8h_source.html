@@ -163,8 +163,8 @@ $(document).ready(function(){initNavTree('surface_8h_source.html','');});
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcore_1_1os_1_1surface.html#acb52fde559cd854a47c27aab64c24d45">register_swapchain</a>(<a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;core::gfx::swapchain&gt;</a> swapchain);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#if defined(SURFACE_WIN32)</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor"></span>        HINSTANCE surface_instance()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _win32_instance; };</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        HWND surface_handle()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _win32_window; };</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor"></span>        HINSTANCE surface_instance()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> win32_instance; };</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        HWND surface_handle()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> win32_window; };</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#elif defined(SURFACE_XCB)</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor"></span>        xcb_connection_t *connection()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _xcb_connection; }</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        xcb_window_t surface_handle()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _xcb_window; };</div>
@@ -225,10 +225,10 @@ $(document).ready(function(){initNavTree('surface_8h_source.html','');});
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keywordtype">bool</span> m_IndicatorLocked{<span class="keyword">false</span>};</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <a class="code" href="classcore_1_1systems_1_1input.html">core::systems::input</a>* m_InputSystem;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">#if defined(SURFACE_WIN32)</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor"></span>        HINSTANCE _win32_instance = NULL;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        HWND _win32_window        = NULL;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        psl::platform_string _win32_class_name;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keyword">static</span> uint64_t _win32_class_id_counter;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor"></span>        HINSTANCE win32_instance = NULL;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        HWND win32_window         = NULL;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        psl::platform_string win32_class_name;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keyword">static</span> uint64_t win32_class_id_counter;</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="comment">// void TranslateInputMessage(MSG *msg);</span></div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">#elif defined(SURFACE_XCB)</span></div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor"></span>        xcb_connection_t *_xcb_connection;</div>

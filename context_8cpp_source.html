@@ -623,11 +623,11 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;{</div>
 <div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;    <span class="keywordflow">if</span>(m_Validated)</div>
 <div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;    {</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;        PFN_vkCreateDebugReportCallbackEXT vkCreateDebugReportCallbackEXT =</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;        PFN_vkCreateDebugReportCallbackEXT fnp_vkCreateDebugReportCallbackEXT =</div>
 <div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;            <span class="keyword">reinterpret_cast&lt;</span>PFN_vkCreateDebugReportCallbackEXT<span class="keyword">&gt;</span>(</div>
 <div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;                vkGetInstanceProcAddr(m_Instance, <span class="stringliteral">&quot;vkCreateDebugReportCallbackEXT&quot;</span>));</div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        PFN_vkDebugReportMessageEXT vkDebugReportMessageEXT =</div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;            <span class="keyword">reinterpret_cast&lt;</span>PFN_vkDebugReportMessageEXT<span class="keyword">&gt;</span>(vkGetInstanceProcAddr(m_Instance, <span class="stringliteral">&quot;vkDebugReportMessageEXT&quot;</span>));</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        <span class="comment">//PFN_vkDebugReportMessageEXT vkDebugReportMessageEXT =</span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        <span class="comment">//  reinterpret_cast&lt;PFN_vkDebugReportMessageEXT&gt;(vkGetInstanceProcAddr(m_Instance, &quot;vkDebugReportMessageEXT&quot;));</span></div>
 <div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;</div>
 <div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;        VkDebugReportCallbackCreateInfoEXT callbackCreateInfo;</div>
 <div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;        callbackCreateInfo.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT;</div>
@@ -642,7 +642,7 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;</div>
 <div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        <span class="comment">/* Register the callback */</span></div>
 <div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;        utility::vulkan::check(</div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;            vkCreateDebugReportCallbackEXT(m_Instance, &amp;callbackCreateInfo, <span class="keyword">nullptr</span>, &amp;m_DebugReport));</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;            fnp_vkCreateDebugReportCallbackEXT(m_Instance, &amp;callbackCreateInfo, <span class="keyword">nullptr</span>, &amp;m_DebugReport));</div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    }</div>
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;}</div>
 <div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;</div>
