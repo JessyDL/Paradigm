@@ -119,8 +119,8 @@ $(document).ready(function(){initNavTree('state_8cpp_source.html','');});
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    PROFILE_SCOPE(core::profiler)</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    if(entities.size() == 0) return;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    ska::bytell_hash_map&lt;component_key_t, std::vector&lt;<a class="code" href="structcore_1_1ecs_1_1entity.html">entity</a>&gt;&gt; erased_entities;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    ska::bytell_hash_map&lt;component_key_t, std::vector&lt;uint64_t&gt;&gt; erased_ids;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    psl::bytell_map&lt;component_key_t, std::vector&lt;<a class="code" href="structcore_1_1ecs_1_1entity.html">entity</a>&gt;&gt; erased_entities;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    psl::bytell_map&lt;component_key_t, std::vector&lt;uint64_t&gt;&gt; erased_ids;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    core::profiler.scope_begin(&quot;erase entities&quot;);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    for(const auto&amp; e : entities)</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>

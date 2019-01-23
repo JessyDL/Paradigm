@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>paradigm engine: core::ecs::details::mf_post_tick&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().post_tick(std::declval&lt; core::ecs::command_buffer &amp; &gt;()))&gt; &gt; Struct Template Reference</title>
+<title>paradigm engine: /home/travis/build/JessyDL/paradigm/psl/inc/bytell_map.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,8 +47,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -69,10 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
-      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
-      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -87,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('structcore_1_1ecs_1_1details_1_1mf__post__tick_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_13b7822da8f3d30be8ad5528af15910ca.html','');});
+$(document).ready(function(){initNavTree('bytell__map_8h_source.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -106,31 +103,34 @@ $(document).ready(function(){initNavTree('structcore_1_1ecs_1_1details_1_1mf__po
 
 <div class="header">
   <div class="headertitle">
-<div class="title">core::ecs::details::mf_post_tick&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().post_tick(std::declval&lt; core::ecs::command_buffer &amp; &gt;()))&gt; &gt; Struct Template Reference</div>  </div>
+<div class="title">bytell_map.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>SFINAE tag that is used to detect the method signature for the <code>post_tick</code> listener.  
- <a href="structcore_1_1ecs_1_1details_1_1mf__post__tick_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_13b7822da8f3d30be8ad5528af15910ca.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="state_8h_source.html">state.h</a>&gt;</code></p>
-
-<p>Inherits true_type.</p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T&gt;<br/>
-struct core::ecs::details::mf_post_tick&lt; T, std::void_t&lt; decltype(std::declval&lt; T &amp; &gt;().post_tick(std::declval&lt; core::ecs::command_buffer &amp; &gt;()))&gt; &gt;</h3>
-
-
-<p>Definition at line <a class="el" href="state_8h_source.html#l00075">75</a> of file <a class="el" href="state_8h_source.html">state.h</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/travis/build/JessyDL/paradigm/core/inc/ecs/<a class="el" href="state_8h_source.html">state.h</a></li>
-</ul>
-</div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DISABLE_EXTENSIONS</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#ifndef DISABLE_EXTENSIONS</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;bytell_hash_map.hpp&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>psl</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> KT, <span class="keyword">typename</span> VT&gt;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">using</span> bytell_map = ska::bytell_hash_map&lt;KT, VT&gt;;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>psl</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> KT, <span class="keyword">typename</span> VT&gt;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">using</span> bytell_map = std::unordered_map&lt;KT, VT&gt;;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacecore.html">core</a></li><li class="navelem"><a class="el" href="namespacecore_1_1ecs.html">ecs</a></li><li class="navelem"><b>details</b></li><li class="navelem"><a class="el" href="structcore_1_1ecs_1_1details_1_1mf__post__tick_3_01_t_00_01std_1_1void__t_3_01decltype_07std_1_13b7822da8f3d30be8ad5528af15910ca.html">mf_post_tick< T, std::void_t< decltype(std::declval< T & >().post_tick(std::declval< core::ecs::command_buffer & >()))> ></a></li>
+    <li class="navelem"><a class="el" href="dir_a1556dadab30d217fbfc78bbc628eb33.html">psl</a></li><li class="navelem"><a class="el" href="dir_e52b4d66bdf46265e4d1ecc7f504bc09.html">inc</a></li><li class="navelem"><b>bytell_map.h</b></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>

@@ -146,10 +146,18 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a0d01f1a67bf17a8c59633de8f573437f"><td class="memTemplParams" colspan="2"><a class="anchor" id="a0d01f1a67bf17a8c59633de8f573437f"></a>
+<tr class="memitem:ae471c3c501ab18637f66c39348dd0283"><td class="memTemplParams" colspan="2"><a class="anchor" id="ae471c3c501ab18637f66c39348dd0283"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae471c3c501ab18637f66c39348dd0283"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>array</b> = std::array&lt; T &gt;</td></tr>
+<tr class="separator:ae471c3c501ab18637f66c39348dd0283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cf9096cf97f19960fbb52de4f455bb4"><td class="memTemplParams" colspan="2"><a class="anchor" id="a6cf9096cf97f19960fbb52de4f455bb4"></a>
 template&lt;typename T , typename Storage  = local_storage&lt;std::max&lt;size_t&gt;(40u, sizeof(T) * 4)&gt;&gt; </td></tr>
-<tr class="memitem:a0d01f1a67bf17a8c59633de8f573437f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>vector</b> = buffer&lt; T, Storage &gt;</td></tr>
-<tr class="separator:a0d01f1a67bf17a8c59633de8f573437f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cf9096cf97f19960fbb52de4f455bb4"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>vector</b> = buffer&lt; T, Storage &gt;</td></tr>
+<tr class="separator:a6cf9096cf97f19960fbb52de4f455bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fa85f3ee83ae5b6deae7374a25041c5"><td class="memTemplParams" colspan="2"><a class="anchor" id="a2fa85f3ee83ae5b6deae7374a25041c5"></a>
+template&lt;typename KT , typename VT &gt; </td></tr>
+<tr class="memitem:a2fa85f3ee83ae5b6deae7374a25041c5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bytell_map</b> = std::unordered_map&lt; KT, VT &gt;</td></tr>
+<tr class="separator:a2fa85f3ee83ae5b6deae7374a25041c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a774fc727a9654f449234fc652b8a6336"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a774fc727a9654f449234fc652b8a6336"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>mat4x4</b> = tmat&lt; float, 4, 4 &gt;</td></tr>
 <tr class="separator:a774fc727a9654f449234fc652b8a6336"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -402,6 +410,10 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>vec3_sz</b> = psl::t
 <tr class="memitem:a7569ba89301a8b97611b561facee288d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7569ba89301a8b97611b561facee288d"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>vec4_sz</b> = psl::tvec&lt; size_t, 4 &gt;</td></tr>
 <tr class="separator:a7569ba89301a8b97611b561facee288d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43b65b204a3e0e9c10d26a59c456139a"><td class="memTemplParams" colspan="2"><a class="anchor" id="a43b65b204a3e0e9c10d26a59c456139a"></a>
+template&lt;typename KT , typename VT &gt; </td></tr>
+<tr class="memitem:a43b65b204a3e0e9c10d26a59c456139a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>unordered_map</b> = std::unordered_map&lt; KT, VT &gt;</td></tr>
+<tr class="separator:a43b65b204a3e0e9c10d26a59c456139a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4388c69a761534239e54db1f8277e344"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4388c69a761534239e54db1f8277e344"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>string8_t</b> = std::basic_string&lt; string8::char_t, std::char_traits&lt; string8::char_t &gt;&gt;</td></tr>
 <tr class="separator:a4388c69a761534239e54db1f8277e344"><td class="memSeparator" colspan="2">&#160;</td></tr>

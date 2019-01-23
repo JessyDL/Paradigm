@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('command__buffer_8h_source.html','');})
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classcore_1_1ecs_1_1command__buffer.html">   27</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcore_1_1ecs_1_1command__buffer.html">command_buffer</a> final</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyT, <span class="keyword">typename</span> ValueT&gt;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">using</span> key_value_container_t = ska::bytell_hash_map&lt;KeyT, ValueT&gt;;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">using</span> key_value_container_t = psl::bytell_map&lt;KeyT, ValueT&gt;;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="comment">// using key_value_container_t = std::unordered_map&lt;KeyT, ValueT&gt;;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span>ecs::state;</div>

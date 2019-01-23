@@ -255,7 +255,7 @@ $(document).ready(function(){initNavTree('profiler_8cpp_source.html','');});
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    psl::string res;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#ifdef PE_PROFILER</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor"></span>    ska::bytell_hash_map&lt;uint64_t, psl::string&gt; demangled_info;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor"></span>    psl::bytell_map&lt;uint64_t, psl::string&gt; demangled_info;</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> endIt = (m_FrameIndex + 1) % m_Frames.size();</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keyword">auto</span> i = endIt;</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#ifdef PLATFORM_WINDOWS</span></div>

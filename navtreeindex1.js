@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classcore_1_1gfx_1_1buffer.html#a02f3e85848fb1919bd6684247314265c":[3,0,0,2,5,13],
 "classcore_1_1gfx_1_1buffer.html#a0c2ba58f37dc317a412f16e5a8ae64dd":[3,0,0,2,5,4],
 "classcore_1_1gfx_1_1buffer.html#a0faf9846a1c8e1714bce11e99aff44d8":[3,0,0,2,5,6],
 "classcore_1_1gfx_1_1buffer.html#a1fa9fe61eab8f498a9224d885ec84cf7":[3,0,0,2,5,10],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classcore_1_1meta_1_1shader_1_1instance_1_1element.html#abe1d8e8937ed9cd78eeddcab33bf8619":[3,0,0,3,0,0,0,6],
 "classcore_1_1meta_1_1shader_1_1instance_1_1element.html#ae6e4002148765f114da9fe1b5c64547d":[3,0,0,3,0,0,0,14],
 "classcore_1_1meta_1_1shader_1_1instance_1_1element.html#aff7fa3d38783b5e7b7a9467c73a56cc1":[3,0,0,3,0,0,0,9],
-"classcore_1_1meta_1_1shader_1_1vertex.html":[3,0,0,3,0,1],
-"classcore_1_1meta_1_1shader_1_1vertex_1_1attribute.html":[3,0,0,3,0,1,0]
+"classcore_1_1meta_1_1shader_1_1vertex.html":[3,0,0,3,0,1]
 };

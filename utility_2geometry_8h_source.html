@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        std::vector&lt;psl::vec3&gt; tangents;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        tangents.resize(positions.size());</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; indices.size(); i += 3)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i &lt; indices.size(); i += 3)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="comment">// Shortcuts for vertices</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; v0 = positions[indices[i + 0]];</div>
@@ -712,7 +712,7 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;        std::vector&lt;uint32_t&gt; triangles = std::vector&lt;uint32_t&gt;(nbIndexes);</div>
 <div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;</div>
 <div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;        <span class="comment">//Top Cap</span></div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;        <span class="keywordtype">size_t</span> i = 0;</div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;        uint32_t i = 0;</div>
 <div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> lon = 0; lon &lt; longitude; lon++)</div>
 <div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;        {</div>
 <div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;            triangles[i++] = lon + 2;</div>
@@ -756,7 +756,7 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;</div>
 <div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;</div>
 <div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;        <span class="keywordtype">float</span> min = 1, max = -1;</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;        uint32_t northIndex = -1, southIndex = -1;</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;        uint32_t northIndex{0}, southIndex{0};</div>
 <div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;        <span class="keywordflow">for</span>(i = 0; i &lt; vertices.size(); ++i)</div>
 <div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;        {</div>
 <div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;            <span class="keywordflow">if</span>(res_positions[i][1] &lt; min)</div>
@@ -1057,7 +1057,7 @@ $(document).ready(function(){initNavTree('utility_2geometry_8h_source.html','');
 <div class="line"><a name="l00992"></a><span class="lineno">  992</span>&#160;        }</div>
 <div class="line"><a name="l00993"></a><span class="lineno">  993</span>&#160;</div>
 <div class="line"><a name="l00994"></a><span class="lineno">  994</span>&#160;        <span class="keywordtype">float</span> min = 1, max = -1;</div>
-<div class="line"><a name="l00995"></a><span class="lineno">  995</span>&#160;        uint32_t northIndex = -1, southIndex = -1;</div>
+<div class="line"><a name="l00995"></a><span class="lineno">  995</span>&#160;        uint32_t northIndex{0}, southIndex{0};</div>
 <div class="line"><a name="l00996"></a><span class="lineno">  996</span>&#160;        <span class="keywordflow">for</span>(uint32_t i = 0; i &lt; res_positions.size(); ++i)</div>
 <div class="line"><a name="l00997"></a><span class="lineno">  997</span>&#160;        {</div>
 <div class="line"><a name="l00998"></a><span class="lineno">  998</span>&#160;            <span class="keywordflow">if</span>(res_positions[i][1] &lt; min)</div>

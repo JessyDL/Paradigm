@@ -650,11 +650,11 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;{</div>
 <div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;    <span class="keywordflow">if</span>(m_Validated)</div>
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;    {</div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;        PFN_vkDestroyDebugReportCallbackEXT vkDestroyDebugReportCallbackEXT =</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;        PFN_vkDestroyDebugReportCallbackEXT fnp_vkDestroyDebugReportCallbackEXT =</div>
 <div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;            <span class="keyword">reinterpret_cast&lt;</span>PFN_vkDestroyDebugReportCallbackEXT<span class="keyword">&gt;</span>(</div>
 <div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;                vkGetInstanceProcAddr(m_Instance, <span class="stringliteral">&quot;vkDestroyDebugReportCallbackEXT&quot;</span>));</div>
 <div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;</div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;        <span class="keywordflow">if</span>(vkDestroyDebugReportCallbackEXT) vkDestroyDebugReportCallbackEXT(m_Instance, m_DebugReport, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;        <span class="keywordflow">if</span>(fnp_vkDestroyDebugReportCallbackEXT) fnp_vkDestroyDebugReportCallbackEXT(m_Instance, m_DebugReport, <span class="keyword">nullptr</span>);</div>
 <div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;    }</div>
 <div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;}</div>
 <div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;</div>
@@ -663,14 +663,14 @@ $(document).ready(function(){initNavTree('context_8cpp_source.html','');});
 <div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;{</div>
 <div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;    <span class="comment">// Find a queue that supports graphics operations</span></div>
 <div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;    std::vector&lt;vk::QueueFamilyProperties&gt; queueProps = m_PhysicalDevice.getQueueFamilyProperties();</div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;    uint32_t secondBest                               = -1;</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;    std::optional&lt;uint32_t&gt; secondBest                                = std::nullopt;</div>
 <div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;    <span class="keywordflow">for</span>(queueIndex = 0; queueIndex &lt; queueProps.size(); queueIndex++)</div>
 <div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;    {</div>
 <div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;        <span class="keywordflow">if</span>(queueProps[queueIndex].queueFlags &amp; flag) secondBest = queueIndex;</div>
 <div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;</div>
 <div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;        <span class="keywordflow">if</span>(queueProps[queueIndex].queueFlags == flag) <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;    }</div>
-<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;    <span class="keywordflow">if</span>(queueIndex &gt;= queueProps.size() &amp;&amp; secondBest != -1) queueIndex = secondBest;</div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;    <span class="keywordflow">if</span>(queueIndex &gt;= queueProps.size() &amp;&amp; secondBest.has_value()) queueIndex = secondBest.value();</div>
 <div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;    <span class="keywordflow">if</span>(queueIndex &gt;= queueProps.size())</div>
 <div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;    {</div>
 <div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;        core::ivk::log-&gt;warn(<span class="stringliteral">&quot;Could not find the appropriate queue enabled bit for {}&quot;</span>, vk::to_string(flag));</div>

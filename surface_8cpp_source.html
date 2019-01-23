@@ -123,7 +123,7 @@ $(document).ready(function(){initNavTree('surface_8cpp_source.html','');});
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;surface::surface(<span class="keyword">const</span> <a class="code" href="classcore_1_1os_1_1surface.html">surface</a>&amp; other, <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">UID</a>&amp; uid, <a class="code" href="classcore_1_1resource_1_1cache.html">core::resource::cache</a>&amp; cache,</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                 <a class="code" href="classcore_1_1resource_1_1handle.html">core::resource::handle&lt;data::window&gt;</a> data)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    : m_Data(data)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    : m_Data(data), m_InputSystem(new core::systems::input())</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    init_surface();</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
