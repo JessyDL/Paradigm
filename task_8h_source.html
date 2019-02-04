@@ -124,101 +124,101 @@ $(document).ready(function(){initNavTree('task_8h_source.html','');});
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define ASYNC_PROFILING</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>utility</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">class </span>spmc_bounded_queue</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        spmc_bounded_queue(<span class="keywordtype">size_t</span> buffer_size) : buffer_(new cell_t[buffer_size]), buffer_mask_(buffer_size - 1)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            assert((buffer_size &gt;= 2) &amp;&amp; ((buffer_size &amp; (buffer_size - 1)) == 0));</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0; i != buffer_size; i += 1) buffer_[i].sequence_.store(i, std::memory_order_relaxed);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            enqueue_pos_.store(0, std::memory_order_relaxed);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            dequeue_pos_.store(0, std::memory_order_relaxed);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        ~spmc_bounded_queue() { <span class="keyword">delete</span>[] buffer_; }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">bool</span> enqueue(T <span class="keyword">const</span>&amp; data)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            cell_t* cell;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordtype">size_t</span> pos = enqueue_pos_.load(std::memory_order_relaxed);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">for</span>(;;)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                cell         = &amp;buffer_[pos &amp; buffer_mask_];</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                <span class="keywordtype">size_t</span> seq   = cell-&gt;sequence_.load(std::memory_order_acquire);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                intptr_t dif = (intptr_t)seq - (intptr_t)pos;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keywordflow">if</span>(dif == 0)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    enqueue_pos_.exchange(pos + 1);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span>(dif &lt; 0)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    pos = enqueue_pos_.load(std::memory_order_relaxed);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            cell-&gt;data_ = data;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            cell-&gt;sequence_.store(pos + 1, std::memory_order_release);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">bool</span> dequeue(T&amp; data)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            cell_t* cell;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordtype">size_t</span> pos = dequeue_pos_.load(std::memory_order_relaxed);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">for</span>(;;)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                cell         = &amp;buffer_[pos &amp; buffer_mask_];</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="keywordtype">size_t</span> seq   = cell-&gt;sequence_.load(std::memory_order_acquire);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                intptr_t dif = (intptr_t)seq - (intptr_t)(pos + 1);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keywordflow">if</span>(dif == 0)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    <span class="keywordflow">if</span>(dequeue_pos_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span>(dif &lt; 0)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    pos = dequeue_pos_.load(std::memory_order_relaxed);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            data = cell-&gt;data_;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            cell-&gt;sequence_.store(pos + buffer_mask_ + 1, std::memory_order_release);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordtype">size_t</span> size()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordflow">return</span> enqueue_pos_.load(std::memory_order_relaxed) - dequeue_pos_.load(std::memory_order_relaxed);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">struct </span>cell_t</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            std::atomic&lt;size_t&gt; sequence_;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            T data_;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        };</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">size_t</span> <span class="keyword">const</span> cacheline_size = 64;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keyword">typedef</span> <span class="keywordtype">char</span> cacheline_pad_t[cacheline_size];</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        cacheline_pad_t pad0_;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        cell_t* <span class="keyword">const</span> buffer_;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordtype">size_t</span> <span class="keyword">const</span> buffer_mask_;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        cacheline_pad_t pad1_;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        std::atomic&lt;size_t&gt; enqueue_pos_;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        cacheline_pad_t pad2_;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        std::atomic&lt;size_t&gt; dequeue_pos_;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        cacheline_pad_t pad3_;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        spmc_bounded_queue(spmc_bounded_queue <span class="keyword">const</span>&amp;);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordtype">void</span> operator=(spmc_bounded_queue <span class="keyword">const</span>&amp;);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    };</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;} <span class="comment">// namespace utility</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//namespace utility</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//{</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//  template &lt;typename T&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//  class spmc_bounded_queue</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//  {</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//    public:</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//      spmc_bounded_queue(size_t buffer_size) : buffer_(new cell_t[buffer_size]), buffer_mask_(buffer_size - 1)</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//      {</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//          assert((buffer_size &gt;= 2) &amp;&amp; ((buffer_size &amp; (buffer_size - 1)) == 0));</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//          for(size_t i = 0; i != buffer_size; i += 1) buffer_[i].sequence_.store(i, std::memory_order_relaxed);</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//          enqueue_pos_.store(0, std::memory_order_relaxed);</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//          dequeue_pos_.store(0, std::memory_order_relaxed);</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//      }</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//      ~spmc_bounded_queue() { delete[] buffer_; }</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//      bool enqueue(T const&amp; data)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//      {</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//          cell_t* cell;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//          size_t pos = enqueue_pos_.load(std::memory_order_relaxed);</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//          for(;;)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//          {</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//              cell         = &amp;buffer_[pos &amp; buffer_mask_];</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//              size_t seq   = cell-&gt;sequence_.load(std::memory_order_acquire);</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//              intptr_t dif = (intptr_t)seq - (intptr_t)pos;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//              if(dif == 0)</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//              {</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">//                  enqueue_pos_.exchange(pos + 1);</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">//                  break;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">//              }</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">//              else if(dif &lt; 0)</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">//                  return false;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">//              else</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">//                  pos = enqueue_pos_.load(std::memory_order_relaxed);</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">//          }</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">//          cell-&gt;data_ = data;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">//          cell-&gt;sequence_.store(pos + 1, std::memory_order_release);</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">//          return true;</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">//      }</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">//      bool dequeue(T&amp; data)</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">//      {</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">//          cell_t* cell;</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">//          size_t pos = dequeue_pos_.load(std::memory_order_relaxed);</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">//          for(;;)</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">//          {</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">//              cell         = &amp;buffer_[pos &amp; buffer_mask_];</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">//              size_t seq   = cell-&gt;sequence_.load(std::memory_order_acquire);</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">//              intptr_t dif = (intptr_t)seq - (intptr_t)(pos + 1);</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">//              if(dif == 0)</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">//              {</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">//                  if(dequeue_pos_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) break;</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">//              }</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">//              else if(dif &lt; 0)</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">//                  return false;</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">//              else</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">//                  pos = dequeue_pos_.load(std::memory_order_relaxed);</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">//          }</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">//          data = cell-&gt;data_;</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">//          cell-&gt;sequence_.store(pos + buffer_mask_ + 1, std::memory_order_release);</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">//          return true;</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">//      }</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">//      size_t size() const</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">//      {</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">//          return enqueue_pos_.load(std::memory_order_relaxed) - dequeue_pos_.load(std::memory_order_relaxed);</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">//      }</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">//    private:</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">//      struct cell_t</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">//      {</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">//          std::atomic&lt;size_t&gt; sequence_;</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">//          T data_;</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">//      };</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">//      static size_t const cacheline_size = 64;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">//      typedef char cacheline_pad_t[cacheline_size];</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">//      cacheline_pad_t pad0_;</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">//      cell_t* const buffer_;</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">//      size_t const buffer_mask_;</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">//      cacheline_pad_t pad1_;</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">//      std::atomic&lt;size_t&gt; enqueue_pos_;</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">//      cacheline_pad_t pad2_;</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">//      std::atomic&lt;size_t&gt; dequeue_pos_;</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">//      cacheline_pad_t pad3_;</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">//      spmc_bounded_queue(spmc_bounded_queue const&amp;);</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">//      void operator=(spmc_bounded_queue const&amp;);</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">//  };</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">//} // namespace utility</span></div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">namespace </span>psl::async</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
@@ -353,78 +353,78 @@ $(document).ready(function(){initNavTree('task_8h_source.html','');});
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        std::future&lt;T&gt; m_Future;</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    };</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keyword">class </span>worker</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    {</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;      <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;          worker() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;          worker(utility::spmc_bounded_queue&lt;details::task_base*&gt;* consumer) : m_Consumer(consumer), m_Worker{std::thread(&amp;worker::thread_loop, <span class="keyword">this</span>)} {};</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;          ~worker()</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;          {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;              <span class="keywordflow">if</span> (m_State != state_t::DEAD)</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;              {</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                  <span class="comment">//throw std::runtime_error(&quot;did not clean up worker thread gracefully&quot;);</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;              }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;          }</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;          worker(<span class="keyword">const</span> worker&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;          worker(worker&amp;&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;          worker&amp; operator=(<span class="keyword">const</span> worker&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;          worker&amp; operator=(worker&amp;&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keyword">enum class</span> state_t : uint8_t</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        {</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            DEAD      = 0,</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            EXECUTING = 1,</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            SLEEPING  = 2</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        };</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="keywordtype">void</span> awake() noexcept</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordflow">if</span>(!m_ShouldBeAwake)</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            {</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                std::unique_lock&lt;std::mutex&gt; lk(m_Sleep);</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                m_ShouldBeAwake = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                m_Conditional.notify_one();</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            }</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        }</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        state_t <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>() const noexcept { <span class="keywordflow">return</span> m_State; }</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="keywordtype">bool</span> terminated() const noexcept { <span class="keywordflow">return</span> m_Terminate; }</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordtype">void</span> terminate() noexcept { m_Terminate = <span class="keyword">true</span>; }</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordtype">void</span> thread_loop()</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        {</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            <span class="keywordflow">while</span>(!m_Terminate)</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            {</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                m_State = state_t::SLEEPING;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                std::unique_lock&lt;std::mutex&gt; lk(m_Sleep);</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                m_Conditional.wait(lk, [&amp;] { <span class="keywordflow">return</span> m_ShouldBeAwake; });</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                m_ShouldBeAwake = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                m_State         = state_t::EXECUTING;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                details::task_base* processing = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                <span class="keywordflow">while</span>(m_Consumer-&gt;dequeue(processing))</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                {</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                    processing-&gt;operator()();</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                    m_Finalized.push(processing);</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                }</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            }</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            m_State = state_t::DEAD;</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        }</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keywordtype">bool</span> m_Terminate{<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        std::condition_variable m_Conditional;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        <span class="keywordtype">bool</span> m_ShouldBeAwake{<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        std::mutex m_Sleep;</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keyword">volatile</span> state_t m_State{state_t::SLEEPING};</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        utility::spmc_bounded_queue&lt;details::task_base*&gt;* m_Consumer{<span class="keyword">nullptr</span>};</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        std::thread m_Worker;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        std::queue&lt;details::task_base*&gt; m_Finalized;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    };</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="comment">/*class worker</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">      public:</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">          worker() = default;</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">          worker(utility::spmc_bounded_queue&lt;details::task_base*&gt;* consumer) : m_Consumer(consumer), m_Worker{std::thread(&amp;worker::thread_loop, this)} {};</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">          ~worker()</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">          {</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">              if (m_State != state_t::DEAD)</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">              {</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">                  //throw std::runtime_error(&quot;did not clean up worker thread gracefully&quot;);</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">              }</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">          }</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">          worker(const worker&amp; other) = delete;</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">          worker(worker&amp;&amp; other) = delete;</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">          worker&amp; operator=(const worker&amp; other) = delete;</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">          worker&amp; operator=(worker&amp;&amp; other) = delete;</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">        enum class state_t : uint8_t</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">        {</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">            DEAD      = 0,</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">            EXECUTING = 1,</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">            SLEEPING  = 2</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">        };</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">        void awake() noexcept</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">        {</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">            if(!m_ShouldBeAwake)</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">            {</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">                std::unique_lock&lt;std::mutex&gt; lk(m_Sleep);</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">                m_ShouldBeAwake = true;</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">                m_Conditional.notify_one();</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">            }</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">        }</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">        state_t state() const noexcept { return m_State; }</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">        bool terminated() const noexcept { return m_Terminate; }</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">        void terminate() noexcept { m_Terminate = true; }</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">      private:</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">        void thread_loop()</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">        {</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">            while(!m_Terminate)</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">            {</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">                m_State = state_t::SLEEPING;</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">                std::unique_lock&lt;std::mutex&gt; lk(m_Sleep);</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">                m_Conditional.wait(lk, [&amp;] { return m_ShouldBeAwake; });</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">                m_ShouldBeAwake = false;</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">                m_State         = state_t::EXECUTING;</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">                details::task_base* processing = nullptr;</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">                while(m_Consumer-&gt;dequeue(processing))</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">                {</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">                    processing-&gt;operator()();</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">                    m_Finalized.push(processing);</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">                }</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">            }</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">            m_State = state_t::DEAD;</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">        }</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">        bool m_Terminate{false};</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">        std::condition_variable m_Conditional;</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">        bool m_ShouldBeAwake{false};</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">        std::mutex m_Sleep;</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">        volatile state_t m_State{state_t::SLEEPING};</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">        utility::spmc_bounded_queue&lt;details::task_base*&gt;* m_Consumer{nullptr};</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">        std::thread m_Worker;</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">        std::queue&lt;details::task_base*&gt; m_Finalized;</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">    };*/</span></div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keyword">class </span>scheduler</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    {</div>
@@ -553,18 +553,20 @@ $(document).ready(function(){initNavTree('task_8h_source.html','');});
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;                std::move(std::begin(other), std::end(other), std::back_inserter(it-&gt;second.tokens));</div>
 <div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;            }</div>
 <div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        }</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        [[nodiscard]] std::future&lt;void&gt; execute(launch policy = launch::immediate);</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        <span class="keywordtype">void</span> enforce_sequential(std::vector&lt;token_t&gt; tokens) noexcept;</div>
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        <span class="keywordtype">size_t</span> workers() const noexcept{<span class="keywordflow">return</span> m_WorkerCount;};</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;          <span class="keywordtype">size_t</span> m_WorkerCount {4};</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;        std::unordered_map&lt;token_t, description&gt; m_TaskList;</div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        token_t m_TokenGenerator{0};</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    };</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;} <span class="comment">// namespace psl::async2</span></div>
-<div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442e"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">core::resource::state</a></div><div class="ttdeci">state</div><div class="ttdoc">represents the various states a resource can be in. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00020">resource.h:20</a></div></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;        [[nodiscard]] std::future&lt;void&gt; execute(launch policy = launch::immediate);</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        <span class="keywordtype">size_t</span> workers() const noexcept{<span class="keywordflow">return</span> m_WorkerCount;};</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;          <span class="keywordtype">size_t</span> m_WorkerCount {4};</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;        std::unordered_map&lt;token_t, description&gt; m_TaskList;</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;        token_t m_TokenGenerator{0};</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    };</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;} <span class="comment">// namespace psl::async2</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
