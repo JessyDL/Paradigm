@@ -117,8 +117,8 @@ $(document).ready(function(){initNavTree('systems_2lifetime_8h_source.html','');
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>core::ecs::systems</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">auto</span> lifetime = [](<a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>&amp; commands, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime,</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                       <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;core::ecs::entity, core::ecs::components::lifetime&gt;</a> life_pack)</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">auto</span> lifetime = [](<span class="keyword">const</span> core::ecs::state&amp; <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime,</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                       <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;core::ecs::partial, core::ecs::entity, core::ecs::components::lifetime&gt;</a> life_pack)</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">using namespace </span>core::ecs;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keyword">using namespace </span>core::ecs::components;</div>
@@ -131,10 +131,13 @@ $(document).ready(function(){initNavTree('systems_2lifetime_8h_source.html','');
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                dead_entities.emplace_back(<a class="code" href="structcore_1_1ecs_1_1entity.html">entity</a>);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        }</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        commands.add_component&lt;dead_tag&gt;(dead_entities);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        commands.remove_component&lt;components::lifetime&gt;(dead_entities);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    };</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a> commands{<a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>};</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        commands.add_component&lt;dead_tag&gt;(dead_entities);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        commands.remove_component&lt;components::lifetime&gt;(dead_entities);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">return</span> commands;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442e"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">core::resource::state</a></div><div class="ttdeci">state</div><div class="ttdoc">represents the various states a resource can be in. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00020">resource.h:20</a></div></div>
 <div class="ttc" id="structcore_1_1ecs_1_1entity_html"><div class="ttname"><a href="structcore_1_1ecs_1_1entity.html">core::ecs::entity</a></div><div class="ttdoc">entity points to a collection of components </div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00013">entity.h:13</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1command__buffer_html"><div class="ttname"><a href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a></div><div class="ttdoc">contains command_buffer for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="command__buffer_8h_source.html#l00027">command_buffer.h:27</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1pack_html"><div class="ttname"><a href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a></div><div class="ttdoc">an iterable container to work with components and entities. </div><div class="ttdef"><b>Definition:</b> <a href="pack_8h_source.html#l00018">pack.h:18</a></div></div>

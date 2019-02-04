@@ -119,10 +119,10 @@ $(document).ready(function(){initNavTree('geometry__instance_8h_source.html','')
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>core::ecs::systems</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">auto</span> geometry_instance = </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        [](<a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>&amp; commands, </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        [](<span class="keyword">const</span> core::ecs::state&amp; <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>, </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;           std::chrono::duration&lt;float&gt; dTime, </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;           std::chrono::duration&lt;float&gt; rTime, </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;           <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;const core::ecs::components::renderable, core::ecs::components::transform&gt;</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;           <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;const core::ecs::components::renderable, const core::ecs::components::transform&gt;</a></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                                geometry_pack)</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">using namespace </span>core::resource;</div>
@@ -183,7 +183,7 @@ $(document).ready(function(){initNavTree('geometry__instance_8h_source.html','')
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        ++indexCount;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        setStart = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        <span class="keyword">auto</span>&amp; transform = std::get&lt;core::ecs::components::transform&amp;&gt;(geometry_pack[i]);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        <span class="keyword">auto</span>&amp; transform = std::get&lt;const core::ecs::components::transform&amp;&gt;(geometry_pack[i]);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        <span class="keyword">const</span> psl::mat4x4 translationMat = translate(transform.position);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        <span class="keyword">const</span> psl::mat4x4 rotationMat = to_matrix(transform.rotation);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        <span class="keyword">const</span> psl::mat4x4 scaleMat = scale(transform.scale);</div>
@@ -195,9 +195,12 @@ $(document).ready(function(){initNavTree('geometry__instance_8h_source.html','')
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    materialHandle-&gt;set(geometryHandle, startIndex, <span class="stringliteral">&quot;INSTANCE_TRANSFORM&quot;</span>, modelMats);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            }</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    };</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;} <span class="comment">// namespace core::ecs::systems</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>{<a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>};</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    };</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;} <span class="comment">// namespace core::ecs::systems</span></div>
+<div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442e"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">core::resource::state</a></div><div class="ttdeci">state</div><div class="ttdoc">represents the various states a resource can be in. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00020">resource.h:20</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1command__buffer_html"><div class="ttname"><a href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a></div><div class="ttdoc">contains command_buffer for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="command__buffer_8h_source.html#l00027">command_buffer.h:27</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1pack_html"><div class="ttname"><a href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a></div><div class="ttdoc">an iterable container to work with components and entities. </div><div class="ttdef"><b>Definition:</b> <a href="pack_8h_source.html#l00018">pack.h:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

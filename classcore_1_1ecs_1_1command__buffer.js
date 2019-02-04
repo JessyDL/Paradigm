@@ -1,5 +1,7 @@
 var classcore_1_1ecs_1_1command__buffer =
 [
+    [ "command_buffer", "classcore_1_1ecs_1_1command__buffer.html#ac49d8d5604bd81658b2a07765a0b0a40", null ],
+    [ "command_buffer", "classcore_1_1ecs_1_1command__buffer.html#aa8c7ea58fedad5cc25103ca4a13b9c62", null ],
     [ "add_component", "classcore_1_1ecs_1_1command__buffer.html#a146ec78ffe70ea0c2cb434c2c8763a0c", null ],
     [ "add_component", "classcore_1_1ecs_1_1command__buffer.html#ac42771ecd7b278f816ca4b657977951c", null ],
     [ "add_components", "classcore_1_1ecs_1_1command__buffer.html#a90e86ecb8f1fb16d940a2554053bc18b", null ],

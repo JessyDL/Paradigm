@@ -475,79 +475,95 @@ $(document).ready(function(){initNavTree('task_8h_source.html','');});
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            <span class="keywordflow">return</span> std::pair{ret.first-&gt;first, task.future()};</div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        }</div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Fn, <span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Fn, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        [[nodiscard]] <span class="keyword">typename</span> std::enable_if&lt;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            std::is_member_function_pointer&lt;Fn&gt;::value,</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            !std::is_member_function_pointer&lt;Fn&gt;::value,</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            std::pair&lt;token_t, std::future&lt;typename psl::templates::func_traits&lt;Fn&gt;::result_t&gt;&gt;&gt;::type</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        schedule(Fn&amp;&amp; <span class="keyword">function</span>, T* target, Args&amp;&amp;... arguments)</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            schedule(Fn <span class="keyword">function</span>, Args&amp;&amp;... arguments)</div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        {</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            <span class="keyword">using</span> return_t = <span class="keyword">typename</span> psl::templates::func_traits&lt;Fn&gt;::result_t;</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            <span class="keyword">using</span> task_t   = task&lt;return_t, Args&amp;&amp;...&gt;;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            <span class="keyword">using</span> task_t = task&lt;return_t, Args&amp;&amp;...&gt;;</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            <span class="keyword">auto</span> func = [<span class="keyword">function</span>, target](Args&amp;&amp;... args) -&gt; return_t {</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                <span class="keywordflow">return</span> std::invoke(<span class="keyword">function</span>, target, std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            };</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            <span class="keyword">auto</span> ret =</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                m_TaskList.emplace(m_TokenGenerator++, description{<span class="keyword">new</span> task_t{func, std::forward&lt;Args&gt;(arguments)...}});</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            task_t&amp; task{*(task_t*)(ret.first-&gt;second.task)};</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;            <span class="keywordflow">return</span> std::pair{ret.first-&gt;first, task.future()};</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        }</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Fn&gt;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        [[nodiscard]] std::pair&lt;token_t, std::future&lt;typename psl::templates::func_traits&lt;Fn&gt;::result_t&gt;&gt;</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        schedule(Fn&amp;&amp; <span class="keyword">function</span>)</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        {</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;            <span class="keyword">using</span> return_t = <span class="keyword">typename</span> psl::templates::func_traits&lt;Fn&gt;::result_t;</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;            <span class="keyword">using</span> task_t   = <span class="keyword">typename</span> details::transform_to_task&lt;Fn&gt;::type;</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            <span class="keyword">auto</span> ret = m_TaskList.emplace(m_TokenGenerator++, description{<span class="keyword">new</span> task_t{std::forward&lt;Fn&gt;(<span class="keyword">function</span>)}});</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;            task_t&amp; task{*(task_t*)(ret.first-&gt;second.task)};</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            <span class="keywordflow">return</span> std::pair{ret.first-&gt;first, task.future()};</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        }</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keywordtype">void</span> dependency(token_t token, barrier&amp;&amp; barrier) noexcept</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        {</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_TaskList.find(token); it != std::end(m_TaskList))</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            {</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;                it-&gt;second.barriers.emplace_back(std::move(barrier));</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            }</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        }</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        <span class="keywordtype">void</span> dependency(token_t token, std::vector&lt;barrier&gt;&amp;&amp; barriers) noexcept</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        {</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;            <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_TaskList.find(token); it != std::end(m_TaskList))</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            {</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;                std::move(std::begin(barriers), std::end(barriers), std::back_inserter(it-&gt;second.barriers));</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;            }</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            <span class="keyword">auto</span> ret = m_TaskList.emplace(</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                m_TokenGenerator++,</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                description{<span class="keyword">new</span> task_t{<span class="keyword">function</span>, std::forward&lt;Args&gt;(arguments)...}});</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;            task_t&amp; task{*(task_t*)(ret.first-&gt;second.task)};</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            <span class="keywordflow">return</span> std::pair{ret.first-&gt;first, task.future()};</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        }</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Fn, <span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        [[nodiscard]] <span class="keyword">typename</span> std::enable_if&lt;</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            std::is_member_function_pointer&lt;Fn&gt;::value,</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            std::pair&lt;token_t, std::future&lt;typename psl::templates::func_traits&lt;Fn&gt;::result_t&gt;&gt;&gt;::type</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        schedule(Fn&amp;&amp; <span class="keyword">function</span>, T* target, Args&amp;&amp;... arguments)</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        {</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            <span class="keyword">using</span> return_t = <span class="keyword">typename</span> psl::templates::func_traits&lt;Fn&gt;::result_t;</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;            <span class="keyword">using</span> task_t   = task&lt;return_t, Args&amp;&amp;...&gt;;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;            <span class="keyword">auto</span> func = [<span class="keyword">function</span>, target](Args&amp;&amp;... args) -&gt; return_t {</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;                <span class="keywordflow">return</span> std::invoke(<span class="keyword">function</span>, target, std::forward&lt;Args&gt;(args)...);</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;            };</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;            <span class="keyword">auto</span> ret =</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                m_TaskList.emplace(m_TokenGenerator++, description{<span class="keyword">new</span> task_t{func, std::forward&lt;Args&gt;(arguments)...}});</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;            task_t&amp; task{*(task_t*)(ret.first-&gt;second.task)};</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;            <span class="keywordflow">return</span> std::pair{ret.first-&gt;first, task.future()};</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        }</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Fn&gt;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        [[nodiscard]] std::pair&lt;token_t, std::future&lt;typename psl::templates::func_traits&lt;Fn&gt;::result_t&gt;&gt;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        schedule(Fn&amp;&amp; <span class="keyword">function</span>)</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        {</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;            <span class="keyword">using</span> return_t = <span class="keyword">typename</span> psl::templates::func_traits&lt;Fn&gt;::result_t;</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;            <span class="keyword">using</span> task_t   = <span class="keyword">typename</span> details::transform_to_task&lt;Fn&gt;::type;</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            <span class="keyword">auto</span> ret = m_TaskList.emplace(m_TokenGenerator++, description{<span class="keyword">new</span> task_t{std::forward&lt;Fn&gt;(<span class="keyword">function</span>)}});</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;            task_t&amp; task{*(task_t*)(ret.first-&gt;second.task)};</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;            <span class="keywordflow">return</span> std::pair{ret.first-&gt;first, task.future()};</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        }</div>
 <div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        <span class="keywordtype">void</span> dependency(token_t token, token_t other) noexcept</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        <span class="keywordtype">void</span> dependency(token_t token, barrier&amp;&amp; barrier) noexcept</div>
 <div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        {</div>
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;            <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_TaskList.find(token); it != std::end(m_TaskList))</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;            {</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                it-&gt;second.tokens.emplace_back(other);</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                it-&gt;second.barriers.emplace_back(std::move(barrier));</div>
 <div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;            }</div>
 <div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;        }</div>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        <span class="keywordtype">void</span> dependency(token_t token, std::vector&lt;token_t&gt;&amp;&amp; other) noexcept</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        <span class="keywordtype">void</span> dependency(token_t token, std::vector&lt;barrier&gt;&amp;&amp; barriers) noexcept</div>
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        {</div>
 <div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;            <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_TaskList.find(token); it != std::end(m_TaskList))</div>
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;            {</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                std::move(std::begin(other), std::end(other), std::back_inserter(it-&gt;second.tokens));</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                std::move(std::begin(barriers), std::end(barriers), std::back_inserter(it-&gt;second.barriers));</div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;            }</div>
 <div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        }</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        [[nodiscard]] std::future&lt;void&gt; execute(launch policy = launch::immediate);</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        <span class="keywordtype">void</span> dependency(token_t token, token_t other) noexcept</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        {</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;            <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_TaskList.find(token); it != std::end(m_TaskList))</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;            {</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                it-&gt;second.tokens.emplace_back(other);</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;            }</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        }</div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;        <span class="keywordtype">size_t</span> workers() const noexcept{<span class="keywordflow">return</span> m_WorkerCount;};</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;      <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;          <span class="keywordtype">size_t</span> m_WorkerCount {4};</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        std::unordered_map&lt;token_t, description&gt; m_TaskList;</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        token_t m_TokenGenerator{0};</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    };</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;} <span class="comment">// namespace psl::async2</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;        <span class="keywordtype">void</span> dependency(token_t token, std::vector&lt;token_t&gt;&amp;&amp; other) noexcept</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        {</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;            <span class="keywordflow">if</span>(<span class="keyword">auto</span> it = m_TaskList.find(token); it != std::end(m_TaskList))</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;            {</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;                std::move(std::begin(other), std::end(other), std::back_inserter(it-&gt;second.tokens));</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;            }</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        }</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        [[nodiscard]] std::future&lt;void&gt; execute(launch policy = launch::immediate);</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        <span class="keywordtype">size_t</span> workers() const noexcept{<span class="keywordflow">return</span> m_WorkerCount;};</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;      <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;          <span class="keywordtype">size_t</span> m_WorkerCount {4};</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;        std::unordered_map&lt;token_t, description&gt; m_TaskList;</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        token_t m_TokenGenerator{0};</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    };</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;} <span class="comment">// namespace psl::async2</span></div>
 <div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442e"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">core::resource::state</a></div><div class="ttdeci">state</div><div class="ttdoc">represents the various states a resource can be in. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00020">resource.h:20</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

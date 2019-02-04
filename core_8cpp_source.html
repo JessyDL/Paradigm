@@ -877,11 +877,11 @@ $(document).ready(function(){initNavTree('core_8cpp_source.html','');});
 <div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;    core::ecs::systems::fly fly_system{ECSState, surface_handle-&gt;input()};</div>
 <div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;    core::ecs::systems::render render_system{ECSState, context_handle, swapchain_handle, surface_handle, frameBuffer};</div>
 <div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;</div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;    ECSState.declare(core::ecs::systems::movement);</div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;    ECSState.declare(core::ecs::systems::death);</div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    ECSState.declare(core::ecs::systems::lifetime);</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;    ECSState.declare(core::ecs::threading::par, ::ecs::systems::movement);</div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;    ECSState.declare(core::ecs::threading::par, core::ecs::systems::death);</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    ECSState.declare(core::ecs::threading::par, core::ecs::systems::lifetime);</div>
 <div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;</div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;    ECSState.declare(core::ecs::systems::attractor);</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;    ECSState.declare(core::ecs::threading::par, core::ecs::systems::attractor);</div>
 <div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    ECSState.declare(core::ecs::systems::geometry_instance);</div>
 <div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;</div>
 <div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;    std::chrono::high_resolution_clock::time_point last_tick = std::chrono::high_resolution_clock::now();</div>
@@ -906,7 +906,7 @@ $(document).ready(function(){initNavTree('core_8cpp_source.html','');});
 <div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;<span class="comment">        ECSState.destroy(all_geom);</span></div>
 <div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="comment">        */</span></div>
 <div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;        ECSState.create(</div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;            1200, </div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;            500, </div>
 <div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;            [&amp;material, &amp;geometryHandles, &amp;material2](<span class="keywordtype">size_t</span> index)</div>
 <div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;            { </div>
 <div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;                <span class="keywordflow">return</span> core::ecs::components::renderable{(std::rand() % 2  == 0)?material:material2, geometryHandles[std::rand() % geometryHandles.size()], 0u};</div>
@@ -919,7 +919,7 @@ $(document).ready(function(){initNavTree('core_8cpp_source.html','');});
 <div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="comment">                              (float)(std::rand() % size_steps) / size_steps,</span></div>
 <div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;<span class="comment">                              (float)(std::rand() % size_steps) / size_steps)};</span></div>
 <div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;<span class="comment">            }*/</span>,</div>
-<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;            [](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::lifetime{.1f + ((std::rand() % 50) / 50.0f) * 1.0f}; },</div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;            [](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::lifetime{0.5f + ((std::rand() % 50) / 50.0f) * 2.0f}; },</div>
 <div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;            [&amp;size_steps](<span class="keywordtype">size_t</span> index) {</div>
 <div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;                <span class="keywordflow">return</span> core::ecs::components::velocity{</div>
 <div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;                    psl::math::normalize(psl::vec3((<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 2.0f - 1.0f,</div>
@@ -928,10 +928,10 @@ $(document).ready(function(){initNavTree('core_8cpp_source.html','');});
 <div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;                    ((std::rand() % 5000) / 500.0f) * 8.0f, 1.0f};</div>
 <div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;            });</div>
 <div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;</div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;        <span class="keywordflow">if</span>(ECSState.filter&lt;core::ecs::components::attractor&gt;().size() &lt; 5)</div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;        <span class="keywordflow">if</span>(ECSState.filter&lt;core::ecs::components::attractor&gt;().size() &lt; 2)</div>
 <div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;        {</div>
 <div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;        ECSState.create(</div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;            5,</div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;            2,</div>
 <div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;            [](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::lifetime{5.0f + ((std::rand() % 50) / 50.0f) * 5.0f}; },</div>
 <div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;            [&amp;size_steps](<span class="keywordtype">size_t</span> index) { <span class="keywordflow">return</span> core::ecs::components::attractor{(float)(std::rand() % size_steps) / size_steps * 3 + 0.5f, (<span class="keywordtype">float</span>)(std::rand() % size_steps) / size_steps * 80}; },</div>
 <div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;            [&amp;area_granularity, &amp;area, &amp;size_steps](<span class="keywordtype">size_t</span> index)</div>

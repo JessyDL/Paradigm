@@ -113,44 +113,48 @@ $(document).ready(function(){initNavTree('attractor_8h_source.html','');});
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ecs/components/velocity.h&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;ecs/components/transform.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;math/math.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>core::ecs::components</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">struct </span>attractor</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        attractor() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        attractor(<span class="keywordtype">float</span> force, <span class="keywordtype">float</span> radius) : force(force), radius(radius){};</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordtype">float</span> force;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordtype">float</span> radius;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    };</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <span class="comment">// namespace core::ecs::components</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>core::ecs::systems</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">auto</span> attractor = [](</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>&amp; commands,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        std::chrono::duration&lt;float&gt; dTime,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        std::chrono::duration&lt;float&gt; rTime,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a>&lt;core::ecs::partial,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">const</span> core::ecs::components::transform,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        core::ecs::components::velocity&gt; movables,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a>&lt;core::ecs::full,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">const</span> core::ecs::components::transform,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">const</span> core::ecs::components::attractor&gt; attractors)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">using namespace </span>psl::math;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>[movTrans, movVel] : movables)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordflow">for</span>(<span class="keyword">auto</span>[attrTransform, attractor] : attractors)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keyword">const</span> <span class="keyword">auto</span> mag = saturate((attractor.radius - magnitude(movTrans.position - attrTransform.position)) / attractor.radius) * dTime.count();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <span class="keyword">const</span> <span class="keyword">auto</span> direction = normalize(attrTransform.position - movTrans.position) * attractor.force;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                movVel.direction = mix&lt;float, float, float, 3&gt;(movVel.direction, direction, mag);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>core::ecs::components</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">struct </span>attractor</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        attractor() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        attractor(<span class="keywordtype">float</span> force, <span class="keywordtype">float</span> radius) : force(force), radius(radius){};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordtype">float</span> force;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">float</span> radius;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    };</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <span class="comment">// namespace core::ecs::components</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>core::ecs::systems</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">auto</span> attractor =</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        [](<span class="keyword">const</span> core::ecs::state&amp; <a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;           <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;core::ecs::partial, const core::ecs::components::transform, core::ecs::components::velocity&gt;</a></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;               movables,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;           <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a>&lt;core::ecs::full, <span class="keyword">const</span> core::ecs::components::transform,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                           <span class="keyword">const</span> core::ecs::components::attractor&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;               attractors) {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keyword">using namespace </span>psl::math;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keywordflow">for</span>(<span class="keyword">auto</span> [movTrans, movVel] : movables)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span> [attrTransform, attractor] : attractors)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                    <span class="keyword">const</span> <span class="keyword">auto</span> mag =</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                        saturate((attractor.radius - magnitude(movTrans.position - attrTransform.position)) /</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                                 attractor.radius) *</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                        dTime.count();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                    <span class="keyword">const</span> <span class="keyword">auto</span> direction = normalize(attrTransform.position - movTrans.position) * attractor.force;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    movVel.direction = mix&lt;float, float, float, 3&gt;(movVel.direction, direction, mag);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>{<a class="code" href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">state</a>};</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        };</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442e"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">core::resource::state</a></div><div class="ttdeci">state</div><div class="ttdoc">represents the various states a resource can be in. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00020">resource.h:20</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1command__buffer_html"><div class="ttname"><a href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a></div><div class="ttdoc">contains command_buffer for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="command__buffer_8h_source.html#l00027">command_buffer.h:27</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1pack_html"><div class="ttname"><a href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a></div><div class="ttdoc">an iterable container to work with components and entities. </div><div class="ttdef"><b>Definition:</b> <a href="pack_8h_source.html#l00018">pack.h:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

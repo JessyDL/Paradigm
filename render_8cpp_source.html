@@ -138,79 +138,81 @@ $(document).ready(function(){initNavTree('render_8cpp_source.html','');});
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    state.declare(threading::seq, &amp;render::tick_draws, <span class="keyword">this</span>);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> render::tick_cameras(</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>&amp; commands, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a> render::tick_cameras(</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">const</span> core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime,</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack&lt;const core::ecs::components::camera, const core::ecs::components::transform&gt;</a> cameras)</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span>(!m_Surface-&gt;open() || !m_Swapchain-&gt;is_ready()) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span>(!m_Surface-&gt;open() || !m_Swapchain-&gt;is_ready()) <span class="keywordflow">return</span> <a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>{state};</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">size_t</span> i = 0;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>[camera, transform] : cameras)</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        update_buffer(i++, transform, camera);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> render::tick_draws(</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>&amp; commands, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a>&lt;<span class="keyword">const</span> core::ecs::components::transform, <span class="keyword">const</span> core::ecs::components::renderable,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="structcore_1_1ecs_1_1on__combine.html">core::ecs::on_combine&lt;core::ecs::components::transform, core::ecs::components::renderable&gt;</a>&gt;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    renderables,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a>&lt;<span class="keyword">const</span> core::ecs::components::transform, <span class="keyword">const</span> core::ecs::components::renderable,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="structcore_1_1ecs_1_1on__break.html">core::ecs::on_break&lt;core::ecs::components::transform, core::ecs::components::renderable&gt;</a>&gt;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    broken_renderables)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        m_Pass.clear();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">auto</span>&amp; default_layer = m_DrawGroup.layer(<span class="stringliteral">&quot;default&quot;</span>, 0);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>[transform, renderable] : renderables)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            m_DrawGroup.add(default_layer, renderable.material).add(renderable.geometry);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>[transform, renderable] : broken_renderables)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordflow">if</span>(<span class="keyword">auto</span> dCall = m_DrawGroup.get(default_layer, renderable.material))</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                dCall.value().get().remove(renderable.geometry.operator <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a> &amp;());</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        m_Pass.add(m_DrawGroup);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        m_Pass.build();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    m_Pass.prepare();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    m_Pass.present();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> render::update_buffer(<span class="keywordtype">size_t</span> index, <span class="keyword">const</span> transform&amp; transform, <span class="keyword">const</span> core::ecs::components::camera&amp; camera)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    PROFILE_SCOPE(core::profiler)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    while(index &gt;= fdatasegment.size())</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        fdatasegment.emplace_back(m_Buffer-&gt;reserve(<span class="keyword">sizeof</span>(framedata)).value());</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        vec3 position  = transform.position;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        vec3 direction = transform.rotation * vec3::forward;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        vec3 up        = vec3::up;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        framedata fdata{};</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        fdata.ScreenParams =</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            psl::vec4((<span class="keywordtype">float</span>)m_Surface-&gt;data().width(), (float)m_Surface-&gt;data().height(), camera.near, camera.far);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        fdata.projectionMatrix = math::perspective_projection(</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            math::radians(camera.fov), (<span class="keywordtype">float</span>)m_Surface-&gt;data().width() / (float)m_Surface-&gt;data().height(),</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            camera.near, camera.far);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        fdata.clipMatrix = clip;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        fdata.viewMatrix  = math::look_at(position, position + direction, up);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        fdata.modelMatrix = mat4x4(1);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        fdata.viewPos    = vec4(position, 1.0);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        fdata.viewDir    = vec4(direction, 0.0);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        fdata.VP  = fdata.clipMatrix * fdata.projectionMatrix * fdata.viewMatrix;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        fdata.WVP = fdata.VP * fdata.modelMatrix;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        m_Buffer-&gt;commit({{&amp;fdata, fdatasegment[index]}});</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>{state};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a> render::tick_draws(</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> core::ecs::state&amp; state, std::chrono::duration&lt;float&gt; dTime, std::chrono::duration&lt;float&gt; rTime,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a>&lt;<span class="keyword">const</span> core::ecs::components::transform, <span class="keyword">const</span> core::ecs::components::renderable,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="structcore_1_1ecs_1_1on__combine.html">core::ecs::on_combine&lt;core::ecs::components::transform, core::ecs::components::renderable&gt;</a>&gt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    renderables,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classcore_1_1ecs_1_1pack.html">core::ecs::pack</a>&lt;<span class="keyword">const</span> core::ecs::components::transform, <span class="keyword">const</span> core::ecs::components::renderable,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="structcore_1_1ecs_1_1on__break.html">core::ecs::on_break&lt;core::ecs::components::transform, core::ecs::components::renderable&gt;</a>&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    broken_renderables)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        m_Pass.clear();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">auto</span>&amp; default_layer = m_DrawGroup.layer(<span class="stringliteral">&quot;default&quot;</span>, 0);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>[transform, renderable] : renderables)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            m_DrawGroup.add(default_layer, renderable.material).add(renderable.geometry);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>[transform, renderable] : broken_renderables)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">if</span>(<span class="keyword">auto</span> dCall = m_DrawGroup.get(default_layer, renderable.material))</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                dCall.value().get().remove(renderable.geometry.operator <span class="keyword">const</span> <a class="code" href="structpsl_1_1_u_i_d.html">psl::UID</a> &amp;());</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        m_Pass.add(m_DrawGroup);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        m_Pass.build();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    m_Pass.prepare();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    m_Pass.present();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a>{state};</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">void</span> render::update_buffer(<span class="keywordtype">size_t</span> index, <span class="keyword">const</span> transform&amp; transform, <span class="keyword">const</span> core::ecs::components::camera&amp; camera)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    PROFILE_SCOPE(core::profiler)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    while(index &gt;= fdatasegment.size())</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        fdatasegment.emplace_back(m_Buffer-&gt;reserve(<span class="keyword">sizeof</span>(framedata)).value());</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        vec3 position  = transform.position;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        vec3 direction = transform.rotation * vec3::forward;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        vec3 up        = vec3::up;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        framedata fdata{};</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        fdata.ScreenParams =</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            psl::vec4((<span class="keywordtype">float</span>)m_Surface-&gt;data().width(), (float)m_Surface-&gt;data().height(), camera.near, camera.far);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        fdata.projectionMatrix = math::perspective_projection(</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            math::radians(camera.fov), (<span class="keywordtype">float</span>)m_Surface-&gt;data().width() / (float)m_Surface-&gt;data().height(),</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            camera.near, camera.far);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        fdata.clipMatrix = clip;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        fdata.viewMatrix  = math::look_at(position, position + direction, up);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        fdata.modelMatrix = mat4x4(1);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        fdata.viewPos    = vec4(position, 1.0);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        fdata.viewDir    = vec4(direction, 0.0);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        fdata.VP  = fdata.clipMatrix * fdata.projectionMatrix * fdata.viewMatrix;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        fdata.WVP = fdata.VP * fdata.modelMatrix;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        m_Buffer-&gt;commit({{&amp;fdata, fdatasegment[index]}});</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
 <div class="ttc" id="namespacecore_1_1resource_html_a2d0329de62b3714bf66c2ff1cf29442e"><div class="ttname"><a href="namespacecore_1_1resource.html#a2d0329de62b3714bf66c2ff1cf29442e">core::resource::state</a></div><div class="ttdeci">state</div><div class="ttdoc">represents the various states a resource can be in. </div><div class="ttdef"><b>Definition:</b> <a href="resource_8h_source.html#l00020">resource.h:20</a></div></div>
 <div class="ttc" id="classcore_1_1gfx_1_1buffer_html"><div class="ttname"><a href="classcore_1_1gfx_1_1buffer.html">core::gfx::buffer</a></div><div class="ttdoc">maps a memory region and interfaces with the driver for read/writes </div><div class="ttdef"><b>Definition:</b> <a href="core_2inc_2vk_2buffer_8h_source.html#l00024">buffer.h:24</a></div></div>
 <div class="ttc" id="classcore_1_1ecs_1_1command__buffer_html"><div class="ttname"><a href="classcore_1_1ecs_1_1command__buffer.html">core::ecs::command_buffer</a></div><div class="ttdoc">contains command_buffer for the core::ecs::state to process at a later time </div><div class="ttdef"><b>Definition:</b> <a href="command__buffer_8h_source.html#l00027">command_buffer.h:27</a></div></div>
