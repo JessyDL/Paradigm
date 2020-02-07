@@ -13,6 +13,8 @@ data/material.h
 data/sampler.h
 data/stream.h
 data/window.h
+data/skeleton.h
+data/animation.h
 
 gfx/stdafx.h
 gfx/limits.h

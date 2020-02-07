@@ -9,6 +9,8 @@ data/geometry.cpp
 data/material.cpp
 data/sampler.cpp
 data/window.cpp
+data/skeleton.cpp
+data/animation.cpp
 
 gfx/buffer.cpp
 gfx/context.cpp

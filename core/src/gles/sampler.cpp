@@ -17,7 +17,6 @@ sampler::sampler(core::resource::cache& cache, const core::resource::metadata& m
 
 	glGenSamplers(1, &m_Sampler);
 
-	// todo: MIN and MAG filter have no mipmapmode equivalent in GLES
 	glSamplerParameteri(m_Sampler, GL_TEXTURE_MIN_FILTER,
 						to_gles(sampler_data->filter_min(), sampler_data->mip_mode()));
 	glSamplerParameteri(m_Sampler, GL_TEXTURE_MAG_FILTER,
@@ -44,7 +43,6 @@ sampler::sampler(core::resource::cache& cache, const core::resource::metadata& m
 		glSamplerParameterf(m_Sampler, GL_TEXTURE_MIN_LOD, 0.0f);
 		glSamplerParameterf(m_Sampler, GL_TEXTURE_MAX_LOD, 0.0f);
 	}
-	// todo find GL_TEXTURE_LOD_BIAS equivalent GLES
 	// todo figure out use case for GL_TEXTURE_COMPARE_MODE
 	glGetError();
 }

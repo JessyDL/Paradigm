@@ -9,7 +9,6 @@ def patch_file(filename):
         def wrapper(self):
             
             if self.filename.endswith(filename):
-                print("patching ", self.filename)
                 self.read()
                 fn(self)
         
@@ -19,13 +18,18 @@ def patch_file(filename):
 
 class File(object):
     def __init__(self, filename):
+        filename = filename.replace('//', '/')
         self.filename = filename
         self.dirty = False
         self.content = ""
         try:
-            self.obj = open(self.filename, 'r+')
-        except:
-            self.obj = []
+            if ".git" in self.filename:
+                self.obj = None
+            else:
+                self.obj = open(self.filename, 'r+')
+        except Exception as e: 
+            self.obj = None
+            print(e)
             pass
 
     def patch(self):
@@ -34,19 +38,17 @@ class File(object):
                 getattr(self, key)()
 
     def __del__(self):
-        if self.dirty:
+        if self.dirty and self.obj:
+            print("patched ", self.filename) 
             self.obj.write(self.content)
             self.obj.truncate()
             self.obj.close()
 
     def read(self):
-        try:
-            if not self.dirty:
-                self.content = self.obj.read()
-                self.obj.seek(0)
-            self.dirty = True
-        except:
-             pass
+        if not self.dirty and self.obj:
+            self.content = self.obj.read()
+            self.obj.seek(0)
+        self.dirty = True
 
     @patch_file("include/vulkan/vulkan.h")
     def patch_vulkan(self):
@@ -59,6 +61,7 @@ class File(object):
           r'''typedef struct HMONITOR__* HMONITOR;\n'''
           r'''typedef struct _SECURITY_ATTRIBUTES SECURITY_ATTRIBUTES;''', \
           self.content, flags = re.M)
+          
     @patch_file("src/spdlog.cpp")
     def patch_spdlogcpp(self):
         if not re.search(r'#include <Windows.h>', self.content):
@@ -95,14 +98,10 @@ class File(object):
 
     @patch_file("core/core.vcxproj")
     def patch_msvc(self):
-        self.content = re.sub(r'<ObjectFileName>.*</ObjectFileName>', r'<ObjectFileName>$(IntDir)%(Directory)</ObjectFileName>', self.content)
-        
+        self.content = re.sub(r'(<ObjectFileName.*?>)(.*?)(</ObjectFileName>)', r'\1$(IntDir)%(Directory)\3', self.content)
+
 def patch(root):
-    patch_includes(root)
-    patch_msvc(root)
-    
-def patch_includes(root):
-    root = root.replace('\\', '/') + "/_deps/"
+    root = root.replace('\\', '/')
     files = []
 
     for r, d, f in os.walk(root):
@@ -112,9 +111,7 @@ def patch_includes(root):
     for f in files:
         fObj = File(f.replace('\\', '/'))
         fObj.patch()
-
-def patch_msvc(root):
-    root = root.replace('\\', '/')
     
-    fObj = File(root + "/core/core.vcxproj")
-    fObj.patch()
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        patch(sys.argv[1])

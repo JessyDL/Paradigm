@@ -198,7 +198,10 @@ namespace utility::platform
 
 			if(path[0] == '/')
 			{
-				dir = psl::string(path.substr(5u, 1u)) + ":/" + path.substr(7u);
+				auto offset = 1;
+				if(path.substr(1, 3) == "mnt") offset = 5;
+				auto index = path.find('/', offset);
+				dir		   = path.substr(offset, index - offset) + ":" + path.substr(index);
 			}
 			else
 			{

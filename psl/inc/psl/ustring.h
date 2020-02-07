@@ -450,7 +450,7 @@ inline psl::string8_t operator+(const psl::string8_t& a, psl::string8::view b)
 }
 
 /// \brief helper operator that allows you to create a new psl::string8_t from adding it to a string_view
-inline psl::string8_t operator+(psl::string8::view b, const psl::string8_t& a)
+inline psl::string8_t operator+(psl::string8::view a, const psl::string8_t& b)
 {
 	psl::string8_t res{a};
 	res.append(b.data(), b.size());
